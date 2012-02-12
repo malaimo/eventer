@@ -35,8 +35,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
-gem 'haml'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -52,3 +50,11 @@ gem 'haml'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+gem 'jquery-rails'
+gem 'haml'
+gem 'haml-rails'
+
+# Gemas para idetificación y autorización de usuarios
+gem 'devise'
+gem 'cancan'
