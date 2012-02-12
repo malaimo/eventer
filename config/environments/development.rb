@@ -16,6 +16,9 @@ Eventer::Application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
   
+  # Devise: Setup default url options for your specific environment. Here is an example of development environment:
+  # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  # This is a required Rails configuration. In production it must be the actual host of your application
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   # Print deprecation notices to the Rails logger

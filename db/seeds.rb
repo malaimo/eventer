@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# Creación del primer usuario. es necesario cambiar el password tan pronto como se haga el rake db:seed
+User.create do |u|
+  u.email = "ejemplo@eventer.heroku.com"
+  u.password = "secret1"
+  u.password_confirmation = "secret1"
+end
