@@ -2,8 +2,13 @@ require 'spec_helper'
 
 describe "Users" do
   describe "GET /users" do
+    
+    before (:each) do
+      @user = Factory.create(:user)
+      post_via_redirect user_session_path, 'user[email]' => @user.email, 'user[password]' => "please"
+    end
+    
     it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
       get users_path
       response.status.should be(200)
     end
