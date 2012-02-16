@@ -1,5 +1,39 @@
 require 'spec_helper'
+require 'cancan/matchers'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  context "If it's an administrator" do
+    
+    before(:each) do
+      @admin = Ability.new ( Factory.create(:administrator) )
+    end
+  
+    it "should be able to manage roles" do
+      @admin.should be_able_to(:manage, Role.new)
+    end
+    
+    it "should be able to manage users" do
+      @admin.should be_able_to(:manage, User.new)
+    end
+  
+  end
+  
+  context "If it's not an administrator" do
+
+    before(:each) do
+      @comercial = Ability.new ( Factory.create(:comercial) )
+    end
+
+  
+    it "shouldn't be able to manage roles" do
+      @comercial.should_not be_able_to(:manage, Role.new)
+    end
+    
+    it "shouldn't be able to manage users" do
+      @comercial.should_not be_able_to(:manage, User.new)      
+    end
+  
+  end
+
 end

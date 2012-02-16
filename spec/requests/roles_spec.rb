@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "Roles" do
   describe "GET /roles" do
     
-    it "should allow identified users" do
-      @user = Factory.create(:user)
+    it "should allow identified administrators" do
+      @user = Factory.create(:administrator)
       post_via_redirect user_session_path, 'user[email]' => @user.email, 'user[password]' => "please"
       
       get roles_path

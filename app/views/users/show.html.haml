@@ -1,17 +1,13 @@
+= render '/commons/dashboard_menu'
 %p#notice= notice
 
 %p
   %b Email:
   = @user.email
-%p
-  %b Password:
-  = @user.password
-%p
-  %b Password confirmation:
-  = @user.password_confirmation
-%p
-  %b Remember me:
-  = @user.remember_me
+
+%h3 Roles
+- for role in @user.roles
+  %div= role.name
 
 = link_to 'Edit', edit_user_path(@user)
 \|

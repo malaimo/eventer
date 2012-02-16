@@ -1,11 +1,10 @@
+= render '/commons/dashboard_menu'
 %h1 Listing users
 
 %table
   %tr
     %th Email
-    %th Password
-    %th Password confirmation
-    %th Remember me
+    %th Roles
     %th
     %th
     %th
@@ -13,9 +12,10 @@
   - @users.each do |user|
     %tr
       %td= user.email
-      %td= user.password
-      %td= user.password_confirmation
-      %td= user.remember_me
+      %td
+        - for role in user.roles
+          = role.name
+          %br
       %td= link_to 'Show', user
       %td= link_to 'Edit', edit_user_path(user)
       %td= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
