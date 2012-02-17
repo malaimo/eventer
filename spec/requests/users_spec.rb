@@ -4,7 +4,7 @@ describe "Users" do
   describe "GET /users" do
     
     it "should allow identified users" do
-      @user = Factory.create(:user)
+      @user = Factory.create(:administrator)
       post_via_redirect user_session_path, 'user[email]' => @user.email, 'user[password]' => "please"
       
       get users_path
