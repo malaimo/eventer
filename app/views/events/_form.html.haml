@@ -1,10 +1,12 @@
+:javascript
+  bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+
 = semantic_form_for @event do |f|
 
   - f.inputs :event_details do
     .grid_12
-      = f.input :name, :input_html => { :size => 20 }
-      = f.input :date, :as => :string, :input_html => {:class => 'datepicker-class', :size => 6 }, 
-                :value => @event.date ? l(@event.date) : ""
+      = f.input :name, :input_html => { :size => 40 }
+      = f.input :date, :as => :string, :input_html => {:class => 'datepicker-class', :size => 6 }
       = f.input :place
       = f.input :capacity, :input_html => { :size => 3 }
       = f.input :city
@@ -16,9 +18,9 @@
       = f.input :list_price_2_pax_discount, :as => :string, :input_html => { :size => 2 }
       = f.input :list_price_3plus_pax_discount, :as => :string, :input_html => { :size => 2 }
       = f.input :seb_price, :as => :number, :input_html => { :size => 2 }
-      = f.input :seb_end_date, :as => :string, :input_html => {:class => 'datepicker-class'}
+      = f.input :seb_end_date, :as => :string, :input_html => {:class => 'datepicker-class', :size => 6 }
       = f.input :eb_price, :as => :number, :input_html => { :size => 2 }
-      = f.input :eb_end_date, :as => :string, :input_html => {:class => 'datepicker-class'}
+      = f.input :eb_end_date, :as => :string, :input_html => {:class => 'datepicker-class', :size => 6 }
       = f.input :description
       = f.input :recipients
       = f.input :program

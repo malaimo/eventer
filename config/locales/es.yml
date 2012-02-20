@@ -113,14 +113,22 @@ es:
         seb_end_date: "Hasta"
         eb_price: "Precio Early Bird"
         eb_end_date: "Hasta"
+        description: "Descripción"
+        recipients: "Destinatarios"
+        program: "Programa/Agenda"
+        draft: "Borrador"
+        cancelled: "Cancelado"
         edit:
           title: "Edit title"
     hints:
       event:
-          capacity: "Cantidad de personas máximas."      
+          capacity: "Cantidad máxima de personas"
+          seb_end_date: "Fecha de finalización del precio Super Early Bird"
+          eb_end_date: "Fecha de finalización del precio Early Bird" 
+              
     placeholders:
       post:
-        title: "Title your post"
+        name: "Title your post"
         slug: "Leave blank for an automatically generated slug"
       user:
         email: "you@yours.com"
@@ -144,6 +152,10 @@ es:
       roles: "Roles"
       events: "Eventos"
       exit: "Salir"
+      
+  title:
+      event:
+          new: "Nuevo Evento"
           
           
   flash:

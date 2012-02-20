@@ -69,8 +69,6 @@ When /^I create an empty event$/ do
   submit_event
 end
 
-
-
 When /^I visit the event listing page$/ do
   visit "/events"
 end
