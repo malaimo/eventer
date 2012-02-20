@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'factory_girl'
 
 FactoryGirl.define do
@@ -28,6 +29,30 @@ FactoryGirl.define do
     password 'please'
     password_confirmation 'please'
     roles [ Factory.create(:comercial_role) ]
+  end
+  
+  factory :country do
+    name "Argentina"
+    iso_code "AR"
+  end
+  
+  factory :trainer do
+    name "Juan Alberto"
+  end
+  
+  factory :event do
+    name "Evento de Prueba"
+    date "23/01/2100"
+    place "Hotel Conrad"
+    city "Punta del Este"
+    capacity 20
+    visibility_type 'pu'
+    list_price 500.00
+    description "Una descripción"
+    recipients "algunos destinatarios"
+    program "El programa del evento"
+    country Factory.build(:country)
+    trainer Factory.build(:trainer)
   end
 
 end

@@ -1,0 +1,59 @@
+%h1 Listing events
+
+%table
+  %tr
+    %th Name
+    %th Date
+    %th Place
+    %th Capacity
+    %th City
+    %th Country
+    %th Trainer
+    %th Type
+    %th List price
+    %th List price plus tax
+    %th List price 2 pax discount
+    %th List price 3plus pax discount
+    %th Seb price
+    %th Seb end date
+    %th Eb proce
+    %th Eb end date
+    %th Description
+    %th Recipients
+    %th Program
+    %th Draft
+    %th Cancelled
+    %th
+    %th
+    %th
+
+  - @events.each do |event|
+    %tr
+      %td= event.name
+      %td= event.date
+      %td= event.place
+      %td= event.capacity
+      %td= event.city
+      %td= event.country.name unless event.country.nil?
+      %td= event.trainer.name unless event.trainer.nil?
+      %td= event.visibility_type
+      %td= event.list_price
+      %td= event.list_price_plus_tax
+      %td= event.list_price_2_pax_discount
+      %td= event.list_price_3plus_pax_discount
+      %td= event.seb_price
+      %td= event.seb_end_date
+      %td= event.eb_price
+      %td= event.eb_end_date
+      %td= event.description
+      %td= event.recipients
+      %td= event.program
+      %td= event.draft
+      %td= event.cancelled
+      %td= link_to 'Show', event
+      %td= link_to 'Edit', edit_event_path(event)
+      %td= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Event', new_event_path

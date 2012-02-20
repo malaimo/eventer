@@ -1,4 +1,8 @@
 Eventer::Application.routes.draw do
+  resources :trainers
+
+  resources :events
+
   resources :roles
 
   devise_for :users

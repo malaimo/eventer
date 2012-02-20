@@ -268,3 +268,11 @@ Country.create([
   {:name => 'Zambia', :iso_code => 'ZM'},
   {:name => 'Zimbabwe', :iso_code => 'ZW'}
 ])
+
+Trainer.create([
+  {:name => 'John Doe'},
+  {:name => 'Jeff Baurer'},
+  {:name => 'Michael Donovan'}
+])
+
+

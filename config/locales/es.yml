@@ -1,0 +1,160 @@
+es:
+    
+  # formatos de fecha y hora
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%d de %B"
+      long: "%d de %B de %Y"
+    day_names: [Domingo, Lunes, Martes, Miércoles, Jueves, Viernes, Sábado]
+    abbr_day_names: [Dom, Lun, Mar, Mie, Jue, Vie, Sáb]
+    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
+    abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic]
+#    order: [:day, :month, :year]
+
+  time:
+    formats:
+      default: "%A, %d de %B de %Y, %H:%M h"
+      short: "%d/%m, %H:%M h"
+      long: "%A, %d de %B de %Y, %H:%M h"
+    am: ''
+    pm: ''
+    
+   # Para Array.to_sentence
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " y "
+      last_word_connector: " y "
+     
+  # Devise
+  devise:
+    failure:
+      user:
+        unauthenticated: "Usuario no identificado. Por favor identifíquese."
+    sessions:
+      user:
+        signed_in: "Identificación exitosa. Bienvenido!"
+        signed_out: "Gracias por utilizar Eventer. Hasta la próxima!"
+     
+     
+  # ActiveRecord
+  activerecord:
+      errors:
+        template:
+          header:
+            one: "No fue posible guardar %{model}: 1 error"
+            other: "No fue posible guardar %{model}: %{count} errores."
+          body: "Por favor, verifique el/lo(s) siguente(s) campo(s):"
+        messages:
+          inclusion: "no está incluido en la lista"
+          exclusion: "no está disponible"
+          invalid: "no es válido"
+          confirmation: "no está de acuerdo con la confirmación"
+          accepted: "debe ser aceptado"
+          empty: "no puede estar vacío"
+          blank: "no puede estar en blanco"
+          too_long: "es muy largo (máximo: %{count} caracteres)"
+          too_short: "es muy corto (mínimo: %{count} caracteres)"
+          wrong_length: "no posee el tamaño esperado (%{count} caracteres)"
+          taken: "ya está en uso"
+          not_a_number: "no es un número"
+          greater_than: "debe ser mayor a %{count}"
+          greater_than_or_equal_to: "debe ser mayor o igual a %{count}"
+          equal_to: "debe ser igual a %{count}"
+          less_than: "debe ser menor que %{count}"
+          less_than_or_equal_to: "debe ser menor o igual a %{count}"
+          odd: "debe ser impar"
+          even: "debe ser par"
+          record_invalid: "La validación falló: %{errors}"
+          existence: "no existe"
+          same_author: "no puede ser el mismo autor"
+          incomplete: "perfil de autor incompleto"
+          experience_report_duration: "solo puede ser 45 minutos"
+          workshop_duration: "solo puede ser 2 o 4 horas"
+          experience_report_session_type: "solo puede ser una sesión"
+          email_format: "debe tener un formato de e-mail válido"
+          username_format: "debe incluir únicamente letras, números, espacios y .-_@"
+          constant: "no se puede cambiar"
+          event_date_in_past: "el evento debe tener una fecha futura"
+          eb_price_should_be_smaller_than_list_price: "el Precio Early Bird no puede ser mayor al Precio de Lista"
+          seb_price_should_be_smaller_than_list_price: "el Precio Super Early Bird no puede ser mayor al Precio de Lista"
+          seb_price_should_be_smaller_than_eb_price: "el Precio Super Early Bird no puede ser mayor al Precio Early Bird"
+          capacity_should_be_greater_than_0: "el evento no puede tener una capacidad de 0 personas"
+          eb_end_date_should_be_earlier_than_event_date: "la fecha de Early Bird no puede ser mayor a la Fecha del Evento"
+          seb_end_date_should_be_earlier_than_event_date: "la fecha de Super Early Bird no puede ser mayor a la Fecha del Evento"
+          seb_end_date_should_be_earlier_than_eb_date: "la fecha de Super Early Bird no puede ser mayor a la Fecha de Early Bird"
+          private_event_should_not_have_discounts: "un evento Privado no puede tener descuentos por cantidad de personas"
+
+  formtastic:
+    yes: "Si"
+    no: "No"
+    titles:
+        event_details: "Información de Evento"
+        event_price_details: "Información de Precios"
+        trainer_details: "Información de Entrenador"
+        user_details: "Información de Usuario"
+        role_details: "Información de Rol"
+    labels:
+      name: "Nombre"
+      date: "Fecha"
+      place: "Lugar"
+      city: "Ciudad"
+      country: "País"
+      trainer: "Entrenador"
+      event:
+        capacity: "Capacidad"
+        visibility_type: "Tipo"
+        list_price: "Precio"
+        list_price_plus_tax: "+ IVA"
+        list_price_2_pax_discount: "Descuento para 2 personas"
+        list_price_3plus_pax_discount: "Descuento para 3 o más personas"
+        seb_price: "Precio Super Early Bird"
+        seb_end_date: "Hasta"
+        eb_price: "Precio Early Bird"
+        eb_end_date: "Hasta"
+        edit:
+          title: "Edit title"
+    hints:
+      event:
+          capacity: "Cantidad de personas máximas."      
+    placeholders:
+      post:
+        title: "Title your post"
+        slug: "Leave blank for an automatically generated slug"
+      user:
+        email: "you@yours.com"
+    actions:
+      event:
+          create: "Ok"
+      create: "Crear mi %{model}"
+      update: "Save changes"
+      reset: "Reset form"
+      cancel: "Cancel and go back"
+      dummie: "Launch!"
+      
+  # Texto customizado
+  event:
+      type:
+          public: "Publico"
+          private: "Privado"
+  menu:
+      dashboard: "Dashboard"
+      users: "Usuarios"
+      roles: "Roles"
+      events: "Eventos"
+      exit: "Salir"
+          
+          
+  flash:
+      failure: "Por favor verifica los campos destacados"
+      unauthorised: "No estás autorizado a acceder a esta página"
+      event:
+          create:
+              success: "Evento creado exitosamente!"
+          update:
+              success: "Evento actualizado exitosamente!"
+          remove:
+              success: "Evento removido exitosamente!"
+      login:
+          required: "Debes estar logueado para acceder a esta página."

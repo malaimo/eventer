@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @trainer.name
+
+= link_to 'Edit', edit_trainer_path(@trainer)
+\|
+= link_to 'Back', trainers_path

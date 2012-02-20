@@ -5,11 +5,9 @@ class Ability
     user ||= User.new
 
     if user.role? :administrator
-      can :manage, [Role, User]
-#    elsif user.role? :operator
-#      can :manage, Post
-#    else
-#      can :read, :all
+      can :manage, [Role, User, Event]
+    elsif user.role? :comercial
+      can :manage, Event
     end
   end
 end

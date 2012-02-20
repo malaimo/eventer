@@ -58,3 +58,5 @@ gem 'haml-rails'
 # Gemas para idetificación y autorización de usuarios
 gem 'devise'
 gem 'cancan'
+
+gem 'formtastic'

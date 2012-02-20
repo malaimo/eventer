@@ -1,0 +1,28 @@
+= semantic_form_for @event do |f|
+
+  - f.inputs :event_details do
+    .grid_12
+      = f.input :name, :input_html => { :size => 20 }
+      = f.input :date, :as => :string, :input_html => {:class => 'datepicker-class', :size => 6 }, 
+                :value => @event.date ? l(@event.date) : ""
+      = f.input :place
+      = f.input :capacity, :input_html => { :size => 3 }
+      = f.input :city
+      = f.input :country, :as => :select, :collection => Country.find(:all), :input_html => { :style => "width: 200px" }
+      = f.input :trainer, :as => :select, :collection => Trainer.find(:all)
+      = f.input :visibility_type, :as => :radio, :collection => { t('event.type.public') => "pu", t('event.type.private') => "pr" }
+      = f.input :list_price, :as => :number, :input_html => { :size => 2 }
+      = f.input :list_price_plus_tax
+      = f.input :list_price_2_pax_discount, :as => :string, :input_html => { :size => 2 }
+      = f.input :list_price_3plus_pax_discount, :as => :string, :input_html => { :size => 2 }
+      = f.input :seb_price, :as => :number, :input_html => { :size => 2 }
+      = f.input :seb_end_date, :as => :string, :input_html => {:class => 'datepicker-class'}
+      = f.input :eb_price, :as => :number, :input_html => { :size => 2 }
+      = f.input :eb_end_date, :as => :string, :input_html => {:class => 'datepicker-class'}
+      = f.input :description
+      = f.input :recipients
+      = f.input :program
+      = f.input :draft
+      = f.input :cancelled
+    .grid_12
+      = f.buttons

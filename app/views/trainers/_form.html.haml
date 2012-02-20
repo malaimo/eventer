@@ -1,0 +1,13 @@
+= form_for @trainer do |f|
+  -if @trainer.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@trainer.errors.count, "error")} prohibited this trainer from being saved:"
+      %ul
+        - @trainer.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .actions
+    = f.submit 'Save'

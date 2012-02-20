@@ -1,0 +1,69 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @event.name
+%p
+  %b Date:
+  = @event.date
+%p
+  %b Place:
+  = @event.place
+%p
+  %b Capacity:
+  = @event.capacity
+%p
+  %b City:
+  = @event.city
+%p
+  %b Country:
+  = @event.country
+%p
+  %b Trainer:
+  = @event.trainer
+%p
+  %b Type:
+  = @event.visibility_type
+%p
+  %b List price:
+  = @event.list_price
+%p
+  %b List price plus tax:
+  = @event.list_price_plus_tax
+%p
+  %b List price 2 pax discount:
+  = @event.list_price_2_pax_discount
+%p
+  %b List price 3plus pax discount:
+  = @event.list_price_3plus_pax_discount
+%p
+  %b Seb price:
+  = @event.seb_price
+%p
+  %b Seb end date:
+  = @event.seb_end_date
+%p
+  %b Eb proce:
+  = @event.eb_price
+%p
+  %b Eb end date:
+  = @event.eb_end_date
+%p
+  %b Description:
+  = @event.description
+%p
+  %b Recipients:
+  = @event.recipients
+%p
+  %b Program:
+  = @event.program
+%p
+  %b Draft:
+  = @event.draft
+%p
+  %b Cancelled:
+  = @event.cancelled
+
+= link_to 'Edit', edit_event_path(@event)
+\|
+= link_to 'Back', events_path

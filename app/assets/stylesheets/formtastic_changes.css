@@ -1,0 +1,109 @@
+/* -------------------------------------------------------------------------------------------------
+
+Load this stylesheet after formtastic.css in your layouts to override the CSS to suit your needs.
+This will allow you to update formtastic.css with new releases without clobbering your own changes.
+
+For example, to make the inline hint paragraphs a little darker in color than the standard #666:
+
+form.formtastic fieldset ol li p.inline-hints { color:#333; }
+
+--------------------------------------------------------------------------------------------------*/
+form.formtastic legend {
+  color: #666666;
+  font-size: 1.2em;
+  padding: 10px;
+}
+
+.formtastic .input .label {
+  float:none;
+}
+
+form.formtastic fieldset ol li label {
+  font-weight: bold;
+}
+
+form.formtastic fieldset ol li.boolean label {
+  padding: 0;
+}
+
+form.formtastic fieldset ol li.string input, form.formtastic fieldset ol li.password input, form.formtastic fieldset ol li.text textarea,form.formtastic fieldset ol li.numeric input {
+  background-color: #ffffff;
+  border: 2px solid #bbbbbb;
+  padding: 2px;
+}
+
+form.formtastic fieldset ol li.check_boxes fieldset ol {
+  padding: 15px;
+}
+
+form.formtastic fieldset ol li.error input, form.formtastic fieldset ol li.error textarea {
+  background: #fbe3e4;
+  color: #8a1f11;
+  border-color: #fbc2c4;
+}
+
+form.formtastic abbr, form.formtastic acronym {
+  color: #d20000;
+}
+
+form.formtastic abbr::before, form.formtastic acronym::before {
+  content: ' ';
+}
+
+form.formtastic fieldset ol li p.inline-hints {
+  color: #999999;
+  font-style: italic;
+  width: 74%;
+}
+
+form.formtastic fieldset ol li ul.errors {
+  background: url('/assets/error_bg.png') no-repeat;
+  color: #d20000;
+/*  float: right; */
+  width: 70%;
+  list-style: none;
+/*  margin: 0; */
+  padding-left: 20px;
+}
+
+form#new_user_session fieldset ol li ul.errors {
+  background: url('/assets/error_bg.png') no-repeat;
+  color: #d20000;
+  list-style: none;
+  margin: 0;
+  padding-left: 20px;
+  float: none;
+  width: 74%;
+}
+
+form.reviewer.formtastic fieldset ol ul.errors {
+  background: url('/assets/error_bg.png') no-repeat;
+  color: #d20000;
+  float: left;
+  width: 74%;
+  list-style: none;
+  margin: 0;
+  padding-left: 20px;
+}
+
+form.formtastic fieldset ol li ul.errors li {
+  margin: 0;
+}
+
+form.formtastic fieldset.buttons {
+  padding: 0;
+}
+
+
+/* RADIO OVERRIDES - display radio buttons in line
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset ol li.radio fieldset ol li {
+    margin:0.1em 0.5em 0.5em 0;
+    display: inline-block;
+}
+
+/* NESTED FIELDSETS AND LEGENDS (radio, check boxes and date/time inputs use nested fieldsets)
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset ol li fieldset legend { 
+	z-index:-1;
+ }

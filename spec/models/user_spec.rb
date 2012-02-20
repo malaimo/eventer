@@ -16,10 +16,14 @@ describe User do
     it "should be able to manage users" do
       @admin.should be_able_to(:manage, User.new)
     end
+    
+    it "should be able to manage roles" do
+      @admin.should be_able_to(:manage, Event.new)
+    end
   
   end
   
-  context "If it's not an administrator" do
+  context "If it's a comercial person" do
 
     before(:each) do
       @comercial = Ability.new ( Factory.create(:comercial) )
@@ -32,6 +36,10 @@ describe User do
     
     it "shouldn't be able to manage users" do
       @comercial.should_not be_able_to(:manage, User.new)      
+    end
+    
+    it "should be able to manage roles" do
+      @comercial.should be_able_to(:manage, Event.new)
     end
   
   end

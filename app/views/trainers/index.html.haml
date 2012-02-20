@@ -1,0 +1,19 @@
+%h1 Listing trainers
+
+%table
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @trainers.each do |trainer|
+    %tr
+      %td= trainer.name
+      %td= link_to 'Show', trainer
+      %td= link_to 'Edit', edit_trainer_path(trainer)
+      %td= link_to 'Destroy', trainer, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Trainer', new_trainer_path

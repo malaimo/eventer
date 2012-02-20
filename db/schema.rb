@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120217100107) do
+ActiveRecord::Schema.define(:version => 20120218131256) do
 
   create_table "countries", :force => true do |t|
     t.string   "name"
@@ -19,6 +19,35 @@ ActiveRecord::Schema.define(:version => 20120217100107) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "events", :force => true do |t|
+    t.string   "name"
+    t.date     "date"
+    t.string   "place"
+    t.integer  "capacity"
+    t.string   "city"
+    t.integer  "country_id"
+    t.integer  "trainer_id"
+    t.string   "visibility_type",               :limit => 2
+    t.decimal  "list_price",                                 :precision => 7, :scale => 2
+    t.boolean  "list_price_plus_tax"
+    t.integer  "list_price_2_pax_discount"
+    t.integer  "list_price_3plus_pax_discount"
+    t.decimal  "seb_price",                                  :precision => 7, :scale => 2
+    t.date     "seb_end_date"
+    t.decimal  "eb_price",                                   :precision => 7, :scale => 2
+    t.date     "eb_end_date"
+    t.text     "description"
+    t.text     "recipients"
+    t.text     "program"
+    t.boolean  "draft"
+    t.boolean  "cancelled"
+    t.datetime "created_at",                                                               :null => false
+    t.datetime "updated_at",                                                               :null => false
+  end
+
+  add_index "events", ["country_id"], :name => "index_events_on_country_id"
+  add_index "events", ["trainer_id"], :name => "index_events_on_trainer_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -29,6 +58,12 @@ ActiveRecord::Schema.define(:version => 20120217100107) do
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer "role_id"
     t.integer "user_id"
+  end
+
+  create_table "trainers", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
