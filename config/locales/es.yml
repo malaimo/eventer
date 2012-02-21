@@ -132,14 +132,21 @@ es:
         slug: "Leave blank for an automatically generated slug"
       user:
         email: "you@yours.com"
+        
     actions:
       event:
           create: "Ok"
+      trainer:
+        create: "Ok"
       create: "Crear mi %{model}"
       update: "Save changes"
       reset: "Reset form"
-      cancel: "Cancel and go back"
+      cancel: "Cancelar y volver"
       dummie: "Launch!"
+      view: "Ver"
+      edit: "Editar"
+      destroy: "Borrar"
+      new: "Nuevo"
       
   # Texto customizado
   event:
@@ -151,11 +158,17 @@ es:
       users: "Usuarios"
       roles: "Roles"
       events: "Eventos"
+      trainers: "Entrenadores"
       exit: "Salir"
       
   title:
       event:
           new: "Nuevo Evento"
+      trainer:
+          index: "Listado de Entrenadores"
+          new: "Nuevo Entrenador"
+          edit: "Modificación de Entrenador"
+          show: "Detalles de Entrenador"
           
           
   flash:
@@ -168,5 +181,15 @@ es:
               success: "Evento actualizado exitosamente!"
           remove:
               success: "Evento removido exitosamente!"
+      trainer:
+        create:
+            success: "Entrenador creado exitosamente!"
+        update:
+            success: "Entrenador actualizado exitosamente!"
+        remove:
+            success: "Entrenador removido exitosamente!"
       login:
           required: "Debes estar logueado para acceder a esta página."
+  
+  confirm:
+      sure: "Está Ud. seguro?"

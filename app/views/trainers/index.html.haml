@@ -1,19 +1,18 @@
-%h1 Listing trainers
+%h1= t('title.trainer.index')
+
+%p.record-actions
+  = link_to t('formtastic.actions.new'), new_trainer_path
 
 %table
   %tr
-    %th Name
-    %th
-    %th
-    %th
-
+    %th= t('formtastic.labels.name')
+    %th.record-actions
+   
   - @trainers.each do |trainer|
     %tr
       %td= trainer.name
-      %td= link_to 'Show', trainer
-      %td= link_to 'Edit', edit_trainer_path(trainer)
-      %td= link_to 'Destroy', trainer, :confirm => 'Are you sure?', :method => :delete
+      %td.record-actions
+        = link_to t('formtastic.actions.view'), trainer
+        = link_to t('formtastic.actions.edit'), edit_trainer_path(trainer)
+        = link_to t('formtastic.actions.destroy'), trainer, :confirm => t('confirm.sure'), :method => :delete
 
-%br
-
-= link_to 'New Trainer', new_trainer_path

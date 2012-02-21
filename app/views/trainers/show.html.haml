@@ -1,9 +1,9 @@
-%p#notice= notice
+%h1= t('title.trainer.show')
 
 %p
-  %b Name:
+  %b= t('formtastic.labels.name') + ": "
   = @trainer.name
 
-= link_to 'Edit', edit_trainer_path(@trainer)
+= link_to t('formtastic.actions.edit'), edit_trainer_path(@trainer)
 \|
-= link_to 'Back', trainers_path
+= link_to t('formtastic.actions.cancel'), trainers_path

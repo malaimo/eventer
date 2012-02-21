@@ -363,3 +363,7 @@ a:hover {
     #content table td {
       border-bottom: 1px solid #336699;
       padding: 6px 8px; }
+
+.record-actions {
+	text-align: right;
+}

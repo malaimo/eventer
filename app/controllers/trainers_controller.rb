@@ -1,4 +1,7 @@
 class TrainersController < ApplicationController
+  before_filter :authenticate_user!
+  load_and_authorize_resource
+  
   # GET /trainers
   # GET /trainers.json
   def index
@@ -44,7 +47,7 @@ class TrainersController < ApplicationController
 
     respond_to do |format|
       if @trainer.save
-        format.html { redirect_to @trainer, notice: 'Trainer was successfully created.' }
+        format.html { redirect_to trainers_path, notice: t('flash.trainer.create.success') }
         format.json { render json: @trainer, status: :created, location: @trainer }
       else
         format.html { render action: "new" }
@@ -60,7 +63,7 @@ class TrainersController < ApplicationController
 
     respond_to do |format|
       if @trainer.update_attributes(params[:trainer])
-        format.html { redirect_to @trainer, notice: 'Trainer was successfully updated.' }
+        format.html { redirect_to trainers_path, notice: t('flash.trainer.update.success') }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -76,7 +79,7 @@ class TrainersController < ApplicationController
     @trainer.destroy
 
     respond_to do |format|
-      format.html { redirect_to trainers_url }
+      format.html { redirect_to trainers_url, notice: t('flash.trainer.remove.success') }
       format.json { head :no_content }
     end
   end

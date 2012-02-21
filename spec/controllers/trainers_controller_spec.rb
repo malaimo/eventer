@@ -24,14 +24,22 @@ describe TrainersController do
   # Trainer. As you add validations to Trainer, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {
+      :name => "Anibal Smith"
+    }
   end
   
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # TrainersController. Be sure to keep this updated too.
   def valid_session
-    {}
+    nil
+  end
+  
+  before(:each) do
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    @user = Factory.create(:comercial)
+    sign_in @user
   end
 
   describe "GET index" do
@@ -81,7 +89,7 @@ describe TrainersController do
 
       it "redirects to the created trainer" do
         post :create, {:trainer => valid_attributes}, valid_session
-        response.should redirect_to(Trainer.last)
+        response.should redirect_to(trainers_path)
       end
     end
 
@@ -123,7 +131,7 @@ describe TrainersController do
       it "redirects to the trainer" do
         trainer = Trainer.create! valid_attributes
         put :update, {:id => trainer.to_param, :trainer => valid_attributes}, valid_session
-        response.should redirect_to(trainer)
+        response.should redirect_to(trainers_path)
       end
     end
 

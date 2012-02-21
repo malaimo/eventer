@@ -1,5 +1,11 @@
 require 'spec_helper'
 
 describe Trainer do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should require a name" do
+    t = Factory.build(:trainer)
+    
+    t.name = ""
+
+    t.valid?.should be false
+  end
 end

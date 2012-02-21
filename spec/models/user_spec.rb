@@ -17,9 +17,13 @@ describe User do
       @admin.should be_able_to(:manage, User.new)
     end
     
-    it "should be able to manage roles" do
+    it "should be able to manage events" do
       @admin.should be_able_to(:manage, Event.new)
     end
+    
+     it "should be able to manage trainers" do
+        @admin.should be_able_to(:manage, Trainer.new)
+     end
   
   end
   
@@ -38,8 +42,12 @@ describe User do
       @comercial.should_not be_able_to(:manage, User.new)      
     end
     
-    it "should be able to manage roles" do
+    it "should be able to manage events" do
       @comercial.should be_able_to(:manage, Event.new)
+    end
+    
+    it "should be able to manage trainers" do
+      @comercial.should be_able_to(:manage, Trainer.new)
     end
   
   end
