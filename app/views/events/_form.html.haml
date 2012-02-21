@@ -1,6 +1,3 @@
-:javascript
-  bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
-
 = semantic_form_for @event do |f|
 
   - f.inputs :event_details do
@@ -28,3 +25,34 @@
       = f.input :cancelled
     .grid_12
       = f.buttons
+
+:javascript
+  bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+
+  $(document).ready(function() {
+    $("#event_visibility_type_pu").change( function() { eventTypeActions( $(this).val() ); });
+    $("#event_visibility_type_pr").change( function() { eventTypeActions( $(this).val() ); });
+
+    if ( $("#event_visibility_type_pr").is(":checked") ) {
+      $("#event_visibility_type_pr").trigger('change');
+    } 
+
+  })
+
+  function eventTypeActions( value ) {
+    if (value === "pu") {
+      $("#event_list_price_2_pax_discount_input").show();
+      $("#event_list_price_3plus_pax_discount_input").show();
+      $("#event_seb_price_input").show();
+      $("#event_seb_end_date_input").show();
+      $("#event_eb_price_input").show();
+      $("#event_eb_end_date_input").show();
+    } else {
+      $("#event_list_price_2_pax_discount_input").hide();
+      $("#event_list_price_3plus_pax_discount_input").hide();
+      $("#event_seb_price_input").hide();
+      $("#event_seb_end_date_input").hide();
+      $("#event_eb_price_input").hide();
+      $("#event_eb_end_date_input").hide();
+    }
+  }

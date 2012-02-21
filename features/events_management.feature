@@ -57,4 +57,17 @@ Feature: Administración de Eventos
 		When I create an empty event
 		Then I should see "Por favor verifica los campos destacados"
 		And  I should see "no puede estar en blanco"
+	
+	@selenium	
+	Scenario: Se deben ocutar los descuentos y precios EB y SEB si es un evento privado
+		Given Im a logged in user
+		When I choose to create a Private event
+		Then I should not see public prices
+	
+	@selenium
+	Scenario: Se deben mostrar los descuentos y precios EB y SEB si es un evento público
+	    Given Im a logged in user
+		When I choose to create a Public event
+		Then I should see public prices
+	
 		

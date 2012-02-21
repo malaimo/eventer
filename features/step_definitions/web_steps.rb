@@ -1,6 +1,11 @@
 # encoding: utf-8
 
 def create_valid_event(event_name)
+  create_valid_event_inputs event_name
+  create_valid_event_texts
+end
+
+def create_valid_event_inputs(event_name)
   fill_in 'event_name', :with => event_name
   fill_in 'event_date', :with => '31/01/2300'
   fill_in 'event_place', :with => 'Hotel Llao Llao'
@@ -17,6 +22,9 @@ def create_valid_event(event_name)
   fill_in 'event_seb_end_date', :with => '31/01/2100'
   fill_in 'event_eb_price', :with => 450.00
   fill_in 'event_eb_end_date', :with => '31/01/2200'
+end
+
+def create_valid_event_texts
   fill_in 'event_description', :with => 'Este es un curso de prueba...'
   fill_in 'event_recipients', :with => 'Pilotos, Despachantes de Vuelo, Azafatas'
   fill_in 'event_program', :with => 'Nubes, Estratos, Corrientes, Windshields'
@@ -80,5 +88,27 @@ end
 
 Then /^I should see one event$/ do
   page.should have_content('Curso de Meteorología Básica I')
+end
+
+When /^I choose to create a Private event$/ do
+  visit "/events/new"
+  create_valid_event_inputs 'Evento de Ejemplo'
+  choose 'event_visibility_type_pr'
+end
+
+When /^I choose to create a Public event$/ do
+  visit "/events/new"
+  create_valid_event_inputs 'Evento de Ejemplo'
+  choose 'event_visibility_type_pu'
+end
+
+Then /^I should not see public prices$/ do
+  page.find_field('event_seb_price').visible?.should be false
+  page.find_field('event_eb_price').visible?.should be false
+end
+
+Then /^I should see public prices$/ do
+  page.find_field('event_seb_price').visible?.should be true
+  page.find_field('event_eb_price').visible?.should be true
 end
 
