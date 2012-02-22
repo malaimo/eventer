@@ -5,9 +5,9 @@ def create_valid_event(event_name)
   create_valid_event_texts
 end
 
-def create_valid_event_inputs(event_name)
+def create_valid_event_inputs(event_name, event_date='31-01-2030')
   fill_in 'event_name', :with => event_name
-  fill_in 'event_date', :with => '31/01/2300'
+  fill_in 'event_date', :with => event_date
   fill_in 'event_place', :with => 'Hotel Llao Llao'
   fill_in 'event_capacity', :with => 25
   fill_in 'event_city', :with => 'Buenos Aires'
@@ -19,9 +19,9 @@ def create_valid_event_inputs(event_name)
   fill_in 'event_list_price_2_pax_discount', :with =>  10
   fill_in 'event_list_price_3plus_pax_discount', :with =>  15
   fill_in 'event_seb_price', :with => 400.00
-  fill_in 'event_seb_end_date', :with => '31/01/2100'
+  fill_in 'event_seb_end_date', :with => '31-12-2029'
   fill_in 'event_eb_price', :with => 450.00
-  fill_in 'event_eb_end_date', :with => '31/01/2200'
+  fill_in 'event_eb_end_date', :with => '21-01-2030'
 end
 
 def create_valid_event_texts
@@ -61,6 +61,13 @@ When /^I create an invalid event with "([^"]*)" as "([^"]*)"$/ do |value, attrib
   create_valid_event 'Evento de Ejemplo'
   fill_in attribute, :with => value
   submit_event
+end
+
+When /^I create a public event on "([^"]*)"$/ do |value|
+  visit "/events/new"
+  create_valid_event_inputs 'Evento de Ejemplo', value
+  fill_in 'event_date', :with => value
+  fill_in 'event_name', :with => 'solo para sacar el foco del event_date y asi lanzar el evento change...'
 end
 
 When /^I create an private event with discounts$/ do
@@ -111,4 +118,13 @@ Then /^I should see public prices$/ do
   page.find_field('event_seb_price').visible?.should be true
   page.find_field('event_eb_price').visible?.should be true
 end
+
+Then /^EB date should be "([^"]*)"$/ do |value|
+  page.find_field('event_eb_end_date').value.should == value
+end
+
+Then /^SEB date should be "([^"]*)"$/ do |value|
+  page.find_field('event_seb_end_date').value.should == value
+end
+
 

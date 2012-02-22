@@ -34,17 +34,17 @@ Feature: Administración de Eventos
 
 	Scenario: Fecha SEB debe ser menor a la Fecha del Evento
 		Given Im a logged in user
-		When I create an invalid event with "31/01/3000" as "event_seb_end_date"
+		When I create an invalid event with "31-01-3000" as "event_seb_end_date"
 		Then I should see "la fecha de Super Early Bird no puede ser mayor a la Fecha del Evento"
 		
 	Scenario: Fecha EB debe ser menor a la Fecha del Evento
 		Given Im a logged in user
-		When I create an invalid event with "31/01/3000" as "event_eb_end_date"
+		When I create an invalid event with "31-01-3000" as "event_eb_end_date"
 		Then I should see "la fecha de Early Bird no puede ser mayor a la Fecha del Evento"
 
 	Scenario: Fecha SEB debe ser menor a la Fecha EB
 		Given Im a logged in user
-		When I create an invalid event with "31/01/2250" as "event_seb_end_date"
+		When I create an invalid event with "26-01-2030" as "event_seb_end_date"
 		Then I should see "la fecha de Super Early Bird no puede ser mayor a la Fecha de Early Bird"
 		
 	Scenario: Un evento Privado no debe tener descuentos
@@ -69,5 +69,12 @@ Feature: Administración de Eventos
 	    Given Im a logged in user
 		When I choose to create a Public event
 		Then I should see public prices
+	
+	@selenium	
+	Scenario: SEB=30 días antes de la fecha del evento y EB=10 días antes de la fecha del evento
+	    Given Im a logged in user
+		When I create a public event on "15-01-2015"
+		Then EB date should be "05-01-2015"
+		And SEB date should be "16-12-2014"
 	
 		

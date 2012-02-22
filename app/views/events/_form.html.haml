@@ -33,6 +33,8 @@
     $("#event_visibility_type_pu").change( function() { eventTypeActions( $(this).val() ); });
     $("#event_visibility_type_pr").change( function() { eventTypeActions( $(this).val() ); });
 
+    $("#event_date").change( function() { eventDateChanged( $(this).val() ); });
+
     if ( $("#event_visibility_type_pr").is(":checked") ) {
       $("#event_visibility_type_pr").trigger('change');
     } 
@@ -55,4 +57,37 @@
       $("#event_eb_price_input").hide();
       $("#event_eb_end_date_input").hide();
     }
+  }
+
+  function eventDateChanged( value ) {
+    var date_string = value.substr(6,4) + "-" + value.substr(3,2) + "-" + value.substr(0,2);   
+
+    var event_date = new Date( date_string );
+    
+    var eb_date = new Date( date_string );
+    eb_date.setDate( event_date.getDate()-9 );
+
+    var eb_date_day = eb_date.getDate();
+    var eb_date_month = eb_date.getMonth()+1;
+    var eb_date_year = eb_date.getFullYear();
+
+    if (eb_date_day<10) eb_date_day = "0"+eb_date_day;
+    if (eb_date_month<10) eb_date_month = "0"+eb_date_month;
+
+    var eb_new_date = eb_date_day + "-" + eb_date_month + "-" + eb_date_year;
+    $("#event_eb_end_date").val( eb_new_date );
+
+    var seb_date = new Date( date_string );
+    seb_date.setDate( event_date.getDate()-29 );
+
+    var seb_date_day = seb_date.getDate();
+    var seb_date_month = seb_date.getMonth()+1;
+    var seb_date_year = seb_date.getFullYear();
+
+    if (seb_date_day<10) seb_date_day = "0"+seb_date_day;
+    if (seb_date_month<10) seb_date_month = "0"+seb_date_month;
+
+    var seb_new_date = seb_date_day + "-" + seb_date_month + "-" + seb_date_year;
+    $("#event_seb_end_date").val( seb_new_date );
+
   }
