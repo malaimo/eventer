@@ -178,7 +178,7 @@ es:
           create:
               success: "Evento creado exitosamente!"
           update:
-              success: "Evento actualizado exitosamente!"
+              success: "Evento modificado exitosamente!"
           remove:
               success: "Evento removido exitosamente!"
       trainer:

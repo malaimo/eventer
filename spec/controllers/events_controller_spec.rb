@@ -145,7 +145,7 @@ describe EventsController do
         it "redirects to the event" do
           event = Event.create! valid_attributes
           put :update, {:id => event.to_param, :event => valid_attributes}, valid_session
-          response.should redirect_to(event)
+          response.should redirect_to(events_path)
         end
       end
 

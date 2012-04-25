@@ -69,7 +69,7 @@ Feature: Administración de Eventos
 		When I create an empty event
 		Then I should see "Por favor verifica los campos destacados"
 		And  I should see "no puede estar en blanco"
-	
+		
 	@selenium	
 	Scenario: Se deben ocutar los descuentos y precios EB y SEB si es un evento privado
 		Given Im a logged in user
@@ -88,5 +88,14 @@ Feature: Administración de Eventos
 		When I create a public event on "15-01-2015"
 		Then EB date should be "05-01-2015"
 		And SEB date should be "16-12-2014"
+		
+	Scenario: Modificación de Evento Válido
+		Given Im a logged in user
+		When I create a valid event named "Curso de Meteorología Básica I"
+		And I modify "Curso de Meteorología Básica I"
+		Then I should be on the events listing page
+		And I should see "Evento modificado exitosamente"
+		And I should see "Curso de Meteorología Básica I - Modificado"
+
 	
 		

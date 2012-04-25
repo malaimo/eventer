@@ -13,7 +13,7 @@
   - @events.each do |event|
     %tr
       %td= event.date
-      %td= event.name
+      %td= link_to event.name, event
       %td= event.city
       %td= event.country.name unless event.country.nil?
       %td 
