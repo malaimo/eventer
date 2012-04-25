@@ -3,6 +3,8 @@ class Event < ActiveRecord::Base
   belongs_to :trainer
   
   scope :visible, where(:cancelled => false) 
+  scope :public_events,  where(:visibility_type => "pu")
+  scope :public_and_visible, self.visible.public_events
   
   after_initialize :initialize_defaults
   

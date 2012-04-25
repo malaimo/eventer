@@ -1,2 +1,16 @@
-%h1 Inicio
-%p Listado de cursos públicos
+%h1 Listado de eventos
+
+%table
+  %tr
+    %th Fecha
+    %th Nombre
+    %th Ciudad
+    %th País
+    
+  - @events.each do |event|
+    %tr
+      %td= event.date
+      %td= event.name
+      %td= event.city
+      %td= event.country.name unless event.country.nil?
+
