@@ -37,7 +37,8 @@ describe EventsController do
       :recipients => "algunos destinatarios",
       :program => "El programa del evento", 
       :country_id => Factory.create(:country).id,
-      :trainer_id => Factory.create(:trainer).id
+      :trainer_id => Factory.create(:trainer).id,
+      :cancelled => false
       }
   end
   

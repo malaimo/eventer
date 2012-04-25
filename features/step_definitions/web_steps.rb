@@ -131,11 +131,23 @@ Then /^SEB date should be "([^"]*)"$/ do |value|
   page.find_field('event_seb_end_date').value.should == value
 end
 
-When /^I modify "([^"]*)"$/ do |link_description|
+When /^I modify the event "([^"]*)"$/ do |link_description|
   click_link link_description
   click_link "Modificar"
   fill_in 'event_name', :with => link_description + " - Modificado"
   click_button "Save changes"
 end
+
+When /^I cancel the event "([^"]*)"$/ do |link_description|
+  click_link link_description
+  click_link "Modificar"
+  check 'event_cancelled'
+  click_button "Save changes"
+end
+
+Then /^I should not see "([^"]*)"$/ do |text|
+  page.should_not have_content( text )
+end
+
 
 

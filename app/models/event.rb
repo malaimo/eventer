@@ -2,6 +2,8 @@ class Event < ActiveRecord::Base
   belongs_to :country
   belongs_to :trainer
   
+  scope :visible, where(:cancelled => false) 
+  
   after_initialize :initialize_defaults
   
   attr_accessible :trainer_id, :country_id, :name, :date, :place, :capacity, :city, :visibility_type, :list_price, 

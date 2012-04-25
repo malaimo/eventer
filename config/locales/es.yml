@@ -125,6 +125,7 @@ es:
           capacity: "Cantidad máxima de personas"
           seb_end_date: "Fecha de finalización del precio Super Early Bird"
           eb_end_date: "Fecha de finalización del precio Early Bird" 
+          cancelled: "Si cancelas el evento no podrás acceder más a él"
               
     placeholders:
       post:
@@ -179,8 +180,8 @@ es:
               success: "Evento creado exitosamente!"
           update:
               success: "Evento modificado exitosamente!"
-          remove:
-              success: "Evento removido exitosamente!"
+          cancel:
+              success: "Evento cancelado exitosamente!"
       trainer:
         create:
             success: "Entrenador creado exitosamente!"

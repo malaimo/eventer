@@ -92,10 +92,17 @@ Feature: Administración de Eventos
 	Scenario: Modificación de Evento Válido
 		Given Im a logged in user
 		When I create a valid event named "Curso de Meteorología Básica I"
-		And I modify "Curso de Meteorología Básica I"
+		And I modify the event "Curso de Meteorología Básica I"
 		Then I should be on the events listing page
 		And I should see "Evento modificado exitosamente"
 		And I should see "Curso de Meteorología Básica I - Modificado"
-
+	
+	Scenario: Cancelación de Evento
+		Given Im a logged in user
+		When I create a valid event named "Curso de Meteorología Básica I - a Cancelar"
+		And I cancel the event "Curso de Meteorología Básica I - a Cancelar"
+		Then I should be on the events listing page
+		And I should see "Evento cancelado exitosamente"
+		And I should not see "Curso de Meteorología Básica I - a Cancelar"
 	
 		

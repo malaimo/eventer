@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all(:order => 'date')
+    @events = Event.visible.all(:order => 'date')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -66,7 +66,11 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
-        format.html { redirect_to events_path, notice: t('flash.event.update.success') }
+        if @event.cancelled
+          format.html { redirect_to events_path, notice: t('flash.event.cancel.success') }
+        else
+          format.html { redirect_to events_path, notice: t('flash.event.update.success') }
+        end
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
