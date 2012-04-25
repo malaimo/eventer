@@ -38,6 +38,10 @@ Given /^I visit the home page$/ do
   visit "/"
 end
 
+Given /^I visit the events page$/ do
+  visit "/events"
+end
+
 Given /^Im a logged in user$/ do
   visit "/users/sign_in"
   fill_in 'user_email', :with => 'ejemplo@eventer.heroku.com'

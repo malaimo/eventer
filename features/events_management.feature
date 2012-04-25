@@ -1,5 +1,17 @@
 Feature: Administración de Eventos
 
+	Scenario: Ver listado de Eventos Confirmados
+		Given Im a logged in user
+		When I visit the events page
+		Then I should see "Eventos Confirmados"
+		And I should see "Fecha"
+		And I should see "Nombre"
+		And I should see "Ciudad"
+		And I should see "País"
+		And I should see "Tipo"
+		And I should see "Acciones"
+		And I should see "Nuevo Evento"
+	
 	Scenario: Alta de Evento Válido
 		Given Im a logged in user
 		When I create a valid event named "Curso de Meteorología Básica I"
