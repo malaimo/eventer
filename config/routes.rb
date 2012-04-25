@@ -15,7 +15,8 @@ Eventer::Application.routes.draw do
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
   match 'dashboard' => 'dashboard#index'
-
+  match 'public_events/:id' => 'public_events#show'
+  
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)

@@ -1,0 +1,54 @@
+%h1= @event.name
+%p
+  = @event.description
+%p
+  %b Público Objetivo:
+  %br
+  = @event.recipients
+%p
+  %b Agenda:
+  %br
+  = @event.program
+%p
+%b Fecha:
+= @event.date
+%br
+%b Lugar:
+= @event.place
+%br
+%b Ciudad:
+= @event.city
+%br
+%b País:
+= @event.country.name
+%br
+%b Entrenador:
+= @event.trainer.name
+%br
+%b Precio de Lista:
+= @event.list_price
+-if @event.list_price_plus_tax
+  +IVA
+-if @event.list_price_2_pax_discount.to_i > 0
+  %br
+  = @event.list_price_2_pax_discount.to_i
+  = "% de Descuento para 2 personas."
+-if @event.list_price_3plus_pax_discount.to_i > 0
+  %br
+  = @event.list_price_3plus_pax_discount.to_i
+  = "% de Descuento para 3 o más personas."
+- if @event.seb_price.to_i > 0
+  %br
+  %b Precio Super Early Bird
+  = @event.seb_price
+  = " hasta el " 
+  = @event.seb_end_date
+- if @event.eb_price.to_i > 0
+  %br
+  %b Precio Early Bird
+  = @event.eb_price
+  = " hasta el " 
+  = @event.eb_end_date
+
+%p
+  = link_to 'Volver', root_path
