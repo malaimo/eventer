@@ -10,7 +10,7 @@
    
   - @trainers.each do |trainer|
     %tr
-      %td= trainer.name
+      %td= link_to trainer.name, trainer
       %td.record-actions
         = link_to t('formtastic.actions.view'), trainer
         = link_to t('formtastic.actions.edit'), edit_trainer_path(trainer)
