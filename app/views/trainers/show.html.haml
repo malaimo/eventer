@@ -3,6 +3,8 @@
 %p
   %b= t('formtastic.labels.name') + ": "
   = @trainer.name
+  %b= t('formtastic.labels.bio') + ": "
+  = @trainer.bio
 
 = link_to t('formtastic.actions.edit'), edit_trainer_path(@trainer)
 \|

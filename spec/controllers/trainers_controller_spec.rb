@@ -25,7 +25,8 @@ describe TrainersController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-      :name => "Anibal Smith"
+      :name => "Anibal Smith",
+      :bio => "prprororrprororp" 
     }
   end
   
