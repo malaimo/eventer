@@ -15,6 +15,7 @@ Eventer::Application.routes.draw do
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
   match 'dashboard' => 'dashboard#index'
+  match 'api/events' => 'home#index'
   match 'public_events/:id' => 'public_events#show'
   
   # Sample of named route:
