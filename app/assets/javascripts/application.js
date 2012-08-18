@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-= require_tree .
+//= require_tree .
 
 $(document).ready(function(){
   $('input.datepicker-class').datepicker( { dateFormat: 'dd-mm-yy' } );
