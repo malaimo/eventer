@@ -70,6 +70,25 @@ Feature: Administración de Eventos
 		Then I should see "Por favor verifica los campos destacados"
 		And  I should see "no puede estar en blanco"
 		
+		@selenium	
+		Scenario: Se deben ocutar los descuentos y precios EB y SEB si es un evento privado
+			Given Im a logged in user
+			When I choose to create a Private event
+			Then I should not see public prices
+
+		@selenium
+		Scenario: Se deben mostrar los descuentos y precios EB y SEB si es un evento público
+		    Given Im a logged in user
+			When I choose to create a Public event
+			Then I should see public prices
+
+		@selenium	
+		Scenario: SEB=30 días antes de la fecha del evento y EB=10 días antes de la fecha del evento
+		    Given Im a logged in user
+			When I create a public event on "15-01-2015"
+			Then EB date should be "05-01-2015"
+			And SEB date should be "16-12-2014"
+		
 	Scenario: Modificación de Evento Válido
 		Given Im a logged in user
 		When I create a valid event named "Curso de Meteorología Básica I"
