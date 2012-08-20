@@ -121,6 +121,7 @@ es:
         description: "Descripción"
         recipients: "Destinado A"
         program: "Programa"
+        goal: "Objetivo"
     hints:
       event:
           capacity: "Cantidad máxima de personas"

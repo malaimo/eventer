@@ -24,7 +24,6 @@ describe "event_types/index" do
     render
     assert_select "tr>th", :text => "Tipo de Evento".to_s, :count => 1
     assert_select "tr>th", :text => "Descripción".to_s, :count => 1
-    assert_select "tr>th", :text => "Destinado A".to_s, :count => 1
     assert_select "tr>td", :text => "Tipo de evento 1".to_s, :count => 1
     assert_select "tr>td", :text => "Tipo de evento 2".to_s, :count => 1
     assert_select "tr>td", :text => "La descripción del tipo de evento 1".to_s, :count => 1

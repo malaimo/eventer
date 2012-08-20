@@ -4,7 +4,6 @@
   %tr
     %th= t('formtastic.labels.event_type.name')
     %th= t('formtastic.labels.event_type.description')
-    %th= t('formtastic.labels.event_type.recipients')
     %th
     %th
     %th
@@ -13,7 +12,6 @@
     %tr
       %td= event_type.name
       %td= event_type.description
-      %td= event_type.recipients
       %td= link_to 'Show', event_type
       %td= link_to 'Edit', edit_event_type_path(event_type)
       %td= link_to 'Destroy', event_type, :confirm => 'Are you sure?', :method => :delete
