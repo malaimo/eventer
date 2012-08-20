@@ -42,7 +42,6 @@ FactoryGirl.define do
  
   factory :event_type do
      name "Tipo de Evento de Prueba"
-     duration 8
      goal "Un objetivo"
      description "Una descripción"
      recipients "algunos destinatarios"

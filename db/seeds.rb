@@ -278,7 +278,6 @@ Trainer.create([
 EventType.create([
   {
     :name => 'Tipo de Evento de Prueba', 
-    :duration => 8,
     :goal => 'Un objetivo', 
     :description => 'Una descripción', 
     :recipients => 'Un destinatario', 
