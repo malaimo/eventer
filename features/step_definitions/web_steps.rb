@@ -17,8 +17,6 @@ def create_valid_event_inputs(event_type_name, event_date='31-01-2030')
   check 'event_list_price_plus_tax'
   fill_in 'event_list_price_2_pax_discount', :with =>  10
   fill_in 'event_list_price_3plus_pax_discount', :with =>  15
-  fill_in 'event_seb_price', :with => 400.00
-  fill_in 'event_seb_end_date', :with => '31-12-2029'
   fill_in 'event_eb_price', :with => 450.00
   fill_in 'event_eb_end_date', :with => '21-01-2030'
 end
@@ -107,21 +105,15 @@ When /^I choose to create a Public event$/ do
 end
 
 Then /^I should not see public prices$/ do
-  page.find_field('event_seb_price').visible?.should be false
   page.find_field('event_eb_price').visible?.should be false
 end
 
 Then /^I should see public prices$/ do
-  page.find_field('event_seb_price').visible?.should be true
   page.find_field('event_eb_price').visible?.should be true
 end
 
 Then /^EB date should be "([^"]*)"$/ do |value|
   page.find_field('event_eb_end_date').value.should == value
-end
-
-Then /^SEB date should be "([^"]*)"$/ do |value|
-  page.find_field('event_seb_end_date').value.should == value
 end
 
 When /^I modify the event "([^"]*)"$/ do |link_description|

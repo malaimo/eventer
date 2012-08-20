@@ -78,12 +78,8 @@ es:
           constant: "no se puede cambiar"
           event_date_in_past: "el evento debe tener una fecha futura"
           eb_price_should_be_smaller_than_list_price: "el Precio Early Bird no puede ser mayor al Precio de Lista"
-          seb_price_should_be_smaller_than_list_price: "el Precio Super Early Bird no puede ser mayor al Precio de Lista"
-          seb_price_should_be_smaller_than_eb_price: "el Precio Super Early Bird no puede ser mayor al Precio Early Bird"
           capacity_should_be_greater_than_0: "el evento no puede tener una capacidad de 0 personas"
           eb_end_date_should_be_earlier_than_event_date: "la fecha de Early Bird no puede ser mayor a la Fecha del Evento"
-          seb_end_date_should_be_earlier_than_event_date: "la fecha de Super Early Bird no puede ser mayor a la Fecha del Evento"
-          seb_end_date_should_be_earlier_than_eb_date: "la fecha de Super Early Bird no puede ser mayor a la Fecha de Early Bird"
           private_event_should_not_have_discounts: "un evento Privado no puede tener descuentos por cantidad de personas"
 
   formtastic:
@@ -128,7 +124,6 @@ es:
     hints:
       event:
           capacity: "Cantidad máxima de personas"
-          seb_end_date: "Fecha de finalización del precio Super Early Bird"
           eb_end_date: "Fecha de finalización del precio Early Bird" 
           cancelled: "Si cancelas el evento no podrás acceder más a él"
               

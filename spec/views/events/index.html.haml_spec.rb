@@ -18,7 +18,6 @@ describe "events/index" do
         :list_price_plus_tax => false,
         :list_price_2_pax_discount => 15,
         :list_price_3plus_pax_discount => 25,
-        :seb_price => "9.99",
         :eb_price => "19.99",
         :draft => true,
         :cancelled => false
@@ -36,7 +35,6 @@ describe "events/index" do
         :list_price_plus_tax => false,
         :list_price_2_pax_discount => 15,
         :list_price_3plus_pax_discount => 25,
-        :seb_price => "9.99",
         :eb_price => "19.99",
         :draft => false,
         :cancelled => false

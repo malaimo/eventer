@@ -27,6 +27,7 @@ describe EventTypesController do
   # update the return value of this method accordingly.
   def valid_attributes
      { :name => "Pepe",
+       :goal => "Un objetivo",
        :description => "Una descripción",
        :recipients => "algunos destinatarios",
        :program => "El programa del evento"

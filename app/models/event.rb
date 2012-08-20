@@ -11,7 +11,7 @@ class Event < ActiveRecord::Base
   
   attr_accessible :event_type_id, :trainer_id, :country_id, :date, :place, :capacity, :city, :visibility_type, :list_price, 
                   :list_price_plus_tax, :list_price_2_pax_discount, :list_price_3plus_pax_discount, 
-                  :seb_price, :seb_end_date, :eb_price, :eb_end_date, :draft, :cancelled
+                  :eb_price, :eb_end_date, :draft, :cancelled
                   
   validates :date, :place, :capacity, :city, :visibility_type, :list_price, 
             :country, :trainer, :event_type, :presence => true
@@ -26,26 +26,8 @@ class Event < ActiveRecord::Base
       record.errors.add(attr, :eb_end_date_should_be_earlier_than_event_date) unless value.nil? || value < record.date
   end
   
-  validates_each :seb_end_date do |record, attr, value|
-    if !value.nil? 
-      record.errors.add(attr, :seb_end_date_should_be_earlier_than_event_date) unless value < record.date
-      if !record.eb_end_date.nil?
-        record.errors.add(attr, :seb_end_date_should_be_earlier_than_eb_date) unless value < record.eb_end_date
-      end
-    end
-  end
-  
   validates_each :eb_price do |record, attr, value|
       record.errors.add(attr, :eb_price_should_be_smaller_than_list_price) unless value.nil? || value < record.list_price
-  end
-  
-  validates_each :seb_price do |record, attr, value|
-    if !value.nil?
-      record.errors.add(attr, :seb_price_should_be_smaller_than_list_price) unless value < record.list_price
-      if !record.eb_price.nil?
-        record.errors.add(attr, :seb_price_should_be_smaller_than_eb_price) unless value < record.eb_price
-      end
-    end
   end
   
   validates_each :list_price_2_pax_discount  do |record, attr, value|

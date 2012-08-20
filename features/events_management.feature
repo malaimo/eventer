@@ -29,36 +29,16 @@ Feature: Administración de Eventos
 		When I create an invalid event with "0" as "event_capacity"
 		Then I should see "el evento no puede tener una capacidad de 0 personas"
 		
-	Scenario: Precio SEB debe ser menor a Precio de Lista
-		Given Im a logged in user
-		When I create an invalid event with "1000" as "event_seb_price"
-		Then I should see "el Precio Super Early Bird no puede ser mayor al Precio de Lista"
-
 	Scenario: Precio EB debe ser menor a Precio de Lista
 		Given Im a logged in user
 		When I create an invalid event with "1000" as "event_eb_price"
 		Then I should see "el Precio Early Bird no puede ser mayor al Precio de Lista"
-		
-	Scenario: Precio SEB debe ser menor al Precio EB
-		Given Im a logged in user
-		When I create an invalid event with "475" as "event_seb_price"
-		Then I should see "el Precio Super Early Bird no puede ser mayor al Precio Early Bird"
-
-	Scenario: Fecha SEB debe ser menor a la Fecha del Evento
-		Given Im a logged in user
-		When I create an invalid event with "31-01-3000" as "event_seb_end_date"
-		Then I should see "la fecha de Super Early Bird no puede ser mayor a la Fecha del Evento"
 		
 	Scenario: Fecha EB debe ser menor a la Fecha del Evento
 		Given Im a logged in user
 		When I create an invalid event with "31-01-3000" as "event_eb_end_date"
 		Then I should see "la fecha de Early Bird no puede ser mayor a la Fecha del Evento"
 
-	Scenario: Fecha SEB debe ser menor a la Fecha EB
-		Given Im a logged in user
-		When I create an invalid event with "26-01-2030" as "event_seb_end_date"
-		Then I should see "la fecha de Super Early Bird no puede ser mayor a la Fecha de Early Bird"
-		
 	Scenario: Un evento Privado no debe tener descuentos
 		Given Im a logged in user
 		When I create an private event with discounts
@@ -87,7 +67,6 @@ Feature: Administración de Eventos
 		    Given Im a logged in user
 			When I create a public event on "15-01-2015"
 			Then EB date should be "05-01-2015"
-			And SEB date should be "16-12-2014"
 		
 	Scenario: Modificación de Evento Válido
 		Given Im a logged in user

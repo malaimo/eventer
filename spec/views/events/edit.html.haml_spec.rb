@@ -16,7 +16,6 @@ describe "events/edit" do
       :list_price_plus_tax => false,
       :list_price_2_pax_discount => 1,
       :list_price_3plus_pax_discount => 1,
-      :seb_price => "9.99",
       :eb_price => "9.99",
       :draft => false,
       :cancelled => false
@@ -40,7 +39,6 @@ describe "events/edit" do
       assert_select "input#event_list_price_plus_tax", :name => "event[list_price_plus_tax]"
       assert_select "input#event_list_price_2_pax_discount", :name => "event[list_price_2_pax_discount]"
       assert_select "input#event_list_price_3plus_pax_discount", :name => "event[list_price_3plus_pax_discount]"
-      assert_select "input#event_seb_price", :name => "event[seb_price]"
       assert_select "input#event_eb_price", :name => "event[eb_price]"
       assert_select "input#event_draft", :name => "event[draft]"
       assert_select "input#event_cancelled", :name => "event[cancelled]"

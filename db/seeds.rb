@@ -276,7 +276,12 @@ Trainer.create([
 ])
 
 EventType.create([
-  {:name => 'Tipo de Evento de Prueba', :description => 'Una descripción', :recipients => 'Un destinatario', :program => 'El programa'},
+  {
+    :name => 'Tipo de Evento de Prueba', 
+    :goal => 'Un objetivo', 
+    :description => 'Una descripción', 
+    :recipients => 'Un destinatario', 
+    :program => 'El programa'},
 ])
 
 

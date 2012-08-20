@@ -70,20 +70,6 @@ describe Event do
       @event.valid?.should be false
   end
   
-  it "Super Early Bird price should be smaller than List Price" do
-      @event.list_price = 100
-      @event.seb_price = 200
-
-      @event.valid?.should be false
-  end
-  
-  it "Super Early Bird price should be smaller than Early Bird Price" do
-      @event.eb_price = 100
-      @event.seb_price = 200
-
-      @event.valid?.should be false
-  end
-  
   it "Early Bird price should be smaller than List Price" do
       @event.list_price = 100
       @event.eb_price = 200
@@ -91,25 +77,10 @@ describe Event do
       @event.valid?.should be false
   end
   
-  it "Super Early Bird date should be earlier than Event date" do
-      @event.date = "31/01/3000"
-      @event.seb_end_date = "31/01/3100"
-
-      @event.valid?.should be false
-  end
-  
   it "Early Bird date should be earlier than Event date" do
       @event.date = "31/01/3000"
       @event.eb_end_date = "31/01/3100"
 
-      @event.valid?.should be false
-  end
-  
-  it "Super Early Bird date should be earlier than Early Bird date" do
-      @event.date = "31/01/4000"
-      @event.seb_end_date = "31/01/3100"
-      @event.eb_end_date = "31/01/3000"
-      
       @event.valid?.should be false
   end
   

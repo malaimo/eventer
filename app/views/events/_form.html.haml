@@ -14,8 +14,6 @@
       = f.input :list_price_plus_tax
       = f.input :list_price_2_pax_discount, :as => :string, :input_html => { :size => 2 }
       = f.input :list_price_3plus_pax_discount, :as => :string, :input_html => { :size => 2 }
-      = f.input :seb_price, :as => :number, :input_html => { :size => 2 }
-      = f.input :seb_end_date, :as => :string, :input_html => {:class => 'datepicker-class', :size => 6 }
       = f.input :eb_price, :as => :number, :input_html => { :size => 2 }
       = f.input :eb_end_date, :as => :string, :input_html => {:class => 'datepicker-class', :size => 6 }
       = f.input :draft
@@ -42,8 +40,6 @@
     if (value === "pu") {
       $("#event_list_price_2_pax_discount_input").show();
       $("#event_list_price_3plus_pax_discount_input").show();
-      $("#event_seb_price_input").show();
-      $("#event_seb_end_date_input").show();
       $("#event_eb_price_input").show();
       $("#event_eb_end_date_input").show();
     } else {
@@ -51,8 +47,6 @@
       $("#event_list_price_2_pax_discount_input").hide();
       $("#event_list_price_3plus_pax_discount").val("");
       $("#event_list_price_3plus_pax_discount_input").hide();
-      $("#event_seb_price_input").hide();
-      $("#event_seb_end_date_input").hide();
       $("#event_eb_price_input").hide();
       $("#event_eb_end_date_input").hide();
     }
@@ -75,18 +69,5 @@
 
     var eb_new_date = eb_date_day + "-" + eb_date_month + "-" + eb_date_year;
     $("#event_eb_end_date").val( eb_new_date );
-
-    var seb_date = new Date( date_string );
-    seb_date.setDate( event_date.getDate()-29 );
-
-    var seb_date_day = seb_date.getDate();
-    var seb_date_month = seb_date.getMonth()+1;
-    var seb_date_year = seb_date.getFullYear();
-
-    if (seb_date_day<10) seb_date_day = "0"+seb_date_day;
-    if (seb_date_month<10) seb_date_month = "0"+seb_date_month;
-
-    var seb_new_date = seb_date_day + "-" + seb_date_month + "-" + seb_date_year;
-    $("#event_seb_end_date").val( seb_new_date );
 
   }

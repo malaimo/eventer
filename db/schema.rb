@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120819224106) do
+ActiveRecord::Schema.define(:version => 20120820142837) do
 
   create_table "countries", :force => true do |t|
     t.string   "name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20120819224106) do
     t.text     "program"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.text     "goal"
   end
 
   create_table "events", :force => true do |t|
@@ -41,8 +42,6 @@ ActiveRecord::Schema.define(:version => 20120819224106) do
     t.boolean  "list_price_plus_tax"
     t.integer  "list_price_2_pax_discount"
     t.integer  "list_price_3plus_pax_discount"
-    t.decimal  "seb_price",                                  :precision => 7, :scale => 2
-    t.date     "seb_end_date"
     t.decimal  "eb_price",                                   :precision => 7, :scale => 2
     t.date     "eb_end_date"
     t.boolean  "draft"
