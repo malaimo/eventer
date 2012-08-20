@@ -1,4 +1,6 @@
 Eventer::Application.routes.draw do
+  resources :event_types
+
   resources :trainers
 
   resources :events

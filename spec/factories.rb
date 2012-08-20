@@ -39,18 +39,22 @@ FactoryGirl.define do
   factory :trainer do
     name "Juan Alberto"
   end
+ 
+  factory :event_type do
+     name "Tipo de Evento de Prueba"
+     description "Una descripción"
+     recipients "algunos destinatarios"
+     program "El programa del evento"
+   end
   
   factory :event do
-    name "Evento de Prueba"
+    event_type Factory.build(:event_type)
     date "23/01/2100"
     place "Hotel Conrad"
     city "Punta del Este"
     capacity 20
     visibility_type 'pu'
     list_price 500.00
-    description "Una descripción"
-    recipients "algunos destinatarios"
-    program "El programa del evento"
     country Factory.build(:country)
     trainer Factory.build(:trainer)
   end

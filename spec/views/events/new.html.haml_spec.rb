@@ -31,7 +31,7 @@ describe "events/new" do
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => events_path, :method => "post" do
-      assert_select "input#event_name", :name => "event[name]"
+      assert_select "select#event_event_type_id", :name => "event[event_type_id]"
       assert_select "input#event_place", :name => "event[place]"
       assert_select "input#event_capacity", :name => "event[capacity]"
       assert_select "input#event_city", :name => "event[city]"
@@ -45,9 +45,6 @@ describe "events/new" do
       assert_select "input#event_list_price_3plus_pax_discount", :name => "event[list_price_3plus_pax_discount]"
       assert_select "input#event_seb_price", :name => "event[seb_price]"
       assert_select "input#event_eb_price", :name => "event[eb_price]"
-      assert_select "textarea#event_description", :name => "event[description]"
-      assert_select "textarea#event_recipients", :name => "event[recipients]"
-      assert_select "textarea#event_program", :name => "event[program]"
       assert_select "input#event_draft", :name => "event[draft]"
       assert_select "input#event_cancelled", :name => "event[cancelled]"
     end

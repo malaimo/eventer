@@ -9,13 +9,7 @@ describe Event do
   it "should be valid" do
     @event.valid?.should be true
   end
-  
-  it "should require its name" do
-    @event.name = ""
     
-    @event.valid?.should be false
-  end
-  
   it "should require its date" do
     @event.date = ""
     
@@ -45,25 +39,7 @@ describe Event do
     
     @event.valid?.should be false
   end
-  
-  it "should require its description" do
-    @event.description = ""
     
-    @event.valid?.should be false
-  end
-  
-  it "should require its recipients" do
-    @event.recipients = ""
-    
-    @event.valid?.should be false
-  end
-  
-  it "should require its program" do
-    @event.program = ""
-    
-    @event.valid?.should be false
-  end
-  
   it "should require its country" do
     @event.country = nil
     
@@ -72,6 +48,12 @@ describe Event do
   
   it "should require its trainer" do
     @event.trainer = nil
+    
+    @event.valid?.should be false
+  end
+  
+  it "should require its event_type" do
+    @event.event_type = nil
     
     @event.valid?.should be false
   end

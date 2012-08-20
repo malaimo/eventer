@@ -5,7 +5,7 @@ Feature: Administración de Eventos
 		When I visit the events page
 		Then I should see "Eventos Confirmados"
 		And I should see "Fecha"
-		And I should see "Nombre"
+		And I should see "Tipo de Evento"
 		And I should see "Ciudad"
 		And I should see "País"
 		And I should see "Tipo"
@@ -14,10 +14,10 @@ Feature: Administración de Eventos
 	
 	Scenario: Alta de Evento Válido
 		Given Im a logged in user
-		When I create a valid event named "Curso de Meteorología Básica I"
+		When I create a valid event of type "Tipo de Evento de Prueba"
 		Then I should be on the events listing page
 		And I should see "Evento creado exitosamente"
-		And I should see "Curso de Meteorología Básica I"
+		And I should see "Tipo de Evento de Prueba"
 		
 	Scenario: Validación de Fecha Pasada
 		Given Im a logged in user
@@ -91,18 +91,18 @@ Feature: Administración de Eventos
 		
 	Scenario: Modificación de Evento Válido
 		Given Im a logged in user
-		When I create a valid event named "Curso de Meteorología Básica I"
-		And I modify the event "Curso de Meteorología Básica I"
+		When I create a valid event of type "Tipo de Evento de Prueba"
+		And I modify the event "Tipo de Evento de Prueba"
 		Then I should be on the events listing page
 		And I should see "Evento modificado exitosamente"
-		And I should see "Curso de Meteorología Básica I - Modificado"
+		And I should see "Tipo de Evento de Prueba"
 	
 	Scenario: Cancelación de Evento
 		Given Im a logged in user
-		When I create a valid event named "Curso de Meteorología Básica I - a Cancelar"
-		And I cancel the event "Curso de Meteorología Básica I - a Cancelar"
+		When I create a valid event of type "Tipo de Evento de Prueba"
+		And I cancel the event "Tipo de Evento de Prueba"
 		Then I should be on the events listing page
 		And I should see "Evento cancelado exitosamente"
-		And I should not see "Curso de Meteorología Básica I - a Cancelar"
+		And I should not see "Tipo de Evento de Prueba"
 	
 		

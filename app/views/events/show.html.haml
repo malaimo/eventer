@@ -2,7 +2,10 @@
 
 %p
   %b Name:
-  = @event.name
+  - if @event.event_type.nil?
+    = "Sin Tipo de Evento"
+  - else
+    = @event.event_type.name
 %p
   %b Date:
   = @event.date
@@ -50,13 +53,22 @@
   = @event.eb_end_date
 %p
   %b Description:
-  = @event.description
+  - if @event.event_type.nil?
+    = "Sin Tipo de Evento"
+  - else
+    = @event.event_type.description
 %p
   %b Recipients:
-  = @event.recipients
+  - if @event.event_type.nil?
+    = "Sin Tipo de Evento"
+  - else
+    = @event.event_type.recipients
 %p
   %b Program:
-  = @event.program
+  - if @event.event_type.nil?
+    = "Sin Tipo de Evento"
+  - else
+    = @event.event_type.program
 %p
   %b Draft:
   = @event.draft

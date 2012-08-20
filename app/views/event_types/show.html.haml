@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @event_type.name
+%p
+  %b Description:
+  = @event_type.description
+%p
+  %b Recipients:
+  = @event_type.recipients
+%p
+  %b Program:
+  = @event_type.program
+
+= link_to 'Edit', edit_event_type_path(@event_type)
+\|
+= link_to 'Back', event_types_path

@@ -6,7 +6,7 @@ describe "events/index" do
   before(:each) do
     assign(:events, [
       stub_model(Event,
-        :name => "Evento 1",
+        :event_type => Factory.build(:event_type),
         :place => "Place",
         :date => "2015-01-01",
         :capacity => 20,
@@ -20,14 +20,11 @@ describe "events/index" do
         :list_price_3plus_pax_discount => 25,
         :seb_price => "9.99",
         :eb_price => "19.99",
-        :description => "MyText-Description",
-        :recipients => "MyText-Recipients",
-        :program => "MyText-Program",
         :draft => true,
         :cancelled => false
       ),
       stub_model(Event,
-        :name => "Evento 2",
+        :event_type => Factory.build(:event_type),
         :place => "Place",
         :date => "2015-01-01",
         :capacity => 20,
@@ -41,9 +38,6 @@ describe "events/index" do
         :list_price_3plus_pax_discount => 25,
         :seb_price => "9.99",
         :eb_price => "19.99",
-        :description => "MyText-Description",
-        :recipients => "MyText-Recipients",
-        :program => "MyText-Program",
         :draft => false,
         :cancelled => false
       )
@@ -53,13 +47,12 @@ describe "events/index" do
   it "renders a list of events" do
     render
     assert_select "tr>th", :text => "Fecha".to_s, :count => 1
-    assert_select "tr>th", :text => "Nombre".to_s, :count => 1
+    assert_select "tr>th", :text => "Tipo de Evento".to_s, :count => 1
     assert_select "tr>th", :text => "Ciudad".to_s, :count => 1
     assert_select "tr>th", :text => "País".to_s, :count => 1
     assert_select "tr>th", :text => "Tipo".to_s, :count => 1
     assert_select "tr>th", :text => "Acciones".to_s, :count => 1
-    assert_select "tr>td", :text => "Evento 1".to_s, :count => 1
-    assert_select "tr>td", :text => "Evento 2".to_s, :count => 1
+    assert_select "tr>td", :text => "Tipo de Evento de Prueba".to_s, :count => 2
     assert_select "tr>td", :text => "2015-01-01".to_s, :count => 2
   end
 end

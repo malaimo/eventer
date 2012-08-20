@@ -275,4 +275,8 @@ Trainer.create([
   {:name => 'Michael Donovan'}
 ])
 
+EventType.create([
+  {:name => 'Tipo de Evento de Prueba', :description => 'Una descripción', :recipients => 'Un destinatario', :program => 'El programa'},
+])
+
 

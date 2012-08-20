@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
   belongs_to :country
   belongs_to :trainer
+  belongs_to :event_type
   
   scope :visible, where(:cancelled => false) 
   scope :public_events,  where(:visibility_type => "pu")
@@ -8,13 +9,12 @@ class Event < ActiveRecord::Base
   
   after_initialize :initialize_defaults
   
-  attr_accessible :trainer_id, :country_id, :name, :date, :place, :capacity, :city, :visibility_type, :list_price, 
+  attr_accessible :event_type_id, :trainer_id, :country_id, :date, :place, :capacity, :city, :visibility_type, :list_price, 
                   :list_price_plus_tax, :list_price_2_pax_discount, :list_price_3plus_pax_discount, 
-                  :seb_price, :seb_end_date, :eb_price, :eb_end_date, :description, :recipients, :program, 
-                  :draft, :cancelled
+                  :seb_price, :seb_end_date, :eb_price, :eb_end_date, :draft, :cancelled
                   
-  validates :name, :date, :place, :capacity, :city, :visibility_type, :list_price, :description, :recipients, 
-            :program, :country, :trainer, :presence => true
+  validates :date, :place, :capacity, :city, :visibility_type, :list_price, 
+            :country, :trainer, :event_type, :presence => true
   
   validates :capacity, :numericality => { :greater_than => 0, :message => :capacity_should_be_greater_than_0 }
   

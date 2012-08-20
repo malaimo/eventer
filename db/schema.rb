@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120710174759) do
+ActiveRecord::Schema.define(:version => 20120819224106) do
 
   create_table "countries", :force => true do |t|
     t.string   "name"
@@ -20,8 +20,16 @@ ActiveRecord::Schema.define(:version => 20120710174759) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "events", :force => true do |t|
+  create_table "event_types", :force => true do |t|
     t.string   "name"
+    t.text     "description"
+    t.text     "recipients"
+    t.text     "program"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "events", :force => true do |t|
     t.date     "date"
     t.string   "place"
     t.integer  "capacity"
@@ -37,13 +45,11 @@ ActiveRecord::Schema.define(:version => 20120710174759) do
     t.date     "seb_end_date"
     t.decimal  "eb_price",                                   :precision => 7, :scale => 2
     t.date     "eb_end_date"
-    t.text     "description"
-    t.text     "recipients"
-    t.text     "program"
     t.boolean  "draft"
     t.boolean  "cancelled"
     t.datetime "created_at",                                                               :null => false
     t.datetime "updated_at",                                                               :null => false
+    t.integer  "event_type_id"
   end
 
   add_index "events", ["country_id"], :name => "index_events_on_country_id"

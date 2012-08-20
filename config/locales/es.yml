@@ -120,6 +120,11 @@ es:
         cancelled: "Cancelado"
         edit:
           title: "Edit title"
+      event_type:
+        name: "Tipo de Evento"
+        description: "Descripción"
+        recipients: "Destinado A"
+        program: "Programa"
     hints:
       event:
           capacity: "Cantidad máxima de personas"
@@ -159,12 +164,16 @@ es:
       users: "Usuarios"
       roles: "Roles"
       events: "Eventos"
+      event_types: "Tipos de Evento"
       trainers: "Entrenadores"
       exit: "Salir"
       
   title:
       event:
           new: "Nuevo Evento"
+      event_types:
+          index: "Listado de Tipos de Evento"
+          edit: "Edición de Tipo de Evento"
       trainer:
           index: "Listado de Entrenadores"
           new: "Nuevo Entrenador"
