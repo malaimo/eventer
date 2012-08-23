@@ -1,5 +1,8 @@
 %h1= t('title.event_type.index')
 
+%p.record-actions
+  = link_to t('formtastic.actions.new'), new_event_type_path
+
 %table
   %tr
     %th= t('formtastic.labels.event_type.name')
@@ -12,10 +15,6 @@
     %tr
       %td= event_type.name
       %td= event_type.description
-      %td= link_to 'Show', event_type
-      %td= link_to 'Edit', edit_event_type_path(event_type)
-      %td= link_to 'Destroy', event_type, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Event type', new_event_type_path
+      %td= link_to t('formtastic.actions.view'), event_type
+      %td= link_to t('formtastic.actions.edit'), edit_event_type_path(event_type)
+      %td= link_to t('formtastic.actions.destroy'), event_type, :confirm => 'Are you sure?', :method => :delete

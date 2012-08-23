@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe EventType do
   
+  it { should have_and_belong_to_many(:trainers) }
+  
   before(:each) do
     @event_type = Factory.build(:event_type)
   end
@@ -30,6 +32,12 @@ describe EventType do
   
   it "should require its program" do
     @event_type.program = ""
+    
+    @event_type.valid?.should be false
+  end
+  
+  it "should require its duration" do
+    @event_type.duration = ""
     
     @event_type.valid?.should be false
   end

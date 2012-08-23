@@ -1,8 +1,11 @@
-%h1 Listing roles
+%h1= t('title.role.index')
+
+%p.record-actions
+  = link_to t('formtastic.actions.new'), new_role_path
 
 %table
   %tr
-    %th Name
+    %th= t('formtastic.labels.role.name')
     %th
     %th
     %th
@@ -10,10 +13,6 @@
   - @roles.each do |role|
     %tr
       %td= role.name
-      %td= link_to 'Show', role
-      %td= link_to 'Edit', edit_role_path(role)
-      %td= link_to 'Destroy', role, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Role', new_role_path
+      %td= link_to t('action.link.role.show'), role
+      %td= link_to t('action.link.role.edit'), edit_role_path(role)
+      %td= link_to t('action.link.role.destroy'), role, :confirm => 'Are you sure?', :method => :delete

@@ -120,14 +120,14 @@ When /^I modify the event "([^"]*)"$/ do |link_description|
   click_link link_description
   click_link "Modificar"
   fill_in 'event_capacity', :with => 200
-  click_button "Save changes"
+  click_button "Guardar Cambios"
 end
 
 When /^I cancel the event "([^"]*)"$/ do |link_description|
   click_link link_description
   click_link "Modificar"
   check 'event_cancelled'
-  click_button "Save changes"
+  click_button "Guardar Cambios"
 end
 
 Then /^I should not see "([^"]*)"$/ do |text|

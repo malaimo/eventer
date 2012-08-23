@@ -1,9 +1,12 @@
-%h1 Listing users
+%h1= t('title.user.index')
+
+%p.record-actions
+  = link_to t('formtastic.actions.new'), new_user_path
 
 %table
   %tr
-    %th Email
-    %th Roles
+    %th= t('formtastic.labels.user.email')
+    %th= t('formtastic.labels.user.roles')
     %th
     %th
     %th
@@ -15,10 +18,7 @@
         - for role in user.roles
           = role.name
           %br
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to t('formtastic.actions.view'), user
+      %td= link_to t('formtastic.actions.edit'), edit_user_path(user)
+      %td= link_to t('formtastic.actions.destroy'), user, :confirm => 'Are you sure?', :method => :delete
 
-%br
-
-= link_to 'New User', new_user_path

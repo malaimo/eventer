@@ -1,6 +1,12 @@
 = semantic_form_for @event_type do |f|
   = f.inputs do
     = f.input :name
+    = f.input :duration
+    Entrenadores
+    - for trainer in Trainer.find(:all)
+      %div
+        = check_box_tag "event_type[trainer_ids][]", trainer.id, @event_type.trainers.include?(trainer)
+        = trainer.name
     = f.input :goal
     = f.input :description
     = f.input :recipients

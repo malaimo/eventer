@@ -98,6 +98,13 @@ es:
       city: "Ciudad"
       country: "País"
       trainer: "Entrenador"
+      role:
+        name: "Nombre"
+      user:
+          email: "E-mail"
+          password: "Clave"
+          password_confirmation: "Confirmación de Clave"
+          roles: "Roles"
       event:
         capacity: "Capacidad"
         visibility_type: "Tipo"
@@ -105,8 +112,6 @@ es:
         list_price_plus_tax: "+ IVA"
         list_price_2_pax_discount: "Descuento para 2 personas"
         list_price_3plus_pax_discount: "Descuento para 3 o más personas"
-        seb_price: "Precio Super Early Bird"
-        seb_end_date: "Hasta"
         eb_price: "Precio Early Bird"
         eb_end_date: "Hasta"
         description: "Descripción"
@@ -140,9 +145,9 @@ es:
           create: "Ok"
       trainer:
         create: "Ok"
-      create: "Crear mi %{model}"
-      update: "Save changes"
-      reset: "Reset form"
+      create: "Crear"
+      update: "Guardar Cambios"
+      reset: "Reset"
       cancel: "Cancelar y volver"
       dummie: "Launch!"
       view: "Ver"
@@ -167,7 +172,7 @@ es:
   title:
       event:
           new: "Nuevo Evento"
-      event_types:
+      event_type:
           index: "Listado de Tipos de Evento"
           edit: "Edición de Tipo de Evento"
       trainer:
@@ -175,7 +180,23 @@ es:
           new: "Nuevo Entrenador"
           edit: "Modificación de Entrenador"
           show: "Detalles de Entrenador"
-          
+      role:
+          index: "Listado de Roles"
+          new: "Nuevo Rol"
+          edit: "Modificación de Rol"
+          show: "Detalles de Rol"
+      user:
+          index: "Listado de Usuarios"
+          new: "Nuevo Usuario"
+          edit: "Modificación de Usuario"
+          show: "Detalles de Usuario"          
+  action:
+      link:
+          role:
+              new: "Crear Nuevo Rol"
+              show: "Ver"
+              edit: "Modificar"
+              destroy: "Borrar"
           
   flash:
       failure: "Por favor verifica los campos destacados"

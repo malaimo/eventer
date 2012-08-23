@@ -10,7 +10,7 @@
   - @events.each do |event|
     %tr
       %td= event.date
-      %td= link_to event.name, :controller => "public_events", :action => "show", :id => event
+      %td= link_to event.event_type.name, :controller => "public_events", :action => "show", :id => event
       %td= event.city
       %td= event.country.name unless event.country.nil?
 

@@ -269,7 +269,7 @@ Country.create([
   {:name => 'Zimbabwe', :iso_code => 'ZW'}
 ])
 
-Trainer.create([
+@trainers = Trainer.create([
   {:name => 'John Doe'},
   {:name => 'Jeff Baurer'},
   {:name => 'Michael Donovan'}
@@ -282,7 +282,8 @@ EventType.create([
     :goal => 'Un objetivo', 
     :description => 'Una descripción', 
     :recipients => 'Un destinatario', 
-    :program => 'El programa'},
+    :program => 'El programa',
+    :trainers => @trainers},
 ])
 
 

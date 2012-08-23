@@ -31,7 +31,8 @@ describe EventTypesController do
        :goal => "Un objetivo",
        :description => "Una descripción",
        :recipients => "algunos destinatarios",
-       :program => "El programa del evento"
+       :program => "El programa del evento",
+       :trainer_ids => [ Factory.create(:trainer).id ]
        }
    end
   

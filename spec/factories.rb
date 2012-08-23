@@ -47,6 +47,7 @@ FactoryGirl.define do
      description "Una descripción"
      recipients "algunos destinatarios"
      program "El programa del evento"
+     trainers [ Factory.build(:trainer) ]
    end
   
   factory :event do

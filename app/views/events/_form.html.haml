@@ -8,7 +8,8 @@
       = f.input :capacity, :input_html => { :size => 3 }
       = f.input :city
       = f.input :country, :as => :select, :collection => Country.find(:all), :input_html => { :style => "width: 200px" }
-      = f.input :trainer, :as => :select, :collection => Trainer.find(:all)
+      #trainer_select
+        = render :partial => 'trainers_select'
       = f.input :visibility_type, :as => :radio, :collection => { t('event.type.public') => "pu", t('event.type.private') => "pr" }
       = f.input :list_price, :as => :number, :input_html => { :size => 2 }
       = f.input :list_price_plus_tax
@@ -27,6 +28,7 @@
   $(document).ready(function() {
     $("#event_visibility_type_pu").change( function() { eventTypeActions( $(this).val() ); });
     $("#event_visibility_type_pr").change( function() { eventTypeActions( $(this).val() ); });
+    $("#event_event_type_id").change( function() { dynamicallyFillTrainersForEventType( $(this).val() ); });
 
     $("#event_date").change( function() { eventDateChanged( $(this).val() ); });
 
@@ -70,4 +72,12 @@
     var eb_new_date = eb_date_day + "-" + eb_date_month + "-" + eb_date_year;
     $("#event_eb_end_date").val( eb_new_date );
 
+  }
+
+  function dynamicallyFillTrainersForEventType( eventTypeID ) {
+    if(eventTypeID == "") eventTypeID="0";
+    jQuery.get('/events/update_trainer_select/' + eventTypeID, function(data) {
+        $("#trainer_select").html(data);
+    })
+    return false;
   }

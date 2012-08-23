@@ -15,6 +15,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'cucumber-rails'
   gem 'capybara'
+  gem 'shoulda-matchers'
 end
 
 group :production do
