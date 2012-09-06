@@ -9,9 +9,16 @@ Author URI: http://www.martinalaimo.com
 */
 
 add_shortcode("keventer-event-list", "keventer_events_list_handler");
+add_shortcode("keventer-event", "keventer_event_handler");
 
 function keventer_events_list_handler() {
   $html_output = keventer_events_list();
+  return $html_output;
+}
+
+function keventer_event_handler() {
+  $event_id = getEventIDFromURI();
+  $html_output = keventer_event($event_id);
   return $html_output;
 }
 
@@ -32,12 +39,22 @@ function keventer_events_list() {
   
   foreach ($xml->event as $event) {
 	$event_date = new DateTime($event->date);
-    $html_output .= "['','".$event_date->format( 'd-M' )."',' Scrum - Gestión Ágil de Proyectos @ PMC College & Consulting','Asunción, Paraguay',''],";	
+    $html_output .= "['','".$event_date->format( 'd-M' )."','<a href=\"/entrenamos/evento/".$event->id."\">".$event->{'event-type'}->name."</a>','".$event->city.", ".$event->country->name."',''],";	
   }
   
   $html_output .= "];\n"
 				. "-->\n"
 				. "</script>";
   return $html_output;
+}
+
+function keventer_event($event_id) {
+  	$html_output = $event_id;
+	return $html_output;
+}
+
+function getEventIDFromURI()
+{
+	return str_replace("/","",substr($_SERVER["REQUEST_URI"],strrpos($_SERVER["REQUEST_URI"],"/entrenamos/evento/")+strlen("/entrenamos/evento/")));
 }
 ?>
