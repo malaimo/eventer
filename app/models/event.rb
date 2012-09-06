@@ -11,7 +11,7 @@ class Event < ActiveRecord::Base
   
   attr_accessible :event_type_id, :trainer_id, :country_id, :date, :place, :capacity, :city, :visibility_type, :list_price, 
                   :list_price_plus_tax, :list_price_2_pax_discount, :list_price_3plus_pax_discount, 
-                  :eb_price, :eb_end_date, :draft, :cancelled
+                  :eb_price, :eb_end_date, :draft, :cancelled, :registration_link
                   
   validates :date, :place, :capacity, :city, :visibility_type, :list_price, 
             :country, :trainer, :event_type, :presence => true

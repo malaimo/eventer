@@ -49,7 +49,21 @@ function keventer_events_list() {
 }
 
 function keventer_event($event_id) {
-  	$html_output = $event_id;
+	$event = simplexml_load_file('http://keventer.herokuapp.com/api/events/'.$event_id.'.xml');
+	$event_date = new DateTime($event->date);
+  	$html_output = "<h1>".$event->{'event-type'}->name."</h1>"
+				. "<p><strong>Fecha:</strong> ".$event_date->format( 'd-M' )."<br/>"
+				. "<strong>Lugar:</strong> ".$event->city.", ".$event->country->name."<br/>"
+				. "</p>"
+				. "<h3>Descripción</h3>"
+				. "<p>".nl2br($event->{'event-type'}->description)."</p>"
+				. "<h3>Objetivo</h3>"
+				. "<p>".nl2br($event->{'event-type'}->goal)."</p>"
+				. "<h3>Destinado A</h3>"
+				. "<p>".nl2br($event->{'event-type'}->recipients)."</p>"
+				. "<h3>Agenda</h3>"
+				. "<p>".nl2br($event->{'event-type'}->program)."</p>"	
+				. "";
 	return $html_output;
 }
 
