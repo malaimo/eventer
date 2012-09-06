@@ -20,7 +20,7 @@
       - else
         %td= event.event_type.name
       %td= event.city
-      - if event.eb_price > 0
+      - if !event.eb_price.nil? && event.eb_price > 0
         - if event.list_price_plus_tax
           %td= event.eb_price.to_i.to_s + "+IVA (" + event.eb_end_date.to_formatted_s(:short) + ")"
         - else
