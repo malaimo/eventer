@@ -20,7 +20,16 @@
       - else
         %td= event.event_type.name
       %td= event.city
-      %td= event.eb_price.to_i.to_s + " (" + event.eb_end_date.to_formatted_s(:short) + ")"
-      %td= event.list_price.to_i.to_s
+      - if event.eb_price > 0
+        - if event.list_price_plus_tax
+          %td= event.eb_price.to_i.to_s + "+IVA (" + event.eb_end_date.to_formatted_s(:short) + ")"
+        - else
+          %td= event.eb_price.to_i.to_s + " (" + event.eb_end_date.to_formatted_s(:short) + ")"
+      - else
+        %td= " "
+      - if event.list_price_plus_tax
+        %td= event.list_price.to_i.to_s + "+IVA"
+      - else
+        %td= event.list_price.to_i.to_s
       %td= event.list_price_2_pax_discount
       %td= event.list_price_3plus_pax_discount
