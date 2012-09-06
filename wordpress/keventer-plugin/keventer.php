@@ -39,7 +39,7 @@ function keventer_events_list() {
   
   foreach ($xml->event as $event) {
 	$event_date = new DateTime($event->date);
-    $html_output .= "['','".$event_date->format( 'd-M' )."','<a href=\"/entrenamos/evento/".$event->id."\">".$event->{'event-type'}->name."</a>','".$event->city.", ".$event->country->name."',''],";	
+    $html_output .= "['','".$event_date->format( 'd-M' )."','<a href=\"/entrenamos/evento/".$event->id."\">".$event->{'event-type'}->name."</a>','".$event->city.", ".$event->country->name."','<div class=\"button-wrap\"><div class=\"button\"><a href=\"".$event->{'registration-link'}."\" target=\"_blank\">Registrarme!</a></div></div>&nbsp;<div class=\"button-wrap\"><div class=\"button\"><a href=\"/entrenamos/evento/".$event->id."\">Detalles</a></div></div>'],";	
   }
   
   $html_output .= "];\n"
@@ -54,6 +54,7 @@ function keventer_event($event_id) {
   	$html_output = "<h1>".$event->{'event-type'}->name."</h1>"
 				. "<p><strong>Fecha:</strong> ".$event_date->format( 'd-M' )."<br/>"
 				. "<strong>Lugar:</strong> ".$event->city.", ".$event->country->name."<br/>"
+				. "<div class=\"button-wrap\"><div class=\"button\"><a href=\"".$event->{'registration-link'}."\" target=\"_blank\">Registrarme!</a></div></div><br/>"
 				. "</p>"
 				. "<h3>Descripción</h3>"
 				. "<p>".nl2br($event->{'event-type'}->description)."</p>"
@@ -61,6 +62,7 @@ function keventer_event($event_id) {
 				. "<p>".nl2br($event->{'event-type'}->goal)."</p>"
 				. "<h3>Destinado A</h3>"
 				. "<p>".nl2br($event->{'event-type'}->recipients)."</p>"
+				. "<p><div class=\"button-wrap\"><div class=\"button\"><a href=\"".$event->{'registration-link'}."\" target=\"_blank\">Registrarme!</a></div></div></p>"
 				. "<h3>Agenda</h3>"
 				. "<p>".nl2br($event->{'event-type'}->program)."</p>"	
 				. "";
