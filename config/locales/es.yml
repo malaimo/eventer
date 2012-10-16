@@ -119,6 +119,7 @@ es:
         program: "Programa/Agenda"
         draft: "Borrador"
         cancelled: "Cancelado"
+        is_sold_out: "Cupo Completo"
         edit:
           title: "Edit title"
       event_type:

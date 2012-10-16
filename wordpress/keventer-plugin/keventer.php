@@ -39,6 +39,13 @@ function keventer_events_list() {
   
   foreach ($xml->event as $event) {
 	$event_date = new DateTime($event->date);
+	if ($event->{'is-sold-out'}) {
+		
+	}
+	else {
+		
+	}
+	
     $html_output .= "['".$event_date->format( 'd-M' )."',' <a href=\"/entrenamos/evento/".$event->id."\">".$event->{'event-type'}->name."</a>',"
 				 . "'<img src=\"/wp-content/plugins/qtranslate/flags/".strtolower($event->country->{'iso-code'}).".png\"/> ".$event->city.", ".$event->country->name."','<div class=\"button-wrap\"><div class=\"button\">"
 				 . "<a href=\"".$event->{'registration-link'}."\" target=\"_blank\">Registrarme!</a></div></div>'],";	
