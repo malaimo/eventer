@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "users/edit" do
   before(:each) do
-    @user = assign(:user, Factory.create(:comercial))
+    @user = assign(:user, FactoryGirl.create(:comercial))
   end
 
   it "renders the edit user form" do

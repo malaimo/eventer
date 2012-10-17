@@ -5,12 +5,12 @@ describe "events/edit" do
     @countries = Country.all
     @trainers = Trainer.all
     @event = assign(:event, stub_model(Event,
-      :event_type => Factory.build(:event_type),
+      :event_type => FactoryGirl.build(:event_type),
       :place => "MyString",
       :capacity => 1,
       :city => "MyString",
-      :country => Factory.build(:country),
-      :trainer => Factory.build(:trainer),
+      :country => FactoryGirl.build(:country),
+      :trainer => FactoryGirl.build(:trainer),
       :type => "",
       :list_price => "9.99",
       :list_price_plus_tax => false,

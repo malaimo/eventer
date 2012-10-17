@@ -6,7 +6,7 @@ describe User do
   context "If it's an administrator" do
     
     before(:each) do
-      @admin = Ability.new ( Factory.create(:administrator) )
+      @admin = Ability.new ( FactoryGirl.create(:administrator) )
     end
   
     it "should be able to manage roles" do
@@ -30,7 +30,7 @@ describe User do
   context "If it's a comercial person" do
 
     before(:each) do
-      @comercial = Ability.new ( Factory.create(:comercial) )
+      @comercial = Ability.new ( FactoryGirl.create(:comercial) )
     end
 
   

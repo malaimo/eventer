@@ -32,7 +32,7 @@ describe EventTypesController do
        :description => "Una descripción",
        :recipients => "algunos destinatarios",
        :program => "El programa del evento",
-       :trainer_ids => [ Factory.create(:trainer).id ]
+       :trainer_ids => [ FactoryGirl.create(:trainer).id ]
        }
    end
   
@@ -45,7 +45,7 @@ describe EventTypesController do
   
   before(:each) do
     @request.env["devise.mapping"] = Devise.mappings[:user]
-    @user = Factory.create(:comercial)
+    @user = FactoryGirl.create(:comercial)
     sign_in @user
   end
 

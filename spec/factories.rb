@@ -21,14 +21,14 @@ FactoryGirl.define do
     email 'admin@user.com'
     password 'please'
     password_confirmation 'please'
-    roles [ Factory.create(:admin_role) ]
+    roles [ FactoryGirl.create(:admin_role) ]
   end
 
   factory :comercial, :class => User do
     email 'comercial@user.com'
     password 'please'
     password_confirmation 'please'
-    roles [ Factory.create(:comercial_role) ]
+    roles [ FactoryGirl.create(:comercial_role) ]
   end
   
   factory :country do
@@ -47,19 +47,19 @@ FactoryGirl.define do
      description "Una descripción"
      recipients "algunos destinatarios"
      program "El programa del evento"
-     trainers [ Factory.build(:trainer) ]
+     trainers [ FactoryGirl.build(:trainer) ]
    end
   
   factory :event do
-    event_type Factory.build(:event_type)
+    event_type FactoryGirl.build(:event_type)
     date "23/01/2100"
     place "Hotel Conrad"
     city "Punta del Este"
     capacity 20
     visibility_type 'pu'
     list_price 500.00
-    country Factory.build(:country)
-    trainer Factory.build(:trainer)
+    country FactoryGirl.build(:country)
+    trainer FactoryGirl.build(:trainer)
   end
 
 end

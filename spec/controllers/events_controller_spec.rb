@@ -26,15 +26,15 @@ describe EventsController do
   # Event. As you add validations to Event, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { :event_type_id => Factory.create(:event_type).id,
+    { :event_type_id => FactoryGirl.create(:event_type).id,
       :date => "23/01/2100",
       :place => "Hotel Conrad",
       :city => "Punta del Este",
       :capacity => 20,
       :visibility_type => 'pu',
       :list_price => 500.00,
-      :country_id => Factory.create(:country).id,
-      :trainer_id => Factory.create(:trainer).id,
+      :country_id => FactoryGirl.create(:country).id,
+      :trainer_id => FactoryGirl.create(:trainer).id,
       :cancelled => false
       }
   end
@@ -50,7 +50,7 @@ describe EventsController do
   
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:user]
-      @user = Factory.create(:comercial)
+      @user = FactoryGirl.create(:comercial)
       sign_in @user
     end
 

@@ -5,7 +5,7 @@ describe EventType do
   it { should have_and_belong_to_many(:trainers) }
   
   before(:each) do
-    @event_type = Factory.build(:event_type)
+    @event_type = FactoryGirl.build(:event_type)
   end
   
   it "should be valid" do

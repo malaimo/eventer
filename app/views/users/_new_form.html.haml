@@ -10,5 +10,5 @@
         = check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role)
         = role.name
     %p
-    = f.buttons
+    = f.actions
     = link_to t('formtastic.actions.cancel'), trainers_path

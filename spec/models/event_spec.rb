@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Event do
   
   before(:each) do
-    @event = Factory.build(:event)
+    @event = FactoryGirl.build(:event)
   end
   
   it "should be valid" do
