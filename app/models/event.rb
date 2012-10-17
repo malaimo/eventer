@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   belongs_to :trainer
   belongs_to :event_type
   
-  scope :visible, where(:cancelled => false) 
+  scope :visible, where(:cancelled => false).where("date >= ?", DateTime.now) 
   scope :public_events,  where(:visibility_type => "pu")
   scope :public_and_visible, self.visible.public_events
   
