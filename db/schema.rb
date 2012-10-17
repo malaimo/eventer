@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121016172510) do
+ActiveRecord::Schema.define(:version => 20121017015622) do
 
   create_table "countries", :force => true do |t|
     t.string   "name"
@@ -44,16 +44,16 @@ ActiveRecord::Schema.define(:version => 20121016172510) do
     t.integer  "country_id"
     t.integer  "trainer_id"
     t.string   "visibility_type",               :limit => 2
-    t.decimal  "list_price",                                 :precision => 7, :scale => 2
+    t.decimal  "list_price",                                 :precision => 10, :scale => 2
     t.boolean  "list_price_plus_tax"
     t.integer  "list_price_2_pax_discount"
     t.integer  "list_price_3plus_pax_discount"
-    t.decimal  "eb_price",                                   :precision => 7, :scale => 2
+    t.decimal  "eb_price",                                   :precision => 10, :scale => 2
     t.date     "eb_end_date"
     t.boolean  "draft"
     t.boolean  "cancelled"
-    t.datetime "created_at",                                                               :null => false
-    t.datetime "updated_at",                                                               :null => false
+    t.datetime "created_at",                                                                :null => false
+    t.datetime "updated_at",                                                                :null => false
     t.integer  "event_type_id"
     t.string   "registration_link"
     t.boolean  "is_sold_out"

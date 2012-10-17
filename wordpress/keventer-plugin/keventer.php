@@ -39,16 +39,19 @@ function keventer_events_list() {
   
   foreach ($xml->event as $event) {
 	$event_date = new DateTime($event->date);
-	if ($event->{'is-sold-out'}) {
-		
+	
+	$registration_link = $event->{'registration-link'};
+	$registration_text = "Registrarme!";
+	
+	if ($event->{'is-sold-out'}=="true") {
+		$registration_link = "javascript:void();";
+		$registration_text = "Completo";
 	}
-	else {
-		
-	}
+	
 	
     $html_output .= "['".$event_date->format( 'd-M' )."',' <a href=\"/entrenamos/evento/".$event->id."\">".$event->{'event-type'}->name."</a>',"
 				 . "'<img src=\"/wp-content/plugins/qtranslate/flags/".strtolower($event->country->{'iso-code'}).".png\"/> ".$event->city.", ".$event->country->name."','<div class=\"button-wrap\"><div class=\"button\">"
-				 . "<a href=\"".$event->{'registration-link'}."\" target=\"_blank\">Registrarme!</a></div></div>'],";	
+				 . "<a href=\"".$registration_link."\" target=\"_blank\">".$registration_text."</a></div></div>'],";	
   }
   
   $html_output .= "];\n"
@@ -60,10 +63,20 @@ function keventer_events_list() {
 function keventer_event($event_id) {
 	$event = simplexml_load_file('http://keventer.herokuapp.com/api/events/'.$event_id.'.xml');
 	$event_date = new DateTime($event->date);
+	
+	$registration_link = $event->{'registration-link'};
+	$registration_text = "Registrarme!";
+	
+	if ($event->{'is-sold-out'}=="true") {
+		$registration_link = "javascript:void();";
+		$registration_text = "Completo";
+	}
+	
   	$html_output = "<h1>".$event->{'event-type'}->name."</h1>"
-				. "<p><strong>Fecha:</strong> ".$event_date->format( 'd-M' )."<br/>"
+				. "<p><strong>Entrenador:</strong> ".$event->trainer->name."<br/>"
+				. "<strong>Fecha:</strong> ".$event_date->format( 'd-M' )."<br/>"
 				. "<strong>Lugar:</strong> ".$event->city.", ".$event->country->name."<br/>"
-				. "<div class=\"button-wrap\"><div class=\"button\"><a href=\"".$event->{'registration-link'}."\" target=\"_blank\">Registrarme!</a></div></div><br/>"
+				. "<div class=\"button-wrap\"><div class=\"button\"><a href=\"".$registration_link."\" target=\"_blank\">".$registration_text."</a></div></div><br/>"
 				. "</p>"
 				. "<h3>Descripción</h3>"
 				. "<p>".nl2br($event->{'event-type'}->description)."</p>"
@@ -71,7 +84,7 @@ function keventer_event($event_id) {
 				. "<p>".nl2br($event->{'event-type'}->goal)."</p>"
 				. "<h3>Destinado A</h3>"
 				. "<p>".nl2br($event->{'event-type'}->recipients)."</p>"
-				. "<p><div class=\"button-wrap\"><div class=\"button\"><a href=\"".$event->{'registration-link'}."\" target=\"_blank\">Registrarme!</a></div></div></p>"
+				. "<p><div class=\"button-wrap\"><div class=\"button\"><a href=\"".$registration_link."\" target=\"_blank\">".$registration_text."</a></div></div></p>"
 				. "<h3>Agenda</h3>"
 				. "<p>".nl2br($event->{'event-type'}->program)."</p>"	
 				. "";
