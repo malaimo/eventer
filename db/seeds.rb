@@ -23,6 +23,7 @@ User.create do |u|
 end
 
 Country.create([
+  {:name => '-- OnLine --', :iso_code => 'OL'},
   {:name => 'Albania', :iso_code => 'AL'},
   {:name => 'Algeria', :iso_code => 'DZ'},
   {:name => 'American Samoa', :iso_code => 'AS'},
