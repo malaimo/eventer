@@ -10,7 +10,7 @@
       = f.input :country, :as => :select, :collection => Country.find(:all), :input_html => { :style => "width: 200px" }
       #trainer_select
         = render :partial => 'trainers_select'
-      = f.input :visibility_type, :as => :radio, :collection => { t('event.type.public') => "pu", t('event.type.private') => "pr" }
+      = f.input :visibility_type, :as => :radio, :collection => { t('event.type.public') => "pu", t('event.type.private') => "pr", t('event.type.community') => "co" }
       = f.input :list_price, :as => :number, :input_html => { :size => 2 }
       = f.input :list_price_plus_tax
       = f.input :list_price_2_pax_discount, :as => :string, :input_html => { :size => 2 }
@@ -30,6 +30,7 @@
   $(document).ready(function() {
     $("#event_visibility_type_pu").change( function() { eventTypeActions( $(this).val() ); });
     $("#event_visibility_type_pr").change( function() { eventTypeActions( $(this).val() ); });
+    $("#event_visibility_type_co").change( function() { eventTypeActions( $(this).val() ); });
     $("#event_event_type_id").change( function() { dynamicallyFillTrainersForEventType( $(this).val() ); });
 
     $("#event_date").change( function() { eventDateChanged( $(this).val() ); });
@@ -37,6 +38,9 @@
     if ( $("#event_visibility_type_pr").is(":checked") ) {
       $("#event_visibility_type_pr").trigger('change');
     } 
+    else if ( $("#event_visibility_type_co").is(":checked") ) {
+      $("#event_visibility_type_co").trigger('change');
+    }
 
   })
 
@@ -46,13 +50,29 @@
       $("#event_list_price_3plus_pax_discount_input").show();
       $("#event_eb_price_input").show();
       $("#event_eb_end_date_input").show();
-    } else {
+      $("#event_list_price_input").show();
+      $("#event_list_price_plus_tax_input").show();
+    }
+    else if (value === "co") {
       $("#event_list_price_2_pax_discount").val("");
       $("#event_list_price_2_pax_discount_input").hide();
       $("#event_list_price_3plus_pax_discount").val("");
       $("#event_list_price_3plus_pax_discount_input").hide();
       $("#event_eb_price_input").hide();
       $("#event_eb_end_date_input").hide();
+      $("#event_list_price").val( 0 );
+      $("#event_list_price_input").hide();
+      $("#event_list_price_plus_tax_input").hide();
+    }
+    else if (value === "pr") {
+      $("#event_list_price_2_pax_discount").val("");
+      $("#event_list_price_2_pax_discount_input").hide();
+      $("#event_list_price_3plus_pax_discount").val("");
+      $("#event_list_price_3plus_pax_discount_input").hide();
+      $("#event_eb_price_input").hide();
+      $("#event_eb_end_date_input").hide();
+      $("#event_list_price_input").show();
+      $("#event_list_price_plus_tax_input").show();
     }
   }
 

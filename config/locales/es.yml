@@ -161,6 +161,7 @@ es:
       type:
           public: "Publico"
           private: "Privado"
+          community: "Comunitario"
   menu:
       dashboard: "Dashboard"
       users: "Usuarios"

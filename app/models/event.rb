@@ -3,8 +3,12 @@ class Event < ActiveRecord::Base
   belongs_to :trainer
   belongs_to :event_type
   
-  scope :visible, where(:cancelled => false).where("date >= ?", DateTime.now) 
-  scope :public_events,  where(:visibility_type => "pu")
+  scope :visible, where(:cancelled => false).where("date >= ?", DateTime.now)
+  scope :public_events,  where("visibility_type = 'pu' or visibility_type = 'co'")
+  scope :public_commercial_events,  where(:visibility_type => "pu")
+  scope :public_community_events,  where(:visibility_type => "co")
+  scope :public_commercial_visible, self.visible.public_commercial_events
+  scope :public_community_visible, self.visible.public_community_events
   scope :public_and_visible, self.visible.public_events
   
   after_initialize :initialize_defaults
@@ -47,6 +51,5 @@ class Event < ActiveRecord::Base
       self.draft = true
     end
   end
-  
 
 end

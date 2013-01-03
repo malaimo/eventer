@@ -63,6 +63,12 @@ Feature: Administración de Eventos
 		    Given Im a logged in user
 			When I choose to create a Public event
 			Then I should see public prices
+			
+		@selenium	
+		Scenario: Se debe ocultar el precio, los descuentos y precios EB y SEB si es un evento comunitario
+			Given Im a logged in user
+			When I choose to create a Community event
+			Then I should not see any price
 
 		@selenium	
 		Scenario: SEB=30 días antes de la fecha del evento y EB=10 días antes de la fecha del evento

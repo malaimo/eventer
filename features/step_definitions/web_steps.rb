@@ -98,6 +98,12 @@ When /^I choose to create a Private event$/ do
   choose 'event_visibility_type_pr'
 end
 
+When /^I choose to create a Community event$/ do
+  visit "/events/new"
+  create_valid_event_inputs 'Tipo de Evento de Prueba'
+  choose 'event_visibility_type_co'
+end
+
 When /^I choose to create a Public event$/ do
   visit "/events/new"
   create_valid_event_inputs 'Tipo de Evento de Prueba'
@@ -106,6 +112,12 @@ end
 
 Then /^I should not see public prices$/ do
   page.find_field('event_eb_price').visible?.should be false
+end
+
+Then /^I should not see any price$/ do
+  page.find_field('event_eb_price').visible?.should be false
+  page.find_field('event_list_price').visible?.should be false
+  page.find_field('event_eb_end_date').visible?.should be false
 end
 
 Then /^I should see public prices$/ do

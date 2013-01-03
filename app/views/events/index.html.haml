@@ -24,6 +24,8 @@
           Público
         -elsif event.visibility_type == "pr"
           Privado
+        -elsif event.visibility_type == "co"
+          Comunitario
       %td 
         -if event.draft
           Borrador
