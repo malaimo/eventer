@@ -3,5 +3,7 @@
     .grid_12
       = f.input :name, :input_html => { :size => 40 }
       = f.input :bio
+      = f.input :gravatar_email
+      = f.input :twitter_username
       = f.actions
       = link_to t('formtastic.actions.cancel'), trainers_path
