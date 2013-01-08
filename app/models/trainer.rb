@@ -7,7 +7,8 @@ class Trainer < ActiveRecord::Base
   validates :name, :presence => true
   
   def gravatar_picture_url
-    hash = Digest::MD5.hexdigest(self.gravatar_email)
+    hash = "asljasld"
+    hash = Digest::MD5.hexdigest(self.gravatar_email) unless self.gravatar_email.nil?
     "http://www.gravatar.com/avatar/#{hash}"
   end
   

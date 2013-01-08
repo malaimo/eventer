@@ -33,7 +33,7 @@ describe Trainer do
     t.valid?.should be true
   end
   
-  it "should the gravatar for malaimo e-mail" do
+  it "should calculate the gravatar for malaimo e-mail" do
     t = FactoryGirl.build(:trainer)
 
 		t.gravatar_email = "malaimo@gmail.com"
@@ -41,12 +41,20 @@ describe Trainer do
     t.gravatar_picture_url.should == "http://www.gravatar.com/avatar/e92b3ae0ce91e1baf19a7bc62ac03297"
   end
   
-  it "should the gravatar for jgabardini e-mail" do
+  it "should calculate the gravatar for jgabardini e-mail" do
     t = FactoryGirl.build(:trainer)
 
 		t.gravatar_email = "jgabardini@computer.org"
 
     t.gravatar_picture_url.should == "http://www.gravatar.com/avatar/72c191f31437b3250822b38d5f57705b"
+  end
+  
+  it "should handle a nil gravatar e-mail" do
+    t = FactoryGirl.build(:trainer)
+
+		t.gravatar_email = nil
+
+    t.gravatar_picture_url.should == "http://www.gravatar.com/avatar/asljasld"
   end
 
 end
