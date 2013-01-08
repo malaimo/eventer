@@ -26,7 +26,7 @@ class HomeController < ApplicationController
   end
   
   def trainers
-    @trainers = Trainer.all(:order => 'country_id')
+    @trainers = Trainer.all(:order => ['country_id','name'])
     respond_to do |format|
       format.html
       format.xml { render :xml => @trainers.to_xml(:include => :country ) }
