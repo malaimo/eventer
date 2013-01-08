@@ -24,4 +24,23 @@ class HomeController < ApplicationController
       format.json { render json: @event }  
     end
   end
+  
+  def trainers
+    @trainers = Trainer.all(:order => 'country_id')
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @trainers.to_xml(:include => :country ) }
+      format.json { render json: @trainers }  
+    end
+  end
+  
+  def kleerers
+    @trainers = Trainer.kleerer.all(:order => 'country_id')
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @trainers.to_xml(:include => :country ) }
+      format.json { render json: @trainers }  
+    end
+  end
+  
 end

@@ -18,6 +18,8 @@ Eventer::Application.routes.draw do
   # Keep in mind you can assign values other than :controller and :action
   match 'dashboard' => 'dashboard#index'
   match 'api/events' => 'home#index'
+  match 'api/trainers' => 'home#trainers'
+  match 'api/kleerers' => 'home#kleerers'
   match 'api/community_events' => 'home#index_community'
   match 'api/events/:id' => 'home#show'
   match 'api/event_types' => 'event_types#index'

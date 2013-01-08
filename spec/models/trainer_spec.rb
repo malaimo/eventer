@@ -33,6 +33,22 @@ describe Trainer do
     t.valid?.should be true
   end
   
+  it "should let me set a linkein url" do
+    t = FactoryGirl.build(:trainer)
+
+		t.linkedin_url = "http://ar.linkedin.com/in/malaimo"
+
+    t.valid?.should be true
+  end  
+
+  it "should let me indicate if the trainer is a kleerer" do
+    t = FactoryGirl.build(:trainer)
+
+		t.is_kleerer = true
+
+    t.valid?.should be true
+  end
+  
   it "should calculate the gravatar for malaimo e-mail" do
     t = FactoryGirl.build(:trainer)
 

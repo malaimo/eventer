@@ -98,6 +98,11 @@ es:
       city: "Ciudad"
       country: "País"
       trainer: "Entrenador"
+      trainer:
+        linedin_url: "URL de LinedIn"
+        is_kleerer: "Es Kleerer?"
+        twitter_username: "Usuario de Twitter"
+        gravatar_email: "Email de Gravatar"
       role:
         name: "Nombre"
       user:

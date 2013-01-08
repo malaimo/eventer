@@ -1,8 +1,8 @@
 class Trainer < ActiveRecord::Base
-  
-  attr_reader :gravatar_picture_url
-  
+  belongs_to :country  
   has_and_belongs_to_many :event_types
+  
+  scope :kleerer, where(:is_kleerer => true)
   
   validates :name, :presence => true
   

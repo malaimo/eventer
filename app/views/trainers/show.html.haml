@@ -5,6 +5,16 @@
   = @trainer.name
   %b= t('formtastic.labels.bio') + ": "
   = @trainer.bio
+  %b= t('formtastic.labels.trainer.linkedin_url') + ": "
+  = @trainer.linkedin_url
+  %b= t('formtastic.labels.trainer.twitter_username') + ": "
+  = @trainer.twitter_username
+  %b= t('formtastic.labels.trainer.is_kleerer') + ": "
+  = @trainer.is_kleerer
+  %b= t('formtastic.labels.trainer.gravatar_email') + ": "
+  = @trainer.gravatar_email
+  %b= t('formtastic.labels.trainer.gravatar_picture') + ": "
+  = @trainer.gravatar_picture_url
 
 = link_to t('formtastic.actions.edit'), edit_trainer_path(@trainer)
 \|
