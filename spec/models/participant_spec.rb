@@ -32,6 +32,18 @@ describe Participant do
     @participant.valid?.should be false
   end
   
+  it "should validate the email" do
+    @participant.email = "cualquiercosa"
+    
+    @participant.valid?.should be false
+  end
+
+  it "should validate the email" do
+    @participant.email = "hola@gmail.com"
+    
+    @participant.valid?.should be true
+  end  
+  
   it "should require its phone" do
     @participant.phone = ""
     

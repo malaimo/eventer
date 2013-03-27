@@ -61,3 +61,4 @@ gem 'devise'
 gem 'cancan'
 
 gem 'formtastic'
+gem 'valid_email'

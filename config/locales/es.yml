@@ -169,6 +169,11 @@ es:
       destroy: "Borrar"
       new: "Nuevo"
       
+  valid_email:
+    validations:
+      email:
+        invalid: "email inválido."
+      
   # Texto customizado
   event:
       type:

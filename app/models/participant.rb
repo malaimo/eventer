@@ -1,8 +1,12 @@
+require 'valid_email'
+
 class Participant < ActiveRecord::Base
   belongs_to :event
   attr_accessible :email, :fname, :lname, :phone, :event_id, :status, :notes
   
   validates :email, :fname, :lname, :phone, :event, :presence => true
+  
+  validates :email, :email => true
   
   scope :new_ones, where(:status => "N")
   scope :confirmed, where(:status => "C")
