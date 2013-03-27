@@ -1,6 +1,6 @@
-%h1 Nuevo Registro
-%h5= "Evento: " + @event.event_type.name
-%h5= "Fecha: " + @event.date.to_formatted_s(:short)
-%h5= "Ciudad: " + @event.city
+Estás registrándote a:
+%h6= @event.event_type.name
+= @event.date.to_formatted_s(:short) + " - " + @event.city
+%hr
 
 = render 'form'

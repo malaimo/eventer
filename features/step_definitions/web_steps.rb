@@ -166,9 +166,9 @@ Then /^It should have a registration page$/ do
   @event = Event.first
   visit '/events/'+@event.id.to_s+'/participants/new'
   
-  page.should have_content('Evento: '+ @event.event_type.name )
-  page.should have_content('Fecha: '+ @event.date.to_formatted_s(:short) )
-  page.should have_content('Ciudad: '+ @event.city )
+  page.should have_content(@event.event_type.name )
+  page.should have_content(@event.date.to_formatted_s(:short) )
+  page.should have_content(@event.city )
   
   page.should have_content('Nombre')
   page.should have_content('Apellido')
