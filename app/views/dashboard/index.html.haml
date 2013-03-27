@@ -39,7 +39,7 @@
       %td= event.list_price_2_pax_discount
       %td= event.list_price_3plus_pax_discount
       %td
-        - if event.registration_link != ""
+        - if event.registration_link == ""
           - if event.participants.new_ones.count > 0
             %img{:src => "/assets/alert.png", :style => "vertical-align:middle"}
             %strong= link_to event.participants.new_ones.count.to_s + " nuevos", event_participants_path(event)
