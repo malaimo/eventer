@@ -98,6 +98,13 @@ es:
       city: "Ciudad"
       country: "País"
       trainer: "Entrenador"
+      participant: "Participante"
+      participant: 
+        fname: "Nombre"
+        lname: "Apellido"
+        phone: "Teléfono de contacto"
+        email: "E-Mail"
+        status: "Estado"        
       trainer:
         linedin_url: "URL de LinedIn"
         is_kleerer: "Es Kleerer?"
@@ -135,10 +142,11 @@ es:
         goal: "Objetivo"
     hints:
       event:
-          capacity: "Cantidad máxima de personas"
-          eb_end_date: "Fecha de finalización del precio Early Bird" 
-          cancelled: "Si cancelas el evento no podrás acceder más a él"
-              
+        capacity: "Cantidad máxima de personas"
+        eb_end_date: "Fecha de finalización del precio Early Bird" 
+        cancelled: "Si cancelas el evento no podrás acceder más a él"
+      participant: 
+        phone: "Una persona de Kleer se contactará a este teléfono para continuar con tu inscripción."      
     placeholders:
       post:
         name: "Title your post"

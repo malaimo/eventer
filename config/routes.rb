@@ -3,7 +3,9 @@ Eventer::Application.routes.draw do
 
   resources :trainers
 
-  resources :events
+  resources :events do
+    resources :participants
+  end
 
   resources :roles
 
@@ -27,7 +29,8 @@ Eventer::Application.routes.draw do
   match 'api/event_types/:id/trainers' => 'event_types#show_trainers'
   match 'public_events/:id' => 'public_events#show'
   match 'events/update_trainer_select/:id' => 'ajax#events_update_trainer_select'
-  
+  match '/registration_confirmed' => 'participants#confirm'
+      
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)

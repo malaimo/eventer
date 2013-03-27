@@ -1,0 +1,11 @@
+= semantic_form_for [:event, @participant] do |f|
+  = f.inputs do
+    = f.input :fname
+    = f.input :lname
+    = f.input :email
+    = f.input :phone
+    = f.input :status, :as => :select, :collection => [["Nuevo", "N"], ["Contactado", "T"], ["Confirmado", "C"], ["Cancelado", "X"], ["Pospuesto", "D"]]
+    = f.input :notes
+  
+  = f.actions do
+    = f.action :submit, :label => "Modificar"

@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
   belongs_to :country
   belongs_to :trainer
   belongs_to :event_type
+  has_many :participants
   
   scope :visible, where(:cancelled => false).where("date >= ?", DateTime.now)
   scope :public_events,  where("visibility_type = 'pu' or visibility_type = 'co'")
@@ -15,7 +16,7 @@ class Event < ActiveRecord::Base
   
   attr_accessible :event_type_id, :trainer_id, :country_id, :date, :place, :capacity, :city, :visibility_type, :list_price, 
                   :list_price_plus_tax, :list_price_2_pax_discount, :list_price_3plus_pax_discount, 
-                  :eb_price, :eb_end_date, :draft, :cancelled, :registration_link, :is_sold_out
+                  :eb_price, :eb_end_date, :draft, :cancelled, :registration_link, :is_sold_out, :participants
                   
   validates :date, :place, :capacity, :city, :visibility_type, :list_price, 
             :country, :trainer, :event_type, :presence => true
@@ -48,7 +49,7 @@ class Event < ActiveRecord::Base
   
   def initialize_defaults
     if new_record?
-      self.draft = true
+#      self.draft = true
     end
   end
 

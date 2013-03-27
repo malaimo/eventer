@@ -1,16 +1,15 @@
 %h1 Dashboard
 
-%h2 Pricing
-
 %table
   %tr
     %th Fecha
     %th Nombre
     %th Ciudad
-    %th E. Bird (Hasta)
+    %th E. Bird
     %th Precio de Lista
     %th Desc. 2p
     %th Desc. 3p
+    %th Participantes
     
   - @events.each do |event|
     %tr
@@ -22,9 +21,15 @@
       %td= event.city
       - if !event.eb_price.nil? && event.eb_price > 0
         - if event.list_price_plus_tax
-          %td= event.eb_price.to_i.to_s + "+IVA (" + event.eb_end_date.to_formatted_s(:short) + ")"
+          %td
+            = event.eb_price.to_i.to_s + "+IVA"
+            %br
+            = "Hasta el " + event.eb_end_date.to_formatted_s(:short)
         - else
-          %td= event.eb_price.to_i.to_s + " (" + event.eb_end_date.to_formatted_s(:short) + ")"
+          %td
+            = event.eb_price.to_i.to_s
+            %br
+            = "Hasta el " + event.eb_end_date.to_formatted_s(:short)
       - else
         %td= " "
       - if event.list_price_plus_tax
@@ -33,3 +38,9 @@
         %td= event.list_price.to_i.to_s
       %td= event.list_price_2_pax_discount
       %td= event.list_price_3plus_pax_discount
+      %td 
+        = event.participants.new_ones.count.to_s + " nuevos"
+        %br
+        = event.participants.contacted.count.to_s + " contactados"
+        %br
+        = link_to 'Ver participantes', event_participants_path(event)

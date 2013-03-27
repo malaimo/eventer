@@ -61,5 +61,13 @@ FactoryGirl.define do
     country FactoryGirl.build(:country)
     trainer FactoryGirl.build(:trainer)
   end
+  
+  factory :participant do
+    fname "Juan Carlos"
+    lname "Perez Luasó"
+    email "juanca@perez.com"
+    phone "5555-5555"
+    event FactoryGirl.build(:event)
+  end
 
 end

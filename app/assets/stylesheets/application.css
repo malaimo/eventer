@@ -22,7 +22,8 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   background: transparent; }
 
 body {
-  line-height: 1; }
+  line-height: 1;
+}
 
 ol, ul {
   list-style-position: inside; }
@@ -48,7 +49,7 @@ table {
   border-spacing: 0; }
 
 body {
-  font: 13px/1.5 'Helvetica Neue','Arial','Liberation Sans','FreeSans','sans-serif'; }
+  font-family:'Helvetica Neue','Arial','Liberation Sans','FreeSans','sans-serif'; }
 
 a:focus {
   outline: 1px dotted; }
@@ -355,7 +356,7 @@ a:hover {
     text-align: left;
     margin: 5px 0; }
     #content table th {
-      font-size: 1.2em;
+      font-size: 12px;
       font-weight: normal;
       color: #009933;
       padding: 10px 8px;

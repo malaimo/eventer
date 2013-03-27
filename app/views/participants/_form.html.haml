@@ -1,0 +1,9 @@
+= semantic_form_for [:event, @participant] do |f|
+  = f.inputs do
+    = f.input :fname
+    = f.input :lname
+    = f.input :email
+    = f.input :phone
+  
+  = f.actions do
+    = f.action :submit, :label => "Registrarme"

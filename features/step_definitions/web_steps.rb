@@ -133,6 +133,7 @@ When /^I modify the event "([^"]*)"$/ do |link_description|
   click_link "Modificar"
   fill_in 'event_capacity', :with => 200
   click_button "Guardar Cambios"
+  sleep 5
 end
 
 When /^I cancel the event "([^"]*)"$/ do |link_description|
@@ -142,8 +143,67 @@ When /^I cancel the event "([^"]*)"$/ do |link_description|
   click_button "Guardar Cambios"
 end
 
-Then /^I should not see "([^"]*)"$/ do |text|
+Then /^I should not see "([^\"]*)"$/ do |text|
   page.should_not have_content( text )
+end
+
+When /^I register for that event$/ do
+  @event = Event.first
+  visit '/events/'+@event.id.to_s+'/participants/new'
+  fill_in 'participant_fname', :with => 'Juan'
+  fill_in 'participant_lname', :with => 'Callidoro'
+  fill_in 'participant_email', :with => 'jcallidoro@gmail.com'
+  fill_in 'participant_phone', :with => '1234-5678'
+  click_button 'Registrarme'
+end
+
+Then /^I should see a confirmation message$/ do
+  current_path.should == '/registration_confirmed'
+  page.should have_content('Tu registro fue realizado exitosamente.')
+end
+
+Then /^It should have a registration page$/ do
+  @event = Event.first
+  visit '/events/'+@event.id.to_s+'/participants/new'
+  
+  page.should have_content('Evento: '+ @event.event_type.name )
+  page.should have_content('Fecha: '+ @event.date.to_formatted_s(:short) )
+  page.should have_content('Ciudad: '+ @event.city )
+  
+  page.should have_content('Nombre')
+  page.should have_content('Apellido')
+  page.should have_content('E-Mail')
+  page.should have_content('Teléfono de contacto')
+end
+
+When /^I visit the dashboard$/ do
+  visit '/dashboard'
+  sleep 15
+end
+
+def create_new_participant
+  visit "/events/1/participants/new"
+  fill_in 'participant_fname', :with => 'Juan'
+  fill_in 'participant_lname', :with => 'Callidoro'
+  fill_in 'participant_email', :with => 'jcallidoro@gmail.com'
+  fill_in 'participant_phone', :with => '1234-5678'
+  click_button 'Registrarme'
+end
+
+def contact_participant
+  visit "/events/1/participants"
+  click_link "Modificar"
+  select "Contactado", :from => 'participant_status'
+  click_button 'Modificar'
+end
+
+Given /^there are (\d+) participants and 1 is contacted$/ do |newones|
+  newones.to_i.times { 
+    create_new_participant
+  }
+   
+  contact_participant
+  
 end
 
 
