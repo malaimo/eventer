@@ -178,7 +178,6 @@ end
 
 When /^I visit the dashboard$/ do
   visit '/dashboard'
-  sleep 15
 end
 
 def create_new_participant

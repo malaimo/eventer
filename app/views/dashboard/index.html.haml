@@ -10,8 +10,26 @@
     %th Ciudad
     %th Pipeline Participantes
     %th Completo al
-    
+  
+  - weeks_from_now_p = -1  
   - @events.each do |event|
+    - weeks_from_now = event.date.cweek-Date.today.cweek
+    - if weeks_from_now <= 1 
+      - weeks_from_now=1
+    - elsif weeks_from_now > 2
+      - if weeks_from_now <= 4
+        - weeks_from_now=4
+      - elsif weeks_from_now <= 6
+        - weeks_from_now=6
+      - else
+        - weeks_from_now=10
+    - if weeks_from_now_p != weeks_from_now
+      %tr{:style => 'background-color: #555555; color: #ffffff'}
+        - if weeks_from_now <=6
+          %td{:colspan => 7}= "Eventos a " + weeks_from_now.to_s + " semana(s)"
+        - else
+          %td{:colspan => 7}= "Eventos a más de 6 semanas"
+      - weeks_from_now_p = weeks_from_now
     %tr
       %td= event.date.to_formatted_s(:short)
       - if event.event_type.nil?
