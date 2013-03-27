@@ -1,5 +1,12 @@
 %h1= @event.event_type.name + " - " + @event.date.to_formatted_s(:short) + " - " + @event.city
-%h2= @event.participants.count.to_s + " Participantes"
+%h6
+  = (@event.completion*100).round.to_s + "% completo."
+  |
+  = @event.participants.confirmed.count.to_s + " confirmados"
+  |
+  = @event.capacity.to_s + " posibles"
+  |
+  = (@event.capacity-@event.participants.confirmed.count).to_s + " por confirmar"
 = link_to 'Actualizar', event_participants_path(@event)
 |
 = link_to 'Nuevo Registro', new_event_participant_path, :target => "_blank"
@@ -21,16 +28,15 @@
       %td= participant.lname
       %td= participant.email
       %td= participant.phone
-      %td
-        - if participant.status == "N"
-          Nuevo
-        - elsif participant.status == "T"
-          Contactado
-        - elsif participant.status == "C"
-          Confirmado
-        - elsif participant.status == "X"
-          Cancelado
-        - elsif participant.status == "D"
-          Postergado
+      - if participant.status == "N"
+        %td{:style=>"background-color: #ffff00;"}Nuevo
+      - elsif participant.status == "T"
+        %td{:style=>"background-color: #e06666;"}Contactado
+      - elsif participant.status == "C"
+        %td{:style=>"background-color: #00ff00;"}Confirmado
+      - elsif participant.status == "X"
+        %td{:style=>"background-color: #ff0000; color: #FFFFFF;"}Cancelado
+      - elsif participant.status == "D"
+        %td{:style=>"background-color: #ff0000; color: #FFFFFF;"}Postergado
       %td= participant.notes
       %td= link_to 'Modificar', edit_event_participant_path(participant.event, participant)

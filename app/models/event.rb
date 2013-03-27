@@ -52,5 +52,13 @@ class Event < ActiveRecord::Base
 #      self.draft = true
     end
   end
+  
+  def completion
+    if self.capacity > 0
+      self.participants.confirmed.count*1.0/self.capacity
+    else
+      1.0
+    end
+  end
 
 end

@@ -38,9 +38,10 @@
         %td= event.list_price.to_i.to_s
       %td= event.list_price_2_pax_discount
       %td= event.list_price_3plus_pax_discount
-      %td 
-        = event.participants.new_ones.count.to_s + " nuevos"
-        %br
-        = event.participants.contacted.count.to_s + " contactados"
-        %br
-        = link_to 'Ver participantes', event_participants_path(event)
+      %td
+        - if event.registration_link != ""
+          - if event.participants.new_ones.count > 0
+            %img{:src => "/assets/alert.png", :style => "vertical-align:middle"}
+            %strong= link_to event.participants.new_ones.count.to_s + " nuevos", event_participants_path(event)
+            %br
+          = link_to event.participants.contacted.count.to_s + " contactados", event_participants_path(event)

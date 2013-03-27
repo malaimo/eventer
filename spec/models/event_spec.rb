@@ -105,5 +105,17 @@ describe Event do
 
          @event.valid?.should be true
      end
+     
+     it "It should return a completion percentage" do
+       
+          @event.capacity = 10
+          
+          p = Participant.new({:fname => "juan", :lname => "pipo", :phone => "1234-5678", :email => "ppp@ppp.com"})
+          p.event = @event
+          p.status = "C"
+          p.save
+          
+          @event.completion.should == 0.1
+      end
   
 end
