@@ -17,7 +17,7 @@
       - if event.event_type.nil?
         %td= "Sin Tipo de Evento"
       - else
-        %td= event.event_type.name
+        %td= event.event_type.short_name
       %td= event.city
       - if !event.eb_price.nil? && event.eb_price > 0
         - if event.list_price_plus_tax

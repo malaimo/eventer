@@ -42,4 +42,14 @@ describe EventType do
     @event_type.valid?.should be false
   end
   
+  it "should have a shot_name version returning 30 characters if name is longuer" do
+    @event_type.name = "qoweiuq owei owqieu qoiweuqo iweu qwoeu qouwie qowieuq woiequ woei uqowie"
+    @event_type.short_name.should == "qoweiuq owei owqieu qoiweuqo i..."
+  end 
+  
+  it "should have a shot_name version returning all characters if name is shorter than 30 letters" do
+    @event_type.name = "hola che!"
+    @event_type.short_name.should == "hola che!"
+  end 
+  
 end
