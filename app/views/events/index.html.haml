@@ -1,5 +1,8 @@
 %h1 Eventos Confirmados
 
+%p.record-actions
+  = link_to t('formtastic.actions.new'), new_event_path
+
 %table
   %tr
     %th Fecha
@@ -12,7 +15,7 @@
     
   - @events.each do |event|
     %tr
-      %td= event.date.to_formatted_s(:short)
+      %td= event.human_date
       - if event.event_type.nil?
         %td= link_to "Sin Tipo de Evento", event
       - else
@@ -33,7 +36,3 @@
           Publicado
       %td= link_to 'Ver', event
       %td= link_to 'Modificar', edit_event_path(event)
-
-%br
-
-= link_to 'Nuevo Evento', new_event_path

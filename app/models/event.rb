@@ -16,12 +16,14 @@ class Event < ActiveRecord::Base
 
   attr_accessible :event_type_id, :trainer_id, :country_id, :date, :place, :capacity, :city, :visibility_type, :list_price,
                   :list_price_plus_tax, :list_price_2_pax_discount, :list_price_3plus_pax_discount,
-                  :eb_price, :eb_end_date, :draft, :cancelled, :registration_link, :is_sold_out, :participants
+                  :eb_price, :eb_end_date, :draft, :cancelled, :registration_link, :is_sold_out, :participants, :duration, 
+                  :start_time, :end_time
 
   validates :date, :place, :capacity, :city, :visibility_type, :list_price,
-            :country, :trainer, :event_type, :presence => true
+            :country, :trainer, :event_type, :duration, :start_time, :end_time, :presence => true
 
   validates :capacity, :numericality => { :greater_than => 0, :message => :capacity_should_be_greater_than_0 }
+  validates :duration, :numericality => { :greater_than => 0, :message => :duration_should_be_greater_than_0 }
 
   validates_each :date do |record, attr, value|
     record.errors.add(attr, :event_date_in_past) unless !value.nil? && value > Time.zone.today
@@ -48,8 +50,10 @@ class Event < ActiveRecord::Base
   end
 
   def initialize_defaults
-    if new_record?
-#      self.draft = true
+    if self.new_record?
+     self.start_time ||= "9:00"   
+     self.end_time ||= "18:00"  
+     self.duration ||= 1        
     end
   end
 
@@ -67,7 +71,61 @@ class Event < ActiveRecord::Base
 
     weeks = (to_date - from_date) / 7
   end
-
-
+  
+  def human_date
+    duration = get_event_duration
+       
+    start_date = humanize_start_date
+    
+    end_date = humanize_end_date
+    
+    if event_is_within_the_same_day(start_date, end_date)
+      human_date = start_date 
+    elsif event_is_within_the_same_month(start_date, end_date)
+      human_date = merge_dates_in_same_month(start_date, end_date)
+    else
+      human_date = start_date + "-" + end_date
+    end
+    
+    human_date
+  end
+  
+  private
+  
+  def get_event_duration
+    if !self.duration.nil?
+      self.duration
+    else
+      1
+    end
+  end
+  
+  def humanize_start_date
+    humanize_date self.date
+  end
+  
+  def humanize_end_date
+    humanize_date self.date+(duration-1)
+  end
+  
+  def humanize_date(date)
+    human_date = I18n.l date, :format => :short 
+    if human_date[0] == "0"
+      human_date = human_date[-5,5]
+    end
+    human_date
+  end
+  
+  def event_is_within_the_same_day(start_date, end_date)
+    start_date == end_date
+  end
+  
+  def event_is_within_the_same_month(start_date, end_date)
+    start_date[-3,3] == end_date[-3,3]
+  end
+  
+  def merge_dates_in_same_month(start_date, end_date)
+    start_date.split(' ')[0] + "-" + end_date.split(' ')[0] + " " + start_date[-3,3]
+  end
 
 end

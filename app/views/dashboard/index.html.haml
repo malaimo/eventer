@@ -31,7 +31,7 @@
           %td{:colspan => 7}= "Eventos a más de 6 semanas"
       - weeks_from_now_p = weeks_from_now
     %tr
-      %td= event.date.to_formatted_s(:short)
+      %td= event.human_date
       - if event.event_type.nil?
         %td= "Sin Tipo de Evento"
       - else

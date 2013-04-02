@@ -17,7 +17,7 @@ Solo se listan los eventos comerciales públicos
     
   - @events.each do |event|
     %tr
-      %td= event.date.to_formatted_s(:short)
+      %td= event.human_date
       - if event.event_type.nil?
         %td= "Sin Tipo de Evento"
       - else

@@ -4,6 +4,9 @@
     .grid_12
       = f.input :event_type, :as => :select, :collection => EventType.find(:all)
       = f.input :date, :as => :string, :input_html => {:class => 'datepicker-class', :size => 6 }
+      = f.input :duration, :input_html => { :size => 3 }
+      = f.input :start_time
+      = f.input :end_time
       = f.input :place
       = f.input :capacity, :input_html => { :size => 3 }
       = f.input :city

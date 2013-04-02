@@ -11,7 +11,7 @@ Feature: Administración de Eventos
 		And I should see "País"
 		And I should see "Tipo"
 		And I should see "Acciones"
-		And I should see "Nuevo Evento"
+		And I should see "Nuevo"
 	
 	@selenium
 	Scenario: Alta de Evento Válido

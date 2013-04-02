@@ -4,7 +4,7 @@ es:
   date:
     formats:
       default: "%d/%m/%Y"
-      short: "%d de %B"
+      short: "%d %b"
       long: "%d de %B de %Y"
     day_names: [Domingo, Lunes, Martes, Miércoles, Jueves, Viernes, Sábado]
     abbr_day_names: [Dom, Lun, Mar, Mie, Jue, Vie, Sáb]
@@ -79,6 +79,7 @@ es:
           event_date_in_past: "el evento debe tener una fecha futura"
           eb_price_should_be_smaller_than_list_price: "el Precio Early Bird no puede ser mayor al Precio de Lista"
           capacity_should_be_greater_than_0: "el evento no puede tener una capacidad de 0 personas"
+          duration_should_be_greater_than_0: "la duración del evento debe ser al menos de 1 día"
           eb_end_date_should_be_earlier_than_event_date: "la fecha de Early Bird no puede ser mayor a la Fecha del Evento"
           private_event_should_not_have_discounts: "un evento Privado no puede tener descuentos por cantidad de personas"
 
@@ -119,6 +120,9 @@ es:
           roles: "Roles"
       event:
         capacity: "Capacidad"
+        duration: "Duración (días)"
+        start_time: "Hora de inicio"
+        end_time: "Hora de finalización"
         visibility_type: "Tipo"
         list_price: "Precio"
         list_price_plus_tax: "+ IVA"

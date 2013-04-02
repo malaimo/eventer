@@ -53,6 +53,9 @@ FactoryGirl.define do
   factory :event do
     event_type FactoryGirl.build(:event_type)
     date "23/01/2100"
+    duration 2
+    start_time "9:00"
+    end_time "18:00"
     place "Hotel Conrad"
     city "Punta del Este"
     capacity 20

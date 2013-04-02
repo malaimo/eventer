@@ -131,4 +131,72 @@ describe Event do
 
           @event.weeks_from(today).should == 52
       end
+      
+  it "should require a duration" do
+    @event.duration = ""
+
+    @event.valid?.should be false
+  end
+
+  it "should have a duration greater than 0" do
+      @event.duration = 0
+
+      @event.valid?.should be false
+  end  
+  
+  it "should require a start time" do
+    @event.start_time = ""
+
+    @event.valid?.should be false
+  end
+  
+  it "should require a end time" do
+    @event.end_time = ""
+
+    @event.valid?.should be false
+  end
+  
+  context "if event date is 15-Jan-2015" do
+    
+    before (:each) do
+      @event.date = "15/01/2015"
+    end
+    
+    it "should have a human date in spanish that returns '15 Ene' if duration is 1" do
+      @event.duration = 1
+      @event.human_date.should == "15 Ene"
+    end
+    
+    it "should have a human date in spanish that returns '15-16 Ene' if duration is 2" do
+      @event.duration = 2
+      @event.human_date.should == "15-16 Ene" 
+    end
+    
+    it "should have a human date in spanish that returns '15 Ene-14 Feb' if duration is 31" do
+      @event.duration = 31
+      @event.human_date.should ==  "15 Ene-14 Feb"
+    end
+  end
+  
+  context "if event date is 20-Apr-2015" do
+    
+    before (:each) do
+      @event.date = "20/04/2015"
+    end
+    
+    it "should have a human date in spanish that returns '20 Abr' if duration is 1" do
+      @event.duration = 1
+      @event.human_date.should == "20 Abr"
+    end
+    
+    it "should have a human date in spanish that returns '20-22 Abr' if duration is 3" do
+      @event.duration = 3
+      @event.human_date.should == "20-22 Abr" 
+    end
+    
+    it "should have a human date in spanish that returns '20 Abr-04 May' if duration is 15" do
+      @event.duration = 15
+      @event.human_date.should ==  "20 Abr-4 May"
+    end
+  end
 end
