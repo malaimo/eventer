@@ -147,13 +147,16 @@ es:
         program: "Programa"
         goal: "Objetivo"
         faq: "Preguntas Frecuentes"
+        materials: "Materiales"
     hints:
       event:
         eb_end_date: "Fecha de finalización del precio Early Bird" 
         cancelled: "Si cancelas el evento no podrás acceder más a él"
         registration_link: "Dejar en blanco para que Keventer gestione los registros"
       participant: 
-        phone: "Una persona de Kleer se contactará a este teléfono para continuar con tu inscripción."      
+        phone: "Una persona de Kleer se contactará a este teléfono para continuar con tu inscripción."    
+      event_type:
+        materials: "Materiales requeridos para el dictado de este curso"
     placeholders:
       post:
         name: "Title your post"

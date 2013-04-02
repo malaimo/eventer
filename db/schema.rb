@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130402171235) do
+ActiveRecord::Schema.define(:version => 20130402171731) do
 
   create_table "countries", :force => true do |t|
     t.string   "name"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20130402171235) do
     t.text     "goal"
     t.integer  "duration"
     t.text     "faq"
+    t.text     "materials"
   end
 
   create_table "event_types_trainers", :id => false, :force => true do |t|
