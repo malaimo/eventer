@@ -1,10 +1,25 @@
 class AddDurationAndTimeToEvent < ActiveRecord::Migration
+  class Event < ActiveRecord::Base
+      belongs_to :country
+      scope :visible, where(:cancelled => false).where("date >= ?", DateTime.now)
+  end
+  
   def up
     change_table :events do |t|
       t.integer :duration
       t.time :start_time
       t.time :end_time
     end
+    
+    Event.reset_column_information
+    Event.visible.all.each do |e|
+      if e.country.iso_code == "CO"
+        e.update_attributes!( {:start_time => "8:00", :end_time => "17:00" } )
+      else
+        e.update_attributes!( {:start_time => "9:00", :end_time => "18:00" } )
+      end
+    end
+    
 	end
 	
 	def down
