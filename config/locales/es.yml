@@ -146,6 +146,7 @@ es:
         recipients: "Destinado A"
         program: "Programa"
         goal: "Objetivo"
+        faq: "Preguntas Frecuentes"
     hints:
       event:
         eb_end_date: "Fecha de finalización del precio Early Bird" 
