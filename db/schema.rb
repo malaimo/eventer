@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130402125740) do
+ActiveRecord::Schema.define(:version => 20130402155605) do
 
   create_table "countries", :force => true do |t|
     t.string   "name"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20130402125740) do
     t.integer  "duration"
     t.time     "start_time"
     t.time     "end_time"
+    t.boolean  "sepyme_enabled"
   end
 
   add_index "events", ["country_id"], :name => "index_events_on_country_id"

@@ -17,7 +17,7 @@ class Event < ActiveRecord::Base
   attr_accessible :event_type_id, :trainer_id, :country_id, :date, :place, :capacity, :city, :visibility_type, :list_price,
                   :list_price_plus_tax, :list_price_2_pax_discount, :list_price_3plus_pax_discount,
                   :eb_price, :eb_end_date, :draft, :cancelled, :registration_link, :is_sold_out, :participants, :duration, 
-                  :start_time, :end_time
+                  :start_time, :end_time, :sepyme_enabled
 
   validates :date, :place, :capacity, :city, :visibility_type, :list_price,
             :country, :trainer, :event_type, :duration, :start_time, :end_time, :presence => true
@@ -73,10 +73,7 @@ class Event < ActiveRecord::Base
   end
   
   def human_date
-    duration = get_event_duration
-       
     start_date = humanize_start_date
-    
     end_date = humanize_end_date
     
     if event_is_within_the_same_day(start_date, end_date)
@@ -105,6 +102,7 @@ class Event < ActiveRecord::Base
   end
   
   def humanize_end_date
+    duration = get_event_duration
     humanize_date self.date+(duration-1)
   end
   

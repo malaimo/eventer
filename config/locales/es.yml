@@ -136,6 +136,8 @@ es:
         draft: "Borrador"
         cancelled: "Cancelado"
         is_sold_out: "Cupo Completo"
+        sepyme_enabled: "Habilitado para Sepyme"
+        registration_link: "Link de Registro"
         edit:
           title: "Edit title"
       event_type:
@@ -146,9 +148,9 @@ es:
         goal: "Objetivo"
     hints:
       event:
-        capacity: "Cantidad máxima de personas"
         eb_end_date: "Fecha de finalización del precio Early Bird" 
         cancelled: "Si cancelas el evento no podrás acceder más a él"
+        registration_link: "Dejar en blanco para que Keventer gestione los registros"
       participant: 
         phone: "Una persona de Kleer se contactará a este teléfono para continuar con tu inscripción."      
     placeholders:

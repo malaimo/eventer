@@ -3,24 +3,39 @@
   - f.inputs :event_details do
     .grid_12
       = f.input :event_type, :as => :select, :collection => EventType.find(:all)
+    .grid_3
       = f.input :date, :as => :string, :input_html => {:class => 'datepicker-class', :size => 6 }
+    .grid_3
       = f.input :duration, :input_html => { :size => 3 }
+    .grid_3
+      = f.input :capacity, :input_html => { :size => 3 }
+    .grid_12
       = f.input :start_time
       = f.input :end_time
       = f.input :place
-      = f.input :capacity, :input_html => { :size => 3 }
-      = f.input :city
+    .grid_3
       = f.input :country, :as => :select, :collection => Country.find(:all), :input_html => { :style => "width: 200px" }
+    .grid_8
+      = f.input :city
+    .grid_12
       #trainer_select
         = render :partial => 'trainers_select'
       = f.input :visibility_type, :as => :radio, :collection => { t('event.type.public') => "pu", t('event.type.private') => "pr", t('event.type.community') => "co" }
+    .grid_3
       = f.input :list_price, :as => :number, :input_html => { :size => 2 }
       = f.input :list_price_plus_tax
+    .grid_3
       = f.input :list_price_2_pax_discount, :as => :string, :input_html => { :size => 2 }
+    .grid_6
       = f.input :list_price_3plus_pax_discount, :as => :string, :input_html => { :size => 2 }
+    .grid_12
+    .grid_3
       = f.input :eb_price, :as => :number, :input_html => { :size => 2 }
+    .grid_6
       = f.input :eb_end_date, :as => :string, :input_html => {:class => 'datepicker-class', :size => 6 }
+    .grid_12
       = f.input :registration_link
+      = f.input :sepyme_enabled 
       = f.input :is_sold_out
       = f.input :draft
       = f.input :cancelled
