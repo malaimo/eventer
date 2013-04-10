@@ -3,6 +3,7 @@ require 'spec_helper'
 describe EventType do
   
   it { should have_and_belong_to_many(:trainers) }
+  it { should have_and_belong_to_many(:categories) }
   
   before(:each) do
     @event_type = FactoryGirl.build(:event_type)
@@ -42,7 +43,7 @@ describe EventType do
     @event_type.valid?.should be false
   end
   
-  it "should have a shot_name version returning 30 characters if name is longuer" do
+  it "should have a shot_name version returning 30 characters if name is longer" do
     @event_type.name = "qoweiuq owei owqieu qoiweuqo iweu qwoeu qouwie qowieuq woiequ woei uqowie"
     @event_type.short_name.should == "qoweiuq owei owqieu qoiweuqo i..."
   end 

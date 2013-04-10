@@ -40,6 +40,12 @@ FactoryGirl.define do
     name "Juan Alberto"
   end
  
+  factory :category do
+    name "Negocios"
+    description "Management, Negocios y blah blah blah"
+    codename "BIZ"
+  end
+ 
   factory :event_type do
      name "Tipo de Evento de Prueba"
      duration 8

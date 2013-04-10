@@ -1,6 +1,7 @@
 class EventType < ActiveRecord::Base
   
   has_and_belongs_to_many :trainers
+  has_and_belongs_to_many :categories
   
   attr_accessible :name, :duration, :goal, :description, :recipients, :program, :trainer_ids, :trainers, :faq, :materials
                   
