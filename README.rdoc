@@ -1,11 +1,10 @@
-== Bienvenido a Keventer ==
+KEventer es una aplicación de administración de cursos, calendarios e inscripciones que utilizamos en Kleer como back-end de nuestro sitio web público.
 
-TODO: explicar brevemente qué hace la aplicación
 
-Esta aplicación estaba basada en Rails. Más allá de los componentes ruby (que los puedes instalar con bundler) vas a necesitar el driver de Selenium de chrome.
-Una vez clocado el repositorio y instalados los componentes no-ruby, ejecuta los siguientes pasos para poner a andar tu ambiente de desarrollo:
+Esta aplicación está basada en Rails. Más allá de los componentes Ruby (que los podés instalar con Bundler) vas a necesitar el driver de Selenium de Chrome.
+Una vez colocado el repositorio e instalados los componentes no-ruby, ejecutá los siguientes pasos para poner a andar tu ambiente de desarrollo:
 
 - Instala las dependencias: bundle install
 - Crea la base de dates: bundle exec rake db:migrate
 - Ejecutar las pruebas: bundle exec rake
-- Inicia a aplicación: rail s
+- Inicia la aplicación: rail s
