@@ -1,6 +1,7 @@
 class Category < ActiveRecord::Base
-  attr_accessible :codename, :description, :name
-  validates :name, :description, :codename, :presence => true
-  
   has_and_belongs_to_many :event_types
+  
+  attr_accessible :codename, :description, :name, :events
+  
+  validates :name, :description, :codename, :presence => true
 end

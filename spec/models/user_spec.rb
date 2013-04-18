@@ -25,6 +25,10 @@ describe User do
         @admin.should be_able_to(:manage, Trainer.new)
      end
   
+     it "should be able to manage trainers" do
+        @admin.should be_able_to(:manage, Category.new)
+     end
+     
   end
   
   context "If it's a comercial person" do
@@ -46,8 +50,16 @@ describe User do
       @comercial.should be_able_to(:manage, Event.new)
     end
     
+    it "shouldn't be able to manage users" do
+      @comercial.should_not be_able_to(:manage, EventType.new)      
+    end
+    
+    it "shouldn't be able to manage users" do
+      @comercial.should_not be_able_to(:manage, Category.new)      
+    end
+    
     it "should be able to manage trainers" do
-      @comercial.should be_able_to(:manage, Trainer.new)
+      @comercial.should_not be_able_to(:manage, Trainer.new)
     end
   
   end

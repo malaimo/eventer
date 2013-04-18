@@ -1,23 +1,20 @@
-%h1 Listing categories
+%h1 Categorías
+
+%p.record-actions
+  = link_to t('formtastic.actions.new'), new_category_path
 
 %table
   %tr
-    %th Name
-    %th Description
-    %th Codename
-    %th
+    %th Nombre
+    %th Código
+    %th Descripción
     %th
     %th
 
   - @categories.each do |category|
     %tr
       %td= category.name
-      %td= category.description
       %td= category.codename
-      %td= link_to 'Show', category
-      %td= link_to 'Edit', edit_category_path(category)
-      %td= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Category', new_category_path
+      %td= category.description
+      %td= link_to 'Modificar', edit_category_path(category)
+      %td= link_to 'Borrar', category, method: :delete, data: { confirm: 'Seguro?' }

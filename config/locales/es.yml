@@ -148,6 +148,10 @@ es:
         goal: "Objetivo"
         faq: "Preguntas Frecuentes"
         materials: "Materiales"
+      category:
+        name: "nombre"
+        description: "Descripción"
+        codename: "Código"
     hints:
       event:
         eb_end_date: "Fecha de finalización del precio Early Bird" 
@@ -196,6 +200,7 @@ es:
       roles: "Roles"
       events: "Eventos"
       event_types: "Tipos de Evento"
+      categories: "Categorías"
       trainers: "Entrenadores"
       exit: "Salir"
       

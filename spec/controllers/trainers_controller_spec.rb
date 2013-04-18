@@ -39,7 +39,7 @@ describe TrainersController do
   
   before(:each) do
     @request.env["devise.mapping"] = Devise.mappings[:user]
-    @user = FactoryGirl.create(:comercial)
+    @user = FactoryGirl.create(:administrator)
     sign_in @user
   end
 

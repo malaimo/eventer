@@ -1,18 +1,27 @@
 = semantic_form_for @event_type do |f|
   = f.inputs do
-    = f.input :name
-    = f.input :duration
-    Entrenadores
-    - for trainer in Trainer.find(:all)
-      %div
-        = check_box_tag "event_type[trainer_ids][]", trainer.id, @event_type.trainers.include?(trainer)
-        = trainer.name
-    = f.input :goal
-    = f.input :description
-    = f.input :recipients
-    = f.input :program
-    = f.input :faq
-    = f.input :materials
+    .grid_12
+      = f.input :name
+      = f.input :duration
+    .grid_6
+      Entrenadores
+      - for trainer in Trainer.find(:all)
+        %div
+          = check_box_tag "event_type[trainer_ids][]", trainer.id, @event_type.trainers.include?(trainer)
+          = trainer.name
+    .grid_6  
+      Categorías
+      - for category in Category.find(:all)
+        %div
+          = check_box_tag "event_type[category_ids][]", category.id, @event_type.categories.include?(category)
+          = category.name
+    .grid_12
+      = f.input :goal
+      = f.input :description
+      = f.input :recipients
+      = f.input :program
+      = f.input :faq
+      = f.input :materials
   
   = f.actions do
     = f.action(:submit)

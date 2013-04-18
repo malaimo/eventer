@@ -6,6 +6,8 @@
     = link_to_menu_item(:li, t('menu.events'), events_path)
   - if can? :manage, EventType.new
     = link_to_menu_item(:li, t('menu.event_types'), event_types_path)
+  - if can? :manage, Category.new
+    = link_to_menu_item(:li, t('menu.categories'), categories_path)
   - if can? :manage, Trainer.new
     = link_to_menu_item(:li, t('menu.trainers'), trainers_path)
   = link_to_menu_item(:li, t('menu.exit'), destroy_user_session_path, :method => :delete)
