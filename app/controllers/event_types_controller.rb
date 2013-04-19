@@ -10,7 +10,7 @@ class EventTypesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @event_types }
-      format.xml { render xml: @event_types }
+      format.xml { render :xml => @event_types.to_xml( { :include => :categories } ) }
     end
   end
 
