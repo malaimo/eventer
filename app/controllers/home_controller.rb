@@ -43,4 +43,13 @@ class HomeController < ApplicationController
     end
   end
   
+  def categories
+    @categories = Category.all(:order => ['name'])
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @categories.to_xml }
+      format.json { render json: @categories }  
+    end
+  end
+  
 end
