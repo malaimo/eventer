@@ -149,8 +149,9 @@ es:
         faq: "Preguntas Frecuentes"
         materials: "Materiales"
       category:
-        name: "nombre"
+        name: "Nombre"
         description: "Descripción"
+        tagline: "Subtítulo"
         codename: "Código"
     hints:
       event:
