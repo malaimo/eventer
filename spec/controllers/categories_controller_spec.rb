@@ -27,6 +27,7 @@ describe CategoriesController do
     {
       :name => "Negocios",
       :description => "Management y Negocios",
+      :tagline => "pepep ep pe pe pe pe",
       :codename => "BIZ"
       }
   end

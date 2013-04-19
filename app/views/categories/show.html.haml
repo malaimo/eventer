@@ -4,11 +4,14 @@
   %b Name:
   = @category.name
 %p
-  %b Description:
-  = @category.description
-%p
   %b Codename:
   = @category.codename
+%p
+  %b Tagline:
+  = @category.tagline
+%p
+  %b Description:
+  = @category.description
 
 = link_to 'Edit', edit_category_path(@category)
 \|

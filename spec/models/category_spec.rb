@@ -23,6 +23,12 @@ describe Category do
     @category.valid?.should be false
   end
   
+  it "should require its tagline" do
+    @category.tagline = ""
+    
+    @category.valid?.should be false
+  end
+  
   it "should require its codename" do
     @category.codename = ""
     
