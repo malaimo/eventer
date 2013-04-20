@@ -17,11 +17,11 @@ ActiveRecord::Schema.define(:version => 20130420222553) do
     t.string   "name"
     t.text     "description"
     t.string   "codename"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.string   "tagline"
     t.boolean  "visible"
-    t.integer  "order"
+    t.integer  "order",       :default => 0
   end
 
   create_table "categories_event_types", :id => false, :force => true do |t|

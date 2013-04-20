@@ -1,7 +1,7 @@
 class AddVisibilityAndOrderToCategory < ActiveRecord::Migration
   def up
 		add_column :categories, :visible, :boolean
-		add_column :categories, :order, :integer
+		add_column :categories, :order, :integer, :default => 0
 	end
 	
 	def down
