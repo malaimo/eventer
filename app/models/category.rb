@@ -5,5 +5,5 @@ class Category < ActiveRecord::Base
   
   validates :name, :description, :codename, :tagline, :presence => true
   
-  scope :visible_ones, where(:visible => true).order("'order' ASC")
+  scope :visible_ones, where(:visible => true)
 end
