@@ -153,6 +153,8 @@ es:
         description: "Descripción"
         tagline: "Subtítulo"
         codename: "Código"
+        visible: "Visible"
+        order: "Orden"
     hints:
       event:
         eb_end_date: "Fecha de finalización del precio Early Bird" 
