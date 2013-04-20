@@ -29,6 +29,18 @@ describe Category do
     @category.valid?.should be false
   end
   
+  it "should have a visibility flag" do
+    @category.visible = false
+    
+    @category.visible.should be false
+  end
+  
+  it "should have an order index" do
+    @category.order = 1
+    
+    @category.order.should == 1
+  end
+  
   it "should require its codename" do
     @category.codename = ""
     
@@ -54,6 +66,23 @@ describe Category do
     tdd.save!
     
     biz.event_types.count.should == 2
+  end
+  
+  it "should have a visible scope" do
+    cat1 = FactoryGirl.build(:category)
+    cat1.visible = true
+    cat1.save!
+    
+    cat2 = FactoryGirl.build(:category)
+    cat2.visible = true
+    cat2.save!
+    
+    cat3 = FactoryGirl.build(:category)
+    cat3.visible = false
+    cat3.save!
+    
+    Category.all.count.should == 3
+    Category.visible_ones.count.should == 2
   end
   
 end

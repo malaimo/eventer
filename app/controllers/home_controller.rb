@@ -44,7 +44,7 @@ class HomeController < ApplicationController
   end
   
   def categories
-    @categories = Category.all(:order => ['name'])
+    @categories = Category.visible_ones
     respond_to do |format|
       format.html
       format.xml { render :xml => @categories.to_xml }

@@ -1,9 +1,15 @@
 = semantic_form_for @category do |f|
   = f.inputs do
-    = f.input :name
-    = f.input :codename
-    = f.input :tagline
-    = f.input :description
+    .grid_12
+      = f.input :name
+      = f.input :codename
+      = f.input :tagline
+    .grid_3
+      = f.input :visible
+    .grid_1
+      = f.input :order
+    .grid_12
+      = f.input :description
   
   = f.actions do
     = f.action(:submit)
