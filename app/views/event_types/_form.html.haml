@@ -3,18 +3,20 @@
     .grid_12
       = f.input :name
       = f.input :duration
-    .grid_6
+    .grid_3
       Entrenadores
       - for trainer in Trainer.find(:all)
         %div
           = check_box_tag "event_type[trainer_ids][]", trainer.id, @event_type.trainers.include?(trainer)
           = trainer.name
-    .grid_6  
+    .grid_3 
       Categorías
       - for category in Category.find(:all)
         %div
           = check_box_tag "event_type[category_ids][]", category.id, @event_type.categories.include?(category)
           = category.name
+    .grid_3
+      = f.input :include_in_catalog
     .grid_12
       = f.input :goal
       = f.input :description

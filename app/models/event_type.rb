@@ -5,7 +5,7 @@ class EventType < ActiveRecord::Base
   has_many :events
   
   attr_accessible :name, :duration, :goal, :description, :recipients, :program, :trainer_ids, :trainers, 
-                  :faq, :materials, :category_ids, :categories, :events
+                  :faq, :materials, :category_ids, :categories, :events, :include_in_catalog
                   
   validates :name, :duration, :goal, :description, :recipients, :program, :trainers, :presence => true
   

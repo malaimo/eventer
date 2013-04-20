@@ -148,6 +148,7 @@ es:
         goal: "Objetivo"
         faq: "Preguntas Frecuentes"
         materials: "Materiales"
+        include_in_catalog: "Incluido en Catálogo (Currícula)"
       category:
         name: "Nombre"
         description: "Descripción"
