@@ -2,6 +2,8 @@
 %strong Dashboard General
 |
 = link_to 'Pricing', '/dashboard/pricing'
+|
+= link_to 'Eventos Pasados', '/dashboard/past_events'
 
 %table
   %tr
@@ -11,7 +13,7 @@
     %th Pipeline Participantes
     %th Completo al
   
-  - weeks_from_now_p = -1  
+  - weeks_from_now_p = -1
   - @events.each do |event|
     - weeks_from_now = event.date.cweek-Date.today.cweek
     - if weeks_from_now <= 1 

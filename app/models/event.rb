@@ -6,12 +6,14 @@ class Event < ActiveRecord::Base
   has_many :categories, :through => :event_type
 
   scope :visible, where(:cancelled => false).where("date >= ?", DateTime.now)
+  scope :past_visible, where(:cancelled => false).where("date <= ?", DateTime.now)
   scope :public_events,  where("visibility_type = 'pu' or visibility_type = 'co'")
   scope :public_commercial_events,  where(:visibility_type => "pu")
   scope :public_community_events,  where(:visibility_type => "co")
   scope :public_commercial_visible, self.visible.public_commercial_events
   scope :public_community_visible, self.visible.public_community_events
   scope :public_and_visible, self.visible.public_events
+  scope :public_and_past_visible, self.past_visible.public_events
 
   after_initialize :initialize_defaults
 

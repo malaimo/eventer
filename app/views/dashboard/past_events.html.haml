@@ -1,0 +1,30 @@
+%h1 Dashboard
+= link_to 'Dashboard General', '/dashboard'
+|
+= link_to 'Pricing', '/dashboard/pricing'
+|
+%strong Eventos Pasados
+
+%table
+  %tr
+    %th Fecha
+    %th Nombre
+    %th Ciudad
+    %th Participantes
+  
+  - printed_year = -1
+  - @events.each do |event|
+    - if printed_year != event.date.year
+      %tr{:style => 'background-color: #555555; color: #ffffff'}
+        %td{:colspan => 7}= event.date.year.to_s
+      - printed_year = event.date.year
+    %tr
+      %td= event.human_date
+      - if event.event_type.nil?
+        %td= "Sin Tipo de Evento"
+      - else
+        %td= event.event_type.short_name
+      %td= event.city
+      %td
+        - if event.registration_link == ""
+          = link_to event.participants.confirmed.count.to_s + " confirmados", event_participants_path(event)
