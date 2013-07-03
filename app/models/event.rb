@@ -29,7 +29,7 @@ class Event < ActiveRecord::Base
   validates :duration, :numericality => { :greater_than => 0, :message => :duration_should_be_greater_than_0 }
 
   validates_each :date do |record, attr, value|
-    record.errors.add(attr, :event_date_in_past) unless !value.nil? && value > Time.zone.today
+    record.errors.add(attr, :event_date_in_past) unless !value.nil? && value >= Time.zone.today
   end
 
   validates_each :eb_end_date do |record, attr, value|
