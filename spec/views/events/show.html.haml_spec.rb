@@ -17,7 +17,8 @@ describe "events/show" do
       :list_price_3plus_pax_discount => 25,
       :eb_price => "19.99",
       :draft => true,
-      :cancelled => false
+      :cancelled => false,
+      :is_webinar => false
     ))
   end
 

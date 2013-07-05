@@ -43,11 +43,11 @@ Given /^Im a logged in user$/ do
 end
 
 
-Then /^I should see "([^"]*)"$/ do |text|
+Then /^I should see "([^\"]*)"$/ do |text|
   page.should have_content(text)
 end
 
-When /^I create a valid event of type "([^"]*)"$/ do |event_name|
+When /^I create a valid event of type "([^\"]*)"$/ do |event_name|
   visit "/events/new"
   create_valid_event event_name
   submit_event
@@ -60,7 +60,7 @@ When /^I create an invalid event with "([^"]*)" as "([^"]*)"$/ do |value, attrib
   submit_event
 end
 
-When /^I create a public event on "([^"]*)"$/ do |value|
+When /^I create a public event on "([^\"]*)"$/ do |value|
   visit "/events/new"
   create_valid_event_inputs 'Tipo de Evento de Prueba', value
   fill_in 'event_date', :with => value
@@ -79,6 +79,7 @@ end
 When /^I create an empty event$/ do
   visit "/events/new"
   submit_event
+  sleep 10
 end
 
 When /^I visit the event listing page$/ do
@@ -126,21 +127,32 @@ Then /^I should see public prices$/ do
   page.find_field('event_eb_price').visible?.should be true
 end
 
-Then /^EB date should be "([^"]*)"$/ do |value|
+When /^I choose to create a Webinar event$/ do
+  visit "/events/new"
+  create_valid_event_inputs 'Tipo de Evento de Prueba'
+  check 'event_is_webinar'
+end
+
+Then /^I should see the webinar setup$/ do
+  page.find_field('event_city').value.should == "Webinar"
+end
+
+Then /^EB date should be "([^\"]*)"$/ do |value|
   page.find_field('event_eb_end_date').value.should == value
 end
 
-When /^I modify the event "([^"]*)"$/ do |link_description|
+When /^I modify the event "([^\"]*)"$/ do |link_description|
   click_link link_description
   click_link "Modificar"
   fill_in 'event_capacity', :with => 200
   click_button "Guardar Cambios"
-  sleep 5
+  sleep 10
 end
 
-When /^I cancel the event "([^"]*)"$/ do |link_description|
+When /^I cancel the event "([^\"]*)"$/ do |link_description|
   click_link link_description
   click_link "Modificar"
+  sleep 10
   check 'event_cancelled'
   click_button "Guardar Cambios"
 end
@@ -180,6 +192,7 @@ end
 
 When /^I visit the dashboard$/ do
   visit '/dashboard'
+  sleep 5
 end
 
 def create_new_participant

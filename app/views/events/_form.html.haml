@@ -10,6 +10,8 @@
     .grid_3
       = f.input :capacity, :input_html => { :size => 3 }
     .grid_12
+      = f.input :is_webinar
+    .grid_12
       = f.input :start_time
       = f.input :end_time
       = f.input :place
@@ -52,6 +54,8 @@
     $("#event_event_type_id").change( function() { dynamicallyFillTrainersForEventType( $(this).val() ); });
 
     $("#event_date").change( function() { eventDateChanged( $(this).val() ); });
+
+    $("#event_is_webinar").change( function() { eventWebinarToggle(); });
 
     if ( $("#event_visibility_type_pr").is(":checked") ) {
       $("#event_visibility_type_pr").trigger('change');
@@ -112,6 +116,14 @@
     var eb_new_date = eb_date_day + "-" + eb_date_month + "-" + eb_date_year;
     $("#event_eb_end_date").val( eb_new_date );
 
+  }
+
+  function eventWebinarToggle() {
+     if ( $("#event_is_webinar").is(":checked") ) {
+         $("#event_city").val( "Webinar" );
+     } else {
+         $("#event_city").val( "" );
+     }
   }
 
   function dynamicallyFillTrainersForEventType( eventTypeID ) {

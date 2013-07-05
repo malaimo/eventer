@@ -156,6 +156,11 @@ describe Event do
     @event.valid?.should be false
   end
   
+  it "should have a webinar flag" do
+    @event.is_webinar = true
+    @event.is_webinar?.should be true
+  end
+  
   context "if event date is 15-Jan-2015" do
     
     before (:each) do

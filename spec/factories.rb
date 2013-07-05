@@ -68,6 +68,7 @@ FactoryGirl.define do
     capacity 20
     visibility_type 'pu'
     list_price 500.00
+    is_webinar false
     country FactoryGirl.build(:country)
     trainer FactoryGirl.build(:trainer)
   end

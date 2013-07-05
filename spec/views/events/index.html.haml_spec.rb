@@ -20,7 +20,8 @@ describe "events/index" do
         :list_price_3plus_pax_discount => 25,
         :eb_price => "19.99",
         :draft => true,
-        :cancelled => false
+        :cancelled => false,
+        :is_webinar => false
       ),
       stub_model(Event,
         :event_type => FactoryGirl.build(:event_type),
@@ -37,7 +38,8 @@ describe "events/index" do
         :list_price_3plus_pax_discount => 25,
         :eb_price => "19.99",
         :draft => false,
-        :cancelled => false
+        :cancelled => false,
+        :is_webinar => false
       )
     ])
   end
@@ -46,7 +48,7 @@ describe "events/index" do
     render
     assert_select "tr>th", :text => "Fecha".to_s, :count => 1
     assert_select "tr>th", :text => "Tipo de Evento".to_s, :count => 1
-    assert_select "tr>th", :text => "Ciudad".to_s, :count => 1
+    assert_select "tr>th", :text => "Locación".to_s, :count => 1
     assert_select "tr>th", :text => "País".to_s, :count => 1
     assert_select "tr>th", :text => "Tipo".to_s, :count => 1
     assert_select "tr>th", :text => "Acciones".to_s, :count => 1

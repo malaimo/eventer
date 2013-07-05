@@ -7,7 +7,7 @@
   %tr
     %th Fecha
     %th Tipo de Evento
-    %th Ciudad
+    %th Locación
     %th País
     %th Tipo
     %th Estado
@@ -20,7 +20,12 @@
         %td= link_to "Sin Tipo de Evento", event
       - else
         %td= link_to event.event_type.short_name, event
-      %td= event.city
+      %td
+        -if event.is_webinar?
+          %img{:src => "/assets/online.png", :style => "vertical-align:middle"}
+          Webinar/Online
+        -else
+          = event.city	
       %td= event.country.name unless event.country.nil?
       %td 
         -if event.visibility_type == "pu"

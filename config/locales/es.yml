@@ -136,6 +136,7 @@ es:
         draft: "Borrador"
         cancelled: "Cancelado"
         is_sold_out: "Cupo Completo"
+        is_webinar: "Webinar (Online)"
         sepyme_enabled: "Habilitado para Sepyme"
         registration_link: "Link de Registro"
         edit:

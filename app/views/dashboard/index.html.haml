@@ -38,7 +38,12 @@
         %td= "Sin Tipo de Evento"
       - else
         %td= event.event_type.short_name
-      %td= event.city
+      %td
+        -if event.is_webinar?
+          %img{:src => "/assets/online.png", :style => "vertical-align:middle"}
+          Webinar/Online
+        -else
+          = event.city
       %td
         - if event.registration_link == ""
           - if event.participants.new_ones.count > 0

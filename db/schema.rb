@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130420222553) do
+ActiveRecord::Schema.define(:version => 20130704215330) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -71,8 +71,8 @@ ActiveRecord::Schema.define(:version => 20130420222553) do
     t.date     "eb_end_date"
     t.boolean  "draft"
     t.boolean  "cancelled"
-    t.datetime "created_at",                                                                :null => false
-    t.datetime "updated_at",                                                                :null => false
+    t.datetime "created_at",                                                                                   :null => false
+    t.datetime "updated_at",                                                                                   :null => false
     t.integer  "event_type_id"
     t.string   "registration_link"
     t.boolean  "is_sold_out"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(:version => 20130420222553) do
     t.time     "start_time"
     t.time     "end_time"
     t.boolean  "sepyme_enabled"
+    t.boolean  "is_webinar",                                                                :default => false
   end
 
   add_index "events", ["country_id"], :name => "index_events_on_country_id"

@@ -7,7 +7,7 @@ Feature: Administración de Eventos
 		Then I should see "Eventos Confirmados"
 		And I should see "Fecha"
 		And I should see "Tipo de Evento"
-		And I should see "Ciudad"
+		And I should see "Locación"
 		And I should see "País"
 		And I should see "Tipo"
 		And I should see "Acciones"
@@ -52,29 +52,35 @@ Feature: Administración de Eventos
 		Then I should see "Por favor verifica los campos destacados"
 		And  I should see "no puede estar en blanco"
 		
-		@selenium	
-		Scenario: Se deben ocutar los descuentos y precios EB y SEB si es un evento privado
-			Given Im a logged in user
-			When I choose to create a Private event
-			Then I should not see public prices
+	@selenium	
+	Scenario: Se deben ocutar los descuentos y precios EB y SEB si es un evento privado
+		Given Im a logged in user
+		When I choose to create a Private event
+		Then I should not see public prices
 
-		@selenium
-		Scenario: Se deben mostrar los descuentos y precios EB y SEB si es un evento público
-		    Given Im a logged in user
-			When I choose to create a Public event
-			Then I should see public prices
-			
-		@selenium	
-		Scenario: Se debe ocultar el precio, los descuentos y precios EB y SEB si es un evento comunitario
-			Given Im a logged in user
-			When I choose to create a Community event
-			Then I should not see any price
+	@selenium
+	Scenario: Se deben mostrar los descuentos y precios EB y SEB si es un evento público
+	    Given Im a logged in user
+		When I choose to create a Public event
+		Then I should see public prices
+	
+	@selenium
+	Scenario: Se debe mostrar timezone y ciudad=Webinar si es el evento es un webinar
+	    Given Im a logged in user
+		When I choose to create a Webinar event
+		Then I should see the webinar setup
+		
+	@selenium	
+	Scenario: Se debe ocultar el precio, los descuentos y precios EB y SEB si es un evento comunitario
+		Given Im a logged in user
+		When I choose to create a Community event
+		Then I should not see any price
 
-		@selenium	
-		Scenario: SEB=30 días antes de la fecha del evento y EB=10 días antes de la fecha del evento
-		    Given Im a logged in user
-			When I create a public event on "15-01-2015"
-			Then EB date should be "05-01-2015"
+	@selenium	
+	Scenario: SEB=30 días antes de la fecha del evento y EB=10 días antes de la fecha del evento
+	    Given Im a logged in user
+		When I create a public event on "15-01-2015"
+		Then EB date should be "05-01-2015"
 	
 	@selenium	
 	Scenario: Modificación de Evento Válido
