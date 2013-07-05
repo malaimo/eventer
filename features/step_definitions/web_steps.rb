@@ -135,6 +135,7 @@ end
 
 Then /^I should see the webinar setup$/ do
   page.find_field('event_city').value.should == "Webinar"
+  page.find_field('event_country_id').value.should == "245" # "-- OnLine --"
 end
 
 Then /^EB date should be "([^\"]*)"$/ do |value|
@@ -144,6 +145,7 @@ end
 When /^I modify the event "([^\"]*)"$/ do |link_description|
   click_link link_description
   click_link "Modificar"
+  sleep 10
   fill_in 'event_capacity', :with => 200
   click_button "Guardar Cambios"
   sleep 10
@@ -155,6 +157,7 @@ When /^I cancel the event "([^\"]*)"$/ do |link_description|
   sleep 10
   check 'event_cancelled'
   click_button "Guardar Cambios"
+  sleep 10
 end
 
 Then /^I should not see "([^\"]*)"$/ do |text|

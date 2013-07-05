@@ -7,10 +7,12 @@
       = f.input :date, :as => :string, :input_html => {:class => 'datepicker-class', :size => 6 }
     .grid_3
       = f.input :duration, :input_html => { :size => 3 }
-    .grid_3
+    .grid_6
       = f.input :capacity, :input_html => { :size => 3 }
-    .grid_12
+    .grid_3
       = f.input :is_webinar
+    .grid_6
+      = f.input :time_zone_name, :as => :select, :collection => @timezones, :input_html => { :style => "width: 200px" }, :member_label => :to_s, :member_value => :name
     .grid_12
       = f.input :start_time
       = f.input :end_time
@@ -45,6 +47,11 @@
       = f.actions
 
 :javascript
+
+  $event_country_id_before_webinar = "";
+  $event_city_before_webinar = "";
+  $event_place_before_webinar = "";
+
   bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
 
   $(document).ready(function() {
@@ -56,6 +63,9 @@
     $("#event_date").change( function() { eventDateChanged( $(this).val() ); });
 
     $("#event_is_webinar").change( function() { eventWebinarToggle(); });
+    $("#event_time_zone_name").change( function() { eventTimeZoneToggle(); });
+    $("#event_time_zone_name_input").hide();
+    eventWebinarCheck();
 
     if ( $("#event_visibility_type_pr").is(":checked") ) {
       $("#event_visibility_type_pr").trigger('change');
@@ -120,10 +130,45 @@
 
   function eventWebinarToggle() {
      if ( $("#event_is_webinar").is(":checked") ) {
-         $("#event_city").val( "Webinar" );
+         eventWebinarConfigure();
      } else {
-         $("#event_city").val( "" );
+         $("#event_city").val( $event_city_before_webinar );
+         $("#event_city").removeAttr('readonly');
+
+         $("#event_country_id").val( $event_country_id_before_webinar );
+
+         $("#event_place").val( $event_place_before_webinar );
+         $("#event_place").removeAttr('readonly');
+
+         $("#event_time_zone_name").val( "" );
+         $("#event_time_zone_name_input").hide();
      }
+  }
+
+  function eventWebinarCheck() {
+     if ( $("#event_is_webinar").is(":checked") ) {
+         eventWebinarConfigure();
+     }
+  }
+
+  function eventWebinarConfigure() {
+     if ( $("#event_is_webinar").is(":checked") ) {
+         $event_city_before_webinar = $("#event_city").val();
+         $("#event_city").val( "Webinar" );
+         $("#event_city").attr('readonly','readonly');
+
+         $event_country_id_before_webinar = $("#event_country_id").val();
+         $("#event_country_id").val( 245 );
+         $("#event_time_zone_name_input").show();
+
+         $event_place_before_webinar = $("#event_place").val();
+         $("#event_place").val( "" );
+         $("#event_place").attr('readonly','readonly');
+     }
+  }
+
+  function eventTimeZoneToggle() {
+    $("#event_place").val( $("#event_time_zone_name option:selected").text() );
   }
 
   function dynamicallyFillTrainersForEventType( eventTypeID ) {

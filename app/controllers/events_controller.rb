@@ -1,3 +1,5 @@
+include ActiveSupport
+
 class EventsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
@@ -30,6 +32,7 @@ class EventsController < ApplicationController
     @event = Event.new
     @countries = Country.all
     @trainers = Trainer.all
+    @timezones = TimeZone.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,12 +43,14 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
+    @timezones = TimeZone.all
   end
 
   # POST /events
   # POST /events.json
   def create
     @event = Event.new(params[:event])
+    @timezones = TimeZone.all
 
     respond_to do |format|
       if @event.save
@@ -63,6 +68,7 @@ class EventsController < ApplicationController
   # PUT /events/1.json
   def update
     @event = Event.find(params[:id])
+    @timezones = TimeZone.all
 
     respond_to do |format|
       if @event.update_attributes(params[:event])

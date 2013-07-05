@@ -82,6 +82,7 @@ es:
           duration_should_be_greater_than_0: "la duración del evento debe ser al menos de 1 día"
           eb_end_date_should_be_earlier_than_event_date: "la fecha de Early Bird no puede ser mayor a la Fecha del Evento"
           private_event_should_not_have_discounts: "un evento Privado no puede tener descuentos por cantidad de personas"
+          time_zone_name_is_required_for_a_webinar: "un webinar debe tener una zona horaria asociada"
 
   formtastic:
     yes: "Si"
@@ -137,6 +138,7 @@ es:
         cancelled: "Cancelado"
         is_sold_out: "Cupo Completo"
         is_webinar: "Webinar (Online)"
+        time_zone_name: "Zona Horaria"
         sepyme_enabled: "Habilitado para Sepyme"
         registration_link: "Link de Registro"
         edit:

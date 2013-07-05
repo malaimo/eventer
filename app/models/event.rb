@@ -20,7 +20,7 @@ class Event < ActiveRecord::Base
   attr_accessible :event_type_id, :trainer_id, :country_id, :date, :place, :capacity, :city, :visibility_type, :list_price,
                   :list_price_plus_tax, :list_price_2_pax_discount, :list_price_3plus_pax_discount,
                   :eb_price, :eb_end_date, :draft, :cancelled, :registration_link, :is_sold_out, :participants, :duration, 
-                  :start_time, :end_time, :sepyme_enabled, :is_webinar
+                  :start_time, :end_time, :sepyme_enabled, :is_webinar, :time_zone_name
 
   validates :date, :place, :capacity, :city, :visibility_type, :list_price,
             :country, :trainer, :event_type, :duration, :start_time, :end_time, :presence => true
@@ -49,6 +49,12 @@ class Event < ActiveRecord::Base
   validates_each :list_price_3plus_pax_discount  do |record, attr, value|
     if !value.nil? && (value > 0 && record.visibility_type == 'pr')
       record.errors.add(attr, :private_event_should_not_have_discounts)
+    end
+  end
+  
+  validates_each :time_zone_name do |record, attr, value|
+    if record.is_webinar? && (value == "" || value.nil?)
+      record.errors.add(attr, :time_zone_name_is_required_for_a_webinar)
     end
   end
 

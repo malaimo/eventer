@@ -7,7 +7,7 @@ Feature: Administración de Eventos
 		Then I should see "Eventos Confirmados"
 		And I should see "Fecha"
 		And I should see "Tipo de Evento"
-		And I should see "Locación"
+		And I should see "Ciudad|Hora|Lugar"
 		And I should see "País"
 		And I should see "Tipo"
 		And I should see "Acciones"

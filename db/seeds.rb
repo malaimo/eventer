@@ -270,6 +270,7 @@ Country.create([
   {:name => 'Zimbabwe', :iso_code => 'ZW'}
 ])
 
+
 @trainers = Trainer.create([
   {:name => 'John Doe'},
   {:name => 'Jeff Baurer'},

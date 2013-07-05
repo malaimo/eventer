@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130704215330) do
+ActiveRecord::Schema.define(:version => 20130705012501) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20130704215330) do
     t.time     "end_time"
     t.boolean  "sepyme_enabled"
     t.boolean  "is_webinar",                                                                :default => false
+    t.string   "time_zone_name"
   end
 
   add_index "events", ["country_id"], :name => "index_events_on_country_id"

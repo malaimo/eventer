@@ -7,7 +7,7 @@
   %tr
     %th Fecha
     %th Tipo de Evento
-    %th Locación
+    %th Ciudad|Hora|Lugar
     %th País
     %th Tipo
     %th Estado
@@ -23,9 +23,7 @@
       %td
         -if event.is_webinar?
           %img{:src => "/assets/online.png", :style => "vertical-align:middle"}
-          Webinar/Online
-        -else
-          = event.city	
+        = event.city + " | " + event.start_time.strftime( "%H:%Mhs." ) + " | " + event.place
       %td= event.country.name unless event.country.nil?
       %td 
         -if event.visibility_type == "pu"

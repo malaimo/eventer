@@ -1,4 +1,5 @@
 require 'spec_helper'
+include ActiveSupport
 
 describe Event do
 
@@ -159,6 +160,24 @@ describe Event do
   it "should have a webinar flag" do
     @event.is_webinar = true
     @event.is_webinar?.should be true
+  end
+  
+  it "should have a time zone name" do
+    @event.time_zone_name = TimeZone.all.first.name
+    tz = TimeZone.new( @event.time_zone_name )
+    tz.should == TimeZone.all.first
+  end
+  
+  it "should require a time zone name if event is webinar" do
+    @event.time_zone_name = ""
+    @event.is_webinar = false
+    @event.valid?.should be true
+    
+    @event.is_webinar = true
+    @event.valid?.should be false
+    
+    @event.time_zone_name = "Buenos Aires"
+    @event.valid?.should be true
   end
   
   context "if event date is 15-Jan-2015" do

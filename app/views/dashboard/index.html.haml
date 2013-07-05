@@ -9,7 +9,7 @@
   %tr
     %th Fecha
     %th Nombre
-    %th Ciudad
+    %th Ciudad|Hora|Lugar
     %th Pipeline Participantes
     %th Completo al
   
@@ -41,9 +41,7 @@
       %td
         -if event.is_webinar?
           %img{:src => "/assets/online.png", :style => "vertical-align:middle"}
-          Webinar/Online
-        -else
-          = event.city
+        = event.city + " | " + event.start_time.strftime( "%H:%Mhs." ) + " | " + event.place
       %td
         - if event.registration_link == ""
           - if event.participants.new_ones.count > 0
