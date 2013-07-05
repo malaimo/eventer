@@ -37,6 +37,7 @@ Eventer::Application.routes.draw do
   
   match 'public_events/:id' => 'public_events#show'
   match 'events/update_trainer_select/:id' => 'ajax#events_update_trainer_select'
+  match 'events/:id/start_webinar' => 'events#start_webinar'
   match '/registration_confirmed' => 'participants#confirm'
       
   # Sample of named route:

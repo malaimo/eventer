@@ -48,7 +48,7 @@ describe "events/index" do
     render
     assert_select "tr>th", :text => "Fecha".to_s, :count => 1
     assert_select "tr>th", :text => "Tipo de Evento".to_s, :count => 1
-    assert_select "tr>th", :text => "Locación".to_s, :count => 1
+    assert_select "tr>th", :text => "Ciudad|Hora|Lugar".to_s, :count => 1
     assert_select "tr>th", :text => "País".to_s, :count => 1
     assert_select "tr>th", :text => "Tipo".to_s, :count => 1
     assert_select "tr>th", :text => "Acciones".to_s, :count => 1

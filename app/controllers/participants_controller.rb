@@ -56,9 +56,18 @@ class ParticipantsController < ApplicationController
     @participant = Participant.new(params[:participant])
     @event = Event.find(params[:event_id])
     @participant.event = @event
+    
+    if @event.list_price == 0.0
+      @participant.confirm!
+    end
  
     respond_to do |format|
       if @participant.save
+        
+        if @event.is_webinar?
+          EventMailer.welcome_new_webinar_participant(@participant).deliver
+        end
+        
         format.html { redirect_to "/registration_confirmed", notice: 'Tu registro fue realizado exitosamente.' }
         format.json { render json: @participant, status: :created, location: @participant }
       else

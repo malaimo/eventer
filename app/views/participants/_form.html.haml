@@ -7,3 +7,17 @@
   
   = f.actions do
     = f.action :submit, :label => "Registrarme"
+    %img{ :src => "/assets/ajax-loader.gif", :id => "loader_img" }
+
+:javascript
+  $(document).ready(function() {
+    $('[name="commit"]').click( function() { setLoading() } );
+    $("#loader_img").hide();
+  })
+
+  function setLoading() {
+    $('[name="commit"]').val("Registro en progreso ...");
+    $('[name="commit"]').attr('disabled','disabled');
+    $("#loader_img").show();
+    $("#new_participant").submit();
+  }

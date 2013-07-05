@@ -96,4 +96,8 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def start_webinar
+    @event = Event.find(params[:id])
+  end
 end

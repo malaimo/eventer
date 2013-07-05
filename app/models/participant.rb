@@ -37,4 +37,8 @@ class Participant < ActiveRecord::Base
       return 6
     end
   end
+  
+  def confirm!()
+    self.status = "C"
+  end
 end
