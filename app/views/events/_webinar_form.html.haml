@@ -1,0 +1,11 @@
+= semantic_form_for @event, :url => "/events/#{@event.id}/broadcast_webinar" do |f|
+  
+  - f.inputs do
+    .grid_12
+    = f.input :embedded_player
+    .grid_12
+    = f.input :twitter_embedded_search
+    .grid_12
+    = f.input :notify_webinar_start
+    .grid_12
+    = f.actions
