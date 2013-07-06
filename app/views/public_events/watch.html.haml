@@ -1,0 +1,8 @@
+%img{ :src => "/assets/logo-kleer.png" }
+
+%h1="Webinar: #{@event.event_type.name}"
+
+=raw(@event.embedded_player)
+%br
+%h3 Puedes hacer preguntas o sugerencias utilizando el siguiente #Hashtag en Twitter:
+=raw(@event.twitter_embedded_search) 

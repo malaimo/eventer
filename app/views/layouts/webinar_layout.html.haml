@@ -1,0 +1,32 @@
+!!!
+%html{html_attrs(I18n.locale)}
+  
+  %head
+    %title
+      = (yield(:title) || t('title.untitled'))
+    %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}
+    = csrf_meta_tags
+    %link{ :href => 'http://fonts.googleapis.com/css?family=Dosis:600', :rel => 'stylesheet', :type => 'text/css'}
+    %link{ :href => 'http://fonts.googleapis.com/css?family=Dosis', :rel => 'stylesheet', :type => 'text/css'}
+    %link{ :href => "/assets/bootstrap.css", :rel => "stylesheet" }
+    %link{ :href => "/css/bootstrap-responsive.css", :rel => "stylesheet" }
+
+    :css
+      html { background: #ffffff; }
+      body { width: 800px; margin: 0 auto; }
+      #header, #footer, #container { width: 800px; }
+      h1, h2, h3, h4, h5, h6 {font-family: 'Dosis'; font-weight: 400;}
+	
+    = yield(:head)
+  
+  %body
+    #container
+      
+      #content{ }
+        - flash.each do |name, msg|
+          = content_tag :div, msg, :id => "flash_#{name}"
+        = " "
+      
+        %h1= yield(:title)
+      
+        = yield

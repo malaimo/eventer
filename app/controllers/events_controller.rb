@@ -68,7 +68,6 @@ class EventsController < ApplicationController
   # PUT /events/1.json
   def update
     @event = Event.find(params[:id])
-    @timezones = TimeZone.all
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
@@ -99,5 +98,38 @@ class EventsController < ApplicationController
   
   def start_webinar
     @event = Event.find(params[:id])
+  end
+  
+  def broadcast_webinar
+    @event = Event.find(params[:id])
+    
+    respond_to do |format|
+      if @event.update_attributes(params[:event])
+        if @event.is_webinar?
+          
+          if @event.notify_webinar_start?
+            
+            hostname = "http://" + request.remote_addr
+            port = request.port
+            
+            if port != 80
+              hostname += ":" + port.to_s
+            end
+            
+            webinar_link = hostname + "/public_events/#{@event.id.to_s}/watch"
+            
+            @event.participants.confirmed.each do |participant|
+              EventMailer.notify_webinar_start(participant, webinar_link).deliver
+            end
+          end
+          
+          flash.now[:notice] = t('flash.event.webinar.broadcasting')
+          format.html
+        end
+      else
+        format.html { render action: "start_webinar" }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
   end
 end

@@ -141,6 +141,9 @@ es:
         time_zone_name: "Zona Horaria"
         sepyme_enabled: "Habilitado para Sepyme"
         registration_link: "Link de Registro"
+        embedded_player: "Embedded Player (width='800' height='500')"
+        twitter_embedded_search: "Búsqueda de #hashtag Twitter"
+        notify_webinar_start: "Notificar a asistentes el comienzo del webinar"
         edit:
           title: "Edit title"
       event_type:
@@ -164,6 +167,9 @@ es:
         eb_end_date: "Fecha de finalización del precio Early Bird" 
         cancelled: "Si cancelas el evento no podrás acceder más a él"
         registration_link: "Dejar en blanco para que Keventer gestione los registros"
+        embedded_player: "Inicia el Google Hangout (On Air) y, sin comenzar el broadcasting, pega aquí el código del reproductor embebido."
+        twitter_embedded_search: "Haz una búsqueda en Twitter con el #hashtag del webinar y pega aquí el código para embeberla."
+        notify_webinar_start: "Al seleccionar este campo, se enviará un e-mail a todos los participantes para que ingresen al webinar."        
       participant: 
         phone: "Una persona de Kleer se contactará a este teléfono para continuar con tu inscripción."    
       event_type:
@@ -250,6 +256,8 @@ es:
               success: "Evento modificado exitosamente!"
           cancel:
               success: "Evento cancelado exitosamente!"
+          webinar:
+              broadcasting: "Webinar Iniciado Exitosamente!"
       trainer:
         create:
             success: "Entrenador creado exitosamente!"

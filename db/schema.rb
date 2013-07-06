@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130705012501) do
+ActiveRecord::Schema.define(:version => 20130705234718) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -82,6 +82,9 @@ ActiveRecord::Schema.define(:version => 20130705012501) do
     t.boolean  "sepyme_enabled"
     t.boolean  "is_webinar",                                                                :default => false
     t.string   "time_zone_name"
+    t.text     "embedded_player"
+    t.boolean  "notify_webinar_start",                                                      :default => false
+    t.text     "twitter_embedded_search"
   end
 
   add_index "events", ["country_id"], :name => "index_events_on_country_id"

@@ -168,6 +168,22 @@ describe Event do
     tz.should == TimeZone.all.first
   end
   
+  it "should have a embedded player" do
+    @event.embedded_player = "hhhh"
+    @event.embedded_player.should == "hhhh"
+  end
+  
+  it "should have an embedded twitter search" do
+    @event.twitter_embedded_search = "hhhh"
+    @event.twitter_embedded_search.should == "hhhh"
+  end
+  
+  it "should have a confirmed participants notification flag" do
+    @event.notify_webinar_start.should be false
+    @event.notify_webinar_start = true
+    @event.notify_webinar_start.should be true
+  end
+  
   it "should require a time zone name if event is webinar" do
     @event.time_zone_name = ""
     @event.is_webinar = false
