@@ -109,7 +109,7 @@ class EventsController < ApplicationController
           
           if @event.notify_webinar_start?
             
-            hostname = "http://" + request.remote_addr
+            hostname = "http://" + request.host
             port = request.port
             
             if port != 80
