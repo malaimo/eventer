@@ -16,6 +16,7 @@
 
 %table
   %tr
+    %th Registrado
     %th Nombre
     %th Apellido
     %th Email
@@ -26,6 +27,7 @@
 
   - @participants.each do |participant|
     %tr
+      %td= l participant.created_at, :format => :short
       %td= participant.fname
       %td= participant.lname
       %td= participant.email
