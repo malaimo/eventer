@@ -16,9 +16,31 @@ class Participant < ActiveRecord::Base
   
   after_initialize :initialize_defaults
   
+  comma do
+    self.lname 'Apellido'
+    self.fname 'Nombre'
+    self.email 'Email'
+    self.phone 'Telefono'
+    self.participant_status 'Estado'
+  end
+  
   def initialize_defaults
     if new_record?
       self.status = "N"
+    end
+  end
+  
+  def participant_status
+    if self.status == "N"
+      return "Nuevo"
+    elsif self.status == "T"
+      return "Contactado"
+    elsif self.status == "C"
+      return "Confirmado"
+    elsif self.status == "D"
+      return "Pospuesto"
+    elsif self.status == "X"
+      return "Cancelado"
     end
   end
   

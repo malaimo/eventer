@@ -10,6 +10,8 @@
 = link_to 'Actualizar', event_participants_path(@event)
 |
 = link_to 'Nuevo Registro', new_event_participant_path, :target => "_blank"
+|
+= link_to 'Bajar Listado (CSV)', event_participants_path(@event) + ".csv"
 
 
 %table

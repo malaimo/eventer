@@ -9,6 +9,7 @@ class ParticipantsController < ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
+      format.csv { render :csv => @participants, :filename => "participantes_event_#{@event.id}.csv" }
       format.json { render json: @participants }
     end
   end
@@ -104,4 +105,5 @@ class ParticipantsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 end
