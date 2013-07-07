@@ -122,15 +122,15 @@ describe Event do
      it "It should compute weeks from now" do
           today = Date.today
           @event.date = today
-
+          
           @event.weeks_from(today.weeks_ago(3)).should == 3
       end
 
      it "It should compute weeks from now (next year)" do
           today = Date.today
-          @event.date = today.years_since(1)
-
-          @event.weeks_from(today).should == 52
+          @event.date = today + 21
+          
+          @event.weeks_from(today).should == 3
       end
       
   it "should require a duration" do
