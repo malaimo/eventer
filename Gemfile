@@ -62,3 +62,5 @@ gem 'cancan'
 
 gem 'formtastic'
 gem 'valid_email'
+gem 'daemons'
+gem 'delayed_job_active_record'

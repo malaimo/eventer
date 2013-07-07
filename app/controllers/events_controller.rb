@@ -119,7 +119,7 @@ class EventsController < ApplicationController
             webinar_link = hostname + "/public_events/#{@event.id.to_s}/watch"
             
             @event.participants.confirmed.each do |participant|
-              EventMailer.notify_webinar_start(participant, webinar_link).deliver
+              EventMailer.delay.notify_webinar_start(participant, webinar_link)
             end
           end
           
