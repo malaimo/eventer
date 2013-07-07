@@ -65,7 +65,7 @@ class ParticipantsController < ApplicationController
       if @participant.save
         
         if @event.is_webinar?
-          EventMailer.delay.welcome_new_webinar_participant(@participant)
+          EventMailer.welcome_new_webinar_participant(@participant).deliver
         end
         
         format.html { redirect_to "/registration_confirmed", notice: 'Tu registro fue realizado exitosamente.' }
