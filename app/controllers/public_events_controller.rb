@@ -13,8 +13,8 @@ class PublicEventsController < ApplicationController
          @participant = Participant.find_by_id(params[:participant_id])
          if @participant.nil?
            format.html { redirect_to new_event_participant_path, notice: t('flash.participant.not_found') }
-         elsif @participant.is_present?
-          format.html { redirect_to new_event_participant_path, notice: t('flash.participant.is_attending') }
+         #elsif @participant.is_present?
+         #  format.html { redirect_to new_event_participant_path, notice: t('flash.participant.is_attending') }
          else
            @participant.attend!
            @participant.save
