@@ -94,7 +94,7 @@ describe ParticipantsController do
 
           it "redirects to the created participant" do
             post :create, :participant => valid_attributes, :event_id => valid_attributes[:event_id]
-            response.should redirect_to( "/registration_confirmed" )
+            response.should redirect_to( "/events/" + Participant.last.event.id.to_s + "/participant_confirmed" )
           end
         end
 

@@ -212,17 +212,6 @@ describe Event do
     @event.webinar_finished?.should be true
   end
   
-  it "should express if a webinar already finished (based on end_time in time_zone)" do
-    @event.is_webinar = true
-    @event.time_zone_name = "Lima"
-    @event.start_time = TimeZone.new("Lima").now-3600
-    @event.end_time = TimeZone.new("Lima").now+3600
-    @event.start_webinar!
-    @event.webinar_finished?.should be false
-    @event.end_time = TimeZone.new("Lima").now-3500
-    @event.webinar_finished?.should be true
-  end
-  
   it "should require a time zone name if event is webinar" do
     @event.time_zone_name = ""
     @event.is_webinar = false

@@ -175,7 +175,7 @@ When /^I register for that event$/ do
 end
 
 Then /^I should see a confirmation message$/ do
-  current_path.should == '/registration_confirmed'
+  current_path.should == '/events/1/participant_confirmed'
   page.should have_content('Tu registro fue realizado exitosamente.')
 end
 
@@ -184,7 +184,7 @@ Then /^It should have a registration page$/ do
   visit '/events/'+@event.id.to_s+'/participants/new'
   
   page.should have_content(@event.event_type.name )
-  page.should have_content(@event.date.to_formatted_s(:short) )
+  page.should have_content(@event.human_date )
   page.should have_content(@event.city )
   
   page.should have_content('Nombre')
