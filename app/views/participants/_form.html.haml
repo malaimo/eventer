@@ -2,8 +2,12 @@
   = f.inputs do
     = f.input :fname
     = f.input :lname
-    = f.input :email
-    = f.input :phone
+    - if @event.is_webinar? && @event.list_price == 0.0
+      = f.input :email, :hint => "Te contactaremos a este e-mail para confirmar tu registro al webinar."
+      = f.input :phone
+    - else
+      = f.input :email
+      = f.input :phone, :hint => "Una persona de Kleer se contactará a este teléfono para continuar con tu inscripción."
   
   = f.actions do
     = f.action :submit, :label => "Registrarme"
