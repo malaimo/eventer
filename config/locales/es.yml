@@ -169,7 +169,7 @@ es:
         registration_link: "Dejar en blanco para que Keventer gestione los registros"
         embedded_player: "Inicia el Google Hangout (On Air) y, sin comenzar el broadcasting, pega aquí el código del reproductor embebido."
         twitter_embedded_search: "Haz una búsqueda en Twitter con el #hashtag del webinar y pega aquí el código para embeberla."
-        notify_webinar_start: "Al seleccionar este campo, se enviará un e-mail a todos los participantes para que ingresen al webinar."        
+        notify_webinar_start: "Al seleccionar este campo, se enviará un e-mail a todos los participantes para que ingresen al webinar (este proceso puede demorar unos minutos)."        
       participant: 
         phone: "Una persona de Kleer se contactará a este teléfono para continuar con tu inscripción."    
       event_type:
@@ -267,6 +267,10 @@ es:
             success: "Entrenador removido exitosamente!"
       login:
           required: "Debes estar logueado para acceder a esta página."
+      participant:
+          is_attending: "El participante ya está presente en el webinar. Por favor, regístrate mediante el siguiente formulario."
+          not_found: "El participante indicado no fue encontrado. Por favor, regístrate mediante el siguiente formulario."
+          registration_required: "Es necesario que te registres. Por favor, utiliza el siguiente formulario."
   
   confirm:
       sure: "Está Ud. seguro?"

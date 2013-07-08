@@ -158,12 +158,9 @@
          $("#event_city").attr('readonly','readonly');
 
          $event_country_id_before_webinar = $("#event_country_id").val();
-         $("#event_country_id").val( 245 );
+         $("#event_country_id option:contains('-- OnLine --')").attr('selected', true);
          $("#event_time_zone_name_input").show();
 
-         $event_place_before_webinar = $("#event_place").val();
-         $("#event_place").val( "" );
-         $("#event_place").attr('readonly','readonly');
      }
   }
 

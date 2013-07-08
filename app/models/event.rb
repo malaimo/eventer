@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  include ActiveSupport
+  
   belongs_to :country
   belongs_to :trainer
   belongs_to :event_type
@@ -21,7 +23,7 @@ class Event < ActiveRecord::Base
                   :list_price_plus_tax, :list_price_2_pax_discount, :list_price_3plus_pax_discount,
                   :eb_price, :eb_end_date, :draft, :cancelled, :registration_link, :is_sold_out, :participants, :duration, 
                   :start_time, :end_time, :sepyme_enabled, :is_webinar, :time_zone_name, :embedded_player, :twitter_embedded_search,
-                  :notify_webinar_start
+                  :notify_webinar_start, :webinar_started
 
   validates :date, :place, :capacity, :city, :visibility_type, :list_price,
             :country, :trainer, :event_type, :duration, :start_time, :end_time, :presence => true
@@ -95,6 +97,26 @@ class Event < ActiveRecord::Base
     end
     
     human_date
+  end
+  
+  def start_webinar!
+    if self.is_webinar?
+      self.webinar_started = true
+    end
+  end
+  
+  def webinar_finished?
+    if self.is_webinar? && self.webinar_started?
+      
+      timezone = TimeZone.new( self.time_zone_name ) unless self.time_zone_name.nil?
+      
+      if !timezone.nil?
+        timezone_current_time = timezone.now
+      else
+        timezone_current_time = Time.now
+      end
+      (Time.parse( self.end_time.strftime("%H:%M") ) < timezone_current_time )
+    end
   end
   
   private

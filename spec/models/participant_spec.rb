@@ -50,4 +50,16 @@ describe Participant do
     @participant.valid?.should be false
   end
   
+  it "should let someone confirm it" do
+    @participant.confirm!
+    @participant.status.should == "C"
+  end
+  
+  it "should let someone mark attended it" do
+    @participant.is_present?.should be false
+    @participant.attend!
+    @participant.status.should == "A"
+    @participant.is_present?.should be true
+  end
+  
 end

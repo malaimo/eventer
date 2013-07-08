@@ -66,7 +66,19 @@ class ParticipantsController < ApplicationController
       if @participant.save
         
         if @event.is_webinar?
-          EventMailer.welcome_new_webinar_participant(@participant).deliver
+          if @event.webinar_started?
+            hostname = "http://" + request.host
+            port = request.port
+            
+            if port != 80
+              hostname += ":" + port.to_s
+            end
+            
+            format.html { redirect_to "/public_events/#{@event.id.to_s}/watch/#{@participant.id.to_s}" }
+            
+          else
+            EventMailer.welcome_new_webinar_participant(@participant).deliver
+          end
         end
         
         format.html { redirect_to "/registration_confirmed", notice: 'Tu registro fue realizado exitosamente.' }

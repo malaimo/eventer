@@ -12,7 +12,8 @@ class Participant < ActiveRecord::Base
   scope :confirmed, where(:status => "C")
   scope :contacted, where(:status => "T")
   scope :cancelled, where(:status => "X")
-  scope :deffered, where(:status => "D")   
+  scope :deffered, where(:status => "D")
+  scope :attended, where(:status => "A")
   
   after_initialize :initialize_defaults
   
@@ -21,7 +22,7 @@ class Participant < ActiveRecord::Base
     self.fname 'Nombre'
     self.email 'Email'
     self.phone 'Telefono'
-    self.participant_status 'Estado'
+    self.human_status 'Estado'
   end
   
   def initialize_defaults
@@ -30,7 +31,7 @@ class Participant < ActiveRecord::Base
     end
   end
   
-  def participant_status
+  def human_status
     if self.status == "N"
       return "Nuevo"
     elsif self.status == "T"
@@ -41,6 +42,8 @@ class Participant < ActiveRecord::Base
       return "Pospuesto"
     elsif self.status == "X"
       return "Cancelado"
+    elsif self.status == "A"
+      return "Presente"
     end
   end
   
@@ -51,16 +54,26 @@ class Participant < ActiveRecord::Base
       return 2
     elsif self.status == "C"
       return 3
-    elsif self.status == "D"
+    elsif self.status == "A"
       return 4
-    elsif self.status == "X"
+    elsif self.status == "D"
       return 5
-    else
+    elsif self.status == "X"
       return 6
+    else
+      return 7
     end
   end
   
-  def confirm!()
+  def confirm!
     self.status = "C"
+  end
+  
+  def attend!
+    self.status = "A"
+  end
+  
+  def is_present?
+    (self.status == "A")
   end
 end

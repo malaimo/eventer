@@ -11,7 +11,8 @@
     %th Nombre
     %th Ciudad|Hora|Lugar
     %th Pipeline Participantes
-    %th Completo al
+    %th Compl.
+    %th Iniciar
   
   - weeks_from_now_p = -1
   - @events.each do |event|
@@ -55,6 +56,7 @@
       %td
         - if event.registration_link == ""
           = (event.completion*100).round.to_s + "%"
+      %td
         -if event.is_webinar?
           %a{ :href => "/events/#{event.id}/start_webinar", :title => "Iniciar Webinar!"}
             %img{:src => "/assets/start.png", :style => "vertical-align:middle"}

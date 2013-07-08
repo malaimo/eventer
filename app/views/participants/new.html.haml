@@ -1,6 +1,8 @@
 Estás registrándote a:
-%h6= @event.event_type.name
+%h4= @event.event_type.name
 = @event.date.to_formatted_s(:short) + " - " + @event.city
+- if @event.is_webinar? && @event.webinar_started? && !@event.webinar_finished?
+  %h6= "Actualmente en progreso!"
 %hr
 
 = render 'form'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130707002850) do
+ActiveRecord::Schema.define(:version => 20130708004410) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20130707002850) do
     t.text     "embedded_player"
     t.boolean  "notify_webinar_start",                                                      :default => false
     t.text     "twitter_embedded_search"
+    t.boolean  "webinar_started",                                                           :default => false
   end
 
   add_index "events", ["country_id"], :name => "index_events_on_country_id"

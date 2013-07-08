@@ -195,7 +195,7 @@ end
 
 When /^I visit the dashboard$/ do
   visit '/dashboard'
-  sleep 5
+  sleep 10
 end
 
 def create_new_participant

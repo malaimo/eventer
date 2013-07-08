@@ -10,8 +10,9 @@
 = link_to 'Actualizar', event_participants_path(@event)
 |
 = link_to 'Nuevo Registro', new_event_participant_path, :target => "_blank"
-|
-= link_to 'Bajar Listado (CSV)', event_participants_path(@event) + ".csv"
+- if @event.participants.count > 0
+  |
+  = link_to 'Bajar Listado (CSV)', event_participants_path(@event) + ".csv"
 
 
 %table
@@ -38,6 +39,8 @@
         %td{:style=>"background-color: #e06666;"}Contactado
       - elsif participant.status == "C"
         %td{:style=>"background-color: #00ff00;"}Confirmado
+      - elsif participant.status == "A"
+        %td{:style=>"background-color: #0000ff;color: #FFFFFF;"}Presente
       - elsif participant.status == "X"
         %td{:style=>"background-color: #ff0000; color: #FFFFFF;"}Cancelado
       - elsif participant.status == "D"

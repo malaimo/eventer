@@ -8,4 +8,19 @@
     .grid_12
     = f.input :notify_webinar_start
     .grid_12
-    = f.actions
+    = f.actions do
+      = f.action :submit, :label => "Iniciar Webinar"
+      %img{ :src => "/assets/ajax-loader.gif", :id => "loader_img" }
+
+:javascript
+  $(document).ready(function() {
+    $('[name="commit"]').click( function() { setLoading() } );
+    $("#loader_img").hide();
+  })
+
+  function setLoading() {
+    $('[name="commit"]').val("Iniciando webinar ...");
+    $('[name="commit"]').attr('disabled','disabled');
+    $("#loader_img").show();
+    $("#edit_event_#{@event.id}").submit();
+  }

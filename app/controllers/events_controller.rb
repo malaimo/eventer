@@ -68,6 +68,7 @@ class EventsController < ApplicationController
   # PUT /events/1.json
   def update
     @event = Event.find(params[:id])
+    @timezones = TimeZone.all
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
@@ -107,6 +108,9 @@ class EventsController < ApplicationController
       if @event.update_attributes(params[:event])
         if @event.is_webinar?
           
+          @event.start_webinar!
+          @event.save
+          
           if @event.notify_webinar_start?
             
             hostname = "http://" + request.host
@@ -119,7 +123,8 @@ class EventsController < ApplicationController
             webinar_link = hostname + "/public_events/#{@event.id.to_s}/watch"
             
             @event.participants.confirmed.each do |participant|
-              EventMailer.notify_webinar_start(participant, webinar_link).deliver
+              webinar_perticipant_link = webinar_link + "/" + participant.id.to_s
+              EventMailer.notify_webinar_start(participant, webinar_perticipant_link).deliver
             end
           end
           
