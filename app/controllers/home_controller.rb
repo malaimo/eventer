@@ -47,8 +47,8 @@ class HomeController < ApplicationController
     @categories = Category.visible_ones
     respond_to do |format|
       format.html
-      format.xml { render :xml => @categories.to_xml }
-      format.json { render json: @categories }  
+      format.xml { render :xml => @categories.to_xml(:include => :event_types ) }
+      format.json { render json: @categories }
     end
   end
   
