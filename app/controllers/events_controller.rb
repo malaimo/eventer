@@ -124,7 +124,7 @@ class EventsController < ApplicationController
             
             @event.participants.confirmed.each do |participant|
               webinar_perticipant_link = webinar_link + "/" + participant.id.to_s
-              EventMailer.notify_webinar_start(participant, webinar_perticipant_link).deliver
+              EventMailer.delay.notify_webinar_start(participant, webinar_perticipant_link)
             end
           end
           
