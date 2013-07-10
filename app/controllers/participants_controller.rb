@@ -78,7 +78,7 @@ class ParticipantsController < ApplicationController
             format.html { redirect_to "/public_events/#{@event.id.to_s}/watch/#{@participant.id.to_s}" }
             
           else
-            EventMailer.welcome_new_webinar_participant(@participant).deliver
+            EventMailer.delay.welcome_new_webinar_participant(@participant)
           end
         end
         
