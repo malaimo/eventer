@@ -141,7 +141,7 @@ es:
         time_zone_name: "Zona Horaria"
         sepyme_enabled: "Habilitado para Sepyme"
         registration_link: "Link de Registro"
-        embedded_player: "Embedded Player (width='800' height='500')"
+        embedded_player: "Embedded Video (Hangout o YouTube)"
         twitter_embedded_search: "Búsqueda de #hashtag Twitter"
         notify_webinar_start: "Notificar a asistentes el comienzo del webinar"
         edit:
