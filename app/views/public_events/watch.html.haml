@@ -1,8 +1,22 @@
-%img{ :src => "/assets/logo-kleer.png" }
+%h1
+  %img{ :src => "/assets/logo-kleer.png", :height => "30" }
+  =" | #{@event.event_type.name}" 
 
-%h1="Webinar: #{@event.event_type.name}"
+.grid_8
+  =raw(@event.embedded_player)
+.grid_4
+  %h3 ¿Preguntas o sugerencias? Utiliza el siguiente #Hashtag:
+  =raw(@event.twitter_embedded_search) 
 
-=raw(@event.embedded_player)
-%br
-%h3 Puedes hacer preguntas o sugerencias utilizando el siguiente #Hashtag en Twitter:
-=raw(@event.twitter_embedded_search) 
+:javascript
+
+  $(document).ready(function() {
+   
+    $("iframe").each(
+         function(index, elem) {
+             elem.setAttribute("width","100%");
+             elem.setAttribute("height","400");
+         }
+     );
+
+  })
