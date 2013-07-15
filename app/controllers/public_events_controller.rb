@@ -4,7 +4,7 @@ class PublicEventsController < ApplicationController
   end
   
   def watch
-     @event = Event.public_and_visible.find(params[:event_id])
+     @event = Event.find(params[:event_id])
      
      respond_to do |format|
        if params[:participant_id].nil?
