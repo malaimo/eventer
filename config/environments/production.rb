@@ -23,7 +23,7 @@ Eventer::Application.configure do
   # Devise: Setup default url options for your specific environment. Here is an example of development environment:
   # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   # This is a required Rails configuration. In production it must be the actual host of your application
-  config.action_mailer.default_url_options = { :host => 'eventer-qa.heroku.com' }
+  config.action_mailer.default_url_options = { :host => 'eventos.kleer.la' }
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
