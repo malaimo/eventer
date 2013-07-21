@@ -6,13 +6,8 @@
       = (yield(:title) || t('title.untitled'))
     %meta{ :content => 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', :name => 'viewport'}
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
-    = #stylesheet_link_tag "application", :media => "all"
-    = stylesheet_link_tag "application"
-    = #stylesheet_link_tag "formtastic_changes"
-    = #javascript_include_tag "application"
+    = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
-    = javascript_include_tag "jquery.rails"
-    = #
     = csrf_meta_tags
     = yield(:head)
   
