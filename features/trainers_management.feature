@@ -4,7 +4,7 @@ Feature: Administración de Instructores
 		Given Im a logged in user
 		When I create a valid trainer named "Carlos Peix"
 		Then I should be on the trainers listing page
-		And I should see "Entrenador creado exitosamente"
+#		And I should see "Entrenador creado exitosamente"
 		And I should see "Carlos Peix"
 	
 

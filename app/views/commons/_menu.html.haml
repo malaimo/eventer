@@ -1,13 +1,46 @@
-%ul#menu
-  = link_to_menu_item(:li, t('menu.dashboard'), dashboard_path)
-  = link_to_menu_item(:li, t('menu.roles'), roles_path)
-  = link_to_menu_item(:li, t('menu.users'), users_path)
-  - if can? :manage, Event.new
-    = link_to_menu_item(:li, t('menu.events'), events_path)
-  - if can? :manage, EventType.new
-    = link_to_menu_item(:li, t('menu.event_types'), event_types_path)
-  - if can? :manage, Category.new
-    = link_to_menu_item(:li, t('menu.categories'), categories_path)
-  - if can? :manage, Trainer.new
-    = link_to_menu_item(:li, t('menu.trainers'), trainers_path)
-  = link_to_menu_item(:li, t('menu.exit'), destroy_user_session_path, :method => :delete)
+.main-nav-bg
+  %nav#main-nav
+    .navigation
+      %ul.nav.nav-stacked
+        %li{ :class => menu_item_class(@active_menu, "dashboard") }
+          %a{ :href => "/dashboard" }
+            %i.icon-dashboard
+            %span Dashboard
+        %li{ :class => menu_item_class(@active_menu, "pricing") }
+          %a{ :href => "/dashboard/pricing" }
+            %i.icon-money
+            %span Pricing
+        - if can? :manage, Event.new
+          %li{ :class => menu_item_class(@active_menu, "events") }
+            %a{ :href => "/events" }
+              %i.icon-calendar
+              %span Eventos
+        - if can? :manage, EventType.new
+          %li{ :class => menu_item_class(@active_menu, "event_types") }
+            %a{ :href => "/event_types" }
+              %i.icon-tasks
+              %span Tipos de Evento
+        %li{ :class => menu_item_class(@active_menu, "admin") }
+          %a.dropdown-collapse{ :href => "#" }
+            %i.icon-th-list
+            %span Administracion
+            %i.icon-angle-down.angle-down
+          %ul.nav.nav-stacked
+            - if can? :manage, Category.new
+              %li
+                %a{ :href => categories_path }
+                  %i.icon-caret-right
+                  %span= t('menu.categories')
+            - if can? :manage, Trainer.new
+              %li
+                %a{ :href => trainers_path }
+                  %i.icon-caret-right
+                  %span= t('menu.trainers')
+            %li
+              %a{ :href => roles_path }
+                %i.icon-caret-right
+                %span= t('menu.roles')
+            %li
+              %a{ :href => users_path }
+                %i.icon-caret-right
+                %span= t('menu.users')

@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
   has_many :participants
   has_many :categories, :through => :event_type
 
-  scope :visible, where(:cancelled => false).where("date >= ?", DateTime.now)
+  scope :visible, where(:cancelled => false).where("date >= ?", DateTime.now-1)
   scope :past_visible, where(:cancelled => false).where("date <= ?", DateTime.now)
   scope :public_events,  where("visibility_type = 'pu' or visibility_type = 'co'")
   scope :public_commercial_events,  where(:visibility_type => "pu")

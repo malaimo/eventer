@@ -1,4 +1,9 @@
-%h1= t('title.user.index')
+.page-header
+  %h1.pull-left
+    %i.icon-user
+    %span Usuarios
+
+= render '/commons/not_migrated_yet'
 
 %p.record-actions
   = link_to t('formtastic.actions.new'), new_user_path

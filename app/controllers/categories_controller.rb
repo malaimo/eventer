@@ -1,4 +1,8 @@
 class CategoriesController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :activate_menu
+  load_and_authorize_resource
+  
   # GET /categories
   # GET /categories.json
   def index
@@ -79,5 +83,11 @@ class CategoriesController < ApplicationController
       format.html { redirect_to categories_url }
       format.json { head :no_content }
     end
+  end
+  
+  private
+  
+  def activate_menu
+    @active_menu = "admin"
   end
 end

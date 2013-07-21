@@ -4,4 +4,12 @@ module ApplicationHelper
         link_to name, url, options
       end
     end
+    
+    def menu_item_class(active, menu)
+      if !active.nil? && active == menu
+        "active"
+      else
+        ""
+      end
+    end
 end

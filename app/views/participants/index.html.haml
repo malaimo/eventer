@@ -1,49 +1,111 @@
-%h1= @event.event_type.name + " - " + @event.date.to_formatted_s(:short) + " - " + @event.city
-%h6
-  = (@event.completion*100).round.to_s + "% completo."
-  |
-  = @event.participants.confirmed.count.to_s + " confirmados"
-  |
-  = @event.capacity.to_s + " posibles"
-  |
-  = (@event.capacity-@event.participants.confirmed.count).to_s + " por confirmar"
-= link_to 'Actualizar', event_participants_path(@event)
-|
-= link_to 'Nuevo Registro', new_event_participant_path, :target => "_blank"
-- if @event.participants.count > 0
-  |
-  = link_to 'Bajar Listado (CSV)', event_participants_path(@event) + ".csv"
+.page-header
+  %h1.pull-left
+    %i.icon-group
+    %span Lista de Inscriptos
+  .pull-right
+    %a.btn.btn-white{ :href => event_participants_path(@event) }
+      %i.icon-rotate-right 
+      Actualizar
+    %a.btn.btn-white{ :href => new_event_participant_path, :target => "_blank" }
+      %i.icon-user
+      Nueva Inscripción
+    - if @event.participants.count > 0
+      %a.btn.btn-white{ :href => event_participants_path(@event) + ".csv" }
+        %i.icon-cloud-download
+        Bajar Listado (CSV)
 
+= render '/commons/notice'
 
-%table
-  %tr
-    %th Registrado
-    %th Nombre
-    %th Apellido
-    %th Email
-    %th Teléfono
-    %th Estado
-    %th Notas
-    %th
+.row-fluid
+  .span12.box.bordered-box.blue-border{ :style => "margin-bottom:0;" }
+    .box-header.blue-background
+      .title= @event.event_type.name + " - " + @event.date.to_formatted_s(:short) + " - " + @event.city 
+    .box-content.box-no-padding
+      .responsive-table
+        .scrollable-area
+.row-fluid
 
-  - @participants.each do |participant|
-    %tr
-      %td= l participant.created_at, :format => :short
-      %td= participant.fname
-      %td= participant.lname
-      %td= participant.email
-      %td= participant.phone
-      - if participant.status == "N"
-        %td{:style=>"background-color: #ffff00;"}Nuevo
-      - elsif participant.status == "T"
-        %td{:style=>"background-color: #e06666;"}Contactado
-      - elsif participant.status == "C"
-        %td{:style=>"background-color: #00ff00;"}Confirmado
-      - elsif participant.status == "A"
-        %td{:style=>"background-color: #0000ff;color: #FFFFFF;"}Presente
-      - elsif participant.status == "X"
-        %td{:style=>"background-color: #ff0000; color: #FFFFFF;"}Cancelado
-      - elsif participant.status == "D"
-        %td{:style=>"background-color: #ff0000; color: #FFFFFF;"}Postergado
-      %td= participant.notes
-      %td= link_to 'Modificar', edit_event_participant_path(participant.event, participant)
+  .span3
+    - if @event.completion < 0.2
+      .box-content.box-statistic.red-background
+        %h3.title.text-primary= (@event.completion*100).round.to_s + "%"
+        %small= "Completo (Restan " + (@event.capacity-@event.participants.confirmed.count).to_s + " personas)"
+        .text-primary.icon-group.align-right
+    - elsif @event.completion >= 0.2 && @event.completion < 0.5
+      .box-content.box-statistic.orange-background
+        %h3.title.text-primary= (@event.completion*100).round.to_s + "%"
+        %small= "Completo (Restan " + (@event.capacity-@event.participants.confirmed.count).to_s + " personas)"
+        .text-primary.icon-group.align-right
+    - elsif @event.completion >= 0.5 && @event.completion < 0.8
+      .box-content.box-statistic.blue-background
+        %h3.title.text-primary= (@event.completion*100).round.to_s + "%"
+        %small= "Completo (Restan " + (@event.capacity-@event.participants.confirmed.count).to_s + " personas)"
+        .text-primary.icon-group.align-right
+    - elsif @event.completion >= 0.8
+      .box-content.box-statistic.green-background
+        %h3.title.text-primary= (@event.completion*100).round.to_s + "%"
+        %small= "Completo (Restan " + (@event.capacity-@event.participants.confirmed.count).to_s + " personas)"
+        .text-primary.icon-group.align-right
+  .span3
+    .box-content.box-statistic
+      %h3.title.text-error
+        = @event.participants.new_ones.count
+      %small Nuevos
+      .text-error.icon-inbox.align-right
+  .span3
+    .box-content.box-statistic
+      %h3.title.text-warning
+        = @event.participants.contacted.count
+      %small Contactados
+      .text-warning.icon-comments.align-right
+  .span3
+    .box-content.box-statistic
+      %h3.title.text-success
+        = @event.participants.confirmed.count
+      %small= "Confirmados (" + @event.capacity.to_s + " posibles)"
+      .text-success.icon-check.align-right
+
+  %br
+
+.row-fluid
+  .span12.box.bordered-box.blue-border{ :style => "margin-bottom:0;" }
+    .box-header.green-background
+      .title Lista de Inscriptos
+    .box-content.box-no-padding
+      .responsive-table
+        .scrollable-area
+          %table.table{ :style => "margin-bottom:0;" }
+            %thead
+              %tr
+                %th Fecha
+                %th Nombre
+                %th Apellido
+                %th Email
+                %th Teléfono
+                %th Estado
+                %th Notas
+                %th
+            %tbody
+              - @participants.each do |participant|
+                %tr
+                  %td= l participant.created_at, :format => :short
+                  %td= participant.fname
+                  %td= participant.lname
+                  %td= participant.email
+                  %td= participant.phone
+                  - if participant.status == "N"
+                    %td{:style=>"background-color: #ffff00;"}Nuevo
+                  - elsif participant.status == "T"
+                    %td{:style=>"background-color: #e06666;"}Contactado
+                  - elsif participant.status == "C"
+                    %td{:style=>"background-color: #00ff00;"}Confirmado
+                  - elsif participant.status == "A"
+                    %td{:style=>"background-color: #0000ff;color: #FFFFFF;"}Presente
+                  - elsif participant.status == "X"
+                    %td{:style=>"background-color: #ff0000; color: #FFFFFF;"}Cancelado
+                  - elsif participant.status == "D"
+                    %td{:style=>"background-color: #ff0000; color: #FFFFFF;"}Postergado
+                  %td= participant.notes
+                  %td
+                    %a.btn.btn-warning.btn-mini{ :href => edit_event_participant_path(participant.event, participant), :id => "modificar" }
+                      %i.icon-edit

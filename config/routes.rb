@@ -24,6 +24,7 @@ Eventer::Application.routes.draw do
   match 'dashboard' => 'dashboard#index'
   match 'dashboard/pricing' => 'dashboard#pricing'
   match 'dashboard/past_events' => 'dashboard#past_events'
+  match 'dashboard/countdown' => 'dashboard#countdown'
   
   match 'api/events' => 'home#index'
   match 'api/trainers' => 'home#trainers'
@@ -87,7 +88,7 @@ Eventer::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'home#index'
+  root :to => 'dashboard#index'
 
   # See how all your routes lay out with "rake routes"
 

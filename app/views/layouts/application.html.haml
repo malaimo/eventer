@@ -5,32 +5,53 @@
     %title
       = (yield(:title) || t('title.untitled'))
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
-    = stylesheet_link_tag "application", :media => "all"
-    = stylesheet_link_tag "jquery-ui-1.8.17.custom"
-    = stylesheet_link_tag "formtastic_changes"
+    = #stylesheet_link_tag "application", :media => "all"
+    = stylesheet_link_tag "application"
+    = #stylesheet_link_tag "formtastic_changes"
+    = #javascript_include_tag "application"
     = javascript_include_tag "application"
+    = javascript_include_tag "jquery.rails"
+    = #
     = csrf_meta_tags
 	
     = yield(:head)
   
-  %body
-    #container
-      #header
-        = link_to image_tag('eventer_logo.jpg'), root_path
-        
+  - if !user_signed_in?
+    %body.sign-in
+      #wrapper
+        = yield
+  - else
+    %body
+      %header
+        .navbar
+          .navbar-inner
+            .container-fluid
+              %a.brand{ :href => "/"}
+                %i.icon-calendar
+                %span.hidden-phone Keventer
+              %a.toggle-nav.btn.pull-left{ :href => '#' }
+                %i.icon-reorder
+              %ul.nav.pull-right
+                %li.dropdown.dark.user-menu
+                  %a.dropdown-toggle{ "data-toggle" => "dropdown", :href => "#" }
+                    %i.icon-user
+                    %span.user-name.hidden-phone Mi Cuenta
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li
+                      %a{ :href => "#" }
+                        %i.icon-cog
+                        Cambiar Clave
+                    %li.divider
+                    %li
+                      %a{ :href => destroy_user_session_path,  "data-method" => :delete, :rel => :nofollow }
+                        %i.icon-signout
+                        = t('menu.exit')
+      .wrapper
         - if user_signed_in?
           = render '/commons/menu'
-        
-    
-      #content{ :class => 'grid_12' }
-        - flash.each do |name, msg|
-          = content_tag :div, msg, :id => "flash_#{name}"
-        = " "
-      
-        %h1= yield(:title)
-      
-        = yield
-
-      #footer Copyleft - #{t('footer.help')}
-
-
+        %section#content
+          .container-fluid
+            .row-fluid#content-wrapper
+              .span12
+                = yield

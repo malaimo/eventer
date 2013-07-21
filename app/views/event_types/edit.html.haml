@@ -1,7 +1,6 @@
-%h1= t('title.event_type.edit')
+.page-header
+  %h1.pull-left
+    %i.icon-tasks
+    %span Tipos de Evento
 
 = render 'form'
-
-= link_to 'Show', @event_type
-\|
-= link_to 'Back', event_types_path

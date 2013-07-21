@@ -4,6 +4,7 @@ describe "events/new" do
   before(:each) do
     @countries = Country.all
     @trainers = Trainer.all
+    @timezones = TimeZone.all
     assign(:event, stub_model(Event,
       :name => "MyString",
       :place => "MyString",

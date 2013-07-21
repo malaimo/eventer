@@ -4,28 +4,18 @@
   %head
     %title
       = (yield(:title) || t('title.untitled'))
+    %meta{ :content => 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', :name => 'viewport'}
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
-    = stylesheet_link_tag "application", :media => "all"
-    = stylesheet_link_tag "jquery-ui-1.8.17.custom"
-    = stylesheet_link_tag "formtastic_changes"
+    = #stylesheet_link_tag "application", :media => "all"
+    = stylesheet_link_tag "application"
+    = #stylesheet_link_tag "formtastic_changes"
+    = #javascript_include_tag "application"
     = javascript_include_tag "application"
-    = javascript_include_tag "nicEdit"
+    = javascript_include_tag "jquery.rails"
+    = #
     = csrf_meta_tags
-
-    :css
-      html { background: #ffffff; }
-      #header, #footer, #container { width: 400px; }
-	
     = yield(:head)
   
-  %body
-    #container
-      
-      #content{ }
-        - flash.each do |name, msg|
-          = content_tag :div, msg, :id => "flash_#{name}"
-        = " "
-      
-        %h1= yield(:title)
-      
-        = yield
+  %body.sign-in{ :style => "padding-top: 0px"}
+    #wrapper
+      = yield

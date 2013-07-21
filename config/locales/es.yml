@@ -120,6 +120,7 @@ es:
           password_confirmation: "Confirmación de Clave"
           roles: "Roles"
       event:
+        date: "Fecha"
         capacity: "Capacidad"
         duration: "Duración (días)"
         start_time: "Hora de inicio"
@@ -127,8 +128,8 @@ es:
         visibility_type: "Tipo"
         list_price: "Precio"
         list_price_plus_tax: "+ IVA"
-        list_price_2_pax_discount: "Descuento para 2 personas"
-        list_price_3plus_pax_discount: "Descuento para 3 o más personas"
+        list_price_2_pax_discount: "Descuento p/2 p."
+        list_price_3plus_pax_discount: "Descuento p/3+ p."
         eb_price: "Precio Early Bird"
         eb_end_date: "Hasta"
         description: "Descripción"
@@ -144,6 +145,9 @@ es:
         embedded_player: "Embedded Video (Hangout o YouTube)"
         twitter_embedded_search: "Búsqueda de #hashtag Twitter"
         notify_webinar_start: "Notificar a asistentes el comienzo del webinar"
+        place: "Lugar"
+        country: "País"
+        city: "Ciudad"
         edit:
           title: "Edit title"
       event_type:

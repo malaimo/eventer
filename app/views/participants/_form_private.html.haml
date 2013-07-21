@@ -1,11 +1,51 @@
-= semantic_form_for [:event, @participant] do |f|
-  = f.inputs do
-    = f.input :fname
-    = f.input :lname
-    = f.input :email
-    = f.input :phone
-    = f.input :status, :as => :select, :collection => [["Nuevo", "N"], ["Contactado", "T"], ["Confirmado", "C"], ["Cancelado", "X"], ["Pospuesto", "D"]]
-    = f.input :notes
-  
-  = f.actions do
-    = f.action :submit, :label => "Modificar"
+- @participant.errors.full_messages.each do |msg|
+  .alert.alert-error
+    %a.close{ "data-dismiss" => :alert, :href => "#" } &times;
+    =msg
+
+.row-fluid
+  .span12.box
+    .box-header.red-background
+      .title
+        .icon-edit
+          = @participant.fname + " " + @participant.lname
+    .box-content
+      = form_for [:event, @participant] do |f|
+        %fieldset.inputs
+          .row-fluid
+            .span4
+              .control-group
+                %label.control-label{ :for => :fname }= t("formtastic.labels.participant.fname")
+                = f.text_field :fname
+            .span4
+              .control-group
+                %label.control-label{ :for => :lname }= t("formtastic.labels.participant.lname")
+                = f.text_field :lname
+            .span4
+              .control-group
+                %label.control-label{ :for => :phone }= t("formtastic.labels.participant.phone")
+                = f.text_field :phone
+          .row-fluid
+            .span4
+              .control-group
+                %label.control-label{ :for => :email }= t("formtastic.labels.participant.email")
+                = f.text_field :email
+            .span4
+              .control-group
+                %label.control-label{ :for => :status }= t("formtastic.labels.participant.status")
+                = f.collection_select :status, [["Nuevo", "N"], ["Contactado", "T"], ["Confirmado", "C"], ["Cancelado", "X"], ["Pospuesto", "D"]], :last, :first
+          .row-fluid
+            .span12
+              .control-group
+                %label.control-label{ :for => :notes }= t("formtastic.labels.participant.notes")
+                = f.text_area :notes, :rows => 10, :class => "input-block-level"
+          .row-fluid
+            .span12
+              .form-actions
+                .text-right
+                  %button.btn.btn-primary.btn-large{ :id => "guardar", :name => "commit", :type => "submit"}
+                    %i.icon-save
+                    Guardar
+                  %a.btn.btn-large{ :href => events_path }
+                    %i.icon-undo
+                    Cancelar

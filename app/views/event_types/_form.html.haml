@@ -1,29 +1,83 @@
-= semantic_form_for @event_type do |f|
-  = f.inputs do
-    .grid_12
-      = f.input :name
-      = f.input :duration
-    .grid_3
-      Entrenadores
-      - for trainer in Trainer.find(:all)
-        %div
-          = check_box_tag "event_type[trainer_ids][]", trainer.id, @event_type.trainers.include?(trainer)
-          = trainer.name
-    .grid_3 
-      Categorías
-      - for category in Category.find(:all)
-        %div
-          = check_box_tag "event_type[category_ids][]", category.id, @event_type.categories.include?(category)
-          = category.name
-    .grid_3
-      = f.input :include_in_catalog
-    .grid_12
-      = f.input :goal
-      = f.input :description
-      = f.input :recipients
-      = f.input :program
-      = f.input :faq
-      = f.input :materials
-  
-  = f.actions do
-    = f.action(:submit)
+- @event_type.errors.full_messages.each do |msg|
+  .alert.alert-error
+    %a.close{ "data-dismiss" => :alert, :href => "#" } &times;
+    =msg
+
+.row-fluid
+  .span12.box
+    .box-header.red-background
+      .title
+        .icon-edit
+          = @event_type.name.nil? ? "Nuevo Tipo de Evento" : @event_type.name
+    .box-content
+      = form_for @event_type do |f|
+        %fieldset.inputs
+          .row-fluid
+            .span8
+              .control-group
+                %label.control-label{ :for => :name }= t("formtastic.labels.event_type.name")
+                = f.text_field :name, :class => 'datepicker-class input-xxlarge'
+            .span4
+              .control-group
+                %label.control-label{ :for => :duration }= t("formtastic.labels.event_type.duration")
+                = f.text_field :duration, :class => 'datepicker-class input-mini'
+          .row-fluid
+            .span4
+              .control-group
+                %label.control-label
+                  = t("formtastic.labels.event_type.trainers")
+                .controls
+                - for trainer in @trainers
+                  %label.checkbox
+                    = check_box_tag "event_type[trainer_ids][]", trainer.id, @event_type.trainers.include?(trainer)
+                    = trainer.name
+            .span4
+              .control-group
+                %label.control-label
+                  = t("formtastic.labels.event_type.categories")
+                .controls
+                - for category in @categories
+                  %label.checkbox
+                    = check_box_tag "event_type[category_ids][]", category.id, @event_type.categories.include?(category)
+                    = category.name
+            .span4
+              .control-group
+                %label.control-label{ :for => :include_in_catalog }= t("formtastic.labels.event_type.include_in_catalog")
+                = f.check_box :include_in_catalog
+          .row-fluid
+            .span6
+              .control-group
+                %label.control-label{ :for => :goal }= t("formtastic.labels.event_type.goal")
+                = f.text_area :goal, :rows => 8, :class => "input-block-level"
+            .span6
+              .control-group
+                %label.control-label{ :for => :description }= t("formtastic.labels.event_type.description")
+                = f.text_area :description, :rows => 8, :class => "input-block-level"
+          .row-fluid
+            .span6
+              .control-group
+                %label.control-label{ :for => :recipients }= t("formtastic.labels.event_type.recipients")
+                = f.text_area :recipients, :rows => 8, :class => "input-block-level"
+            .span6
+              .control-group
+                %label.control-label{ :for => :program }= t("formtastic.labels.event_type.program")
+                = f.text_area :program, :rows => 8, :class => "input-block-level"
+          .row-fluid
+            .span6
+              .control-group
+                %label.control-label{ :for => :faq }= t("formtastic.labels.event_type.faq")
+                = f.text_area :faq, :rows => 8, :class => "input-block-level"
+            .span6
+              .control-group
+                %label.control-label{ :for => :materials }= t("formtastic.labels.event_type.materials")
+                = f.text_area :materials, :rows => 8, :class => "input-block-level"
+          .row-fuid
+            .span12
+              .form-actions
+                .text-right
+                  %button.btn.btn-primary.btn-large{:id => "guardar", :name => "commit", :type => "submit"}
+                    %i.icon-save
+                    Guardar
+                  %a.btn.btn-large{ :href => events_path }
+                    %i.icon-undo
+                    Cancelar

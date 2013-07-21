@@ -1,50 +1,143 @@
-= semantic_form_for @event do |f|
+- @event.errors.full_messages.each do |msg|
+  .alert.alert-error
+    %a.close{ "data-dismiss" => :alert, :href => "#" } &times;
+    =msg
 
-  - f.inputs :event_details do
-    .grid_12
-      = f.input :event_type, :as => :select, :collection => EventType.find(:all)
-    .grid_3
-      = f.input :date, :as => :string, :input_html => {:class => 'datepicker-class', :size => 6 }
-    .grid_3
-      = f.input :duration, :input_html => { :size => 3 }
-    .grid_6
-      = f.input :capacity, :input_html => { :size => 3 }
-    .grid_3
-      = f.input :is_webinar
-    .grid_6
-      = f.input :time_zone_name, :as => :select, :collection => @timezones, :input_html => { :style => "width: 200px" }, :member_label => :to_s, :member_value => :name
-    .grid_12
-      = f.input :start_time
-      = f.input :end_time
-      = f.input :place
-    .grid_3
-      = f.input :country, :as => :select, :collection => Country.find(:all), :input_html => { :style => "width: 200px" }
-    .grid_8
-      = f.input :city
-    .grid_12
-      #trainer_select
-        = render :partial => 'trainers_select'
-      = f.input :visibility_type, :as => :radio, :collection => { t('event.type.public') => "pu", t('event.type.private') => "pr", t('event.type.community') => "co" }
-    .grid_3
-      = f.input :list_price, :as => :number, :input_html => { :size => 2 }
-      = f.input :list_price_plus_tax
-    .grid_3
-      = f.input :list_price_2_pax_discount, :as => :string, :input_html => { :size => 2 }
-    .grid_6
-      = f.input :list_price_3plus_pax_discount, :as => :string, :input_html => { :size => 2 }
-    .grid_12
-    .grid_3
-      = f.input :eb_price, :as => :number, :input_html => { :size => 2 }
-    .grid_6
-      = f.input :eb_end_date, :as => :string, :input_html => {:class => 'datepicker-class', :size => 6 }
-    .grid_12
-      = f.input :registration_link
-      = f.input :sepyme_enabled 
-      = f.input :is_sold_out
-      = f.input :draft
-      = f.input :cancelled
-    .grid_12
-      = f.actions
+.row-fluid
+  .span12.box
+    .box-header.red-background
+      .title
+        .icon-edit
+          = @event.event_type.nil? ? "Nuevo Evento" : @event.event_type.name
+    .box-content
+      = form_for @event do |f|
+        %fieldset.inputs
+          .row-fluid
+            .span12
+              .control-group
+                %label.control-label{ :for => :event_type_id } Tipo de Evento
+                = f.collection_select :event_type_id, EventType.find(:all).sort{|p1,p2| p1.name <=> p2.name}, :id, :name, {include_blank: 'Selecciona uno...'}
+          .row-fluid
+            .span2
+              .control-group
+                %label.control-label{ :for => :date }= t("formtastic.labels.event.date")
+                = f.text_field :date, :class => 'datepicker-class input-small'
+            .span2
+              .control-group
+                %label.control-label{ :for => :duration }= t("formtastic.labels.event.duration")
+                = f.text_field :duration, :class => "input-mini"
+            .span2
+              .control-group
+                %label.control-label{ :for => :capacity }= t("formtastic.labels.event.capacity")
+                = f.text_field :capacity, :class => "input-mini"
+            .span2
+              .control-group
+                %label.control-label{ :for => :is_webinar }= t("formtastic.labels.event.is_webinar")
+                = f.check_box :is_webinar
+            .span4
+              .control-group#event_time_zone_name_input
+                %label.control-label{ :for => :time_zone_name }= t("formtastic.labels.event.time_zone_name")
+                = f.collection_select :time_zone_name, @timezones, :name, :to_s, {include_blank: 'Selecciona una...'}
+          .row-fluid
+            .span12
+              .control-group
+                %label.control-label= t("formtastic.labels.event.horario")
+                = "De " 
+                = f.time_select :start_time, {:minute_step => 15}, :style => "width:50px"
+                = " a " 
+                = f.time_select :end_time, {:minute_step => 15}, :style => "width:50px"
+          .row-fuid
+            .span5
+              .control-group
+                %label.control-label{ :for => :place }= t("formtastic.labels.event.place")
+                = f.text_field :place, :class => "span-5"
+            .span3
+              .control-group
+                %label.control-label{ :for => :country_id }= t("formtastic.labels.event.city")
+                = f.text_field :city, :class => "span-3"
+            .span4
+              .control-group
+                %label.control-label{ :for => :country_id }= t("formtastic.labels.event.country")
+                = f.collection_select :country_id, Country.find(:all), :id, :name, :input_html => { :style => "width: 200px" }
+          .row-fuid
+            .span12
+              .control-group
+                %label.control-label{ :for => :trainer_id }= t("formtastic.labels.event.trainer")
+                #trainer_select
+                  = render :partial => 'trainers_select'
+          .row-fuid
+            .span12
+              .control-group
+                %label.control-label{ :for => :visibility_type }= t("formtastic.labels.event.visibility_type")
+                .controls
+                  %label.checkbox.inline
+                    = f.radio_button :visibility_type, "pu"
+                    %span.label.label-success= t('event.type.public')
+                  %label.checkbox.inline
+                    = f.radio_button :visibility_type, "pr"
+                    %span.label.label-important= t('event.type.private')
+                  %label.checkbox.inline
+                    = f.radio_button :visibility_type, "co"
+                    %span.label.label-info= t('event.type.community')
+          .row-fuid#event_public_or_private_set
+            .span2
+              .control-group
+                %label.control-label{ :for => :list_price }= t("formtastic.labels.event.list_price")
+                = f.text_field :list_price, :class => "input-mini"
+            .span2
+              .control-group
+                %label.control-label{ :for => :list_price_plus_tax }= t("formtastic.labels.event.list_price_plus_tax")
+                = f.check_box :list_price_plus_tax
+            .span8
+              .row-fuid
+                .span3
+                  .control-group
+                    %label.control-label{ :for => :list_price_2_pax_discount }= t("formtastic.labels.event.list_price_2_pax_discount")
+                    = f.text_field :list_price_2_pax_discount, :class => "input-mini"
+                .span3
+                  .control-group
+                    %label.control-label{ :for => :list_price_3plus_pax_discount }= t("formtastic.labels.event.list_price_3plus_pax_discount")
+                    = f.text_field :list_price_3plus_pax_discount, :class => "input-mini"
+                .span3
+                  .control-group
+                    %label.control-label{ :for => :eb_price }= t("formtastic.labels.event.eb_price")
+                    = f.text_field :eb_price, :class => "input-mini"
+                .span3
+                  .control-group
+                    %label.control-label{ :for => :eb_end_date }= t("formtastic.labels.event.eb_end_date")
+                    = f.text_field :eb_end_date, :class => 'datepicker-class input-small'
+          .row-fuid
+            .span12
+              .control-group
+                %label.control-label{ :for => :registration_link }= t("formtastic.labels.event.registration_link")
+                = f.text_field :registration_link, :class => 'input-block-level', :placeholder => t("formtastic.hints.event.registration_link")
+          .row-fuid
+            .span3
+              .control-group
+                %label.control-label{ :for => :sepyme_enabled }= t("formtastic.labels.event.sepyme_enabled")
+                = f.check_box :sepyme_enabled
+            .span3
+              .control-group
+                %label.control-label{ :for => :is_sold_out }= t("formtastic.labels.event.is_sold_out")
+                = f.check_box :is_sold_out
+            .span3
+              .control-group
+                %label.control-label{ :for => :draft }= t("formtastic.labels.event.draft")
+                = f.check_box :draft
+            .span3
+              .control-group
+                %label.control-label{ :for => :cancelled }= t("formtastic.labels.event.cancelled")
+                = f.check_box :cancelled
+          .row-fuid
+            .span12
+              .form-actions
+                .text-right
+                  %button.btn.btn-primary.btn-large{:id => "guardar", :name => "commit", :type => "submit"}
+                    %i.icon-save
+                    Guardar
+                  %a.btn.btn-large{ :href => events_path }
+                    %i.icon-undo
+                    Cancelar
 
 :javascript
 
@@ -52,9 +145,12 @@
   $event_city_before_webinar = "";
   $event_place_before_webinar = "";
 
-  bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+  //bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
 
   $(document).ready(function() {
+	
+    $('input.datepicker-class').datepicker( { dateFormat: 'dd-mm-yy' } );
+	
     $("#event_visibility_type_pu").change( function() { eventTypeActions( $(this).val() ); });
     $("#event_visibility_type_pr").change( function() { eventTypeActions( $(this).val() ); });
     $("#event_visibility_type_co").change( function() { eventTypeActions( $(this).val() ); });
@@ -78,33 +174,26 @@
 
   function eventTypeActions( value ) {
     if (value === "pu") {
-      $("#event_list_price_2_pax_discount_input").show();
-      $("#event_list_price_3plus_pax_discount_input").show();
-      $("#event_eb_price_input").show();
-      $("#event_eb_end_date_input").show();
-      $("#event_list_price_input").show();
-      $("#event_list_price_plus_tax_input").show();
+      $("#event_list_price_2_pax_discount").removeAttr('disabled');
+      $("#event_list_price_3plus_pax_discount").removeAttr('disabled');
+      $("#event_eb_price").removeAttr('disabled');
+      $("#event_eb_end_date").removeAttr('disabled');
+      $("#event_public_or_private_set").show();
     }
     else if (value === "co") {
       $("#event_list_price_2_pax_discount").val("");
-      $("#event_list_price_2_pax_discount_input").hide();
       $("#event_list_price_3plus_pax_discount").val("");
-      $("#event_list_price_3plus_pax_discount_input").hide();
-      $("#event_eb_price_input").hide();
-      $("#event_eb_end_date_input").hide();
       $("#event_list_price").val( 0 );
-      $("#event_list_price_input").hide();
-      $("#event_list_price_plus_tax_input").hide();
+      $("#event_public_or_private_set").hide();
     }
     else if (value === "pr") {
       $("#event_list_price_2_pax_discount").val("");
-      $("#event_list_price_2_pax_discount_input").hide();
       $("#event_list_price_3plus_pax_discount").val("");
-      $("#event_list_price_3plus_pax_discount_input").hide();
-      $("#event_eb_price_input").hide();
-      $("#event_eb_end_date_input").hide();
-      $("#event_list_price_input").show();
-      $("#event_list_price_plus_tax_input").show();
+      $("#event_list_price_2_pax_discount").attr('disabled','disabled');
+      $("#event_list_price_3plus_pax_discount").attr('disabled','disabled');
+      $("#event_eb_price").attr('disabled','disabled');
+      $("#event_eb_end_date").attr('disabled','disabled');
+      $("#event_public_or_private_set").show();
     }
   }
 

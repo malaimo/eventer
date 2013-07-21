@@ -1,41 +1,66 @@
-%h1 Eventos Confirmados
+.page-header
+  %h1.pull-left
+    %i.icon-calendar
+    %span Eventos
+  .pull-right
+    %a.btn.btn-white{ :href => new_event_path }
+      %i.icon-calendar
+      Nuevo Evento
+    %a.btn.btn-white{ :href => '/dashboard/past_events'}
+      %i.icon-calendar-empty
+      Ver Eventos Pasados
 
-%p.record-actions
-  = link_to t('formtastic.actions.new'), new_event_path
+= render '/commons/notice'
 
-%table
-  %tr
-    %th Fecha
-    %th Tipo de Evento
-    %th Ciudad|Hora|Lugar
-    %th País
-    %th Tipo
-    %th Estado
-    %th{:colspan => 2} Acciones
-    
-  - @events.each do |event|
-    %tr
-      %td= event.human_date
-      - if event.event_type.nil?
-        %td= link_to "Sin Tipo de Evento", event
-      - else
-        %td= link_to event.event_type.short_name, event
-      %td
-        -if event.is_webinar?
-          %img{:src => "/assets/online.png", :style => "vertical-align:middle"}
-        = event.city + " | " + event.start_time.strftime( "%H:%Mhs." ) + " | " + event.place
-      %td= event.country.name unless event.country.nil?
-      %td 
-        -if event.visibility_type == "pu"
-          Público
-        -elsif event.visibility_type == "pr"
-          Privado
-        -elsif event.visibility_type == "co"
-          Comunitario
-      %td 
-        -if event.draft
-          Borrador
-        -else
-          Publicado
-      %td= link_to 'Ver', event
-      %td= link_to 'Modificar', edit_event_path(event)
+.row-fluid
+  .span12.box.bordered-box.blue-border{ :style => "margin-bottom:0;" }
+    .box-header.blue-background
+      .title Eventos futuros
+    .box-content.box-no-padding
+      .responsive-table
+        .scrollable-area
+          %table.table{ :style => "margin-bottom:0;" }
+            %thead
+              %tr
+                %th Fecha
+                %th Tipo de Evento
+                %th Detalles
+                %th Tipo
+                %th Estado
+                %th
+            %tbody
+              - @events.each do |event|
+                %tr
+                  %td= event.human_date
+                  - if event.event_type.nil?
+                    %td= link_to "Sin Tipo de Evento", event
+                  - else
+                    %td= link_to event.event_type.short_name, event
+                  %td
+                    -if event.is_webinar?
+                      %img{:src => "/assets/online.png", :style => "vertical-align:middle"}
+                    -elsif !event.country.nil?
+                      %i{ :class => "flag flag-#{event.country.iso_code.downcase}"}
+                    = event.city + " | " + event.start_time.strftime( "%H:%Mhs." ) + " | " + event.place
+                  %td 
+                    -if event.visibility_type == "pu"
+                      %span.label.label-success Público
+                    -elsif event.visibility_type == "pr"
+                      %span.label.label-important Privado
+                    -elsif event.visibility_type == "co"
+                      %span.label.label-info Comunitario
+                  %td 
+                    -if event.draft
+                      %span.label.label-important Borrador
+                    -else
+                      %span.label.label-success Publicado
+                  %td
+                    .text-right
+                      - #%a.btn.btn-success.btn-mini{ :href => event_path(event) }
+                      - #  %i.icon-eye-open
+                      %a.btn.btn-warning.btn-mini{ :href => edit_event_path(event) }
+                        %i.icon-edit
+                      -if event.is_webinar?
+                        %a.btn.btn-success.btn-mini{ :href => "/events/#{event.id}/start_webinar" }
+                          %i.icon-play
+                          Iniciar

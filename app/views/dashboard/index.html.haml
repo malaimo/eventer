@@ -1,62 +1,82 @@
-%h1 Dashboard
-%strong Dashboard General
-|
-= link_to 'Pricing', '/dashboard/pricing'
-|
-= link_to 'Eventos Pasados', '/dashboard/past_events'
+.page-header
+  %h1.pull-left
+    %i.icon-dashboard
+    %span Dashboard General
 
-%table
-  %tr
-    %th Fecha
-    %th Nombre
-    %th Ciudad|Hora|Lugar
-    %th Pipeline Participantes
-    %th Compl.
-    %th Iniciar
-  
-  - weeks_from_now_p = -1
-  - @events.each do |event|
-    - weeks_from_now = event.date.cweek-Date.today.cweek
-    - if weeks_from_now <= 1 
-      - weeks_from_now=1
-    - elsif weeks_from_now > 2
-      - if weeks_from_now <= 4
-        - weeks_from_now=4
-      - elsif weeks_from_now <= 6
-        - weeks_from_now=6
-      - else
-        - weeks_from_now=10
-    - if weeks_from_now_p != weeks_from_now
-      %tr{:style => 'background-color: #555555; color: #ffffff'}
-        - if weeks_from_now <=6
-          %td{:colspan => 7}= "Eventos a " + weeks_from_now.to_s + " semana(s)"
-        - else
-          %td{:colspan => 7}= "Eventos a más de 6 semanas"
-      - weeks_from_now_p = weeks_from_now
-    %tr
-      %td= event.human_date
-      %td
-        - if event.event_type.nil?
-          = "Sin Tipo de Evento"
-        - else
-          = event.event_type.short_name
-      %td
-        -if event.is_webinar?
-          %img{:src => "/assets/online.png", :style => "vertical-align:middle"}
-        = event.city + " | " + event.start_time.strftime( "%H:%Mhs." ) + " | " + event.place
-      %td
-        - if event.registration_link == ""
-          - if event.participants.new_ones.count > 0
-            %img{:src => "/assets/alert.png", :style => "vertical-align:middle"}
-            %strong= link_to event.participants.new_ones.count.to_s + " nuevos", event_participants_path(event)
-            >
-          = link_to event.participants.contacted.count.to_s + " contactados", event_participants_path(event)
-          >
-          = link_to event.participants.confirmed.count.to_s + " confirmados", event_participants_path(event)
-      %td
-        - if event.registration_link == ""
-          = (event.completion*100).round.to_s + "%"
-      %td
-        -if event.is_webinar?
-          %a{ :href => "/events/#{event.id}/start_webinar", :title => "Iniciar Webinar!"}
-            %img{:src => "/assets/start.png", :style => "vertical-align:middle"}
+= render '/commons/notice'
+
+.row-fluid
+  .span12.box
+    .box-header
+      .title
+        .icon-group
+        Registros
+      .actions
+        %a.btn.box-collapse.btn-mini.btn-link
+          %i
+    .row-fluid
+      .span6
+        .box-content.box-statistic
+          %h3.title.text-error
+            = @nuevos_registros
+          %small Nuevos (Recordá Contactarlos)
+          .text-error.icon-inbox.align-right
+      .span6
+        .box-content.box-statistic
+          %h3.title.text-warning
+            = @participantes_contactados
+          %small Contactados (Recordá Hacer Seguimiento)
+          .text-warning.icon-check.align-right
+
+.row-fluid
+  .span12
+    .row-fluid
+      .span12.box.box-nomargin
+        .box-header.green-background
+          .title
+            .icon-tasks
+            Completitud de Próximos Cursos (Participantes Confirmados)
+          .actions
+            %a.btn.box-collapse.btn-mini.btn-link
+              %i
+        .box-content
+          %ul.unstyled.tasks
+            - @events.select{ |ev| !ev.event_type.nil? }.each do |event|
+              %li
+                .row-fluid
+                  .span1
+                    = event.human_date
+                    %br
+                    -if event.is_webinar? && false
+                      %img{:src => "/assets/icons/webinar.png", :style => "vertical-align:middle; width:50%"}
+                    - elsif false
+                      %img{:src => "/assets/icons/presencial.png", :style => "vertical-align:middle; width:50%"}
+                  .span11
+                    .task
+                      %span.pull-left
+                        %a{ :href => "/events/#{event.id}/participants" }
+                          %b= event.event_type.name
+                          = "| " + event.city + " | " + event.start_time.strftime( "%H:%Mhs." ) + " | " + event.place
+                      %small.pull-right
+                        - if event.registration_link == ""
+                          = "#{(event.completion*100).round.to_s}% (#{event.participants.confirmed.count.to_s}/#{event.capacity.to_s}) "
+                          - if event.participants.new_ones.count > 0
+                            %img{:src => "/assets/alert.png", :style => "vertical-align:middle"}
+                            %strong= link_to event.participants.new_ones.count.to_s + " nuevos", event_participants_path(event)
+                          %a.btn.btn-info.btn-mini{ :href => "/events/#{event.id}/participants" }
+                            %i.icon-group
+                        - else
+                          N/A
+                    - if event.registration_link == ""
+                      - if event.completion < 0.2
+                        .progress.progress-small.progress-danger
+                          .bar{ :style => "width: #{(event.completion*100).round.to_s}%" }
+                      - elsif event.completion >= 0.2 && event.completion < 0.5
+                        .progress.progress-small.progress-warning
+                          .bar{ :style => "width: #{(event.completion*100).round.to_s}%" }
+                      - elsif event.completion >= 0.5 && event.completion < 0.8
+                        .progress.progress-small
+                          .bar{ :style => "width: #{(event.completion*100).round.to_s}%" }
+                      - elsif event.completion >= 0.8
+                        .progress.progress-small.progress-success
+                          .bar{ :style => "width: #{(event.completion*100).round.to_s}%" }

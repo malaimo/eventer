@@ -96,7 +96,7 @@ describe EventTypesController do
 
       it "redirects to the created event_type" do
         post :create, {:event_type => valid_attributes}, valid_session
-        response.should redirect_to(EventType.last)
+        response.should redirect_to(EventType)
       end
     end
 
@@ -138,7 +138,7 @@ describe EventTypesController do
       it "redirects to the event_type" do
         event_type = EventType.create! valid_attributes
         put :update, {:id => event_type.to_param, :event_type => valid_attributes}, valid_session
-        response.should redirect_to(event_type)
+        response.should redirect_to(EventType)
       end
     end
 

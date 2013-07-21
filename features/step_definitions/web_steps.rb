@@ -24,7 +24,7 @@ def create_valid_event_inputs(event_type_name, event_date='31-01-2030')
 end
 
 def submit_event
-  click_button 'Ok'
+  click_button 'guardar'
 end
 
 Given /^I visit the home page$/ do
@@ -113,14 +113,12 @@ When /^I choose to create a Public event$/ do
   choose 'event_visibility_type_pu'
 end
 
-Then /^I should not see public prices$/ do
-  page.find_field('event_eb_price').visible?.should be false
+Then /^public prices should be disabled$/ do
+  page.find_field('event_eb_price')['disabled'].should == "true"
 end
 
 Then /^I should not see any price$/ do
-  page.find_field('event_eb_price').visible?.should be false
-  page.find_field('event_list_price').visible?.should be false
-  page.find_field('event_eb_end_date').visible?.should be false
+  page.find( 'div', :id => 'event_public_or_private_set').visible?.should be false
 end
 
 Then /^I should see public prices$/ do
@@ -135,7 +133,7 @@ end
 
 Then /^I should see the webinar setup$/ do
   page.find_field('event_city').value.should == "Webinar"
-  page.find_field('event_country_id').value.should == "245" # "-- OnLine --"
+  page.find_field('event_country_id').find('option[selected]').text.should == "-- OnLine --"
 end
 
 Then /^EB date should be "([^\"]*)"$/ do |value|
@@ -147,7 +145,7 @@ When /^I modify the event "([^\"]*)"$/ do |link_description|
   click_link "Modificar"
   sleep 10
   fill_in 'event_capacity', :with => 200
-  click_button "Guardar Cambios"
+  click_button "guardar"
   sleep 10
 end
 
@@ -156,7 +154,7 @@ When /^I cancel the event "([^\"]*)"$/ do |link_description|
   click_link "Modificar"
   sleep 10
   check 'event_cancelled'
-  click_button "Guardar Cambios"
+  click_button "guardar"
   sleep 10
 end
 
@@ -187,10 +185,10 @@ Then /^It should have a registration page$/ do
   page.should have_content(@event.human_date )
   page.should have_content(@event.city )
   
-  page.should have_content('Nombre')
-  page.should have_content('Apellido')
-  page.should have_content('E-Mail')
-  page.should have_content('Teléfono de contacto')
+#  page.should have_content('Nombre')
+#  page.should have_content('Apellido')
+#  page.should have_content('E-Mail')
+#  page.should have_content('Teléfono')
 end
 
 When /^I visit the dashboard$/ do
@@ -209,9 +207,9 @@ end
 
 def contact_participant
   visit "/events/1/participants"
-  click_link "Modificar"
+  click_link "modificar"
   select "Contactado", :from => 'participant_status'
-  click_button 'Modificar'
+  click_button 'guardar'
 end
 
 Given /^there are (\d+) participants and 1 is contacted$/ do |newones|

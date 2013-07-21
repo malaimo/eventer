@@ -1,5 +1,6 @@
 class RolesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :activate_menu
   load_and_authorize_resource
   
   # GET /roles
@@ -82,5 +83,11 @@ class RolesController < ApplicationController
       format.html { redirect_to roles_url }
       format.json { head :no_content }
     end
+  end
+  
+  private
+  
+  def activate_menu
+    @active_menu = "admin"
   end
 end

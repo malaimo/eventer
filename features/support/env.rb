@@ -58,3 +58,9 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+After("@selenium") do |scenario|
+  if scenario.exception.is_a? Timeout::Error
+    # restart Selenium driver
+    Capybara.send(:session_pool).delete_if { |key, value| key =~ /selenium/i }
+  end
+end

@@ -1,11 +1,13 @@
 class EventTypesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :activate_menu
+  
   load_and_authorize_resource
 
   # GET /event_types
   # GET /event_types.json
   def index
-    @event_types = EventType.all
+    @event_types = EventType.all.sort{|p1,p2| p1.name <=> p2.name}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -38,6 +40,8 @@ class EventTypesController < ApplicationController
   # GET /event_types/new.json
   def new
     @event_type = EventType.new
+    @trainers = Trainer.find(:all).sort{|p1,p2| p1.name <=> p2.name}
+    @categories = Category.find(:all).sort{|p1,p2| p1.name <=> p2.name}
 
     respond_to do |format|
       format.html # new.html.erb
@@ -48,16 +52,20 @@ class EventTypesController < ApplicationController
   # GET /event_types/1/edit
   def edit
     @event_type = EventType.find(params[:id])
+    @trainers = Trainer.find(:all).sort{|p1,p2| p1.name <=> p2.name}
+    @categories = Category.find(:all).sort{|p1,p2| p1.name <=> p2.name}
   end
 
   # POST /event_types
   # POST /event_types.json
   def create
     @event_type = EventType.new(params[:event_type])
+    @trainers = Trainer.find(:all).sort{|p1,p2| p1.name <=> p2.name}
+    @categories = Category.find(:all).sort{|p1,p2| p1.name <=> p2.name}
 
     respond_to do |format|
       if @event_type.save
-        format.html { redirect_to @event_type, notice: 'Event type was successfully created.' }
+        format.html { redirect_to event_types_path, notice: t('flash.event_type.create.success')  }
         format.json { render json: @event_type, status: :created, location: @event_type }
       else
         format.html { render action: "new" }
@@ -73,7 +81,7 @@ class EventTypesController < ApplicationController
 
     respond_to do |format|
       if @event_type.update_attributes(params[:event_type])
-        format.html { redirect_to @event_type, notice: 'Event type was successfully updated.' }
+        format.html { redirect_to event_types_path, notice: t('flash.event_type.update.success') }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -92,5 +100,11 @@ class EventTypesController < ApplicationController
       format.html { redirect_to event_types_url }
       format.json { head :no_content }
     end
+  end
+  
+  private
+  
+  def activate_menu
+    @active_menu = "event_types"
   end
 end

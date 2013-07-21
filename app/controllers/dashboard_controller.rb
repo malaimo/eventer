@@ -1,16 +1,39 @@
 class DashboardController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :activate_menu
   
   def index
-    @events = Event.public_and_visible.all(:order => 'date')
+    @active_menu = "dashboard"
+    
+    @events = Event.public_and_visible.all(:order => 'date').select{ |ev| !ev.event_type.nil? }
+    
+    @nuevos_registros = 0
+    @participantes_contactados = 0
+    
+    @events.each do |event|
+      @nuevos_registros += event.participants.new_ones.count
+      @participantes_contactados += event.participants.contacted.count
+    end
+    
   end
   
   def past_events
-    @events = Event.public_and_past_visible.all(:order => 'date desc')
+    @events = Event.public_and_past_visible.all(:order => 'date desc').select{ |ev| !ev.event_type.nil? }
   end
   
   def pricing
-    @events = Event.public_commercial_visible.all(:order => 'date')
+    @active_menu = "pricing"
+    @events = Event.public_commercial_visible.all(:order => 'date').select{ |ev| !ev.event_type.nil? }
   end  
+  
+  def countdown
+    @events = Event.public_and_visible.all(:order => 'date').select{ |ev| !ev.event_type.nil? }
+  end
+  
+  private
+  
+  def activate_menu
+    @active_menu = "dashboard"
+  end
   
 end

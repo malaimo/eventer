@@ -4,14 +4,13 @@ Feature: Administración de Eventos
 	Scenario: Ver listado de Eventos Confirmados
 		Given Im a logged in user
 		When I visit the events page
-		Then I should see "Eventos Confirmados"
+		Then I should see "Eventos futuros"
 		And I should see "Fecha"
 		And I should see "Tipo de Evento"
-		And I should see "Ciudad|Hora|Lugar"
-		And I should see "País"
+		And I should see "Detalles"
 		And I should see "Tipo"
-		And I should see "Acciones"
-		And I should see "Nuevo"
+		And I should see "Estado"
+		And I should see "Nuevo Evento"
 	
 	@selenium
 	Scenario: Alta de Evento Válido
@@ -49,14 +48,13 @@ Feature: Administración de Eventos
 	Scenario: No se puede crear un evento vacío
 		Given Im a logged in user
 		When I create an empty event
-		Then I should see "Por favor verifica los campos destacados"
-		And  I should see "no puede estar en blanco"
+		Then I should see "no puede estar en blanco"
 		
 	@selenium	
 	Scenario: Se deben ocutar los descuentos y precios EB y SEB si es un evento privado
 		Given Im a logged in user
 		When I choose to create a Private event
-		Then I should not see public prices
+		Then public prices should be disabled
 
 	@selenium
 	Scenario: Se deben mostrar los descuentos y precios EB y SEB si es un evento público
@@ -69,12 +67,6 @@ Feature: Administración de Eventos
 	    Given Im a logged in user
 		When I choose to create a Webinar event
 		Then I should see the webinar setup
-		
-	@selenium	
-	Scenario: Se debe ocultar el precio, los descuentos y precios EB y SEB si es un evento comunitario
-		Given Im a logged in user
-		When I choose to create a Community event
-		Then I should not see any price
 
 	@selenium	
 	Scenario: SEB=30 días antes de la fecha del evento y EB=10 días antes de la fecha del evento

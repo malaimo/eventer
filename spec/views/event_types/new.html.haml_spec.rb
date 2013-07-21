@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe "event_types/new" do
   before(:each) do
+    @trainers = Trainer.all
+    @categories = Category.all
     assign(:event_type, stub_model(EventType,
       :name => "MyString",
       :description => "MyText",

@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 ruby '1.9.3'
 
 gem 'rails', '3.2.11'
@@ -62,6 +62,7 @@ gem 'devise'
 gem 'cancan'
 
 gem 'formtastic'
+gem 'formtastic-bootstrap'
 gem 'valid_email'
 gem 'daemons'
 gem 'delayed_job_active_record'

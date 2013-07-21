@@ -1,13 +1,20 @@
-Estás registrándote a:
-%h4= @event.event_type.name
-- if @event.is_webinar?
-  = @event.human_date + " de " + @event.start_time.strftime( "%H:%M" ) + " a " + @event.end_time.strftime( "%H:%M" ) + " hs."
-  = @event.place
-  - if @event.webinar_started? && !@event.webinar_finished?
-    %h6= "Actualmente en progreso!"
-- else
-  = @event.human_date + " de " + @event.start_time.strftime( "%H:%M" ) + " a " + @event.end_time.strftime( "%H:%M" ) + " hs."
-  %br= @event.place + ", " + @event.city
-%hr
-
-= render 'form'
+.controls
+  .form-wrapper
+    %h1.text-center= @event.event_type.name
+    - if @event.is_webinar?
+      %p.text-center
+        %i.icon-calendar
+        = @event.human_date + " de " + @event.start_time.strftime( "%H:%M" ) + " a " + @event.end_time.strftime( "%H:%M" ) + " hs."
+        %br
+        %i.icon-globe
+        = @event.place
+      - if @event.webinar_started? && !@event.webinar_finished?
+        %h6.text-center= "Actualmente en progreso!"
+    - else
+      %p.text-center
+        %i.icon-calendar
+        = @event.human_date + " de " + @event.start_time.strftime( "%H:%M" ) + " a " + @event.end_time.strftime( "%H:%M" ) + " hs."
+        %br
+        %i.icon-map-marker
+        = @event.place + ", " + @event.city
+    = render 'form'

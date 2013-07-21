@@ -1,10 +1,8 @@
-= semantic_form_for("event", :remote => true) do |f|
-
-  - f.inputs do
-    - if !@trainers_for_event_type.blank?
-      = f.input :trainer_id, :as => :select, :collection=>@trainers_for_event_type.collect{ |s| [s.name,s.id]}
+= form_for("event", :remote => true) do |f|
+  - if !@trainers_for_event_type.blank?
+    = f.collection_select :trainer_id, @trainers_for_event_type, :id, :name
+  - else
+    - if !@event.nil? && !@event.event_type.nil?
+      = f.collection_select :trainer_id, @event.event_type.trainers, :id, :name
     - else
-      - if !@event.blank? && !@event.event_type.blank?
-        = f.input :trainer_id, :as => :select, :collection=>@event.event_type.trainers.collect{ |s| [s.name,s.id]}
-      - else
-        = f.input :trainer_id, :as => :select, :collection=>[]
+      = f.collection_select :trainer_id, [], :id, :name, {include_blank: 'No hay entrenadores disponibles'}

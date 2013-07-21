@@ -1,4 +1,10 @@
-%h1= t('title.trainer.index')
+.page-header
+  %h1.pull-left
+    %i.icon-briefcase
+    %span Entrenadores
+
+= render '/commons/not_migrated_yet'
+
 
 %p.record-actions
   = link_to t('formtastic.actions.new'), new_trainer_path
