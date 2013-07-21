@@ -88,6 +88,6 @@ class CategoriesController < ApplicationController
   private
   
   def activate_menu
-    @active_menu = "admin"
+    @active_menu = "categories"
   end
 end

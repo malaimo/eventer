@@ -88,6 +88,6 @@ class UsersController < ApplicationController
   private
   
   def activate_menu
-    @active_menu = "admin"
+    @active_menu = "users"
   end
 end

@@ -89,6 +89,6 @@ class TrainersController < ApplicationController
   private
   
   def activate_menu
-    @active_menu = "admin"
+    @active_menu = "trainers"
   end
 end

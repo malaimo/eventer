@@ -20,27 +20,21 @@
             %a{ :href => "/event_types" }
               %i.icon-tasks
               %span Tipos de Evento
-        %li{ :class => menu_item_class(@active_menu, "admin") }
-          %a.dropdown-collapse{ :href => "#" }
-            %i.icon-th-list
-            %span Administracion
-            %i.icon-angle-down.angle-down
-          %ul.nav.nav-stacked
-            - if can? :manage, Category.new
-              %li
-                %a{ :href => categories_path }
-                  %i.icon-caret-right
-                  %span= t('menu.categories')
-            - if can? :manage, Trainer.new
-              %li
-                %a{ :href => trainers_path }
-                  %i.icon-caret-right
-                  %span= t('menu.trainers')
-            %li
-              %a{ :href => roles_path }
-                %i.icon-caret-right
-                %span= t('menu.roles')
-            %li
-              %a{ :href => users_path }
-                %i.icon-caret-right
-                %span= t('menu.users')
+        - if can? :manage, Category.new
+          %li{ :class => menu_item_class(@active_menu, "categories") }
+            %a{ :href => categories_path }
+              %i.icon-sitemap
+              %span= t('menu.categories')
+        - if can? :manage, Trainer.new
+          %li{ :class => menu_item_class(@active_menu, "trainers") }
+            %a{ :href => trainers_path }
+              %i.icon-briefcase
+              %span= t('menu.trainers')
+        %li{ :class => menu_item_class(@active_menu, "roles") }
+          %a{ :href => roles_path }
+            %i.icon-cogs
+            %span= t('menu.roles')
+        %li{ :class => menu_item_class(@active_menu, "users") }
+          %a{ :href => users_path }
+            %i.icon-user
+            %span= t('menu.users')
