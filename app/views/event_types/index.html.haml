@@ -14,17 +14,17 @@
     .box-content.box-no-padding
       .responsive-table
         .scrollable-area
-          %table.table{ :style => "margin-bottom:0;" }
+          %table.table.table-striped{ :style => "margin-bottom:0;" }
             %thead
               %tr
                 %th= t('formtastic.labels.event_type.name')
-                %th= t('formtastic.labels.event_type.description')
+                -# %th= t('formtastic.labels.event_type.description')
                 %th
             %tbody
               - @event_types.each do |event_type|
                 %tr
                   %td= event_type.name
-                  %td= event_type.description
+                  -# %td= event_type.description
                   %td
                     .text-right
                       - #%a.btn.btn-success.btn-mini{ :href => event_path(event) }

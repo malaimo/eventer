@@ -5,7 +5,7 @@ class DashboardController < ApplicationController
   def index
     @active_menu = "dashboard"
     
-    @events = Event.public_and_visible.all(:order => 'date').select{ |ev| !ev.event_type.nil? }
+    @events = Event.public_and_visible.all(:order => 'date').select{ |ev| !ev.event_type.nil? && ev.registration_link == "" }
     
     @nuevos_registros = 0
     @participantes_contactados = 0
