@@ -78,10 +78,8 @@
             %thead
               %tr
                 %th Fecha
-                %th Nombre
-                %th Apellido
-                %th Email
-                %th Teléfono
+                %th Nombre y Apellido
+                %th Contacto
                 %th Estado
                 %th Notas
                 %th
@@ -89,10 +87,11 @@
               - @participants.each do |participant|
                 %tr
                   %td= l participant.created_at, :format => :short
-                  %td= participant.fname
-                  %td= participant.lname
-                  %td= participant.email
-                  %td= participant.phone
+                  %td= participant.fname + " " + participant.lname
+                  %td
+                    = participant.email
+                    .div.btn.btn-mini.has-popover{ "data-content" => participant.phone, "data-placement" => "top", "data-title" => "Teléfono" }
+                      %i.icon-phone-sign
                   - if participant.status == "N"
                     %td{:style=>"background-color: #ffff00;"}Nuevo
                   - elsif participant.status == "T"
