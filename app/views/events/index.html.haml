@@ -25,8 +25,7 @@
                 %th Fecha
                 %th Tipo de Evento
                 %th Detalles
-                %th Tipo
-                %th Estado
+                %th 
                 %th
             %tbody
               - @events.each do |event|
@@ -36,12 +35,14 @@
                     %td= link_to "Sin Tipo de Evento", event
                   - else
                     %td= link_to event.event_type.short_name, event
-                  %td
+                  %td{ :style => "white-space:normal;"}
                     -if event.is_webinar?
                       %img{:src => "/assets/online.png", :style => "vertical-align:middle"}
                     -elsif !event.country.nil?
                       %i{ :class => "flag flag-#{event.country.iso_code.downcase}"}
-                    = event.city + " | " + event.start_time.strftime( "%H:%Mhs." ) + " | " + event.place
+                    = event.city
+                    %br
+                    = event.start_time.strftime( "%H:%Mhs." ) + " | " + event.place
                   %td 
                     -if event.visibility_type == "pu"
                       %span.label.label-success Público
@@ -49,7 +50,7 @@
                       %span.label.label-important Privado
                     -elsif event.visibility_type == "co"
                       %span.label.label-info Comunitario
-                  %td 
+                    %br 
                     -if event.draft
                       %span.label.label-important Borrador
                     -else
@@ -57,10 +58,10 @@
                   %td
                     .text-right
                       - #%a.btn.btn-success.btn-mini{ :href => event_path(event) }
-                      - #  %i.icon-eye-open
-                      %a.btn.btn-warning.btn-mini{ :href => edit_event_path(event) }
-                        %i.icon-edit
+                      - #  %i.icon-eye-open	
                       -if event.is_webinar?
                         %a.btn.btn-success.btn-mini{ :href => "/events/#{event.id}/start_webinar" }
                           %i.icon-play
                           Iniciar
+                      %a.btn.btn-warning.btn-mini{ :href => edit_event_path(event) }
+                        %i.icon-edit
