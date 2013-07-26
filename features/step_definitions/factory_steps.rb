@@ -17,3 +17,11 @@ Given /^theres (\d+) event (\d+) week away from now$/ do |amount, weeks_away|
     event.save!
   }
 end
+
+Given /^theres an influence zone$/ do
+  country = FactoryGirl.create(:country)
+  zi = FactoryGirl.create(:influence_zone)
+  zi.country = country
+  zi.zone_name = "Buenos Aires"
+  zi.save!
+end

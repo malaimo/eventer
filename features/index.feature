@@ -1,13 +1,5 @@
 Feature: Inicio
 
-	Scenario: Página de Inicio
-		Given I visit the home page
-		Then I should see "Listado de eventos"
-		And I should see "Fecha"
-		And I should see "Nombre"
-		And I should see "Ciudad"
-		And I should see "País"
-
 #	Scenario: Dashboard de Participantes
 #		Given Im a logged in user
 #		And theres 1 event 1 week away from now

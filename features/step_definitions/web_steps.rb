@@ -169,6 +169,7 @@ When /^I register for that event$/ do
   fill_in 'participant_lname', :with => 'Callidoro'
   fill_in 'participant_email', :with => 'jcallidoro@gmail.com'
   fill_in 'participant_phone', :with => '1234-5678'
+  select 'Argentina - Buenos Aires', :from => 'participant_influence_zone_id'
   click_button 'Registrarme'
 end
 

@@ -28,7 +28,8 @@ describe ParticipantsController do
       :fname => "Pablo",
       :lname => "Picasso", 
       :email => "ppicaso@pintores.org",
-      :phone => "1234-5678"}
+      :phone => "1234-5678",
+      :influence_zone_id => FactoryGirl.create(:influence_zone).id}
   end
 
   # This should return the minimal set of values that should be in the session

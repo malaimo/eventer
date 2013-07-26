@@ -110,8 +110,12 @@ describe Event do
      it "It should return a completion percentage" do
 
           @event.capacity = 10
+          
+          c = FactoryGirl.create(:country)
+          zi = FactoryGirl.create(:influence_zone)
+          zi.country = c
 
-          p = Participant.new({:fname => "juan", :lname => "pipo", :phone => "1234-5678", :email => "ppp@ppp.com"})
+          p = Participant.new({:fname => "juan", :lname => "pipo", :phone => "1234-5678", :email => "ppp@ppp.com", :influence_zone => zi })
           p.event = @event
           p.status = "C"
           p.save
