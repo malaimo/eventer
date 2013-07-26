@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130708004410) do
+ActiveRecord::Schema.define(:version => 20130725225403) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -107,16 +107,25 @@ ActiveRecord::Schema.define(:version => 20130708004410) do
   add_index "events", ["country_id"], :name => "index_events_on_country_id"
   add_index "events", ["trainer_id"], :name => "index_events_on_trainer_id"
 
+  create_table "influence_zones", :force => true do |t|
+    t.string   "zone_name"
+    t.string   "tag_name"
+    t.integer  "country_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "participants", :force => true do |t|
     t.string   "fname"
     t.string   "lname"
     t.string   "email"
     t.string   "phone"
     t.integer  "event_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "status"
     t.text     "notes"
+    t.integer  "influence_zone_id"
   end
 
   add_index "participants", ["event_id"], :name => "index_participants_on_event_id"

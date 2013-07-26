@@ -106,7 +106,8 @@ es:
         lname: "Apellido"
         phone: "Teléfono de contacto"
         email: "E-Mail"
-        status: "Estado"        
+        status: "Estado"      
+        influence_zone: "Zona de Influencia"  
       trainer:
         linedin_url: "URL de LinedIn"
         is_kleerer: "Es Kleerer?"

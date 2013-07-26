@@ -2,9 +2,11 @@ require 'valid_email'
 
 class Participant < ActiveRecord::Base
   belongs_to :event
-  attr_accessible :email, :fname, :lname, :phone, :event_id, :status, :notes
+  belongs_to :influence_zone
   
-  validates :email, :fname, :lname, :phone, :event, :presence => true
+  attr_accessible :email, :fname, :lname, :phone, :event_id, :status, :notes, :influence_zone_id
+  
+  validates :email, :fname, :lname, :phone, :event, :influence_zone, :presence => true
   
   validates :email, :email => true
   
@@ -23,6 +25,7 @@ class Participant < ActiveRecord::Base
     self.email 'Email'
     self.phone 'Telefono'
     self.human_status 'Estado'
+    self.influence_zone_tag 'Zona de Influencia'
   end
   
   def initialize_defaults
@@ -75,5 +78,9 @@ class Participant < ActiveRecord::Base
   
   def is_present?
     (self.status == "A")
+  end
+  
+  def influence_zone_tag
+    self.influence_zone.nil? ? "" : self.influence_zone.tag_name
   end
 end

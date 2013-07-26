@@ -96,6 +96,10 @@
                     %span{ :style => "white-space:nowrap;"}
                       %i.icon-phone-sign
                       = participant.phone
+                    %br
+                    %span{ :style => "white-space:nowrap;"}
+                      %i.icon-globe
+                      = participant.influence_zone.nil? ? "N/A" : participant.influence_zone.tag_name
                   - if participant.status == "N"
                     %td{:style=>"background-color: #ffff00;"}Nuevo
                   - elsif participant.status == "T"

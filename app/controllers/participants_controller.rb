@@ -30,6 +30,7 @@ class ParticipantsController < ApplicationController
   def new
     @participant = Participant.new
     @event = Event.find(params[:event_id])
+    @influence_zones = InfluenceZone.all
 
     respond_to do |format|
       format.html { render :layout => "empty_layout" }
@@ -50,6 +51,7 @@ class ParticipantsController < ApplicationController
   def edit
     @participant = Participant.find(params[:id])
     @event = Event.find(params[:event_id])
+    @influence_zones = InfluenceZone.all
   end
 
   # POST /participants
@@ -95,6 +97,7 @@ class ParticipantsController < ApplicationController
   # PUT /participants/1.json
   def update
     @participant = Participant.find(params[:id])
+    @influence_zones = InfluenceZone.all
  
     respond_to do |format|
       if @participant.update_attributes(params[:participant])

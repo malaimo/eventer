@@ -38,6 +38,12 @@ describe Participant do
     @participant.valid?.should be false
   end
 
+  it "should require the influence zone" do
+    @participant.influence_zone = nil
+    
+    @participant.valid?.should be false
+  end
+
   it "should validate the email" do
     @participant.email = "hola@gmail.com"
     

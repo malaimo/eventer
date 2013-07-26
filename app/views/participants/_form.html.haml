@@ -24,6 +24,8 @@
       .span12
         .control-group
           = f.text_field :phone, :class => "span12", :placeholder => t("formtastic.labels.participant.phone")
+    .row_fluid
+      = f.collection_select :influence_zone_id, @influence_zones, :id, :display_name, {include_blank: 'Tu lugar más próximo ...'}
     .row-fluid
       .span12
         .form-actions{ :style => "padding: 4px 20px 4px; margin-top: 0px;"}

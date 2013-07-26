@@ -73,12 +73,19 @@ FactoryGirl.define do
     trainer FactoryGirl.build(:trainer)
   end
   
+  factory :influence_zone do
+    tag_name "ZI-AMS-AR-PAT (Patagonia)"
+    zone_name "Rio Negro"
+    country FactoryGirl.build(:country)
+  end
+  
   factory :participant do
     fname "Juan Carlos"
     lname "Perez Luasó"
     email "juanca@perez.com"
     phone "5555-5555"
     event FactoryGirl.build(:event)
+    influence_zone FactoryGirl.build(:influence_zone)
   end
 
 end
