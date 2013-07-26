@@ -71,7 +71,15 @@ class Event < ActiveRecord::Base
 
   def completion
     if self.capacity > 0
-      self.participants.confirmed.count*1.0/self.capacity
+      (self.participants.confirmed.count+self.participants.attended.count)*1.0/self.capacity
+    else
+      1.0
+    end
+  end
+  
+  def attendance
+    if self.capacity > 0
+      (self.participants.attended.count)*1.0/self.capacity
     else
       1.0
     end

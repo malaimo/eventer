@@ -25,7 +25,7 @@
         .scrollable-area
 .row-fluid
 
-  .span3
+  .span4
     - if @event.completion < 0.2
       .box-content.box-statistic.red-background
         %h3.title.text-primary= (@event.completion*100).round.to_s + "%"
@@ -46,24 +46,30 @@
         %h3.title.text-primary= (@event.completion*100).round.to_s + "%"
         %small= "Completo (Restan " + (@event.capacity-@event.participants.confirmed.count).to_s + " personas)"
         .text-primary.icon-group.align-right
-  .span3
+  .span2
     .box-content.box-statistic
       %h3.title.text-error
         = @event.participants.new_ones.count
       %small Nuevos
       .text-error.icon-inbox.align-right
-  .span3
+  .span2
     .box-content.box-statistic
       %h3.title.text-warning
         = @event.participants.contacted.count
       %small Contactados
       .text-warning.icon-comments.align-right
-  .span3
+  .span2
     .box-content.box-statistic
       %h3.title.text-success
         = @event.participants.confirmed.count
-      %small= "Confirmados (" + @event.capacity.to_s + " posibles)"
+      %small= "Confirmados"
       .text-success.icon-check.align-right
+  .span2
+    .box-content.box-statistic
+      %h3.title.text-primary
+        = @event.participants.attended.count
+      %small= "Presentes"
+      .text-primary.icon-user.align-right
 
   %br
 
@@ -79,7 +85,7 @@
               %tr
                 %th Fecha
                 %th Participante
-                %th Contacto
+                %th 
                 %th Estado
                 %th Notas
                 %th
@@ -87,27 +93,34 @@
               - @participants.each do |participant|
                 %tr
                   %td{ :style => "white-space:normal;"}= l participant.created_at, :format => :short
-                  %td= participant.fname + " " + participant.lname
                   %td{ :style => "white-space:normal;"}
+                    %span{ :style => "white-space:nowrap;"}
+                      %i.icon-user
+                      = participant.fname + " " + participant.lname
+                    %br
                     %span{ :style => "white-space:nowrap;"}
                       %i.icon-envelope-alt
                       = participant.email
-                    %br
+                  %td{ :style => "white-space:normal;"}
                     %span{ :style => "white-space:nowrap;"}
                       %i.icon-phone-sign
                       = participant.phone
                     %br
                     %span{ :style => "white-space:nowrap;"}
                       %i.icon-globe
+                      = participant.influence_zone.nil? ? "N/A" : participant.influence_zone.display_name
+                    %br
+                    %span{ :style => "white-space:nowrap;"}
+                      %i.icon-tag
                       = participant.influence_zone.nil? ? "N/A" : participant.influence_zone.tag_name
                   - if participant.status == "N"
-                    %td{:style=>"background-color: #ffff00;"}Nuevo
+                    %td{:style=>"background-color: #f34541;color: #FFFFFF;"}Nuevo
                   - elsif participant.status == "T"
-                    %td{:style=>"background-color: #e06666;"}Contactado
+                    %td{:style=>"background-color: #f8a326;color: #FFFFFF;"}Contactado
                   - elsif participant.status == "C"
-                    %td{:style=>"background-color: #00ff00;"}Confirmado
+                    %td{:style=>"background-color: #49bf67;color: #FFFFFF;"}Confirmado
                   - elsif participant.status == "A"
-                    %td{:style=>"background-color: #0000ff;color: #FFFFFF;"}Presente
+                    %td{:style=>"background-color: #00acec;color: #FFFFFF;"}Presente
                   - elsif participant.status == "X"
                     %td{:style=>"background-color: #ff0000; color: #FFFFFF;"}Cancelado
                   - elsif participant.status == "D"
