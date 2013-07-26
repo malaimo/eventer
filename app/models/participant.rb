@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'valid_email'
 
 class Participant < ActiveRecord::Base
@@ -25,7 +26,9 @@ class Participant < ActiveRecord::Base
     self.email 'Email'
     self.phone 'Telefono'
     self.human_status 'Estado'
-    self.influence_zone_tag 'Zona de Influencia'
+    self.influence_zone_name 'Ciudad/Provincia/Región'
+    self.influence_zone_country 'País'
+    self.influence_zone_tag 'Zona de Influencia (tag)'
   end
   
   def initialize_defaults
@@ -82,5 +85,17 @@ class Participant < ActiveRecord::Base
   
   def influence_zone_tag
     self.influence_zone.nil? ? "" : self.influence_zone.tag_name
+  end
+  
+  def influence_zone_name
+    self.influence_zone.nil? ? "" : self.influence_zone.zone_name
+  end
+  
+  def influence_zone_country
+    if !self.influence_zone.nil?
+      self.influence_zone.country.nil? ? "" : self.influence_zone.country.name
+    else
+      ""
+    end
   end
 end
