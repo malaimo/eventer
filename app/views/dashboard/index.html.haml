@@ -63,7 +63,7 @@
                           - if event.participants.new_ones.count > 0
                             %img{:src => "/assets/alert.png", :style => "vertical-align:middle"}
                             %strong= link_to event.participants.new_ones.count.to_s + " nuevos", event_participants_path(event)
-                          %a.btn.btn-info.btn-mini{ :href => "/events/#{event.id}/participants" }
+                          %a.btn.btn-warning.btn-mini{ :href => "/events/#{event.id}/participants" }
                             %i.icon-group
                         - else
                           N/A
@@ -72,7 +72,7 @@
                         .progress.progress-small.progress-danger
                           .bar{ :style => "width: #{(event.completion*100).round.to_s}%" }
                       - elsif event.completion >= 0.2 && event.completion < 0.5
-                        .progress.progress-small.progress-warning
+                        .progress.progress-small.progress-info
                           .bar{ :style => "width: #{(event.completion*100).round.to_s}%" }
                       - elsif event.completion >= 0.5 && event.completion < 0.8
                         .progress.progress-small
