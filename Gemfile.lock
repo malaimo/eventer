@@ -108,6 +108,8 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.19)
+    money (5.1.1)
+      i18n (~> 0.6.0)
     multi_json (1.5.0)
     nokogiri (1.5.5)
     orm_adapter (0.4.0)
@@ -210,6 +212,7 @@ DEPENDENCIES
   haml
   haml-rails
   jquery-rails
+  money
   pg
   rails (= 3.2.11)
   rspec-rails

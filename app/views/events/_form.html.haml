@@ -106,6 +106,10 @@
                   .control-group
                     %label.control-label{ :for => :eb_end_date }= t("formtastic.labels.event.eb_end_date")
                     = f.text_field :eb_end_date, :class => 'datepicker-class input-small'
+            .span12
+              .control-group
+                %label.control-label{ :for => :currency_iso_code}= t("formtastic.labels.event.currency_iso_code")
+                = f.collection_select :currency_iso_code, @currencies.collect{ |c| [ c[1][:iso_code]+" - "+c[1][:name], c[1][:iso_code]] }, :last, :first
           .row-fuid
             .span12
               .control-group

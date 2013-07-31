@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130725225403) do
+ActiveRecord::Schema.define(:version => 20130731104517) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20130725225403) do
     t.boolean  "notify_webinar_start",                                                      :default => false
     t.text     "twitter_embedded_search"
     t.boolean  "webinar_started",                                                           :default => false
+    t.string   "currency_iso_code"
   end
 
   add_index "events", ["country_id"], :name => "index_events_on_country_id"

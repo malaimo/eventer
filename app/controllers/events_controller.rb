@@ -35,6 +35,7 @@ class EventsController < ApplicationController
     @countries = Country.all
     @trainers = Trainer.all
     @timezones = TimeZone.all
+    @currencies = Money::Currency.table
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,6 +47,7 @@ class EventsController < ApplicationController
   def edit
     @event = Event.find(params[:id])
     @timezones = TimeZone.all
+    @currencies = Money::Currency.table
   end
 
   # POST /events
@@ -53,6 +55,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(params[:event])
     @timezones = TimeZone.all
+    @currencies = Money::Currency.table
 
     respond_to do |format|
       if @event.save
@@ -71,6 +74,7 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     @timezones = TimeZone.all
+    @currencies = Money::Currency.table
 
     respond_to do |format|
       if @event.update_attributes(params[:event])

@@ -149,6 +149,7 @@ es:
         place: "Lugar"
         country: "País"
         city: "Ciudad"
+        currency_iso_code: "Moneda"
         edit:
           title: "Edit title"
       event_type:

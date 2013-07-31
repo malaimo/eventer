@@ -34,19 +34,29 @@
                   - if !event.eb_price.nil? && event.eb_price > 0
                     - if event.list_price_plus_tax
                       %td
-                        = event.eb_price.to_i.to_s + "+IVA"
+                        = "(#{event.currency_iso_code})"
+                        = currency_symbol_for( event.currency_iso_code )
+                        = sprintf("%05.2f", event.eb_price) + "+IVA"
                         %br
                         = "Hasta el " + event.eb_end_date.to_formatted_s(:short)
                     - else
                       %td
-                        = event.eb_price.to_i.to_s
+                        = "(#{event.currency_iso_code})"
+                        = currency_symbol_for( event.currency_iso_code )
+                        = sprintf("%05.2f", event.eb_price)
                         %br
                         = "Hasta el " + event.eb_end_date.to_formatted_s(:short)
                   - else
                     %td= " "
                   - if event.list_price_plus_tax
-                    %td= event.list_price.to_i.to_s + "+IVA"
+                    %td
+                      = "(#{event.currency_iso_code})"
+                      = currency_symbol_for( event.currency_iso_code )
+                      = sprintf("%05.2f", event.list_price) + "+IVA"
                   - else
-                    %td= event.list_price.to_i.to_s
+                    %td
+                      = "(#{event.currency_iso_code})"
+                      = currency_symbol_for( event.currency_iso_code )
+                      = sprintf("%05.2f", event.list_price)
                   %td= event.list_price_2_pax_discount
                   %td= event.list_price_3plus_pax_discount

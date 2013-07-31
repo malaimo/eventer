@@ -23,7 +23,7 @@ class Event < ActiveRecord::Base
                   :list_price_plus_tax, :list_price_2_pax_discount, :list_price_3plus_pax_discount,
                   :eb_price, :eb_end_date, :draft, :cancelled, :registration_link, :is_sold_out, :participants, :duration, 
                   :start_time, :end_time, :sepyme_enabled, :is_webinar, :time_zone_name, :embedded_player, :twitter_embedded_search,
-                  :notify_webinar_start, :webinar_started
+                  :notify_webinar_start, :webinar_started, :currency_iso_code
 
   validates :date, :place, :capacity, :city, :visibility_type, :list_price,
             :country, :trainer, :event_type, :duration, :start_time, :end_time, :presence => true
