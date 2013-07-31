@@ -8,8 +8,6 @@ Feature: Administración de Eventos
 		And I should see "Fecha"
 		And I should see "Tipo de Evento"
 		And I should see "Detalles"
-		And I should see "Tipo"
-		And I should see "Estado"
 		And I should see "Nuevo Evento"
 	
 	@selenium

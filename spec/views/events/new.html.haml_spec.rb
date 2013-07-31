@@ -5,6 +5,7 @@ describe "events/new" do
     @countries = Country.all
     @trainers = Trainer.all
     @timezones = TimeZone.all
+    @currencies = Money::Currency.table
     assign(:event, stub_model(Event,
       :name => "MyString",
       :place => "MyString",
