@@ -67,6 +67,7 @@ FactoryGirl.define do
     start_time "9:00"
     end_time "18:00"
     place "Hotel Conrad"
+    address "Tucumán 373"
     city "Punta del Este"
     capacity 20
     visibility_type 'pu'

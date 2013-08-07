@@ -147,6 +147,7 @@ es:
         twitter_embedded_search: "Búsqueda de #hashtag Twitter"
         notify_webinar_start: "Notificar a asistentes el comienzo del webinar"
         place: "Lugar"
+        address: "Dirección"
         country: "País"
         city: "Ciudad"
         currency_iso_code: "Moneda"

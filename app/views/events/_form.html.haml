@@ -47,15 +47,19 @@
                 = " a " 
                 = f.time_select :end_time, {:minute_step => 15}, :style => "width:50px"
           .row-fuid
-            .span5
+            .span3
               .control-group
                 %label.control-label{ :for => :place }= t("formtastic.labels.event.place")
-                = f.text_field :place, :class => "span-5"
+                = f.text_field :place, :class => "span-3"
+            .span3
+              .control-group
+                %label.control-label{ :for => :address }= t("formtastic.labels.event.address")
+                = f.text_field :address, :class => "span-3"
             .span3
               .control-group
                 %label.control-label{ :for => :country_id }= t("formtastic.labels.event.city")
                 = f.text_field :city, :class => "span-3"
-            .span4
+            .span3
               .control-group
                 %label.control-label{ :for => :country_id }= t("formtastic.labels.event.country")
                 = f.collection_select :country_id, Country.find(:all), :id, :name, :input_html => { :style => "width: 200px" }
@@ -148,6 +152,7 @@
   $event_country_id_before_webinar = "";
   $event_city_before_webinar = "";
   $event_place_before_webinar = "";
+  $event_address_before_webinar = "";
 
   //bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
 
@@ -233,6 +238,9 @@
          $("#event_place").val( $event_place_before_webinar );
          $("#event_place").removeAttr('readonly');
 
+         $("#event_address").val( $event_address_before_webinar );
+         $("#event_address").removeAttr('readonly');
+
          $("#event_time_zone_name").val( "" );
          $("#event_time_zone_name_input").hide();
      }
@@ -249,6 +257,10 @@
          $event_city_before_webinar = $("#event_city").val();
          $("#event_city").val( "Webinar" );
          $("#event_city").attr('readonly','readonly');
+
+         $event_address_before_webinar = $("#event_address").val();
+         $("#event_address").val( "Webinar" );
+         $("#event_address").attr('readonly','readonly');
 
          $event_country_id_before_webinar = $("#event_country_id").val();
          $("#event_country_id option:contains('-- OnLine --')").attr('selected', true);

@@ -10,6 +10,7 @@ def create_valid_event_inputs(event_type_name, event_date='31-01-2030')
   fill_in 'event_duration', :with => 2
   fill_in 'event_date', :with => event_date
   fill_in 'event_place', :with => 'Hotel Llao Llao'
+  fill_in 'event_address', :with => 'Tucumán 373'
   fill_in 'event_capacity', :with => 25
   fill_in 'event_city', :with => 'Buenos Aires'
   select 'Argentina', :from => 'event_country_id'
