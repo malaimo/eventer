@@ -42,7 +42,7 @@
                       %i{ :class => "flag flag-#{event.country.iso_code.downcase}"}
                     = event.city
                     %br
-                    = event.start_time.strftime( "%H:%Mhs." ) + " | " + event.place
+                    = event.start_time.strftime( "%H:%Mhs." ) + " | " + event.place + ", " + event.address
                   %td 
                     -if event.visibility_type == "pu"
                       %span.label.label-success Público
