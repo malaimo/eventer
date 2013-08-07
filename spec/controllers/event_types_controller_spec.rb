@@ -28,6 +28,7 @@ describe EventTypesController do
   def valid_attributes
      { :name => "Pepe",
        :duration => 8,
+       :elevator_pitch => "un speech grooooso",
        :goal => "Un objetivo",
        :description => "Una descripción",
        :recipients => "algunos destinatarios",

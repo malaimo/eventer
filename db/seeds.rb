@@ -285,6 +285,7 @@ EventType.create([
     :description => 'Una descripción', 
     :recipients => 'Un destinatario', 
     :program => 'El programa',
+    :elevator_pitch => 'Este es el mejor tipo de evento',
     :trainers => @trainers},
 ])
 

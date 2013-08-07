@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130731104517) do
+ActiveRecord::Schema.define(:version => 20130807124420) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -64,6 +64,9 @@ ActiveRecord::Schema.define(:version => 20130731104517) do
     t.text     "faq"
     t.text     "materials"
     t.boolean  "include_in_catalog"
+    t.text     "elevator_pitch"
+    t.text     "learnings"
+    t.text     "takeaways"
   end
 
   create_table "event_types_trainers", :id => false, :force => true do |t|

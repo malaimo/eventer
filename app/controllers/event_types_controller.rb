@@ -78,6 +78,8 @@ class EventTypesController < ApplicationController
   # PUT /event_types/1.json
   def update
     @event_type = EventType.find(params[:id])
+    @trainers = Trainer.find(:all).sort{|p1,p2| p1.name <=> p2.name}
+    @categories = Category.find(:all).sort{|p1,p2| p1.name <=> p2.name}
 
     respond_to do |format|
       if @event_type.update_attributes(params[:event_type])

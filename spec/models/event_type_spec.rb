@@ -25,6 +25,12 @@ describe EventType do
     @event_type.valid?.should be false
   end
   
+  it "should require an elevator pitch" do
+    @event_type.elevator_pitch = ""
+    
+    @event_type.valid?.should be false
+  end
+  
   it "should require its recipients" do
     @event_type.recipients = ""
     

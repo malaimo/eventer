@@ -50,10 +50,13 @@ FactoryGirl.define do
   factory :event_type do
      name "Tipo de Evento de Prueba"
      duration 8
+     elevator_pitch "un speech grooooso"
      goal "Un objetivo"
      description "Una descripción"
      recipients "algunos destinatarios"
      program "El programa del evento"
+     learnings "algunas cosas"
+     takeaways "un manual"
      trainers [ FactoryGirl.build(:trainer) ]
    end
   
