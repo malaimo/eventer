@@ -5,6 +5,8 @@
 
 = form_for [:event, @participant] do |f|
   %fieldset.inputs
+    - if @nakedform
+      %input{ :type => "hidden", :name => "nakedform", :value => "1" }
     .row-fluid
       .span12
         .control-group

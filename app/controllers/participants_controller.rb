@@ -31,6 +31,7 @@ class ParticipantsController < ApplicationController
     @participant = Participant.new
     @event = Event.find(params[:event_id])
     @influence_zones = InfluenceZone.all
+    @nakedform = !params[:nakedform].nil?
 
     respond_to do |format|
       format.html { render :layout => "empty_layout" }
@@ -41,6 +42,7 @@ class ParticipantsController < ApplicationController
   # GET /participants/new/confirm
   def confirm
     @event = Event.find(params[:event_id])
+    @nakedform = !params[:nakedform].nil?
     
     respond_to do |format|
       format.html { render :layout => "empty_layout" }
@@ -60,6 +62,7 @@ class ParticipantsController < ApplicationController
     @participant = Participant.new(params[:participant])
     @event = Event.find(params[:event_id])
     @participant.event = @event
+    @nakedform = !params[:nakedform].nil?
     
     if @event.list_price == 0.0
       @participant.confirm!
@@ -84,7 +87,7 @@ class ParticipantsController < ApplicationController
           end
         end
         
-        format.html { redirect_to "/events/#{@event.id.to_s}/participant_confirmed", notice: 'Tu registro fue realizado exitosamente.' }
+        format.html { redirect_to "/events/#{@event.id.to_s}/participant_confirmed#{@nakedform ? "?nakedform=1" : ""}", notice: 'Tu registro fue realizado exitosamente.' }
         format.json { render json: @participant, status: :created, location: @participant }
       else
         format.html { render action: "new", :layout => "empty_layout" }

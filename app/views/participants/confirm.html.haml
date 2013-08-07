@@ -1,7 +1,16 @@
-.controls
-  .form-wrapper
-    = render '/commons/notice'
-    - if @event.is_webinar? && 
-      %p Gracias! Te hemos enviado un e-mail de confirmación de tu registro.
-    - else
-      %p Gracias! Un representante de Kleer se contactará contigo para concluir el proceso de registro.
+- if !@nakedform
+  .controls
+    .form-wrapper
+      = render '/commons/notice'
+      - if @event.is_webinar? && 
+        %p Gracias! Te hemos enviado un e-mail de confirmación de tu registro.
+      - else
+        %p Gracias! Un representante de Kleer se contactará contigo para concluir el proceso de registro.
+- else
+  :css
+    body {bgcolor:#FFFFFF;}
+  = render '/commons/notice'
+  - if @event.is_webinar? && 
+    %p Gracias! Te hemos enviado un e-mail de confirmación de tu registro.
+  - else
+    %p Gracias! Un representante de Kleer se contactará contigo para concluir el proceso de registro.
