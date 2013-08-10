@@ -63,6 +63,7 @@ class ParticipantsController < ApplicationController
     @event = Event.find(params[:event_id])
     @participant.event = @event
     @nakedform = !params[:nakedform].nil?
+    @influence_zones = InfluenceZone.all
     
     if @event.list_price == 0.0
       @participant.confirm!

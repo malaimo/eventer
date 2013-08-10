@@ -1,8 +1,3 @@
-- @participant.errors.full_messages.each do |msg|
-  .alert.alert-error
-    %a.close{ "data-dismiss" => :alert, :href => "#" } &times;
-    =msg
-
 = form_for [:event, @participant] do |f|
   %fieldset.inputs
     - if @nakedform
@@ -36,6 +31,10 @@
             %button.btn.btn-primary{:name => "commit", :type => "submit", :style => "margin-top: 0px;"}
               %i.icon-save
               Registrarme
+
+- if @participant.errors.full_messages.count > 0
+  :javascript
+    alert("Todos los campos son requeridos");
 
 :javascript
   $(document).ready(function() {

@@ -223,5 +223,10 @@ Given /^there are (\d+) participants and 1 is contacted$/ do |newones|
   
 end
 
+When /^I make a blank registration for that event$/ do
+  visit "/events/1/participants/new"
+  click_button 'Registrarme'
+end
+
 
 
