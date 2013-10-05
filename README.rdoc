@@ -6,5 +6,6 @@ Una vez colocado el repositorio e instalados los componentes no-ruby, ejecutá l
 
 - Instala las dependencias: bundle install
 - Crea la base de dates: bundle exec rake db:migrate
+- Cargá los datos iniciales: bundle exec rake db:seed
 - Ejecutar las pruebas: bundle exec rake
 - Inicia la aplicación: rail s
