@@ -17,6 +17,7 @@ group :test do
   gem 'cucumber-rails'
   gem 'capybara'
   gem 'shoulda-matchers'
+  gem 'selenium-webdriver', '~> 2.35.1'
 end
 
 group :production do
