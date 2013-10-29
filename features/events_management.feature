@@ -56,19 +56,19 @@ Feature: Administración de Eventos
 
 	@selenium
 	Scenario: Se deben mostrar los descuentos y precios EB y SEB si es un evento público
-	    Given Im a logged in user
+	  Given Im a logged in user
 		When I choose to create a Public event
 		Then I should see public prices
 	
 	@selenium
 	Scenario: Se debe mostrar timezone y ciudad=Webinar si es el evento es un webinar
-	    Given Im a logged in user
+	  Given Im a logged in user
 		When I choose to create a Webinar event
 		Then I should see the webinar setup
 
 	@selenium	
 	Scenario: SEB=30 días antes de la fecha del evento y EB=10 días antes de la fecha del evento
-	    Given Im a logged in user
+	  Given Im a logged in user
 		When I create a public event on "15-01-2015"
 		Then EB date should be "05-01-2015"
 	
