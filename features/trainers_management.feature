@@ -10,7 +10,7 @@ Feature: Administración de Instructores
 
 	Scenario: Alta de Instructor con mini Bio
 		Given Im a logged in user
-		When I create a valid trainer named "Carlos Peix" and with bio "Gran instructor!"
-		And I view the trainer "Carlos Peix"
+		When I create a valid trainer named "Carlos Peix2" and with bio "Gran instructor!"
+		And I view the trainer "Carlos Peix2"
 		Then I should see "Gran instructor!"
 
