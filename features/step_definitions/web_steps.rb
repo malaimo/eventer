@@ -1,5 +1,16 @@
 # encoding: utf-8
 
+def fill_valid_event_type(event_type_name)
+  fill_in 'event_type_name', :with => event_type_name
+  fill_in 'event_type_duration', :with => 30
+  first(:css, '#event_type_trainer_ids_').click
+  fill_in 'event_type_elevator_pitch', :with => "something"
+  fill_in 'event_type_description', :with => "something"
+  fill_in 'event_type_recipients', :with => "something"
+  fill_in 'event_type_program', :with => "something"
+end
+
+
 def create_valid_event(event_type_name)
   create_valid_event_inputs event_type_name
 end
@@ -14,7 +25,7 @@ def create_valid_event_inputs(event_type_name, event_date='31-01-2030')
   fill_in 'event_capacity', :with => 25
   fill_in 'event_city', :with => 'Buenos Aires'
   select 'Argentina', :from => 'event_country_id'
-  select 'John Doe', :from => 'event_trainer_id'
+  all('#event_event_type_id option')[1].select_option
   choose 'event_visibility_type_pu'
   fill_in 'event_list_price', :with => 500.00
   check 'event_list_price_plus_tax'
@@ -91,7 +102,6 @@ Then /^I should be on the events listing page$/ do
   current_path.should == events_path
 end
 
-
 Then /^I should see one event$/ do
   page.should have_content('Curso de Meteorología Básica I')
 end
@@ -157,6 +167,12 @@ When /^I cancel the event "([^\"]*)"$/ do |link_description|
   check 'event_cancelled'
   click_button "guardar"
   sleep 10
+end
+
+Given /^there is a event type "(.*?)"$/ do |type_name|
+  visit "/event_types/new"
+  fill_valid_event_type type_name
+  click_button "guardar"
 end
 
 Then /^I should not see "([^\"]*)"$/ do |text|
@@ -227,6 +243,3 @@ When /^I make a blank registration for that event$/ do
   visit "/events/1/participants/new"
   click_button 'Registrarme'
 end
-
-
-

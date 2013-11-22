@@ -75,11 +75,11 @@ Feature: Administración de Eventos
 	@selenium	
 	Scenario: Modificación de Evento Válido
 		Given Im a logged in user
-		When I create a valid event of type "Tipo de Evento de Prueba"
-		And I modify the event "Tipo de Evento de Prueba"
+		And there is a event type "Modificar"
+		When I create a valid event of type "Modificar"
+		And I modify the event "Modificar"
 		Then I should be on the events listing page
 		And I should see "Evento modificado exitosamente"
-		And I should see "Tipo de Evento de Prueba"
 	
 	@selenium
 	Scenario: Cancelación de Evento
