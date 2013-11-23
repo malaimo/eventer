@@ -125,7 +125,7 @@ When /^I choose to create a Public event$/ do
 end
 
 Then /^public prices should be disabled$/ do
-  page.find_field('event_eb_price')['disabled'].should == "true"
+  page.find_by_id('event_eb_price')['disabled'].should == "true"
 end
 
 Then /^I should not see any price$/ do
