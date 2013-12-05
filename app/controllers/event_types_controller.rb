@@ -27,14 +27,6 @@ class EventTypesController < ApplicationController
       format.xml { render xml: @event_type }
     end
   end
-  
-  def show_trainers
-    @event_type = EventType.find(params[:id])
-
-    respond_to do |format|
-      format.xml { render xml: @event_type.trainers }
-    end
-  end
 
   # GET /event_types/new
   # GET /event_types/new.json

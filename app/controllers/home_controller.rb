@@ -37,7 +37,6 @@ class HomeController < ApplicationController
   def kleerers
     @trainers = Trainer.kleerer.all(:order => ['country_id','name'])
     respond_to do |format|
-      format.html
       format.xml { render :xml => @trainers.to_xml(:include => :country ) }
       format.json { render json: @trainers }  
     end
@@ -46,7 +45,6 @@ class HomeController < ApplicationController
   def categories
     @categories = Category.visible_ones
     respond_to do |format|
-      format.html
       format.xml { render :xml => @categories.to_xml(:include => :event_types ) }
       format.json { render json: @categories }
     end
@@ -58,9 +56,27 @@ class HomeController < ApplicationController
     @event_type = EventType.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
       format.json { render json: @event_type }
       format.xml { render xml: @event_type }
+    end
+  end
+  
+  # GET /event_types
+  # GET /event_types.json
+  def event_type_index
+    @event_types = EventType.all.sort{|p1,p2| p1.name <=> p2.name}
+
+    respond_to do |format|
+      format.json { render json: @event_types }
+      format.xml { render :xml => @event_types.to_xml( { :include => :categories } ) }
+    end
+  end
+  
+  def show_event_type_trainers
+    @event_type = EventType.find(params[:id])
+
+    respond_to do |format|
+      format.xml { render xml: @event_type.trainers }
     end
   end
 
