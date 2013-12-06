@@ -190,8 +190,7 @@ Then /^I should not see "([^\"]*)"$/ do |text|
 end
 
 When /^I register for that event$/ do
-  @event = Event.first
-  visit '/events/'+@event.id.to_s+'/participants/new'
+  visit '/events/1/participants/new'
   fill_in 'participant_fname', :with => 'Juan'
   fill_in 'participant_lname', :with => 'Callidoro'
   fill_in 'participant_email', :with => 'jcallidoro@gmail.com'

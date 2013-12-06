@@ -5,11 +5,10 @@ Feature: Administración de Participantes
 		And theres an event
 		Then It should have a registration page
 	
-	@selenium
 	Scenario: Nueva inscripción Exitosa
 		Given Im a logged in user
 		And theres an event
-		And theres an influence zone
+#		And theres an influence zone
 		When I register for that event
 		Then I should see a confirmation message
 		
