@@ -74,6 +74,12 @@ When /^I create a valid event of type "([^\"]*)"$/ do |event_name|
   submit_event
 end
 
+Given /^theres an event$/ do
+  visit "/events/new"
+  create_valid_event
+  submit_event
+end
+
 When /^I create an invalid event with "([^"]*)" as "([^"]*)"$/ do |value, attribute|
   visit "/events/new"
   create_valid_event 'Tipo de Evento de Prueba'
@@ -246,4 +252,8 @@ end
 When /^I make a blank registration for that event$/ do
   visit "/events/1/participants/new"
   click_button_and_wait 'Registrarme'
+end
+
+Given /^theres an influence zone$/ do
+  InfluenceZone.count.should be > 0
 end
