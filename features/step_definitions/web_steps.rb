@@ -256,3 +256,13 @@ Then /^I should see an alert "([^\"]*)"$/ do |msg|
   page.driver.browser.switch_to.alert.text.should == msg
   page.driver.browser.switch_to.alert.accept    
 end
+
+Given /^theres (\d+) event (\d+) week away from now$/ do |amount, weeks_away|
+  event_type = EventType.first
+  event_date = Date.today + 7*weeks_away.to_i 
+
+  amount.to_i.times {
+    create_valid_event_inputs(event_type.name, event_date)
+    submit_event
+  }
+end
