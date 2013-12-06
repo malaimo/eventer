@@ -106,7 +106,6 @@ end
 When /^I create an empty event$/ do
   visit "/events/new"
   submit_event
-  sleep 10
 end
 
 When /^I visit the event listing page$/ do
@@ -214,11 +213,6 @@ Then /^It should have a registration page$/ do
   page.should have_content(@event.event_type.name )
   page.should have_content(@event.human_date )
   page.should have_content(@event.city )
-  
-#  page.should have_content('Nombre')
-#  page.should have_content('Apellido')
-#  page.should have_content('E-Mail')
-#  page.should have_content('Teléfono')
 end
 
 When /^I visit the dashboard$/ do
@@ -251,9 +245,14 @@ end
 
 When /^I make a blank registration for that event$/ do
   visit "/events/1/participants/new"
-  click_button_and_wait 'Registrarme'
+  click_button 'Registrarme'
 end
 
 Given /^theres an influence zone$/ do
   InfluenceZone.count.should be > 0
+end
+
+Then /^I should see an alert "([^\"]*)"$/ do |msg|
+  page.driver.browser.switch_to.alert.text.should == msg
+  page.driver.browser.switch_to.alert.accept    
 end
