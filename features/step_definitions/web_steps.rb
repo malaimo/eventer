@@ -1,5 +1,15 @@
 # encoding: utf-8
 
+def click_button_and_wait(button)
+  click_button button
+  page.should_not have_content "dude, you forgot to assert anything about the view"
+end
+
+def click_link_and_wait(link)
+  click_link link
+  page.should_not have_content "dude, you forgot to assert anything about the view"
+end
+
 def fill_valid_event_type(event_type_name)
   fill_in 'event_type_name', :with => event_type_name
   fill_in 'event_type_duration', :with => 30
@@ -10,8 +20,7 @@ def fill_valid_event_type(event_type_name)
   fill_in 'event_type_program', :with => "something"
 end
 
-
-def create_valid_event(event_type_name)
+def create_valid_event(event_type_name = 'Tipo de Evento de Prueba')
   create_valid_event_inputs event_type_name
 end
 
@@ -36,7 +45,7 @@ def create_valid_event_inputs(event_type_name, event_date='31-01-2030')
 end
 
 def submit_event
-  click_button 'guardar'
+  click_button_and_wait 'guardar'
 end
 
 Given /^I visit the home page$/ do
@@ -51,7 +60,7 @@ Given /^Im a logged in user$/ do
   visit "/users/sign_in"
   fill_in 'user_email', :with => 'ejemplo@eventer.heroku.com'
   fill_in 'user_password', :with => 'secret1'
-  click_button 'Sign in'
+  click_button_and_wait 'Sign in'
 end
 
 
@@ -152,27 +161,23 @@ Then /^EB date should be "([^\"]*)"$/ do |value|
 end
 
 When /^I modify the event "([^\"]*)"$/ do |link_description|
-  click_link link_description
-  click_link "Modificar"
-  sleep 10
+  click_link_and_wait link_description
+  click_link_and_wait "Modificar"
   fill_in 'event_capacity', :with => 200
-  click_button "guardar"
-  sleep 10
+  click_button_and_wait "guardar"
 end
 
 When /^I cancel the event "([^\"]*)"$/ do |link_description|
-  click_link link_description
-  click_link "Modificar"
-  sleep 10
+  click_link_and_wait link_description
+  click_link_and_wait "Modificar"
   check 'event_cancelled'
-  click_button "guardar"
-  sleep 10
+  click_button_and_wait "guardar"
 end
 
 Given /^there is a event type "(.*?)"$/ do |type_name|
   visit "/event_types/new"
   fill_valid_event_type type_name
-  click_button "guardar"
+  click_button_and_wait "guardar"
 end
 
 Then /^I should not see "([^\"]*)"$/ do |text|
@@ -186,8 +191,9 @@ When /^I register for that event$/ do
   fill_in 'participant_lname', :with => 'Callidoro'
   fill_in 'participant_email', :with => 'jcallidoro@gmail.com'
   fill_in 'participant_phone', :with => '1234-5678'
-  select 'Argentina - Buenos Aires', :from => 'participant_influence_zone_id'
-  click_button 'Registrarme'
+#  select 'Argentina - Buenos Aires', :from => 'participant_influence_zone_id'
+  all('#participant_influence_zone_id option')[1].select_option
+  click_button_and_wait 'Registrarme'
 end
 
 Then /^I should see a confirmation message$/ do
@@ -211,7 +217,7 @@ end
 
 When /^I visit the dashboard$/ do
   visit '/dashboard'
-  sleep 10
+  page.should_not have_content "dude, you forgot to assert anything about the view"
 end
 
 def create_new_participant
@@ -220,26 +226,24 @@ def create_new_participant
   fill_in 'participant_lname', :with => 'Callidoro'
   fill_in 'participant_email', :with => 'jcallidoro@gmail.com'
   fill_in 'participant_phone', :with => '1234-5678'
-  click_button 'Registrarme'
+  click_button_and_wait 'Registrarme'
 end
 
 def contact_participant
   visit "/events/1/participants"
-  click_link "modificar"
+  click_link_and_wait "modificar"
   select "Contactado", :from => 'participant_status'
-  click_button 'guardar'
+  click_button_and_wait 'guardar'
 end
 
 Given /^there are (\d+) participants and 1 is contacted$/ do |newones|
   newones.to_i.times { 
     create_new_participant
   }
-   
   contact_participant
-  
 end
 
 When /^I make a blank registration for that event$/ do
   visit "/events/1/participants/new"
-  click_button 'Registrarme'
+  click_button_and_wait 'Registrarme'
 end
