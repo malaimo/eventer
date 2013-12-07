@@ -56,30 +56,30 @@ Feature: Administración de Eventos
 
 	@selenium
 	Scenario: Se deben mostrar los descuentos y precios EB y SEB si es un evento público
-	    Given Im a logged in user
+	  Given Im a logged in user
 		When I choose to create a Public event
 		Then I should see public prices
 	
 	@selenium
 	Scenario: Se debe mostrar timezone y ciudad=Webinar si es el evento es un webinar
-	    Given Im a logged in user
+	  Given Im a logged in user
 		When I choose to create a Webinar event
 		Then I should see the webinar setup
 
 	@selenium	
 	Scenario: SEB=30 días antes de la fecha del evento y EB=10 días antes de la fecha del evento
-	    Given Im a logged in user
+	  Given Im a logged in user
 		When I create a public event on "15-01-2015"
 		Then EB date should be "05-01-2015"
 	
 	@selenium	
 	Scenario: Modificación de Evento Válido
 		Given Im a logged in user
-		When I create a valid event of type "Tipo de Evento de Prueba"
-		And I modify the event "Tipo de Evento de Prueba"
+		And there is a event type "Modificar"
+		When I create a valid event of type "Modificar"
+		And I modify the event "Modificar"
 		Then I should be on the events listing page
 		And I should see "Evento modificado exitosamente"
-		And I should see "Tipo de Evento de Prueba"
 	
 	@selenium
 	Scenario: Cancelación de Evento
