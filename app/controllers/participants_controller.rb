@@ -1,5 +1,5 @@
 class ParticipantsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:new, :create, :confirm]
+  before_filter :authenticate_user!, :except => [:new, :create, :confirm, :certificate]
   
   # GET /participants
   # GET /participants.json
@@ -126,4 +126,14 @@ class ParticipantsController < ApplicationController
     end
   end
   
+  def certificate
+
+	@participant = Participant.find(params[:id])
+	
+	render "/participants/certificate", :layout => false
+
+  end
+
+
+
 end

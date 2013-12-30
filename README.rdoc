@@ -11,3 +11,26 @@ Una vez clonado el repositorio e instalados los componentes no-ruby, ejecutá lo
 - Inicia la aplicación: bundle exec rail s
 
 * Nuevo branch certificado-asistencia
+
+# Crear Branching
+git branch
+git fetch
+
+git checkout certificado-asistencia
+
+* Agregar cambio dummy
+git add README.rdoc
+git commit -m 'Readme modificado'
+git config --global user.name "Luis Mulato"
+git config --global user.email <e-mail>
+git commit --amend --reset-author
+
+* Agregar certificado
+ssh-keygen -t rsa -C "<e-mail>"
+sudo apt-get install xclip
+xclip -sel clip < ~/.ssh/id_rsa.pub 
+*Agregar certificado en github
+https://help.github.com/articles/generating-ssh-keys
+
+git push origin certificado-asistencia:certificado-asistencia
+

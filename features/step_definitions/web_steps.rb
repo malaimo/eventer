@@ -265,3 +265,11 @@ Given /^theres (\d+) event (\d+) week away from now$/ do |amount, weeks_away|
     submit_event
   }
 end
+
+When(/^I visit the certificate page$/) do
+  visit "/events/1/participants/1/certificate"
+end
+
+
+
+

@@ -45,6 +45,9 @@ Eventer::Application.routes.draw do
   match 'events/:id/broadcast_webinar' => 'events#broadcast_webinar'
   
   match 'events/:event_id/participant_confirmed' => 'participants#confirm'
+
+  match 'events/:event_id/participants/:id/certificate' => 'participants#certificate'
+
       
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
