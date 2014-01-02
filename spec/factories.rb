@@ -88,7 +88,7 @@ FactoryGirl.define do
     lname "Perez Luasó"
     email "juanca@perez.com"
     phone "5555-5555"
-    event {FactoryGirl.build(:event){
+    event {FactoryGirl.build(:event)}
     influence_zone {FactoryGirl.build(:influence_zone)}
   end
 
