@@ -1,6 +1,9 @@
 language: ruby
-rvm: 1.9.3
+rvm:
+- 1.9.3
 bundler_args: --without development production
+env:
+- DB=sqlite
 before_script:
 - sh -e /etc/init.d/xvfb start
 script:
