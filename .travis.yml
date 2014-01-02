@@ -4,5 +4,6 @@ bundler_args: --without development production
 before_script:
 - sh -e /etc/init.d/xvfb start
 script:
-- bundle exec rspec
-- bundle exec cucumber
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake spec
+- bundle exec rake cucumber
