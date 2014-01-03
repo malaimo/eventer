@@ -6,5 +6,6 @@ before_script:
 - sh -e /etc/init.d/xvfb start
 
 script:
-  - bundle exec rake --trace db:migrate
-  - bundle exec rake spec
+- echo $RAILS_ENV
+- bundle exec rake --trace db:migrate
+- bundle exec rake spec
