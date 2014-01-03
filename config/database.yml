@@ -13,11 +13,9 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test: &test
-  adapter: postgresql
-  encoding: unicode
-  database: eventer_test
-  username: postgres
-  
+  adapter: sqlite3
+  database: db/test.sqlite3
+
 production:
   adapter: sqlite3
   database: db/production.sqlite3
