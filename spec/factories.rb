@@ -21,14 +21,14 @@ FactoryGirl.define do
     email 'admin@user.com'
     password 'please'
     password_confirmation 'please'
-    roles [ {FactoryGirl.create(:admin_role)} ]
+    roles [ FactoryGirl.create(:admin_role) ]
   end
 
   factory :comercial, :class => User do
     email 'comercial@user.com'
     password 'please'
     password_confirmation 'please'
-    roles [ {FactoryGirl.create(:comercial_role)} ]
+    roles [ FactoryGirl.create(:comercial_role) ]
   end
   
   factory :country do
@@ -57,7 +57,7 @@ FactoryGirl.define do
      program "El programa del evento"
      learnings "algunas cosas"
      takeaways "un manual"
-     trainers [ {FactoryGirl.build(:trainer)} ]
+     trainers [ FactoryGirl.build(:trainer) ]
    end
   
   factory :event do
@@ -73,14 +73,14 @@ FactoryGirl.define do
     visibility_type 'pu'
     list_price 500.00
     is_webinar false
-    country {FactoryGirl.build(:country)}
-    trainer {FactoryGirl.build(:trainer)}
+    country FactoryGirl.build(:country)
+    trainer FactoryGirl.build(:trainer)
   end
   
   factory :influence_zone do
     tag_name "ZI-AMS-AR-PAT (Patagonia)"
     zone_name "Rio Negro"
-    country {FactoryGirl.build(:country)}
+    country FactoryGirl.build(:country)
   end
   
   factory :participant do
@@ -88,8 +88,8 @@ FactoryGirl.define do
     lname "Perez Luasó"
     email "juanca@perez.com"
     phone "5555-5555"
-    event {FactoryGirl.build(:event)}
-    influence_zone {FactoryGirl.build(:influence_zone)}
-  end
+    event FactoryGirl.build(:event)
+    influence_zone FactoryGirl.build(:influence_zone)
+  en
 
 end
