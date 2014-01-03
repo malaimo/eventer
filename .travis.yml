@@ -5,7 +5,7 @@ rvm:
 before_script:
 - sh -e /etc/init.d/xvfb start
 
+
 script:
 - bundle exec rake --trace db:migrate
-- bundle exec rake spec
-- bundle exec rake cucumber
+- bundle exec rake ci
