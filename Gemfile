@@ -13,7 +13,7 @@ end
 
 group :test do
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails',require: false
   gem 'cucumber-rails', require: false
   gem 'capybara'
   gem 'shoulda-matchers'
