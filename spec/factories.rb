@@ -90,6 +90,6 @@ FactoryGirl.define do
     phone "5555-5555"
     event FactoryGirl.build(:event)
     influence_zone FactoryGirl.build(:influence_zone)
-  en
+  end
 
 end
