@@ -11,4 +11,4 @@ deploy:
   api_key:
     secure: in0pTnnVFO6bBmyQo8lhtmj+7Ta6TY7BJQKxnTkZTweGnpDC/sJ7v6fMCIt6vePNbbS5ODM45MtWs3XtVMUP1Zphv98F7FY4nOyh6CvJ0TJkHiEZsfQYao0M/0XSXEatB2gXoDVEpTLWpGnNwS28249XOOLNP+S0dDlGrb69hQg=
   app:
-  	develop: keventer-test
+    develop: keventer-test
