@@ -5,8 +5,8 @@ before_script:
 - sh -e /etc/init.d/xvfb start
 script:
 - bundle exec rake --trace db:migrate
-- bundle exec rake ci
-before_deploy: "heroku pgbackups:capture --expire --app keventer-test HEROKU_POSTGRESQL_COPPER_URL"
+before_deploy:
+- heroku pgbackups:capture --expire --app keventer-test HEROKU_POSTGRESQL_COPPER_URL
 deploy:
   provider: heroku
   api_key:
