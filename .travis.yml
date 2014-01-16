@@ -3,6 +3,7 @@ rvm:
 - 1.9.3
 before_script:
 - sh -e /etc/init.d/xvfb start
+- heroku pgbackups:capture --expire --app keventer-test HEROKU_POSTGRESQL_COPPER_URL
 script:
 - bundle exec rake --trace db:migrate
 - bundle exec rake ci
