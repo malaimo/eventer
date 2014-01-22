@@ -1,5 +1,7 @@
 class EventMailer < ActionMailer::Base
   
+  add_template_helper(DashboardHelper)
+
   def welcome_new_webinar_participant(participant)
     @participant = participant
     mail(to: @participant.email, from: "Eventos <eventos@kleerer.com>", subject: "Kleer | Te has registrado al #{@participant.event.event_type.name}" )
@@ -12,7 +14,15 @@ class EventMailer < ActionMailer::Base
   end
 
   def welcome_new_event_participant(participant)
-  	mail(to: participant.email, from: "Eventos <eventos@kleerer.com>", subject: "Kleer | Prueba" )
+    @participant = participant
+    mail(to: @participant.email, from: "Eventos <eventos@kleerer.com>", 
+        subject: "Kleer | Prueba")
   end
   
 end
+
+#class Fixnum
+#  def money_to_s
+#    replace ""
+#  end
+#end
