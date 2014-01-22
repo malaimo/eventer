@@ -10,5 +10,9 @@ class EventMailer < ActionMailer::Base
     @webinar_link = webinar_link
     mail(to: @participant.email, from: "Eventos <eventos@kleerer.com>", subject: "Kleer | Estamos iniciando! Sumate al webinar #{@participant.event.event_type.name}" )
   end
+
+  def welcome_new_event_participant(participant)
+  	mail(to: participant.email, from: "Eventos <eventos@kleerer.com>", subject: "Kleer | Prueba" )
+  end
   
 end
