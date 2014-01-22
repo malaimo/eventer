@@ -86,6 +86,10 @@ class ParticipantsController < ApplicationController
           else
             EventMailer.delay.welcome_new_webinar_participant(@participant)
           end
+        else
+          @participant.contact!
+          @participant.save
+          EventMailer.delay.welcome_new_event_participant(@participant)
         end
         
         format.html { redirect_to "/events/#{@event.id.to_s}/participant_confirmed#{@nakedform ? "?nakedform=1" : ""}", notice: 'Tu registro fue realizado exitosamente.' }

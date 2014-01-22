@@ -48,9 +48,11 @@
                                   %b
                                     Inversión:
                                   %br
-                                  ="Hasta el #{@participant.event.eb_end_date} (#{@participant.event.currency_iso_code}) #{currency_symbol_for(@participant.event.currency_iso_code)} #{sprintf("%05.2f", @participant.event.eb_price)}" unless @participant.event.eb_price.nil? || @participant.event.eb_price == 0
-                                  %br
-                                  ="Precio de lista (#{@participant.event.currency_iso_code}) #{currency_symbol_for(@participant.event.currency_iso_code)} #{sprintf("%05.2f", @participant.event.list_price)}"
+                                  - if !@participant.event.eb_price.nil? && @participant.event.eb_price > 0
+                                    ="#{currency_symbol_for(@participant.event.currency_iso_code)} #{sprintf("%05.2f", @participant.event.eb_price)} (#{@participant.event.currency_iso_code}) abonando antes del #{@participant.event.eb_end_date}."
+                                    %br
+                                    Luego:
+                                  ="#{currency_symbol_for(@participant.event.currency_iso_code)} #{sprintf("%05.2f", @participant.event.list_price)} (#{@participant.event.currency_iso_code})"
                                   %br
                                   %br
                                   Cualquier consulta que tengas no dudes en contactarnos :)

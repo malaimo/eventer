@@ -75,6 +75,16 @@ class Participant < ActiveRecord::Base
     self.status = "C"
   end
   
+  def contact!
+    self.status = "T"
+    if !self.notes.nil?
+      self.notes += "\n"
+    else
+      self.notes = ""
+    end
+    self.notes += "Info (auto) on #{Date.today.strftime('%d-%b')}"
+  end
+  
   def attend!
     self.status = "A"
   end
