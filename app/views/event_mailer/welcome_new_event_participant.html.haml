@@ -47,7 +47,10 @@
                                   %br
                                   %b
                                     Inversión:
-                                  =" (#{@participant.event.currency_iso_code}) #{currency_symbol_for(@participant.event.currency_iso_code)} #{sprintf("%05.2f", @participant.event.list_price)}"
+                                  %br
+                                  ="Hasta el #{@participant.event.eb_end_date} (#{@participant.event.currency_iso_code}) #{currency_symbol_for(@participant.event.currency_iso_code)} #{sprintf("%05.2f", @participant.event.eb_price)}" unless @participant.event.eb_price.nil? || @participant.event.eb_price == 0
+                                  %br
+                                  ="Precio de lista (#{@participant.event.currency_iso_code}) #{currency_symbol_for(@participant.event.currency_iso_code)} #{sprintf("%05.2f", @participant.event.list_price)}"
                                   %br
                                   %br
                                   Cualquier consulta que tengas no dudes en contactarnos :)

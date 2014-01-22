@@ -8,7 +8,9 @@ Recibimos tu inscripción al evento llamado
 = "Lugar: #{@participant.event.place}"
 = "Dirección: #{@participant.event.address}, #{@participant.event.city}, #{@participant.event.country.name}"
 
-= "La inversión es: (#{@participant.event.currency_iso_code}) #{currency_symbol_for(@participant.event.currency_iso_code)} #{sprintf("%05.2f", @participant.event.list_price)}, y, si pagas antes del #{@participant.event.eb_end_date}, la inversión es #{@participant.event.eb_price}"
+= "La inversión es: (#{@participant.event.currency_iso_code}) #{currency_symbol_for(@participant.event.currency_iso_code)} #{sprintf("%05.2f", @participant.event.list_price)}"
+
+= "Si pagas antes del #{@participant.event.eb_end_date}, la inversión es: (#{@participant.event.currency_iso_code}) #{currency_symbol_for(@participant.event.currency_iso_code)} #{sprintf("%05.2f", @participant.event.eb_price)}" unless @participant.event.eb_price.nil? || @participant.event.eb_price == 0
 
 Cualquier consulta que tengas no dudes en contactarnos :)
 Te esperamos!
