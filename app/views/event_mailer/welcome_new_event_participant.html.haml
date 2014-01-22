@@ -29,15 +29,25 @@
                                   = "Hola " + @participant.fname + ","
                                   %br
                                   %br
-                                  Recibimos tu inscripción al webinar llamado 
+                                  Recibimos tu inscripción al evento llamado 
                                   %b= @participant.event.event_type.name
                                   que será facilitado por  
                                   %b= @participant.event.trainer.name
                                   ="el día " + @participant.event.human_date + " de " + @participant.event.start_time.strftime( '%H:%M' ) + " a " + @participant.event.end_time.strftime( '%H:%M ' ) + "hs."
-                                  %i= "[#{@participant.event.place}]."
                                   %br
                                   %br
-                                  ="Unos momentos antes del comienzo enviaremos a tu cuenta de mail (#{@participant.email}) un link mediante el cual podrás acceder al webinar."
+                                  %b
+                                    Lugar:
+                                  =" #{@participant.event.place}"
+                                  %br
+                                  %b
+                                    Dirección:
+                                  =" #{@participant.event.address}, #{@participant.event.city}, #{@participant.event.country.name}"
+                                  %br
+                                  %br
+                                  %b
+                                    Inversión:
+                                  =" (#{@participant.event.currency_iso_code}) #{currency_symbol_for(@participant.event.currency_iso_code)} #{sprintf("%05.2f", @participant.event.list_price)}"
                                   %br
                                   %br
                                   Cualquier consulta que tengas no dudes en contactarnos :)
