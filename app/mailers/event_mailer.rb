@@ -4,7 +4,7 @@ class EventMailer < ActionMailer::Base
 
   def welcome_new_webinar_participant(participant)
     @participant = participant
-    mail(to: @participant.email, from: "Eventos <eventos@kleerer.com>", subject: "Kleer | Te has registrado al #{@participant.event.event_type.name}" )
+    mail(to: @participant.email, from: "Eventos <eventos@kleerer.com>", subject: "Kleer | #{@participant.event.event_type.name}" )
   end
   
   def notify_webinar_start(participant, webinar_link)
@@ -15,8 +15,7 @@ class EventMailer < ActionMailer::Base
 
   def welcome_new_event_participant(participant)
     @participant = participant
-    mail(to: @participant.email, from: "Eventos <eventos@kleerer.com>", 
-        subject: "Kleer | Prueba")
+    mail(to: @participant.email, from: "Eventos <eventos@kleerer.com>", subject: "Kleer | #{@participant.event.event_type.name}")
   end
 
 end
