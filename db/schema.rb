@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130807195316) do
+ActiveRecord::Schema.define(:version => 20140123011821) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20130807195316) do
     t.boolean  "webinar_started",                                                           :default => false
     t.string   "currency_iso_code"
     t.string   "address"
+    t.string   "custom_prices_email_text"
   end
 
   add_index "events", ["country_id"], :name => "index_events_on_country_id"
