@@ -1,20 +1,25 @@
-= "Hola " + @participant.fname
-===============================================
-Recibimos tu inscripción al evento llamado
-= @participant.event.event_type.name
-= "que será facilitado por #{@participant.event.trainer.name}"
-= "el día #{@participant.event.human_date} de #{@participant.event.start_time.strftime( '%H:%M' )} a #{@participant.event.end_time.strftime( '%H:%M ' )} hs."
-
+= "Hola #{@participant.fname},"
+= " "
+= "Recibimos tu inscripción al evento llamado #{@participant.event.event_type.name}, que será facilitado por #{@participant.event.trainer.name} el día #{@participant.event.human_date} de #{@participant.event.start_time.strftime( '%H:%M' )} a #{@participant.event.end_time.strftime( '%H:%M' )} hs."
+= " " 
 = "Lugar: #{@participant.event.place}"
 = "Dirección: #{@participant.event.address}, #{@participant.event.city}, #{@participant.event.country.name}"
-
-= "La inversión es: (#{@participant.event.currency_iso_code}) #{currency_symbol_for(@participant.event.currency_iso_code)} #{sprintf("%05.2f", @participant.event.list_price)}"
-
-= "Si pagas antes del #{@participant.event.eb_end_date}, la inversión es: (#{@participant.event.currency_iso_code}) #{currency_symbol_for(@participant.event.currency_iso_code)} #{sprintf("%05.2f", @participant.event.eb_price)}" unless @participant.event.eb_price.nil? || @participant.event.eb_price == 0
-
+= " "
+Inversión
+- if !@participant.event.eb_price.nil? && @participant.event.eb_price > 0
+	="Pronto pago: (#{@participant.event.currency_iso_code}) #{currency_symbol_for(@participant.event.currency_iso_code)} #{sprintf("%05.2f", @participant.event.eb_price)} abonando antes del #{@participant.event.eb_end_date.strftime('%d-%b-%Y')}."
+="Precio de Lista: (#{@participant.event.currency_iso_code}) #{currency_symbol_for(@participant.event.currency_iso_code)} #{sprintf("%05.2f", @participant.event.list_price)}."
+= " "
+- if (!@participant.event.list_price_2_pax_discount.nil? && @participant.event.list_price_2_pax_discount > 0) || (!@participant.event.list_price_3plus_pax_discount.nil? && @participant.event.list_price_3plus_pax_discount > 0)
+	Descuentos sobre precio de lista:
+	- if !@participant.event.list_price_2_pax_discount.nil? && @participant.event.list_price_2_pax_discount > 0
+		= "#{@participant.event.list_price_2_pax_discount}% dto. para 2 personas."
+	- if !@participant.event.list_price_3plus_pax_discount.nil? && @participant.event.list_price_3plus_pax_discount > 0
+		= "#{@participant.event.list_price_3plus_pax_discount}% dto. para 3 o más personas."
+= " "
 Cualquier consulta que tengas no dudes en contactarnos :)
 Te esperamos!
-
+= " "
 Kleer - Agile Coaching & Training
 website | http://www.kleer.la
 facebook | http://www.facebook.com/kleer.la

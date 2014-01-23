@@ -82,7 +82,7 @@ class Participant < ActiveRecord::Base
     else
       self.notes = ""
     end
-    self.notes += "Info (auto) on #{Date.today.strftime('%d-%b')}"
+    self.notes += "#{Date.today.strftime('%d-%b')}: Info (auto)"
   end
   
   def attend!
