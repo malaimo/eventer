@@ -129,6 +129,11 @@
                   %a{ :href => "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet", :target => "_blank"}Markdown 
                   y HTML.
           .row-fuid
+            .span12
+              .control-group
+                %label.control-label{ :for => :monitor_email }= t("formtastic.labels.event.monitor_email")
+                = f.text_field :monitor_email, :class => 'input-block-level', :placeholder => t("formtastic.hints.event.monitor_email")
+          .row-fuid
             .span3
               .control-group
                 %label.control-label{ :for => :sepyme_enabled }= t("formtastic.labels.event.sepyme_enabled")
