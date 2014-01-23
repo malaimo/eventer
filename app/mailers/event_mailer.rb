@@ -24,7 +24,6 @@ class EventMailer < ActionMailer::Base
   def alert_event_monitor(participant, edit_registration_link)
     @participant = participant
     if !@participant.event.monitor_email.nil? && @participant.event.monitor_email != ""
-      puts "Enviando email a #{@participant.event.monitor_email} - #{edit_registration_link}"
       mail(to: @participant.event.monitor_email, 
           from: "Eventos <eventos@kleerer.com>", 
           subject: "[Keventer] Nuevo registro a #{@participant.event.event_type.name}: #{@participant.fname} #{@participant.lname}",
