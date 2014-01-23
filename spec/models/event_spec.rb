@@ -234,8 +234,8 @@ describe Event do
   end
   
   it "should have an optional monitor email" do
-    @event..monitor_email = "martin.alaimo@kleer.la"
-    @event..monitor_email.should == "martin.alaimo@kleer.la"
+    @event.monitor_email = "martin.alaimo@kleer.la"
+    @event.monitor_email.should == "martin.alaimo@kleer.la"
   end
   
   context "if event date is 15-Jan-2015" do
