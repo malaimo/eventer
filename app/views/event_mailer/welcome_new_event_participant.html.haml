@@ -64,7 +64,7 @@
                                         = "#{@participant.event.list_price_3plus_pax_discount}% dto. para 3 o más personas."
                                         %br
                                   - else
-                                    = @participant.event.custom_prices_email_text
+                                    = @markdown_renderer.render( @participant.event.custom_prices_email_text ).html_safe
                                   %br
                                   %br
                                   Cualquier consulta que tengas no dudes en contactarnos :)

@@ -124,6 +124,10 @@
               .control-group
                 %label.control-label{ :for => :custom_prices_email_text }= t("formtastic.labels.event.custom_prices_email_text")
                 = f.text_area :custom_prices_email_text, :rows => 10, :class => 'input-block-level', :placeholder => t("formtastic.hints.event.custom_prices_email_text")
+                %small.muted 
+                  Este texto soporta 
+                  %a{ :href => "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet", :target => "_blank"}Markdown 
+                  y HTML.
           .row-fuid
             .span3
               .control-group

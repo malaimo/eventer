@@ -117,4 +117,14 @@ describe EventMailer do
     html_message.should include("texto customizado")
   end
   
+  it "should send the custom text in HTML format if custom text markdown is present" do
+    @participant.event.custom_prices_email_text = "**texto customizado**: 16"
+    
+    email = EventMailer.welcome_new_event_participant(@participant).deliver
+    
+    html_message = email.body.parts.find {|p| p.content_type.match /html/}.body.raw_source
+    html_message.should include("<strong>texto customizado</strong>: 16")
+
+  end  
+  
 end

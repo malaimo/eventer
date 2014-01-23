@@ -15,6 +15,7 @@ class EventMailer < ActionMailer::Base
 
   def welcome_new_event_participant(participant)
     @participant = participant
+    @markdown_renderer = Redcarpet::Markdown.new( Redcarpet::Render::HTML.new(:hard_wrap => true), :autolink => true)
     mail(to: @participant.email, from: "Eventos <eventos@kleerer.com>", subject: "Kleer | #{@participant.event.event_type.name}")
   end
 
