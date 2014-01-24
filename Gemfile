@@ -13,11 +13,11 @@ end
 
 group :test do
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails',require: false
   gem 'cucumber-rails', require: false
   gem 'capybara'
   gem 'shoulda-matchers'
-  gem 'selenium-webdriver', '~> 2.35.1'
+  gem 'selenium-webdriver', '~> 2.35'
 end
 
 group :production do
@@ -69,3 +69,4 @@ gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'comma'
 gem 'money'
+gem 'redcarpet'
