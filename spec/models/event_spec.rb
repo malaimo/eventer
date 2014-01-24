@@ -228,6 +228,16 @@ describe Event do
     @event.valid?.should be true
   end
   
+  it "should allow custom e-mail prices overrite" do
+    @event.custom_prices_email_text = "PL: 300, EB: 200, BN: 100"
+    @event.custom_prices_email_text.should == "PL: 300, EB: 200, BN: 100"
+  end
+  
+  it "should have an optional monitor email" do
+    @event.monitor_email = "martin.alaimo@kleer.la"
+    @event.monitor_email.should == "martin.alaimo@kleer.la"
+  end
+  
   context "if event date is 15-Jan-2015" do
     
     before (:each) do

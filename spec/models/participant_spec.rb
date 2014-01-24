@@ -61,6 +61,11 @@ describe Participant do
     @participant.status.should == "C"
   end
   
+  it "should let someone contact it" do
+    @participant.contact!
+    @participant.status.should == "T"
+  end
+  
   it "should let someone mark attended it" do
     @participant.is_present?.should be false
     @participant.attend!

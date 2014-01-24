@@ -120,6 +120,20 @@
                 %label.control-label{ :for => :registration_link }= t("formtastic.labels.event.registration_link")
                 = f.text_field :registration_link, :class => 'input-block-level', :placeholder => t("formtastic.hints.event.registration_link")
           .row-fuid
+            .span12
+              .control-group
+                %label.control-label{ :for => :custom_prices_email_text }= t("formtastic.labels.event.custom_prices_email_text")
+                = f.text_area :custom_prices_email_text, :rows => 10, :class => 'input-block-level', :placeholder => t("formtastic.hints.event.custom_prices_email_text")
+                %small.muted 
+                  Este texto soporta 
+                  %a{ :href => "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet", :target => "_blank"}Markdown 
+                  y HTML.
+          .row-fuid
+            .span12
+              .control-group
+                %label.control-label{ :for => :monitor_email }= t("formtastic.labels.event.monitor_email")
+                = f.text_field :monitor_email, :class => 'input-block-level', :placeholder => t("formtastic.hints.event.monitor_email")
+          .row-fuid
             .span3
               .control-group
                 %label.control-label{ :for => :sepyme_enabled }= t("formtastic.labels.event.sepyme_enabled")

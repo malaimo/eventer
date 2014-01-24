@@ -161,8 +161,7 @@ Then /^I should see the webinar setup$/ do
 end
 
 Then /^EB date should be "([^\"]*)"$/ do |value|
-  sleep 5
-  page.find_field('event_eb_end_date').value.should == value
+  page.should have_field('event_eb_end_date', with: value)
 end
 
 When /^I modify the event "([^\"]*)"$/ do |link_description|
