@@ -73,28 +73,29 @@ class ParticipantsController < ApplicationController
       if @participant.save
         
         if @event.is_webinar?
+          
           if @event.webinar_started?
-            hostname = "http://" + request.host
-            port = request.port
-            
-            if port != 80
-              hostname += ":" + port.to_s
-            end
             
             format.html { redirect_to "/public_events/#{@event.id.to_s}/watch/#{@participant.id.to_s}" }
             
           else
+            
             EventMailer.delay.welcome_new_webinar_participant(@participant)
+          
           end
+          
         else
+          
           if @event.list_price != 0.0
             @participant.contact!
             @participant.save
           end
+          
           EventMailer.delay.welcome_new_event_participant(@participant)
           
           edit_registration_link = "http://#{request.host}/events/#{@participant.event.id}/participants/#{@participant.id}/edit"
           EventMailer.delay.alert_event_monitor(@participant, edit_registration_link)
+          
         end
         
         format.html { redirect_to "/events/#{@event.id.to_s}/participant_confirmed#{@nakedform ? "?nakedform=1" : ""}", notice: 'Tu registro fue realizado exitosamente.' }
