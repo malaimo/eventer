@@ -11,6 +11,6 @@ deploy:
   provider: heroku
   api_key:
     secure: KLy58hugX51Nq+QcX8UEBt1tZN6KSgif2w1QEeDjdvddrsiIXugISXkh7VvTVbg0gLXVbYiHBKaguAySTPBpJL6bdMWygcepAlMJNnlF44q86IwpzGg+eaMzNjbtt2NZo9RIAfbofu/13ckHNgTTGSZo+0MArQG4HUYGyy5KLbs=
-  app: keventer
+  app:
     develop: keventer-test
     master: keventer
