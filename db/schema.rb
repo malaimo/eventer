@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140127222433) do
+ActiveRecord::Schema.define(:version => 20140131143115) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20140127222433) do
     t.string   "address"
     t.text     "custom_prices_email_text",      :limit => 255
     t.string   "monitor_email"
+    t.text     "specific_conditions"
   end
 
   add_index "events", ["country_id"], :name => "index_events_on_country_id"
