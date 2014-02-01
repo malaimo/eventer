@@ -41,6 +41,7 @@ def create_valid_event_inputs(event_type_name, event_date='31-01-2030')
   fill_in 'event_list_price_2_pax_discount', :with =>  10
   fill_in 'event_list_price_3plus_pax_discount', :with =>  15
   fill_in 'event_eb_price', :with => 450.00
+  fill_in 'event_specific_conditions', :with => 'Algunas condiciones especiales'
 end
 
 def submit_event

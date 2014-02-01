@@ -71,6 +71,12 @@ describe Event do
       @event.valid?.should be false
   end
 
+  it "should have specific conditions" do
+    @event.specific_conditions = "Participa y llevate un Kindle de regalo!"
+
+    @event.specific_conditions.should == "Participa y llevate un Kindle de regalo!"
+  end
+
   it "Early Bird price should be smaller than List Price" do
       @event.list_price = 100
       @event.eb_price = 200
