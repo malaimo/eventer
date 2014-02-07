@@ -77,6 +77,16 @@ describe Event do
     @event.specific_conditions.should == "Participa y llevate un Kindle de regalo!"
   end
   
+  it "should have a flag to enable referer codes on registrations if desired" do
+    @event.should_ask_for_referer_code = false
+
+    @event.should_ask_for_referer_code.should == false
+  end
+  
+  it "should not require referer code (default)" do
+    @event.should_ask_for_referer_code.should == false
+  end
+  
   it "should have a flag to prevent welcome e-mail if desired" do
     @event.should_welcome_email = false
 
