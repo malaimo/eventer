@@ -136,6 +136,11 @@
           .row-fuid
             .span12
               .control-group
+                %label.control-label{ :for => :should_welcome_email }= t("formtastic.labels.event.should_welcome_email")
+                = f.check_box :should_welcome_email
+          .row-fuid
+            .span12
+              .control-group
                 %label.control-label{ :for => :specific_conditions }= t("formtastic.labels.event.specific_conditions")
                 = f.text_area :specific_conditions, :rows => 10, :class => 'input-block-level', :placeholder => t("formtastic.hints.event.specific_conditions")
                 %small.muted 

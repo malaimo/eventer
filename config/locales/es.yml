@@ -154,6 +154,7 @@ es:
         custom_prices_email_text: "Precios para e-mail de registro"
         monitor_email: "Notificación de nuevos registros a"
         specific_conditions: "Condiciones Especeificas del evento"
+        should_welcome_email: "Enviar e-mail de bienvenida a nuevos registrados?"
         edit:
           title: "Edit title"
       event_type:

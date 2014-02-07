@@ -76,6 +76,16 @@ describe Event do
 
     @event.specific_conditions.should == "Participa y llevate un Kindle de regalo!"
   end
+  
+  it "should have a flag to prevent welcome e-mail if desired" do
+    @event.should_welcome_email = false
+
+    @event.should_welcome_email.should == false
+  end
+  
+  it "should send welcome e-mails (default)" do
+    @event.should_welcome_email.should == true
+  end  
 
   it "Early Bird price should be smaller than List Price" do
       @event.list_price = 100
