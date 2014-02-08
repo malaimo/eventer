@@ -58,6 +58,7 @@ describe Participant do
   
   it "should be valid if there's no referer code" do
     @participant.referer_code = ""
+    
     @participant.valid?.should be true
   end
   
