@@ -128,10 +128,8 @@ class ParticipantsController < ApplicationController
   
   def certificate
 
-	@participant = Participant.find(params[:id])
+	  @participant = Participant.find(params[:id])
 	
-	render "/participants/certificate", :layout => false
-
   end
 
 
