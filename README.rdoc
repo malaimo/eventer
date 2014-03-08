@@ -6,10 +6,10 @@ KEventer es una aplicación de administración de cursos, calendarios e inscripc
 Esta aplicación está basada en Rails.
 Una vez clonado el repositorio e instalados los componentes no-ruby, ejecutá los siguientes pasos para poner a andar tu ambiente de desarrollo:
 
-- Instala las dependencias: bundle install
-- Crea la base de dates: bundle exec rake db:migrate
+- Instalá las dependencias: bundle install
+- Creá la base de dates: bundle exec rake db:migrate
 - Cargá los datos iniciales: bundle exec rake db:seed
-- Ejecutar las pruebas: bundle exec rake
-- Inicia la aplicación: bundle exec rails s
+- Ejecutá las pruebas: bundle exec rake
+- Iniciá la aplicación: bundle exec rails s
 
 Enjoy it!
