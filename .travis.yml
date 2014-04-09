@@ -9,7 +9,7 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: KLy58hugX51Nq+QcX8UEBt1tZN6KSgif2w1QEeDjdvddrsiIXugISXkh7VvTVbg0gLXVbYiHBKaguAySTPBpJL6bdMWygcepAlMJNnlF44q86IwpzGg+eaMzNjbtt2NZo9RIAfbofu/13ckHNgTTGSZo+0MArQG4HUYGyy5KLbs=
+    secure: JWnb0NtN18H4gttHyeQ5VWfnloHled39gQ+lYNSjEoCs7AiaWT+MV2jPYsxy7HpT8SYENAnbgpPwZ106DSEoXMrTCEEGvI0mDYiXvt/oP/dgfflr6/KRcpYswkXYUJJ42SGciBYjJZ5vEGbfSLITbx+HNsr+YLUJm3+i8/thet4=
   app:
     develop: keventer-test
     master: keventer
