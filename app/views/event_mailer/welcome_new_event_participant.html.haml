@@ -29,11 +29,14 @@
                                   = "Hola " + @participant.fname + ","
                                   %br
                                   %br
-                                  Recibimos tu inscripción al evento llamado 
+                                  = "¡Gracias por tu interés!"
+                                  %br
+                                  %br
+                                  El evento  
                                   %b= @participant.event.event_type.name
-                                  que será facilitado por  
+                                  será facilitado por 
                                   %b= @participant.event.trainer.name
-                                  ="el día " + @participant.event.human_date + " de " + @participant.event.start_time.strftime( '%H:%M' ) + " a " + @participant.event.end_time.strftime( '%H:%M ' ) + "hs."
+                                  = "el día " + @participant.event.human_date + " de " + @participant.event.start_time.strftime( '%H:%M' ) + " a " + @participant.event.end_time.strftime( '%H:%M ' ) + "hs."
                                   %br
                                   %br
                                   %b
@@ -67,9 +70,29 @@
                                     = @markdown_renderer.render( @participant.event.custom_prices_email_text ).html_safe
                                   %br
                                   %br
-                                  Cualquier consulta que tengas no dudes en contactarnos :)
+                                  %b
+                                    Formas de pago: 
+                                  tarjeta de crédito, transferencia bancaria o cheque
+                                  - if !@participant.event.country.iso_code == 'AR'
+                                    (
+                                    %a{ :href => "http://www.kleer.la/es/preguntas-frecuentes/facturacion-pagos-argentina", :target => "_blank" }
+                                      más información
+                                    ).
                                   %br
-                                  Te esperamos!
+                                  %br
+                                  Envianos un mensaje a 
+                                  %a{ :href => "mailto:entrenamos@kleer.la" }
+                                    entrenamos@kleer.la
+                                  )
+                                  con la forma de pago que prefieras.
+                                  %b
+                                    Mientras tanto, te reservaremos un lugar para este evento por las próximas 48 horas.
+                                  %br
+                                  %br
+                                  No dudes en contactarnos por cualquier consulta que tengas :)
+                                  %br
+                                  %br
+                                  ¡Te esperamos!
                                   %br
                                   %br
                                   %strong Kleer - Agile Coaching & Training

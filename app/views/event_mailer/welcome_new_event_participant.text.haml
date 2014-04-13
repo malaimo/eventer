@@ -1,6 +1,8 @@
 = "Hola #{@participant.fname},"
 = " "
-= "Recibimos tu inscripción al evento llamado #{@participant.event.event_type.name}, que será facilitado por #{@participant.event.trainer.name} el día #{@participant.event.human_date} de #{@participant.event.start_time.strftime( '%H:%M' )} a #{@participant.event.end_time.strftime( '%H:%M' )} hs."
+= "¡Gracias por tu interés!"
+= " "
+= "El evento #{@participant.event.event_type.name} será facilitado por #{@participant.event.trainer.name} el día #{@participant.event.human_date} de #{@participant.event.start_time.strftime( '%H:%M' )} a #{@participant.event.end_time.strftime( '%H:%M' )} hs."
 = " " 
 = "Lugar: #{@participant.event.place}"
 = "Dirección: #{@participant.event.address}, #{@participant.event.city}, #{@participant.event.country.name}"
@@ -20,8 +22,18 @@
 - else
   = @participant.event.custom_prices_email_text
 = " "
-Cualquier consulta que tengas no dudes en contactarnos :)
-Te esperamos!
+
+Formas de pago: tarjeta de crédito, transferencia bancaria o cheque
+- if !@participant.event.country.iso_code == 'AR'
+  (Más información: http://www.kleer.la/es/preguntas-frecuentes/facturacion-pagos-argentina).
+
+Envianos un mensaje a entrenamos@kleer.la con la forma de pago que prefieras.
+
+Mientras tanto, te reservaremos un lugar para este evento por las próximas 48 horas.
+
+No dudes en contactarnos por cualquier consulta que tengas :)
+
+!Te esperamos!
 = " "
 Kleer - Agile Coaching & Training
 website | http://www.kleer.la
