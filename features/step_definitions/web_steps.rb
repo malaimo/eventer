@@ -199,12 +199,12 @@ When /^I register for that event$/ do
   fill_in 'participant_phone', :with => '1234-5678'
 #  select 'Argentina - Buenos Aires', :from => 'participant_influence_zone_id'
   all('#participant_influence_zone_id option')[1].select_option
-  click_button_and_wait 'Registrarme'
+  click_button_and_wait '¡Me interesa!'
 end
 
 Then /^I should see a confirmation message$/ do
   current_path.should == '/events/1/participant_confirmed'
-  page.should have_content('Tu registro fue realizado exitosamente.')
+  page.should have_content('Tu pedido fue realizado exitosamente.')
 end
 
 Then /^It should have a registration page$/ do
@@ -227,7 +227,7 @@ def create_new_participant
   fill_in 'participant_lname', :with => 'Callidoro'
   fill_in 'participant_email', :with => 'jcallidoro@gmail.com'
   fill_in 'participant_phone', :with => '1234-5678'
-  click_button_and_wait 'Registrarme'
+  click_button_and_wait '¡Me interesa!'
 end
 
 def contact_participant
@@ -246,7 +246,7 @@ end
 
 When /^I make a blank registration for that event$/ do
   visit "/events/1/participants/new"
-  click_button 'Registrarme'
+  click_button '¡Me interesa!'
 end
 
 Given /^theres an influence zone$/ do
