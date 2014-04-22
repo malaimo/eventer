@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(:version => 20140307201814) do
     t.text     "custom_prices_email_text",      :limit => 255
     t.string   "monitor_email"
     t.text     "specific_conditions"
-    t.boolean  "should_welcome_email",                                                        :default => true
+    t.boolean  "should_welcome_email"
     t.boolean  "should_ask_for_referer_code",                                                 :default => false
   end
 

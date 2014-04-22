@@ -30,6 +30,13 @@ class DashboardController < ApplicationController
     @events = Event.public_and_visible.all(:order => 'date').select{ |ev| !ev.event_type.nil? }
   end
   
+  def funneling
+    @events = Event.all(:order => 'date')
+    respond_to do |format|
+      format.csv { render :csv => @events, :filename => "events" }
+    end
+  end
+  
   private
   
   def activate_menu
