@@ -25,6 +25,7 @@ Eventer::Application.routes.draw do
   match 'dashboard/pricing' => 'dashboard#pricing'
   match 'dashboard/past_events' => 'dashboard#past_events'
   match 'dashboard/countdown' => 'dashboard#countdown'
+  match 'dashboard/funneling' => 'dashboard#funneling'
   
   match 'api/events' => 'home#index'
   match 'api/trainers' => 'home#trainers'

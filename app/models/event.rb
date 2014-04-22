@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Event < ActiveRecord::Base
   include ActiveSupport
   
@@ -60,6 +62,17 @@ class Event < ActiveRecord::Base
     if record.is_webinar? && (value == "" || value.nil?)
       record.errors.add(attr, :time_zone_name_is_required_for_a_webinar)
     end
+  end
+  
+  comma do
+    self.visibility_type 'Visibilidad'
+    self.event_type 'Event Type' do |ev_type| ev_type.nil? ? "" : ev_type.name end
+    self.date 'Fecha de Inicio'
+    self.country 'País' do |country| country.nil? ? "" : country.name end
+    self.city 'Ciudad'
+    self.participants 'Registrados' do |participants| participants.count end
+    self.participants 'Confirmados' do |participants| participants.count > 0 ? participants.confirmed.count : 0 end
+    self.capacity 'Capacidad'
   end
 
   def initialize_defaults
