@@ -66,6 +66,7 @@ class Event < ActiveRecord::Base
   
   comma do
     self.visibility_type 'Visibilidad'
+    self.id 'Event ID'
     self.event_type 'Event Type' do |ev_type| ev_type.nil? ? "" : ev_type.name end
     self.date 'Fecha de Inicio'
     self.country 'País' do |country| country.nil? ? "" : country.name end

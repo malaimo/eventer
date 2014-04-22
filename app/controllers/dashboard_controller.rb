@@ -33,7 +33,7 @@ class DashboardController < ApplicationController
   def funneling
     @events = Event.all(:order => 'date')
     respond_to do |format|
-      format.csv { render :csv => @events, :filename => "events" }
+      format.csv { render :csv => @events, :filename => "funelling" }
     end
   end
   
