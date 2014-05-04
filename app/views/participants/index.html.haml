@@ -13,6 +13,9 @@
       %a.btn.btn-white{ :href => event_participants_path(@event) + ".csv" }
         %i.icon-cloud-download
         Bajar Listado (CSV)
+      %a.btn.btn-white{ :href => "./participants_print", :target => "_blank" }
+        %i.icon-print
+        Lista de Asistencia
 
 = render '/commons/notice'
 

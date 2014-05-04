@@ -13,6 +13,16 @@ class ParticipantsController < ApplicationController
       format.json { render json: @participants }
     end
   end
+  
+  def print
+    @event = Event.find(params[:event_id])
+    @participants = @event.participants.confirmed.sort_by(&:lname)
+    
+    respond_to do |format|
+      format.html { render :layout => "empty_layout" }
+      format.json { render json: @participants }
+    end
+  end
 
   # GET /participants/1
   # GET /participants/1.json
