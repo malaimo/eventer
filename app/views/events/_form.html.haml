@@ -43,9 +43,9 @@
               .control-group
                 %label.control-label= t("formtastic.labels.event.horario")
                 = "De " 
-                = f.time_select :start_time, {:minute_step => 15}, :style => "width:50px"
+                = f.time_select :start_time, {:minute_step => 15}, :style => "width:5em"
                 = " a " 
-                = f.time_select :end_time, {:minute_step => 15}, :style => "width:50px"
+                = f.time_select :end_time, {:minute_step => 15}, :style => "width:5em"
           .row-fuid
             .span3
               .control-group
