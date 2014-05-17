@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140307201814) do
+ActiveRecord::Schema.define(:version => 20140517122947) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20140307201814) do
     t.text     "elevator_pitch"
     t.text     "learnings"
     t.text     "takeaways"
+    t.string   "tag_name"
   end
 
   create_table "event_types_trainers", :id => false, :force => true do |t|
@@ -162,6 +163,7 @@ ActiveRecord::Schema.define(:version => 20140307201814) do
     t.string   "linkedin_url"
     t.boolean  "is_kleerer"
     t.integer  "country_id"
+    t.string   "tag_name"
   end
 
   create_table "users", :force => true do |t|

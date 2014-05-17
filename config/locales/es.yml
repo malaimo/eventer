@@ -171,6 +171,7 @@ es:
         faq: "Preguntas Frecuentes"
         materials: "Materiales"
         include_in_catalog: "Incluido en Catálogo (Currícula)"
+        tag_name: "Tag Name (CapsuleCRM)"
       category:
         name: "Nombre"
         description: "Descripción"

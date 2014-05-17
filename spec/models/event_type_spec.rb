@@ -58,5 +58,10 @@ describe EventType do
     @event_type.name = "hola che!"
     @event_type.short_name.should == "hola che!"
   end 
+
+  it "should have a crm tag" do
+    @event_type.tag_name = "TR-CP (Carlos Peix)"
+    @event_type.valid?.should be true
+  end
   
 end
