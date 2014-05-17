@@ -31,4 +31,13 @@ class EventMailer < ActionMailer::Base
     end
   end
 
+  def alert_event_crm_push_finished(crm_push_transaction)
+    if !crm_push_transaction.user.email.nil? && crm_push_transaction.user.email != ""
+      mail(to: crm_push_transaction.user.email, 
+          from: "Keventer <eventos@kleerer.com>", 
+          subject: "[Keventer] Envío al CRM finalizado",
+          body: "El último push al CRM que solicitaste ya ha finalizado.")
+    end
+  end
+
 end

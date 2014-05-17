@@ -102,6 +102,15 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def push_to_crm
+    @event = Event.find(params[:id])
+
+    crm_push = CrmPushTransaction.create( :event => @event, :user => current_user )
+    crm_push.delay.start!
+
+    flash.now[:notice] = t('flash.event.pushing_to_crm')
+  end
   
   def start_webinar
     @event = Event.find(params[:id])
