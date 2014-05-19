@@ -17,7 +17,7 @@ class CrmPushTransactionItem < ActiveRecord::Base
   	if crm_ids.size == 0
       self.log += "002 persona inexistente en CRM\n"
     else
-    	if self.participant.status == "C" || self.participant.status == "A"
+    	if self.participant.is_confirmed_or_attended?
 	    	crm_ids.each do |crm_id|
 	    		self.log += "003 actualizando persona con id:#{crm_id}\n"
 	    		
