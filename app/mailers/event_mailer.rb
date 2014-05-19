@@ -26,8 +26,17 @@ class EventMailer < ActionMailer::Base
     if !@participant.event.monitor_email.nil? && @participant.event.monitor_email != ""
       mail(to: @participant.event.monitor_email, 
           from: "Eventos <eventos@kleerer.com>", 
-          subject: "[Keventer] Nuevo registro a #{@participant.event.event_type.name}: #{@participant.fname} #{@participant.lname}",
-          body: "Una nueva persona se registró a #{@participant.event.event_type.name}. Puedes ver/editar el registro en #{edit_registration_link}.")
+          subject: "[Keventer] Nuevo registro a #{@participant.event.event_type.name} en #{@participant.event.country.name}: #{@participant.fname} #{@participant.lname}",
+          body: "Una nueva persona se registró a #{@participant.event.event_type.name} del #{@participant.event.human_date} en #{@participant.event.country.name}. Puedes ver/editar el registro en #{edit_registration_link}.")
+    end
+  end
+
+  def alert_event_crm_push_finished(crm_push_transaction)
+    if !crm_push_transaction.user.email.nil? && crm_push_transaction.user.email != ""
+      mail(to: crm_push_transaction.user.email, 
+          from: "Keventer <eventos@kleerer.com>", 
+          subject: "[Keventer] Envío al CRM finalizado",
+          body: "El último push al CRM que solicitaste ya ha finalizado.")
     end
   end
 

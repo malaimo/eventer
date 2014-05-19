@@ -22,7 +22,7 @@
                 %label.control-label{ :for => :duration }= t("formtastic.labels.event_type.duration") + " (*)"
                 = f.text_field :duration, :class => 'datepicker-class input-mini'
           .row-fluid
-            .span4
+            .span3
               .control-group
                 %label.control-label
                   = t("formtastic.labels.event_type.trainers") + " (*)"
@@ -31,7 +31,7 @@
                   %label.checkbox
                     = check_box_tag "event_type[trainer_ids][]", trainer.id, @event_type.trainers.include?(trainer)
                     = trainer.name
-            .span4
+            .span3
               .control-group
                 %label.control-label
                   = t("formtastic.labels.event_type.categories") + " (*)"
@@ -40,10 +40,16 @@
                   %label.checkbox
                     = check_box_tag "event_type[category_ids][]", category.id, @event_type.categories.include?(category)
                     = category.name
-            .span4
+            .span3
               .control-group
                 %label.control-label{ :for => :include_in_catalog }= t("formtastic.labels.event_type.include_in_catalog")
                 = f.check_box :include_in_catalog
+            .span3
+              .control-group
+                %label.control-label{ :for => :tag_name }= t("formtastic.labels.event_type.tag_name")
+                = f.text_field :tag_name, :class => 'input-block-level'
+                %small.muted
+                  Del tipo "C-XYZ (Descripción)", por ejemplo: "C-CSM (Certified ScrumMaster)"
           .row-fluid
             .span12
               .control-group

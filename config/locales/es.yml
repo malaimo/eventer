@@ -171,6 +171,7 @@ es:
         faq: "Preguntas Frecuentes"
         materials: "Materiales"
         include_in_catalog: "Incluido en Catálogo (Currícula)"
+        tag_name: "Tag Name (CapsuleCRM)"
       category:
         name: "Nombre"
         description: "Descripción"
@@ -277,6 +278,7 @@ es:
               success: "Evento cancelado exitosamente!"
           webinar:
               broadcasting: "Webinar Iniciado Exitosamente!"
+          pushing_to_crm: "Enviando participantes del evento a CapsuleCRM... Te eviaré un e-mail al finalizar."
       event_type:
           create:
               success: "Tipo de Evento creado exitosamente!"

@@ -44,6 +44,7 @@ Eventer::Application.routes.draw do
   match 'events/update_trainer_select/:id' => 'ajax#events_update_trainer_select'
   match 'events/:id/start_webinar' => 'events#start_webinar'
   match 'events/:id/broadcast_webinar' => 'events#broadcast_webinar'
+  match 'events/:id/push_to_crm' => 'events#push_to_crm'
   
   match 'events/:event_id/participant_confirmed' => 'participants#confirm'
   match 'events/:event_id/participants_print' => 'participants#print'

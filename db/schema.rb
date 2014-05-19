@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140307201814) do
+ActiveRecord::Schema.define(:version => 20140517135558) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -32,6 +32,22 @@ ActiveRecord::Schema.define(:version => 20140307201814) do
   create_table "countries", :force => true do |t|
     t.string   "name"
     t.string   "iso_code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "crm_push_transaction_items", :force => true do |t|
+    t.integer  "crm_push_transaction_id"
+    t.integer  "participant_id"
+    t.text     "log"
+    t.string   "result"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  create_table "crm_push_transactions", :force => true do |t|
+    t.integer  "event_id"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -67,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20140307201814) do
     t.text     "elevator_pitch"
     t.text     "learnings"
     t.text     "takeaways"
+    t.string   "tag_name"
   end
 
   create_table "event_types_trainers", :id => false, :force => true do |t|
@@ -162,6 +179,7 @@ ActiveRecord::Schema.define(:version => 20140307201814) do
     t.string   "linkedin_url"
     t.boolean  "is_kleerer"
     t.integer  "country_id"
+    t.string   "tag_name"
   end
 
   create_table "users", :force => true do |t|
