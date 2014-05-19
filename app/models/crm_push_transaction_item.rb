@@ -10,6 +10,8 @@ class CrmPushTransactionItem < ActiveRecord::Base
   attr_accessible :crm_push_transaction, :log, :participant, :result
 
   def push!
+  	self.result = "Errored/Halted"
+
   	self.log = "001 push iniciado para #{self.participant.email}\n"
 
   	crm_ids = get_crm_ids(self.participant.email)
@@ -17,6 +19,8 @@ class CrmPushTransactionItem < ActiveRecord::Base
   	if crm_ids.size == 0
 	    self.log += "002 persona inexistente en CRM\n"
 	    new_id = create_crm_person(self.participant)
+	    self.result = "Created"
+
 	    add_crm_tag new_id, self.participant.influence_zone_tag
 
 	    if self.participant.is_confirmed_or_present?
@@ -29,6 +33,7 @@ class CrmPushTransactionItem < ActiveRecord::Base
 	    		self.log += "004 actualizando persona con id:#{crm_id}\n"
 	    		apply_event_tags crm_id, crm_push_transaction.event
 	    	end
+	    	self.result = "Updated"
     	end
     end
 
