@@ -70,3 +70,6 @@ gem 'delayed_job_active_record'
 gem 'comma'
 gem 'money'
 gem 'redcarpet'
+
+# Gemas necesarias para la comunicación con CapsuleCRM
+gem 'curb'

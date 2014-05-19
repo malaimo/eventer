@@ -128,18 +128,22 @@ class Event < ActiveRecord::Base
       self.webinar_started = true
     end
   end
+
+  def finished?
+    timezone = TimeZone.new( self.time_zone_name ) unless self.time_zone_name.nil?
+    
+    if !timezone.nil?
+      timezone_current_time = timezone.now
+    else
+      timezone_current_time = Time.now
+    end
+    
+    (Time.parse( self.end_time.strftime("%H:%M") ) < timezone_current_time )
+  end
   
   def webinar_finished?
     if self.is_webinar? && self.webinar_started?
-      
-      timezone = TimeZone.new( self.time_zone_name ) unless self.time_zone_name.nil?
-      
-      if !timezone.nil?
-        timezone_current_time = timezone.now
-      else
-        timezone_current_time = Time.now
-      end
-      (Time.parse( self.end_time.strftime("%H:%M") ) < timezone_current_time )
+      finished?
     end
   end
   

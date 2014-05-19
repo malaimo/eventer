@@ -16,6 +16,28 @@
       %a.btn.btn-white{ :href => "./participants_print", :target => "_blank" }
         %i.icon-print
         Lista de Asistencia
+      %a.btn.btn-white{ "data-toggle" => "modal", :href => "#modal-push-confirmation", :role => "button" }
+        %i.icon-circle-arrow-right
+        CapsuleCRM
+
+.modal.hide.fade#modal-push-confirmation{ :role => :dialog, :tabindex => -1 }
+  .modal-header
+    %button.close{ "data-dismiss" => :modal, :type => "button" }
+      &times;
+    %h3 
+      Finalizar evento y enviar participantes a CapsuleCRM
+  .modal-body
+    %h4
+      ¡Atención!
+    %p
+      Esta operación creará las personas en CapsuleCRM y aplicará los tags del curso y trainer a quienes están marcado como "Confirmados" o "Presentes". Antes de seguir, asegúrate que el evento ya haya finalizado y que quienes estuvieron ausentes estén marcados como "Pospuestos" o "Cancelados".
+    %p
+      ¿Estás seguro/a de continuar?
+  .modal-footer
+    %button.btn{ "data-dismiss" => "modal" }
+      No, cancelar :(
+    %a.btn.btn-primary{ :href => "./push_to_crm" }
+      Si, continuar! :)
 
 = render '/commons/notice'
 
