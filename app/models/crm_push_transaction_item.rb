@@ -18,10 +18,13 @@ class CrmPushTransactionItem < ActiveRecord::Base
 	    self.log += "002 persona inexistente en CRM\n"
 	    new_id = create_crm_person(self.participant)
 	    add_crm_tag new_id, self.participant.influence_zone_tag
-		apply_event_tags new_id, crm_push_transaction.event
+
+	    if self.participant.is_confirmed_or_present?
+			apply_event_tags new_id, crm_push_transaction.event
+		end
 		
     else
-    	if self.participant.is_confirmed_or_attended?
+    	if self.participant.is_confirmed_or_present?
 	    	crm_ids.each do |crm_id|
 	    		self.log += "004 actualizando persona con id:#{crm_id}\n"
 	    		apply_event_tags crm_id, crm_push_transaction.event
@@ -59,10 +62,9 @@ class CrmPushTransactionItem < ActiveRecord::Base
 	redirect_url = c.header_str.match(/Location: (.*)/).to_s
 	from_index = redirect_url.rindex("/")+1
 	to_index = redirect_url.length-1
-	new_id = redirect_url[from_index..to_index]
+	new_id = redirect_url[from_index..to_index].strip
 
   	self.log += "003 persona creada con ID #{new_id} en CRM\n"
-
 	
 	new_id
 
