@@ -13,6 +13,16 @@ class ParticipantsController < ApplicationController
       format.json { render json: @participants }
     end
   end
+  
+  def print
+    @event = Event.find(params[:event_id])
+    @participants = @event.participants.confirmed.sort_by(&:lname)
+    
+    respond_to do |format|
+      format.html { render :layout => "empty_layout" }
+      format.json { render json: @participants }
+    end
+  end
 
   # GET /participants/1
   # GET /participants/1.json
@@ -73,22 +83,34 @@ class ParticipantsController < ApplicationController
       if @participant.save
         
         if @event.is_webinar?
+          
           if @event.webinar_started?
-            hostname = "http://" + request.host
-            port = request.port
-            
-            if port != 80
-              hostname += ":" + port.to_s
-            end
             
             format.html { redirect_to "/public_events/#{@event.id.to_s}/watch/#{@participant.id.to_s}" }
             
           else
+            
             EventMailer.delay.welcome_new_webinar_participant(@participant)
+          
           end
+          
+        else
+          
+          if @event.list_price != 0.0
+            @participant.contact!
+            @participant.save
+          end
+          
+          if @event.should_welcome_email
+            EventMailer.delay.welcome_new_event_participant(@participant)
+          end
+          
+          edit_registration_link = "http://#{request.host}/events/#{@participant.event.id}/participants/#{@participant.id}/edit"
+          EventMailer.delay.alert_event_monitor(@participant, edit_registration_link)
+          
         end
         
-        format.html { redirect_to "/events/#{@event.id.to_s}/participant_confirmed#{@nakedform ? "?nakedform=1" : ""}", notice: 'Tu registro fue realizado exitosamente.' }
+        format.html { redirect_to "/events/#{@event.id.to_s}/participant_confirmed#{@nakedform ? "?nakedform=1" : ""}", notice: 'Tu pedido fue realizado exitosamente.' }
         format.json { render json: @participant, status: :created, location: @participant }
       else
         format.html { render action: "new", :layout => "empty_layout" }

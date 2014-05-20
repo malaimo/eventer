@@ -56,9 +56,26 @@ describe Participant do
     @participant.valid?.should be false
   end
   
+  it "should be valid if there's no referer code" do
+    @participant.referer_code = ""
+    
+    @participant.valid?.should be true
+  end
+  
+  it "should be valid if there's a referer code" do
+    @participant.referer_code = "UNCODIGO"
+    
+    @participant.valid?.should be true
+  end
+  
   it "should let someone confirm it" do
     @participant.confirm!
     @participant.status.should == "C"
+  end
+  
+  it "should let someone contact it" do
+    @participant.contact!
+    @participant.status.should == "T"
   end
   
   it "should let someone mark attended it" do

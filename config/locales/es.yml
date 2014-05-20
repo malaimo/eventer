@@ -108,6 +108,7 @@ es:
         email: "E-Mail"
         status: "Estado"      
         influence_zone: "Zona de Influencia"  
+        referer_code: "Código de Referencia"
       trainer:
         linedin_url: "URL de LinedIn"
         is_kleerer: "Es Kleerer?"
@@ -151,6 +152,11 @@ es:
         country: "País"
         city: "Ciudad"
         currency_iso_code: "Moneda"
+        custom_prices_email_text: "Precios para e-mail de registro"
+        monitor_email: "Notificación de nuevos registros a"
+        specific_conditions: "Condiciones Especeificas del evento"
+        should_welcome_email: "Enviar e-mail de bienvenida a nuevos registrados?"
+        should_ask_for_referer_code: "Solicitar código de referencia (referer) a nuevos registrados?"
         edit:
           title: "Edit title"
       event_type:
@@ -165,6 +171,7 @@ es:
         faq: "Preguntas Frecuentes"
         materials: "Materiales"
         include_in_catalog: "Incluido en Catálogo (Currícula)"
+        tag_name: "Tag Name (CapsuleCRM)"
       category:
         name: "Nombre"
         description: "Descripción"
@@ -180,6 +187,9 @@ es:
         embedded_player: "Inicia el Google Hangout (On Air) y, sin comenzar el broadcasting, pega aquí el código del reproductor embebido."
         twitter_embedded_search: "Haz una búsqueda en Twitter con el #hashtag del webinar y pega aquí el código para embeberla."
         notify_webinar_start: "Al seleccionar este campo, se enviará un e-mail a todos los participantes para que ingresen al webinar (este proceso puede demorar unos minutos)."        
+        custom_prices_email_text: "Dejar en blanco para que el e-mail de bienvenida contenga información de precio de lista, early bird y descuentos para 2 y 3+ personas (si corresponde)"
+        monitor_email: "Email de la persona a quien se notificarán nuevos registros. En blanco para no notificar nuevos registros."
+        specific_conditions: "Condiciones específicas de este evento. Como por ejemplo: promociones, horarios especiales, ejecución desagregada, etc. En blanco, si no tiene."
       participant: 
         phone_old: "Una persona de Kleer se contactará a este teléfono para continuar con tu inscripción."    
       event_type:
@@ -268,6 +278,7 @@ es:
               success: "Evento cancelado exitosamente!"
           webinar:
               broadcasting: "Webinar Iniciado Exitosamente!"
+          pushing_to_crm: "Enviando participantes del evento a CapsuleCRM... Te eviaré un e-mail al finalizar."
       event_type:
           create:
               success: "Tipo de Evento creado exitosamente!"

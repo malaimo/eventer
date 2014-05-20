@@ -61,7 +61,7 @@ FactoryGirl.define do
    end
   
   factory :event do
-    event_type FactoryGirl.build(:event_type)
+    event_type {FactoryGirl.build(:event_type)}
     date "23/01/2100"
     duration 2
     start_time "9:00"
@@ -72,6 +72,7 @@ FactoryGirl.define do
     capacity 20
     visibility_type 'pu'
     list_price 500.00
+    currency_iso_code "ARS"
     is_webinar false
     country FactoryGirl.build(:country)
     trainer FactoryGirl.build(:trainer)

@@ -5,7 +5,7 @@ class Participant < ActiveRecord::Base
   belongs_to :event
   belongs_to :influence_zone
   
-  attr_accessible :email, :fname, :lname, :phone, :event_id, :status, :notes, :influence_zone_id, :influence_zone
+  attr_accessible :email, :fname, :lname, :phone, :event_id, :status, :notes, :influence_zone_id, :influence_zone, :referer_code
   
   validates :email, :fname, :lname, :phone, :event, :influence_zone, :presence => true
   
@@ -75,12 +75,26 @@ class Participant < ActiveRecord::Base
     self.status = "C"
   end
   
+  def contact!
+    self.status = "T"
+    if !self.notes.nil?
+      self.notes += "\n"
+    else
+      self.notes = ""
+    end
+    self.notes += "#{Date.today.strftime('%d-%b')}: Info (auto)"
+  end
+  
   def attend!
     self.status = "A"
   end
   
   def is_present?
     (self.status == "A")
+  end
+
+  def is_confirmed_or_present?
+    (self.status == "A" || self.status == "C")
   end
   
   def influence_zone_tag

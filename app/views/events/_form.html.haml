@@ -43,9 +43,9 @@
               .control-group
                 %label.control-label= t("formtastic.labels.event.horario")
                 = "De " 
-                = f.time_select :start_time, {:minute_step => 15}, :style => "width:50px"
+                = f.time_select :start_time, {:minute_step => 15}, :style => "width:5em"
                 = " a " 
-                = f.time_select :end_time, {:minute_step => 15}, :style => "width:50px"
+                = f.time_select :end_time, {:minute_step => 15}, :style => "width:5em"
           .row-fuid
             .span3
               .control-group
@@ -119,6 +119,39 @@
               .control-group
                 %label.control-label{ :for => :registration_link }= t("formtastic.labels.event.registration_link")
                 = f.text_field :registration_link, :class => 'input-block-level', :placeholder => t("formtastic.hints.event.registration_link")
+          .row-fuid
+            .span12
+              .control-group
+                %label.control-label{ :for => :should_ask_for_referer_code }= t("formtastic.labels.event.should_ask_for_referer_code")
+                = f.check_box :should_ask_for_referer_code
+          .row-fuid
+            .span12
+              .control-group
+                %label.control-label{ :for => :custom_prices_email_text }= t("formtastic.labels.event.custom_prices_email_text")
+                = f.text_area :custom_prices_email_text, :rows => 10, :class => 'input-block-level', :placeholder => t("formtastic.hints.event.custom_prices_email_text")
+                %small.muted 
+                  Este texto soporta 
+                  %a{ :href => "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet", :target => "_blank"}Markdown 
+                  y HTML.
+          .row-fuid
+            .span12
+              .control-group
+                %label.control-label{ :for => :monitor_email }= t("formtastic.labels.event.monitor_email")
+                = f.text_field :monitor_email, :class => 'input-block-level', :placeholder => t("formtastic.hints.event.monitor_email")
+          .row-fuid
+            .span12
+              .control-group
+                %label.control-label{ :for => :should_welcome_email }= t("formtastic.labels.event.should_welcome_email")
+                = f.check_box :should_welcome_email
+          .row-fuid
+            .span12
+              .control-group
+                %label.control-label{ :for => :specific_conditions }= t("formtastic.labels.event.specific_conditions")
+                = f.text_area :specific_conditions, :rows => 10, :class => 'input-block-level', :placeholder => t("formtastic.hints.event.specific_conditions")
+                %small.muted 
+                  Este texto soporta 
+                  %a{ :href => "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet", :target => "_blank"}Markdown 
+                  y HTML.
           .row-fuid
             .span3
               .control-group
@@ -212,7 +245,7 @@
     var event_date = new Date( date_string );
     
     var eb_date = new Date( date_string );
-    eb_date.setDate( event_date.getDate()-9 );
+    eb_date.setDate( event_date.getUTCDate()-10 );
 
     var eb_date_day = eb_date.getDate();
     var eb_date_month = eb_date.getMonth()+1;

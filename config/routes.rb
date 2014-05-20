@@ -25,6 +25,7 @@ Eventer::Application.routes.draw do
   match 'dashboard/pricing' => 'dashboard#pricing'
   match 'dashboard/past_events' => 'dashboard#past_events'
   match 'dashboard/countdown' => 'dashboard#countdown'
+  match 'dashboard/funneling' => 'dashboard#funneling'
   
   match 'api/events' => 'home#index'
   match 'api/trainers' => 'home#trainers'
@@ -43,11 +44,13 @@ Eventer::Application.routes.draw do
   match 'events/update_trainer_select/:id' => 'ajax#events_update_trainer_select'
   match 'events/:id/start_webinar' => 'events#start_webinar'
   match 'events/:id/broadcast_webinar' => 'events#broadcast_webinar'
+  match 'events/:id/push_to_crm' => 'events#push_to_crm'
   
   match 'events/:event_id/participant_confirmed' => 'participants#confirm'
 
   match 'events/:event_id/participants/:id/certificate' => 'participants#certificate'
 
+  match 'events/:event_id/participants_print' => 'participants#print'
       
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase

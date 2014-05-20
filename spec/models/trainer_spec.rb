@@ -73,4 +73,12 @@ describe Trainer do
     t.gravatar_picture_url.should == "http://www.gravatar.com/avatar/asljasld"
   end
 
+  it "should have a crm tag" do
+    t = FactoryGirl.build(:trainer)
+
+    t.tag_name = "TR-CP (Carlos Peix)"
+
+    t.valid?.should be true
+  end
+
 end

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Event < ActiveRecord::Base
   include ActiveSupport
   
@@ -23,7 +25,8 @@ class Event < ActiveRecord::Base
                   :list_price_plus_tax, :list_price_2_pax_discount, :list_price_3plus_pax_discount,
                   :eb_price, :eb_end_date, :draft, :cancelled, :registration_link, :is_sold_out, :participants, :duration, 
                   :start_time, :end_time, :sepyme_enabled, :is_webinar, :time_zone_name, :embedded_player, :twitter_embedded_search,
-                  :notify_webinar_start, :webinar_started, :currency_iso_code, :address
+                  :notify_webinar_start, :webinar_started, :currency_iso_code, :address, :custom_prices_email_text, :monitor_email,
+                  :specific_conditions, :should_welcome_email, :should_ask_for_referer_code
 
   validates :date, :place, :capacity, :city, :visibility_type, :list_price,
             :country, :trainer, :event_type, :duration, :start_time, :end_time, :address, :presence => true
@@ -60,12 +63,25 @@ class Event < ActiveRecord::Base
       record.errors.add(attr, :time_zone_name_is_required_for_a_webinar)
     end
   end
+  
+  comma do
+    self.visibility_type 'Visibilidad'
+    self.id 'Event ID'
+    self.event_type 'Event Type' do |ev_type| ev_type.nil? ? "" : ev_type.name end
+    self.date 'Fecha de Inicio'
+    self.country 'País' do |country| country.nil? ? "" : country.name end
+    self.city 'Ciudad'
+    self.participants 'Registrados' do |participants| participants.count end
+    self.participants 'Confirmados' do |participants| participants.count > 0 ? participants.confirmed.count : 0 end
+    self.capacity 'Capacidad'
+  end
 
   def initialize_defaults
     if self.new_record?
      self.start_time ||= "9:00"   
      self.end_time ||= "18:00"  
-     self.duration ||= 1        
+     self.duration ||= 1
+     self.should_welcome_email ||= true    
     end
   end
 
@@ -112,21 +128,29 @@ class Event < ActiveRecord::Base
       self.webinar_started = true
     end
   end
+
+  def finished?
+    timezone = TimeZone.new( self.time_zone_name ) unless self.time_zone_name.nil?
+    
+    if !timezone.nil?
+      timezone_current_time = timezone.now
+    else
+      timezone_current_time = Time.now
+    end
+    
+    (Time.parse( self.end_time.strftime("%H:%M") ) < timezone_current_time )
+  end
   
   def webinar_finished?
     if self.is_webinar? && self.webinar_started?
-      
-      timezone = TimeZone.new( self.time_zone_name ) unless self.time_zone_name.nil?
-      
-      if !timezone.nil?
-        timezone_current_time = timezone.now
-      else
-        timezone_current_time = Time.now
-      end
-      (Time.parse( self.end_time.strftime("%H:%M") ) < timezone_current_time )
+      finished?
     end
   end
   
+  def is_community_event?
+    self.visibility_type == 'co'
+  end
+
   private
   
   def get_event_duration

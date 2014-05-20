@@ -22,6 +22,13 @@ User.create do |u|
   u.roles << @admin_role
 end
 
+User.create do |u|
+  u.email = "entrenamos@kleer.la"
+  u.password = "secret1"
+  u.password_confirmation = "secret1"
+  u.roles << @admin_role
+end
+
 
 @trainers = Trainer.create([
   {:name => 'John Doe'},
@@ -294,6 +301,8 @@ if (EventType.count == 0)
 end
 
 if (InfluenceZone.count == 0)
+    InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMS-CL (Chile)', country_id: Country.find_by_iso_code( 'CL' ).id )
+    
     InfluenceZone.create( zone_name: 'Neuquen', tag_name: 'ZI-AMS-AR-PAT (Patagonia)', country_id: Country.find_by_iso_code( 'AR' ).id )
     InfluenceZone.create( zone_name: 'Santa Cruz', tag_name: 'ZI-AMS-AR-PAT (Patagonia)', country_id: Country.find_by_iso_code( 'AR' ).id )
     InfluenceZone.create( zone_name: 'Chubut', tag_name: 'ZI-AMS-AR-PAT (Patagonia)', country_id: Country.find_by_iso_code( 'AR' ).id )
@@ -317,7 +326,9 @@ if (InfluenceZone.count == 0)
     InfluenceZone.create( zone_name: 'Mendoza', tag_name: 'ZI-AMS-AR-CUY (Cuyo)', country_id: Country.find_by_iso_code( 'AR' ).id )
     InfluenceZone.create( zone_name: 'San Juan', tag_name: 'ZI-AMS-AR-CUY (Cuyo)', country_id: Country.find_by_iso_code( 'AR' ).id )
     InfluenceZone.create( zone_name: 'San Luis', tag_name: 'ZI-AMS-AR-CUY (Cuyo)', country_id: Country.find_by_iso_code( 'AR' ).id )
+
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AUS (Australia)', country_id: Country.find_by_iso_code( 'AU' ).id )
+
     InfluenceZone.create( zone_name: 'Cochabamba', tag_name: 'ZI-AMS-BO (Bolivia)', country_id: Country.find_by_iso_code( 'BO' ).id )
     InfluenceZone.create( zone_name: 'La Paz', tag_name: 'ZI-AMS-BO (Bolivia)', country_id: Country.find_by_iso_code( 'BO' ).id )
     InfluenceZone.create( zone_name: 'Santa Cruz', tag_name: 'ZI-AMS-BO (Bolivia)', country_id: Country.find_by_iso_code( 'BO' ).id )
@@ -327,6 +338,7 @@ if (InfluenceZone.count == 0)
     InfluenceZone.create( zone_name: 'Oruro', tag_name: 'ZI-AMS-BO (Bolivia)', country_id: Country.find_by_iso_code( 'BO' ).id )
     InfluenceZone.create( zone_name: 'Chuquisaca', tag_name: 'ZI-AMS-BO (Bolivia)', country_id: Country.find_by_iso_code( 'BO' ).id )
     InfluenceZone.create( zone_name: 'Beni', tag_name: 'ZI-AMS-BO (Bolivia)', country_id: Country.find_by_iso_code( 'BO' ).id )
+
     InfluenceZone.create( zone_name: 'Acre', tag_name: 'ZI-AMS-BR (Brasil)', country_id: Country.find_by_iso_code( 'BR' ).id )
     InfluenceZone.create( zone_name: 'Alagoas', tag_name: 'ZI-AMS-BR (Brasil)', country_id: Country.find_by_iso_code( 'BR' ).id )
     InfluenceZone.create( zone_name: 'Rio de Janeiro', tag_name: 'ZI-AMS-BR (Brasil)', country_id: Country.find_by_iso_code( 'BR' ).id )
@@ -354,8 +366,9 @@ if (InfluenceZone.count == 0)
     InfluenceZone.create( zone_name: 'São Paulo', tag_name: 'ZI-AMS-BR (Brasil)', country_id: Country.find_by_iso_code( 'BR' ).id )
     InfluenceZone.create( zone_name: 'Sergipe', tag_name: 'ZI-AMS-BR (Brasil)', country_id: Country.find_by_iso_code( 'BR' ).id )
     InfluenceZone.create( zone_name: 'Tocantins', tag_name: 'ZI-AMS-BR (Brasil)', country_id: Country.find_by_iso_code( 'BR' ).id )
+
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMN-CA (Canada)', country_id: Country.find_by_iso_code( 'CA' ).id )
-    InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMS-CL (Chile)', country_id: Country.find_by_iso_code( 'CL' ).id )
+
     InfluenceZone.create( zone_name: 'Armenia', tag_name: 'ZI-AMS-CO-EJE (Eje cafetero)', country_id: Country.find_by_iso_code( 'CO' ).id )
     InfluenceZone.create( zone_name: 'Pereira', tag_name: 'ZI-AMS-CO-EJE (Eje cafetero)', country_id: Country.find_by_iso_code( 'CO' ).id )
     InfluenceZone.create( zone_name: 'Manizales', tag_name: 'ZI-AMS-CO-EJE (Eje cafetero)', country_id: Country.find_by_iso_code( 'CO' ).id )
@@ -378,10 +391,12 @@ if (InfluenceZone.count == 0)
     InfluenceZone.create( zone_name: 'Quibdó', tag_name: 'ZI-AMS-CO-PAC (Pacífico)', country_id: Country.find_by_iso_code( 'CO' ).id )
     InfluenceZone.create( zone_name: 'Medellin', tag_name: 'ZI-AMS-CO-MDE (Medellín)', country_id: Country.find_by_iso_code( 'CO' ).id )
     InfluenceZone.create( zone_name: 'N/A', tag_name: 'ZI-AMS-CO-BOG (Bogota)', country_id: Country.find_by_iso_code( 'CO' ).id )
+
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMC (America Central y Caribe)', country_id: Country.find_by_iso_code( 'CU' ).id )
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMC (America Central y Caribe)', country_id: Country.find_by_iso_code( 'GT' ).id )
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMC (America Central y Caribe)', country_id: Country.find_by_iso_code( 'HN' ).id )
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMS-EC (Ecuador)', country_id: Country.find_by_iso_code( 'EC' ).id )
+
     InfluenceZone.create( zone_name: 'Andalucía', tag_name: 'ZI-EUR-ES (España)', country_id: Country.find_by_iso_code( 'ES' ).id )
     InfluenceZone.create( zone_name: 'Aragón', tag_name: 'ZI-EUR-ES (España)', country_id: Country.find_by_iso_code( 'ES' ).id )
     InfluenceZone.create( zone_name: 'Principado de Asturias', tag_name: 'ZI-EUR-ES (España)', country_id: Country.find_by_iso_code( 'ES' ).id )
@@ -402,9 +417,11 @@ if (InfluenceZone.count == 0)
     InfluenceZone.create( zone_name: 'Ceuta', tag_name: 'ZI-EUR-ES (España)', country_id: Country.find_by_iso_code( 'ES' ).id )
     InfluenceZone.create( zone_name: 'Melilla', tag_name: 'ZI-EUR-ES (España)', country_id: Country.find_by_iso_code( 'ES' ).id )
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-ASI (Asia)', country_id: Country.find_by_iso_code( 'ES' ).id )
+
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMN-MX (Mexico)', country_id: Country.find_by_iso_code( 'MX' ).id )
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMC (America Central y Caribe)', country_id: Country.find_by_iso_code( 'PA' ).id )
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMS-PY (Paraguay)', country_id: Country.find_by_iso_code( 'PY' ).id )
+
     InfluenceZone.create( zone_name: 'Amazonas', tag_name: 'ZI-AMS-PE (Peru)', country_id: Country.find_by_iso_code( 'PE' ).id )
     InfluenceZone.create( zone_name: 'Áncash', tag_name: 'ZI-AMS-PE (Peru)', country_id: Country.find_by_iso_code( 'PE' ).id )
     InfluenceZone.create( zone_name: 'Apurímac', tag_name: 'ZI-AMS-PE (Peru)', country_id: Country.find_by_iso_code( 'PE' ).id )
@@ -430,6 +447,7 @@ if (InfluenceZone.count == 0)
     InfluenceZone.create( zone_name: 'Tacna', tag_name: 'ZI-AMS-PE (Peru)', country_id: Country.find_by_iso_code( 'PE' ).id )
     InfluenceZone.create( zone_name: 'Tumbes', tag_name: 'ZI-AMS-PE (Peru)', country_id: Country.find_by_iso_code( 'PE' ).id )
     InfluenceZone.create( zone_name: 'Ucayali', tag_name: 'ZI-AMS-PE (Peru)', country_id: Country.find_by_iso_code( 'PE' ).id )
+
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMC (America Central y Caribe)', country_id: Country.find_by_iso_code( 'DO' ).id )
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMS-UY (Uruguay)', country_id: Country.find_by_iso_code( 'UY' ).id )
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMN-US (EEUU)', country_id: Country.find_by_iso_code( 'US' ).id )

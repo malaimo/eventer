@@ -38,10 +38,12 @@ def create_valid_event_inputs(event_type_name, event_date='31-01-2030')
   choose 'event_visibility_type_pu'
   fill_in 'event_list_price', :with => 500.00
   check 'event_list_price_plus_tax'
+  check 'event_should_welcome_email'
+  check 'event_should_ask_for_referer_code'
   fill_in 'event_list_price_2_pax_discount', :with =>  10
   fill_in 'event_list_price_3plus_pax_discount', :with =>  15
   fill_in 'event_eb_price', :with => 450.00
-  fill_in 'event_eb_end_date', :with => '21-01-2030'
+  fill_in 'event_specific_conditions', :with => 'Algunas condiciones especiales'
 end
 
 def submit_event
@@ -162,7 +164,7 @@ Then /^I should see the webinar setup$/ do
 end
 
 Then /^EB date should be "([^\"]*)"$/ do |value|
-  page.find_field('event_eb_end_date').value.should == value
+  page.should have_field('event_eb_end_date', with: value)
 end
 
 When /^I modify the event "([^\"]*)"$/ do |link_description|
@@ -197,12 +199,12 @@ When /^I register for that event$/ do
   fill_in 'participant_phone', :with => '1234-5678'
 #  select 'Argentina - Buenos Aires', :from => 'participant_influence_zone_id'
   all('#participant_influence_zone_id option')[1].select_option
-  click_button_and_wait 'Registrarme'
+  click_button_and_wait '¡Me interesa!'
 end
 
 Then /^I should see a confirmation message$/ do
   current_path.should == '/events/1/participant_confirmed'
-  page.should have_content('Tu registro fue realizado exitosamente.')
+  page.should have_content('Tu pedido fue realizado exitosamente.')
 end
 
 Then /^It should have a registration page$/ do
@@ -225,7 +227,7 @@ def create_new_participant
   fill_in 'participant_lname', :with => 'Callidoro'
   fill_in 'participant_email', :with => 'jcallidoro@gmail.com'
   fill_in 'participant_phone', :with => '1234-5678'
-  click_button_and_wait 'Registrarme'
+  click_button_and_wait '¡Me interesa!'
 end
 
 def contact_participant
@@ -244,7 +246,7 @@ end
 
 When /^I make a blank registration for that event$/ do
   visit "/events/1/participants/new"
-  click_button 'Registrarme'
+  click_button '¡Me interesa!'
 end
 
 Given /^theres an influence zone$/ do

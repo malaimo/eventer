@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130807195316) do
+ActiveRecord::Schema.define(:version => 20140517135558) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -32,6 +32,22 @@ ActiveRecord::Schema.define(:version => 20130807195316) do
   create_table "countries", :force => true do |t|
     t.string   "name"
     t.string   "iso_code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "crm_push_transaction_items", :force => true do |t|
+    t.integer  "crm_push_transaction_id"
+    t.integer  "participant_id"
+    t.text     "log"
+    t.string   "result"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  create_table "crm_push_transactions", :force => true do |t|
+    t.integer  "event_id"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -67,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20130807195316) do
     t.text     "elevator_pitch"
     t.text     "learnings"
     t.text     "takeaways"
+    t.string   "tag_name"
   end
 
   create_table "event_types_trainers", :id => false, :force => true do |t|
@@ -82,16 +99,16 @@ ActiveRecord::Schema.define(:version => 20130807195316) do
     t.integer  "country_id"
     t.integer  "trainer_id"
     t.string   "visibility_type",               :limit => 2
-    t.decimal  "list_price",                                 :precision => 10, :scale => 2
+    t.decimal  "list_price",                                   :precision => 10, :scale => 2
     t.boolean  "list_price_plus_tax"
     t.integer  "list_price_2_pax_discount"
     t.integer  "list_price_3plus_pax_discount"
-    t.decimal  "eb_price",                                   :precision => 10, :scale => 2
+    t.decimal  "eb_price",                                     :precision => 10, :scale => 2
     t.date     "eb_end_date"
     t.boolean  "draft"
     t.boolean  "cancelled"
-    t.datetime "created_at",                                                                                   :null => false
-    t.datetime "updated_at",                                                                                   :null => false
+    t.datetime "created_at",                                                                                     :null => false
+    t.datetime "updated_at",                                                                                     :null => false
     t.integer  "event_type_id"
     t.string   "registration_link"
     t.boolean  "is_sold_out"
@@ -99,14 +116,19 @@ ActiveRecord::Schema.define(:version => 20130807195316) do
     t.time     "start_time"
     t.time     "end_time"
     t.boolean  "sepyme_enabled"
-    t.boolean  "is_webinar",                                                                :default => false
+    t.boolean  "is_webinar",                                                                  :default => false
     t.string   "time_zone_name"
     t.text     "embedded_player"
-    t.boolean  "notify_webinar_start",                                                      :default => false
+    t.boolean  "notify_webinar_start",                                                        :default => false
     t.text     "twitter_embedded_search"
-    t.boolean  "webinar_started",                                                           :default => false
+    t.boolean  "webinar_started",                                                             :default => false
     t.string   "currency_iso_code"
     t.string   "address"
+    t.text     "custom_prices_email_text",      :limit => 255
+    t.string   "monitor_email"
+    t.text     "specific_conditions"
+    t.boolean  "should_welcome_email"
+    t.boolean  "should_ask_for_referer_code",                                                 :default => false
   end
 
   add_index "events", ["country_id"], :name => "index_events_on_country_id"
@@ -131,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20130807195316) do
     t.string   "status"
     t.text     "notes"
     t.integer  "influence_zone_id"
+    t.string   "referer_code"
   end
 
   add_index "participants", ["event_id"], :name => "index_participants_on_event_id"
@@ -156,6 +179,7 @@ ActiveRecord::Schema.define(:version => 20130807195316) do
     t.string   "linkedin_url"
     t.boolean  "is_kleerer"
     t.integer  "country_id"
+    t.string   "tag_name"
   end
 
   create_table "users", :force => true do |t|
