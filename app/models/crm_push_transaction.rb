@@ -10,6 +10,6 @@ class CrmPushTransaction < ActiveRecord::Base
   			crm_push_item = CrmPushTransactionItem.create(:crm_push_transaction => self, :participant => participant)
   			crm_push_item.push!
   		end
-  		EventMailer.alert_event_crm_push_finished(self)
+  		EventMailer.delay.alert_event_crm_push_finished(self)
   	end
 end
