@@ -92,6 +92,10 @@ class Participant < ActiveRecord::Base
   def is_present?
     (self.status == "A")
   end
+
+  def is_confirmed_or_present?
+    (self.status == "A" || self.status == "C")
+  end
   
   def influence_zone_tag
     self.influence_zone.nil? ? "" : self.influence_zone.tag_name
