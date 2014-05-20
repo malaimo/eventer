@@ -128,6 +128,8 @@ class ParticipantsController < ApplicationController
   
   def certificate
 
+    @page_size = params[:page_size]
+
 	  @participant = Participant.find(params[:id])
 	
   end
