@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140517135558) do
+ActiveRecord::Schema.define(:version => 20140522000005) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -171,8 +171,8 @@ ActiveRecord::Schema.define(:version => 20140517135558) do
 
   create_table "trainers", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.text     "bio"
     t.string   "gravatar_email"
     t.string   "twitter_username"
@@ -180,6 +180,8 @@ ActiveRecord::Schema.define(:version => 20140517135558) do
     t.boolean  "is_kleerer"
     t.integer  "country_id"
     t.string   "tag_name"
+    t.string   "signature_image"
+    t.string   "signature_credentials"
   end
 
   create_table "users", :force => true do |t|
