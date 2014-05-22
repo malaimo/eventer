@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140522000005) do
+ActiveRecord::Schema.define(:version => 20140522133846) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20140522000005) do
     t.text     "learnings"
     t.text     "takeaways"
     t.string   "tag_name"
+    t.boolean  "csd_eligible"
   end
 
   create_table "event_types_trainers", :id => false, :force => true do |t|
@@ -154,6 +155,7 @@ ActiveRecord::Schema.define(:version => 20140522000005) do
     t.text     "notes"
     t.integer  "influence_zone_id"
     t.string   "referer_code"
+    t.string   "verification_code"
   end
 
   add_index "participants", ["event_id"], :name => "index_participants_on_event_id"

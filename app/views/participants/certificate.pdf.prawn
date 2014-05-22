@@ -1,10 +1,14 @@
 if @page_size != "LETTER" && @page_size != "A4"
   prawn_document(:page_layout => :landscape, :page_size => "LETTER") do |pdf|
-    pdf.text "Solo puedes generar certificados en tamaño carta (LETTER) o A4 (A4). Por favor, contáctano a entrenamos@kleer.la"
+    pdf.text "Solo puedes generar certificados en tamaño carta (LETTER) o A4 (A4). Por favor, contáctanos a entrenamos@kleer.la"
   end
+elsif @verification_code != @participant.verification_code
+  prawn_document(:page_layout => :landscape, :page_size => "LETTER") do |pdf|
+    pdf.text "El código de verificación #{@verification_code} no es válido. Por favor, contáctanos a entrenamos@kleer.la"
+  end  
 elsif !@participant.is_confirmed_or_present?
   prawn_document(:page_layout => :landscape, :page_size => "LETTER") do |pdf|
-    pdf.text "#{@participant.fname} #{@participant.lname} no estuvo presente en este evento. Por favor, contáctano a entrenamos@kleer.la"
+    pdf.text "#{@participant.fname} #{@participant.lname} no estuvo presente en este evento. Por favor, contáctanos a entrenamos@kleer.la"
   end
 else
 
@@ -12,9 +16,15 @@ else
   kleer_logo_path = "#{Rails.root}/app/assets/images/K-kleer_horizontal_negro_web.png"
   trainer_signature_path = "#{Rails.root}/app/assets/images/firmas/" + @participant.event.trainer.signature_image
 
+  is_csd_eligible = @participant.event.event_type.csd_eligible
+
   prawn_document(:page_layout => :landscape, :page_size => @page_size) do |pdf|
 
-    pdf.image rep_logo_path, :width => 150, :position => :right
+    if is_csd_eligible
+        pdf.image rep_logo_path, :width => 150, :position => :right
+    else
+        pdf.move_down 100
+    end
 
     if @page_size == "LETTER"
   	 pdf.image kleer_logo_path, :width => 300, :at => [-55, 610]
@@ -44,13 +54,15 @@ else
                 "with a duration of #{@participant.event.duration} days.",
     			:align => :center, :size => 14, :inline_format => true 
 
-    pdf.text    "This course has been approved by the <b>Scrum Alliance</b> as a CSD-eligible one,",
-                :align => :center, :size => 14, :inline_format => true
+    if is_csd_eligible
+        pdf.text    "This course has been approved by the <b>Scrum Alliance</b> as a CSD-eligible one,",
+                    :align => :center, :size => 14, :inline_format => true
 
-    pdf.text    "therefore valid for the <b>Certified Scrum Developer</b> certification.",
-                :align => :center, :size => 14, :inline_format => true
+        pdf.text    "therefore valid for the <b>Certified Scrum Developer</b> certification.",
+                    :align => :center, :size => 14, :inline_format => true
+    end
 
-    pdf.text    "<i>Certificate verification code: JKHIUYIQEUIY573561723UY.</i>",
+    pdf.text    "<i>Certificate verification code: #{@participant.verification_code}.</i>",
                 :align => :center, :size => 9, :inline_format => true         
 
     if @page_size == "LETTER"
@@ -66,9 +78,11 @@ else
         pdf.text "#{@participant.event.trainer.signature_credentials}", :align => :center, :size => 14
     end
 
-    pdf.text    "Kleer is a Scrum Alliance Registered Education Provider. " +
-                "SCRUM ALLIANCE REP(SM) is a service mark of Scrum Alliance, Inc. " +
-                "Any unauthorized use is strictly prohibited.", :valign => :bottom, :size => 9
+    if is_csd_eligible
+        pdf.text    "Kleer is a Scrum Alliance Registered Education Provider. " +
+                    "SCRUM ALLIANCE REP(SM) is a service mark of Scrum Alliance, Inc. " +
+                    "Any unauthorized use is strictly prohibited.", :valign => :bottom, :size => 9
+    end
 
     pdf.line_width = 3
 

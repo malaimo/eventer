@@ -72,6 +72,7 @@ class ParticipantsController < ApplicationController
     @participant = Participant.new(params[:participant])
     @event = Event.find(params[:event_id])
     @participant.event = @event
+    @participant.verification_code = Digest::SHA1.hexdigest([Time.now, rand].join)[1..20].upcase
     @nakedform = !params[:nakedform].nil?
     @influence_zones = InfluenceZone.all
     
@@ -151,6 +152,7 @@ class ParticipantsController < ApplicationController
   def certificate
 
     @page_size = params[:page_size]
+    @verification_code = params[:verification_code]
 
 	  @participant = Participant.find(params[:id])
 	
