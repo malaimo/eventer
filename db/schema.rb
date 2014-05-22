@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140517135558) do
+ActiveRecord::Schema.define(:version => 20140522133846) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20140517135558) do
     t.text     "learnings"
     t.text     "takeaways"
     t.string   "tag_name"
+    t.boolean  "csd_eligible"
   end
 
   create_table "event_types_trainers", :id => false, :force => true do |t|
@@ -154,6 +155,7 @@ ActiveRecord::Schema.define(:version => 20140517135558) do
     t.text     "notes"
     t.integer  "influence_zone_id"
     t.string   "referer_code"
+    t.string   "verification_code"
   end
 
   add_index "participants", ["event_id"], :name => "index_participants_on_event_id"
@@ -171,8 +173,8 @@ ActiveRecord::Schema.define(:version => 20140517135558) do
 
   create_table "trainers", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.text     "bio"
     t.string   "gravatar_email"
     t.string   "twitter_username"
@@ -180,6 +182,8 @@ ActiveRecord::Schema.define(:version => 20140517135558) do
     t.boolean  "is_kleerer"
     t.integer  "country_id"
     t.string   "tag_name"
+    t.string   "signature_image"
+    t.string   "signature_credentials"
   end
 
   create_table "users", :force => true do |t|

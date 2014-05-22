@@ -53,6 +53,11 @@
           .row-fluid
             .span12
               .control-group
+                %label.control-label{ :for => :csd_eligible }= t("formtastic.labels.event_type.csd_eligible")
+                = f.check_box :csd_eligible
+          .row-fluid
+            .span12
+              .control-group
                 %label.control-label{ :for => :elevator_pitch }= t("formtastic.labels.event_type.elevator_pitch") + " (*)"
                 = f.text_area :elevator_pitch, :rows => 4, :class => "input-block-level"
                 %small.muted

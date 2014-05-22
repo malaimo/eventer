@@ -20,6 +20,14 @@ class EventMailer < ActionMailer::Base
     @markdown_renderer = Redcarpet::Markdown.new( Redcarpet::Render::HTML.new(:hard_wrap => true), :autolink => true)
     mail(to: @participant.email, from: "Eventos <eventos@kleerer.com>", subject: "Kleer | #{@participant.event.event_type.name}")
   end
+
+  def send_certificate(participant, host_url)
+    @participant = participant
+    @certificate_link_A4 = "#{host_url}/events/#{@participant.event.id}/participants/#{@participant.id}/certificate.pdf?page_size=A4&verification_code=#{@participant.verification_code}"
+    @certificate_link_LETTER = "#{host_url}/events/#{@participant.event.id}/participants/#{@participant.id}/certificate.pdf?page_size=LETTER&verification_code=#{@participant.verification_code}"
+    @markdown_renderer = Redcarpet::Markdown.new( Redcarpet::Render::HTML.new(:hard_wrap => true), :autolink => true)
+    mail(to: @participant.email, from: "#{@participant.event.trainer.name} <eventos@kleerer.com>", subject: "Kleer | Certificado del #{@participant.event.event_type.name}")
+  end
   
   def alert_event_monitor(participant, edit_registration_link)
     @participant = participant

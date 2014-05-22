@@ -18,6 +18,7 @@ group :test do
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'selenium-webdriver', '~> 2.35'
+  gem 'pdf-inspector', :require => "pdf/inspector"
 end
 
 group :production do
@@ -69,6 +70,8 @@ gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'comma'
 gem 'money'
+gem 'prawn'
+gem 'prawn_rails'
 gem 'redcarpet'
 
 # Gemas necesarias para la comunicación con CapsuleCRM
