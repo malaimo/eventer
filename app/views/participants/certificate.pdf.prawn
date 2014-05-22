@@ -13,7 +13,7 @@ elsif !@participant.is_confirmed_or_present?
 else
 
   rep_logo_path = "#{Rails.root}/app/assets/images/rep-logo-transparent.png"
-  kleer_logo_path = "#{Rails.root}/app/assets/images/K-kleer_horizontal_negro_web.png"
+  kleer_logo_path = "#{Rails.root}/app/assets/images/K-kleer_horizontal_negro_1color-01.png"
   trainer_signature_path = "#{Rails.root}/app/assets/images/firmas/" + @participant.event.trainer.signature_image
 
   is_csd_eligible = @participant.event.event_type.csd_eligible
