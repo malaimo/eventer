@@ -111,6 +111,25 @@ class EventsController < ApplicationController
 
     flash.now[:notice] = t('flash.event.pushing_to_crm')
   end
+
+  def send_certificate
+    @event = Event.find(params[:id])
+
+    host_url = "http://" + request.host
+    port = request.port
+    
+    if port != 80
+      host_url += ":" + port.to_s
+    end
+
+    @event.participants.each do |participant|
+      if participant.is_confirmed_or_present?
+        EventMailer.delay.send_certificate(participant, host_url)
+      end
+    end
+
+    flash.now[:notice] = t('flash.event.send_certificate')
+  end
   
   def start_webinar
     @event = Event.find(params[:id])

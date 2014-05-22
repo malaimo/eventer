@@ -5,20 +5,24 @@
   .pull-right
     %a.btn.btn-white{ :href => event_participants_path(@event) }
       %i.icon-rotate-right 
-      Actualizar
     %a.btn.btn-white{ :href => new_event_participant_path, :target => "_blank" }
       %i.icon-user
-      Nueva Inscripción
+      Nuevo
     - if @event.participants.count > 0
       %a.btn.btn-white{ :href => event_participants_path(@event) + ".csv" }
         %i.icon-cloud-download
-        Bajar Listado (CSV)
+        Listado (CSV)
       %a.btn.btn-white{ :href => "./participants_print", :target => "_blank" }
         %i.icon-print
         Lista de Asistencia
-      %a.btn.btn-white{ "data-toggle" => "modal", :href => "#modal-push-confirmation", :role => "button" }
+      %a.btn.btn-white{ "data-toggle" => "modal", :href => "#modal-push-confirmation", :role => "button", :title => "Enviar Participantes a CapsuleCRM" }
         %i.icon-circle-arrow-right
+        %i.icon-group
         CapsuleCRM
+      %a.btn.btn-white{ "data-toggle" => "modal", :href => "#modal-cert-confirmation", :role => "button", :title => "Enviar Certificados de Asistencia a los Participantes" }
+        %i.icon-circle-arrow-right
+        %i.icon-certificate
+        Certificados
 
 .modal.hide.fade#modal-push-confirmation{ :role => :dialog, :tabindex => -1 }
   .modal-header
@@ -37,6 +41,25 @@
     %button.btn{ "data-dismiss" => "modal" }
       No, cancelar :(
     %a.btn.btn-primary{ :href => "./push_to_crm" }
+      Si, continuar! :)
+
+.modal.hide.fade#modal-cert-confirmation{ :role => :dialog, :tabindex => -1 }
+  .modal-header
+    %button.close{ "data-dismiss" => :modal, :type => "button" }
+      &times;
+    %h3 
+      Enviar Cetificados de Asistencia
+  .modal-body
+    %h4
+      ¡Atención!
+    %p
+      Esta operación enviará certificados de asistencia a las personas en que están marcadas como "Confirmados" o "Presentes". Antes de seguir, asegúrate que el evento ya haya finalizado y que quienes estuvieron ausentes estén marcados como "Pospuestos" o "Cancelados".
+    %p
+      ¿Estás seguro/a de continuar?
+  .modal-footer
+    %button.btn{ "data-dismiss" => "modal" }
+      No, cancelar :(
+    %a.btn.btn-primary{ :href => "./send_certificate" }
       Si, continuar! :)
 
 = render '/commons/notice'

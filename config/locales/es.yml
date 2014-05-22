@@ -172,6 +172,7 @@ es:
         materials: "Materiales"
         include_in_catalog: "Incluido en Catálogo (Currícula)"
         tag_name: "Tag Name (CapsuleCRM)"
+        csd_eligible: "Es CSD-Eligible? (Aprobado por la Scrum Alliance para la certificación CSD)"
       category:
         name: "Nombre"
         description: "Descripción"
@@ -279,6 +280,7 @@ es:
           webinar:
               broadcasting: "Webinar Iniciado Exitosamente!"
           pushing_to_crm: "Enviando participantes del evento a CapsuleCRM... Te eviaré un e-mail al finalizar."
+          send_certificate: "Enviando certificados de asistencia a los participantes."
       event_type:
           create:
               success: "Tipo de Evento creado exitosamente!"

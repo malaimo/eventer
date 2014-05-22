@@ -267,3 +267,7 @@ Given /^theres (\d+) event (\d+) week away from now$/ do |amount, weeks_away|
     submit_event
   }
 end
+
+
+
+
