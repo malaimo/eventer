@@ -6,6 +6,7 @@ class ParticipantsController < ApplicationController
   def index
     @event = Event.find(params[:event_id])
     @participants = @event.participants.sort_by(&:status_sort_order)
+    @influence_zones = InfluenceZone.all
     
     respond_to do |format|
       format.html # index.html.erb
@@ -129,10 +130,11 @@ class ParticipantsController < ApplicationController
     respond_to do |format|
       if @participant.update_attributes(params[:participant])
         format.html { redirect_to event_participants_path(@participant.event), notice: 'Participant was successfully updated.' }
-        format.json { head :no_content }
+        format.json { respond_with_bip(@participant) }
       else
         format.html { render action: "edit" }
-        format.json { render json: @participant.errors, status: :unprocessable_entity }
+        #format.json { render json: @participant.errors, status: :unprocessable_entity }
+        format.json { respond_with_bip(@participant) }
       end
     end
   end
