@@ -280,7 +280,9 @@ es:
           webinar:
               broadcasting: "Webinar Iniciado Exitosamente!"
           pushing_to_crm: "Enviando participantes del evento a CapsuleCRM... Te eviaré un e-mail al finalizar."
-          send_certificate: "Enviando certificados de asistencia a los participantes."
+          send_certificate:
+              success: "Enviando certificados de asistencia a los participantes."
+              signature_failure: "El entrenador necesita tener una firma para poder enviar los certificados."
       event_type:
           create:
               success: "Tipo de Evento creado exitosamente!"

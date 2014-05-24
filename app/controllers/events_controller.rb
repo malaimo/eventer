@@ -115,20 +115,26 @@ class EventsController < ApplicationController
   def send_certificate
     @event = Event.find(params[:id])
 
-    host_url = "http://" + request.host
-    port = request.port
-    
-    if port != 80
-      host_url += ":" + port.to_s
-    end
+    if @event.trainer.signature_image.nil? || @event.trainer.signature_image == ""
+      flash.now[:alert] = t('flash.event.send_certificate.signature_failure')
+    else
 
-    @event.participants.each do |participant|
-      if participant.is_present?
-        EventMailer.delay.send_certificate(participant, host_url)
+      host_url = "http://" + request.host
+      port = request.port
+      
+      if port != 80
+        host_url += ":" + port.to_s
       end
+
+      @event.participants.each do |participant|
+        if participant.is_present?
+          EventMailer.delay.send_certificate(participant, host_url)
+        end
+      end
+
+      flash.now[:notice] = t('flash.event.send_certificate.success')
     end
 
-    flash.now[:notice] = t('flash.event.send_certificate')
   end
   
   def start_webinar
