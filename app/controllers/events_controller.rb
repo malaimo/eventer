@@ -123,7 +123,7 @@ class EventsController < ApplicationController
     end
 
     @event.participants.each do |participant|
-      if participant.is_confirmed_or_present?
+      if participant.is_present?
         EventMailer.delay.send_certificate(participant, host_url)
       end
     end

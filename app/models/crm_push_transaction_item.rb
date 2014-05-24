@@ -23,12 +23,12 @@ class CrmPushTransactionItem < ActiveRecord::Base
 
 	    add_crm_tag new_id, self.participant.influence_zone_tag
 
-	    if self.participant.is_confirmed_or_present?
+	    if self.participant.is_present?
 			apply_event_tags new_id, crm_push_transaction.event
 		end
 		
     else
-    	if self.participant.is_confirmed_or_present?
+    	if self.participant.is_present?
 	    	crm_ids.each do |crm_id|
 	    		self.log += "004 actualizando persona con id:#{crm_id}\n"
 	    		apply_event_tags crm_id, crm_push_transaction.event
