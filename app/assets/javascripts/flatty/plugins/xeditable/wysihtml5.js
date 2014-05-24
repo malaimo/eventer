@@ -8,7 +8,7 @@
         this.options.wysihtml5 = $.extend({}, Wysihtml5.defaults.wysihtml5, options.wysihtml5);
     };
 
-    $.fn.editableutils.inherit(Wysihtml5, $.fn.editabletypes.abstractinput);
+    // $.fn.editableutils.inherit(Wysihtml5, $.fn.editabletypes.abstractinput);
 
     $.extend(Wysihtml5.prototype, {
         render: function () {
@@ -61,17 +61,17 @@
         }
     });
 
-    Wysihtml5.defaults = $.extend({}, $.fn.editabletypes.abstractinput.defaults, {
+    // Wysihtml5.defaults = $.extend({}, $.fn.editabletypes.abstractinput.defaults, {
         /**
          @property tpl
          @default <textarea></textarea>
          **/
-        tpl:'<textarea></textarea>',
+        // tpl:'<textarea></textarea>',
         /**
          @property inputclass
          @default editable-wysihtml5
          **/
-        inputclass: 'editable-wysihtml5',
+        // inputclass: 'editable-wysihtml5',
         /**
          Placeholder attribute of input. Shown when input is empty.
 
@@ -79,7 +79,7 @@
          @type string
          @default null
          **/
-        placeholder: null,
+        // placeholder: null,
         /**
          Wysihtml5 default options.
          See https://github.com/jhollingworth/bootstrap-wysihtml5#options
@@ -88,11 +88,11 @@
          @type object
          @default {stylesheets: false}
          **/
-        wysihtml5: {
-            stylesheets: false //see https://github.com/jhollingworth/bootstrap-wysihtml5/issues/183
-        }
-    });
+        // wysihtml5: {
+        //     stylesheets: false //see https://github.com/jhollingworth/bootstrap-wysihtml5/issues/183
+        // }
+    // });
 
-    $.fn.editabletypes.wysihtml5 = Wysihtml5;
+    // $.fn.editabletypes.wysihtml5 = Wysihtml5;
 
 }(window.jQuery));
