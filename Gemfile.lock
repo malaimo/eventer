@@ -33,6 +33,9 @@ GEM
     arel (3.0.3)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
+    best_in_place (2.1.0)
+      jquery-rails
+      rails (~> 3.1)
     builder (3.0.4)
     cancan (1.6.10)
     capybara (2.2.0)
@@ -225,6 +228,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  best_in_place
   cancan
   capybara
   coffee-rails (~> 3.2.1)

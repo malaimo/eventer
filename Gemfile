@@ -76,3 +76,6 @@ gem 'redcarpet'
 
 # Gemas necesarias para la comunicación con CapsuleCRM
 gem 'curb'
+
+# Edición en el lugar 
+gem 'best_in_place'
