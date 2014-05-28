@@ -34,10 +34,6 @@ class Event < ActiveRecord::Base
   validates :capacity, :numericality => { :greater_than => 0, :message => :capacity_should_be_greater_than_0 }
   validates :duration, :numericality => { :greater_than => 0, :message => :duration_should_be_greater_than_0 }
 
-  validates_each :date do |record, attr, value|
-    record.errors.add(attr, :event_date_in_past) unless !value.nil? && value >= Time.zone.today
-  end
-
   validates_each :eb_end_date do |record, attr, value|
       record.errors.add(attr, :eb_end_date_should_be_earlier_than_event_date) unless value.nil? || value < record.date
   end
@@ -138,7 +134,7 @@ class Event < ActiveRecord::Base
       timezone_current_time = Time.now
     end
     
-    (Time.parse( self.end_time.strftime("%H:%M") ) < timezone_current_time )
+    (Time.parse( self.end_time.strftime("%Y/%m/%d %H:%M") ) < timezone_current_time )
   end
   
   def webinar_finished?
