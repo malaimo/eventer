@@ -59,10 +59,10 @@ describe Event do
     @event.valid?.should be false
   end
 
-  it "should have a future date" do
+  it "should not require a future date" do
     @event.date = "31/01/2000"
 
-    @event.valid?.should be false
+    @event.valid?.should be true
   end
 
   it "should have a capacity greater than 0" do

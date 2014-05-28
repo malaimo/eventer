@@ -17,12 +17,6 @@ Feature: Administración de Eventos
 		Then I should be on the events listing page
 		And I should see "Evento creado exitosamente"
 		And I should see "Tipo de Evento de Prueba"
-		
-	@selenium
-	Scenario: Validación de Fecha Pasada
-		Given Im a logged in user
-		When I create an invalid event with "23-01-2001" as "event_date"
-		Then I should see "el evento debe tener una fecha futura"
 	
 	@selenium
 	Scenario: Validación de Capacidad

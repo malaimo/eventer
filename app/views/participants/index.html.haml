@@ -226,6 +226,10 @@
                   %td
                     %a.btn.btn-warning.btn-mini{ :href => edit_event_participant_path(participant.event, participant), :id => "modificar" }
                       %i.icon-edit
+                    - if participant.status == "A"
+                      &nbsp;
+                      %a.btn.btn-warning.btn-mini{ :href => "/events/#{participant.event.id}/participants/#{participant.id}/certificate.pdf?page_size=A4&verification_code=#{participant.verification_code}", :id => "modificar" }
+                        %i.icon-certificate
 
 :javascript
 

@@ -39,19 +39,20 @@ else
     pdf.move_down 20
 
     pdf.text 	"<b><i>#{@participant.fname} #{@participant.lname}</i></b>", 
-    			:align => :center, :size => 64, :inline_format => true
+    			:align => :center, :size => 48, :inline_format => true
 
     pdf.text "attended the course named", :align => :center, :size => 14
 
     pdf.move_down 10
 
-    pdf.text "<b><i>#{@participant.event.event_type.name}</i></b>", :align => :center, :size => 24, :inline_format => true
+    pdf.text    "<b><i>#{@participant.event.event_type.name}</i></b>", 
+                :align => :center, :size => 24, :inline_format => true
 
     pdf.move_down 10
 
     pdf.text 	"delivered in <b>#{@participant.event.city}, #{@participant.event.country.name}</b>, " +
     			"on <b>#{@participant.event.human_date} #{@participant.event.date.year}</b>, " +
-                "with a duration of #{@participant.event.duration} days.",
+                "with a duration of #{@participant.event.duration} day(s).",
     			:align => :center, :size => 14, :inline_format => true 
 
     if is_csd_eligible
