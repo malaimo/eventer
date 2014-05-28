@@ -33,7 +33,8 @@ class Participant < ActiveRecord::Base
   
   def initialize_defaults
     if new_record?
-      self.status = "N"
+      self.status = "N" unless !self.status.nil?
+      self.verification_code = Digest::SHA1.hexdigest([Time.now, rand].join)[1..20].upcase
     end
   end
   
@@ -112,4 +113,33 @@ class Participant < ActiveRecord::Base
       ""
     end
   end
+
+  def self.create_from_batch_line(participant_data_line, event, influence_zone, status)
+
+    data_attibutes = participant_data_line.split("\t")
+    if data_attibutes.size == 1
+      data_attibutes = participant_data_line.split(",")
+    end
+
+    if data_attibutes.size >= 3
+      lname = data_attibutes[0].strip
+      fname = data_attibutes[1].strip
+      email = data_attibutes[2].strip
+
+      if data_attibutes.size == 3
+        phone = "N/A"
+      else
+        phone = data_attibutes[3].strip
+      end
+
+      participant = Participant.new(:fname => fname, :lname => lname, :email => email,
+                                    :phone => phone, :event_id => event.id, :notes => "Batch load",
+                                    :influence_zone_id => influence_zone.id, :status => status)
+      participant.save
+    else
+      false
+    end
+
+  end
+
 end

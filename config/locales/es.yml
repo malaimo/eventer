@@ -283,6 +283,9 @@ es:
           send_certificate:
               success: "Enviando certificados de asistencia a los participantes."
               signature_failure: "El entrenador necesita tener una firma para poder enviar los certificados."
+          batch_load:
+            success: "%{success_loads} participantes creados exitosamente."
+            error: "%{errored_loads} líneas erroneas: %{errored_lines}"
       event_type:
           create:
               success: "Tipo de Evento creado exitosamente!"

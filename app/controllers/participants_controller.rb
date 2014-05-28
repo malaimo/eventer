@@ -73,7 +73,6 @@ class ParticipantsController < ApplicationController
     @participant = Participant.new(params[:participant])
     @event = Event.find(params[:event_id])
     @participant.event = @event
-    @participant.verification_code = Digest::SHA1.hexdigest([Time.now, rand].join)[1..20].upcase
     @nakedform = !params[:nakedform].nil?
     @influence_zones = InfluenceZone.all
     
@@ -156,10 +155,43 @@ class ParticipantsController < ApplicationController
     @page_size = params[:page_size]
     @verification_code = params[:verification_code]
 
-	  @participant = Participant.find(params[:id])
-	
+    @participant = Participant.find(params[:id])
+  
   end
 
+  def batch_load
 
+    event = Event.find(params[:event_id])
+    influence_zone = InfluenceZone.find( params[:influence_zone_id] )
+    status = params[:status]
+
+    success_loads = 0
+    errored_loads = 0
+    errored_lines = ""
+
+    batch = params[:participants_batch]
+
+    batch.lines.each do |participant_data_line|
+
+      if Participant.create_from_batch_line( participant_data_line, event, influence_zone, status )
+        success_loads += 1
+      else
+        errored_loads += 1
+        if errored_lines == ""
+          errored_lines += "'#{participant_data_line.strip}'"
+        else
+          errored_lines += ", '#{participant_data_line.strip}'"
+        end
+      end
+
+    end
+      
+
+    flash[:alert] = t('flash.event.batch_load.error', :errored_loads => errored_loads, :errored_lines => errored_lines )
+    flash[:notice] = t('flash.event.batch_load.success', :success_loads => success_loads)
+
+    redirect_to event_participants_path
+
+  end
 
 end

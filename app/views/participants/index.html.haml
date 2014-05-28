@@ -17,9 +17,9 @@
   .pull-right
     %a.btn.btn-white{ :href => event_participants_path(@event) }
       %i.icon-rotate-right 
-    %a.btn.btn-white{ :href => new_event_participant_path, :target => "_blank" }
+    %a.btn.btn-white{ "data-toggle" => "modal", :href => "#modal-batch-load", :role => "button", :title => "Enviar Participantes a CapsuleCRM" }
       %i.icon-user
-      Nuevo
+      Nuevo(s)
     - if @event.participants.count > 0
       %a.btn.btn-white{ :href => event_participants_path(@event) + ".csv" }
         %i.icon-cloud-download
@@ -73,6 +73,38 @@
       No, cancelar :(
     %a.btn.btn-primary{ :href => "./send_certificate" }
       Si, continuar! :)
+
+.modal.hide.fade#modal-batch-load{ :role => :dialog, :tabindex => -1 }
+  .modal-header
+    %button.close{ "data-dismiss" => :modal, :type => "button" }
+      &times;
+    %h3 
+      Carga Rápida de Participantes
+  .modal-body
+    = render '/commons/notice'
+    = form_tag("./participants_batch_load", method: "post", id: "bulk_form") do |f|
+      .control-group
+        .control-label
+          Participantes (uno por línea, atributos separados por comas o TABS)
+        .controls
+          %small.muted
+            En este orden: APELLIDO, NOMBRE, E-MAIL, TELÉFONO
+          %textarea.span12#participants_batch{ :rows => 10, :placeholder => "Tortorella, Pablo, pablo.tortorella@kleer.la, N/A", :name => "participants_batch", :value => flash[:batch_output] }
+      .control-group
+        .control-label
+          Estado (aplica a todos)
+        .controls
+          = select_tag :status, options_from_collection_for_select( [["Nuevo", "N"], ["Contactado", "T"], ["Confirmado", "C"], ["Presente", "A"], ["Cancelado", "X"], ["Pospuesto", "D"]], :last, :first )
+      .control-group
+        .control-label
+          Zona de Influencia (aplica a todos)
+        .controls
+          = select_tag :influence_zone_id, options_from_collection_for_select(@influence_zones,"id", "display_name")
+  .modal-footer
+    %button.btn{ "data-dismiss" => "modal" }
+      No, cancelar :(
+    %button.btn.btn-primary{ :id => "bulk_submit_btn" }
+      Si, continuar! :)      
 
 = render '/commons/notice'
 
@@ -182,7 +214,7 @@
                     %br
                     %span{ :style => "white-space:nowrap;"}
                       %i.icon-globe
-                      = best_in_place participant, :influence_zone_id, :type => :select, :path => "/events/#{participant.event.id}/participants/#{participant.id}", :collection => @influence_zones.map{ |i| [i.id, "#{i.country.name} - #{i.zone_name}"] }, :classes => ['editable','editable-click']
+                      = best_in_place participant, :influence_zone_id, :type => :select, :path => "/events/#{participant.event.id}/participants/#{participant.id}", :collection => @influence_zones.map{ |i| [i.id, "#{i.display_name}"] }, :classes => ['editable','editable-click']
                     %br
                     %span{ :style => "white-space:nowrap;"}
                       %i.icon-tag
@@ -200,6 +232,10 @@
   $(document).ready(function() {
     /* Activating Best In Place */
     jQuery(".best_in_place").best_in_place();
+  });
+
+  $('#bulk_submit_btn').click(function() {
+    $('#bulk_form').submit();
   });
 
   $('.color_on_success').bind("ajax:success", function() { 
