@@ -121,7 +121,7 @@ class Participant < ActiveRecord::Base
     certificate_filename = ParticipantsHelper::generate_certificate( self, "LETTER" )
     certificate_url_LETTER = ParticipantsHelper::upload_certificate( certificate_filename )
 
-    EventMailer.send_certificate(self, certificate_url_A4, certificate_url_LETTER)
+    EventMailer.send_certificate(self, certificate_url_A4, certificate_url_LETTER).deliver
   end
 
   def self.create_from_batch_line(participant_data_line, event, influence_zone, status)
