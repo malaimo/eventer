@@ -22,14 +22,13 @@ class EventMailer < ActionMailer::Base
   end
 
   def send_certificate(participant, certificate_url_A4, certificate_url_LETTER )
-    puts "send_certificate#start"
     @participant = participant
     @certificate_link_A4 = certificate_url_A4
     @certificate_link_LETTER = certificate_url_LETTER
     @markdown_renderer = Redcarpet::Markdown.new( Redcarpet::Render::HTML.new(:hard_wrap => true), :autolink => true)
-    puts "send_certificate#sending"
-    mail(to: @participant.email, from: "#{@participant.event.trainer.name} <eventos@kleerer.com>", subject: "Kleer | Certificado del #{@participant.event.event_type.name}")
-    puts "send_certificate#sent"
+    mail( to: @participant.email, 
+          from: "#{@participant.event.trainer.name} <eventos@kleerer.com>", 
+          subject: "Kleer | Certificado del #{@participant.event.event_type.name}")
   end
   
   def alert_event_monitor(participant, edit_registration_link)
