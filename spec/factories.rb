@@ -38,6 +38,8 @@ FactoryGirl.define do
   
   factory :trainer do
     name "Juan Alberto"
+    signature_image "PT.png"
+    signature_credentials "Agile Coach & Trainer"
   end
  
   factory :category do
@@ -85,10 +87,12 @@ FactoryGirl.define do
   end
   
   factory :participant do
+    id "10"
     fname "Juan Carlos"
     lname "Perez Luasó"
-    email "juanca@perez.com"
+    email "malaimo@gmail.com"
     phone "5555-5555"
+    verification_code "065BECBA36F903CF6PPP"
     event FactoryGirl.build(:event)
     influence_zone FactoryGirl.build(:influence_zone)
   end

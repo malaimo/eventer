@@ -125,6 +125,18 @@ describe EventMailer do
     html_message = email.body.parts.find {|p| p.content_type.match /html/}.body.raw_source
     html_message.should include("<strong>texto customizado</strong>: 16")
 
-  end  
+  end
+
+  it "should send the certificate e-mail" do
+    @participant.event = FactoryGirl.create(:event)
+    @participant.email = "malaimo@gmail.com"
+    @participant.influence_zone = FactoryGirl.create(:influence_zone)
+    @participant.status = "A"
+
+    email = EventMailer.send_certificate(@participant, 'http://pepe.com/A4.pdf', 'http://pepe.com/LETTER.pdf').deliver
+
+    ActionMailer::Base.deliveries.empty?.should_not be true
+
+  end
   
 end
