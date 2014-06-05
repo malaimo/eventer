@@ -9,6 +9,8 @@ gem 'rails', '3.2.11'
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'pdf-inspector'
+  gem 'rspec-mocks'
 end
 
 group :test do
@@ -79,3 +81,6 @@ gem 'curb'
 
 # Edición en el lugar 
 gem 'best_in_place'
+
+# Amazon AWS API Client
+gem 'aws-sdk'

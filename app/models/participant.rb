@@ -114,6 +114,16 @@ class Participant < ActiveRecord::Base
     end
   end
 
+  def generate_certificate_and_notify
+    certificate_filename = ParticipantsHelper::generate_certificate( self, "A4" )
+    certificate_url_A4 = ParticipantsHelper::upload_certificate( certificate_filename )
+
+    certificate_filename = ParticipantsHelper::generate_certificate( self, "LETTER" )
+    certificate_url_LETTER = ParticipantsHelper::upload_certificate( certificate_filename )
+
+    EventMailer.send_certificate(self, certificate_url_A4, certificate_url_LETTER)
+  end
+
   def self.create_from_batch_line(participant_data_line, event, influence_zone, status)
 
     data_attibutes = participant_data_line.split("\t")
