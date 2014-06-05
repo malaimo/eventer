@@ -8,7 +8,7 @@ module ParticipantsHelper
 
     is_csd_eligible = participant.event.event_type.csd_eligible
 
-    certificate_filename = "#{Rails.root}/tmp/#{participant.verification_code}-#{page_size}.pdf"
+    certificate_filename = "#{Rails.root}/tmp/#{participant.verification_code}p#{participant.id}-#{page_size}.pdf"
 
     Prawn::Document.generate(certificate_filename, 
       :page_layout => :landscape, :page_size => page_size) do |pdf|
