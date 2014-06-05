@@ -85,6 +85,45 @@ describe Participant do
     @participant.is_present?.should be true
   end
 
+  context "given a PDF certificate is generated" do
+
+    before(:all) do
+      @participant_pdf = FactoryGirl.build(:participant)
+      @participant_pdf.event = FactoryGirl.create(:event)
+      @participant_pdf.influence_zone = FactoryGirl.create(:influence_zone)
+      @participant_pdf.status = "A"
+
+      @filepath_A4 = ParticipantsHelper::generate_certificate(@participant_pdf, "A4")
+      @filepath_LETTER = ParticipantsHelper::generate_certificate(@participant_pdf, "LETTER")
+    end
+
+    before(:each) do
+
+      @reader_A4 = PDF::Reader.new(@filepath_A4)
+      @reader_LETTER = PDF::Reader.new(@filepath_LETTER)
+ 
+    end
+
+    it "should have a unique name" do
+      @filepath_A4.should == "#{Rails.root}/tmp/#{@participant_pdf.verification_code}p#{@participant_pdf.id}-A4.pdf"
+      @filepath_LETTER.should == "#{Rails.root}/tmp/#{@participant_pdf.verification_code}p#{@participant_pdf.id}-LETTER.pdf"
+    end
+
+    it "should have left a temp file in A4 format" do
+      File.exist?(@filepath_A4).should be_true
+    end
+
+    it "should have left a temp file in LETTER format" do
+      File.exist?(@filepath_LETTER).should be_true
+    end 
+
+    it "should be a single page certificate" do
+      @reader_A4.page_count.should == 1
+      @reader_LETTER.page_count.should == 1
+    end
+
+  end
+
   context "given a batch load" do
 
     before(:each) do

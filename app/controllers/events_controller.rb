@@ -119,16 +119,9 @@ class EventsController < ApplicationController
       flash.now[:alert] = t('flash.event.send_certificate.signature_failure')
     else
 
-      host_url = "http://" + request.host
-      port = request.port
-      
-      if port != 80
-        host_url += ":" + port.to_s
-      end
-
       @event.participants.each do |participant|
         if participant.is_present?
-          EventMailer.delay.send_certificate(participant, host_url)
+          participant.delay.generate_certificate_and_notify
         end
       end
 
