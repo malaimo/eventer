@@ -247,14 +247,28 @@ describe Event do
       @event.visibility_type = "pr"
     end
 
-    it "should not have discounts for 2 persons" do
-      @event.list_price_2_pax_discount = 10
+    it "should not have special price for early birds" do
+      @event.eb_price = 1100
 
       @event.valid?.should be false
     end
 
-    it "should not have discounts for 3+ persons" do
-      @event.list_price_3plus_pax_discount = 10
+    it "should not have special price for couples" do
+      @event.couples_eb_price = 1000
+
+      @event.valid?.should be false
+    end
+
+    it "should not have special price for business" do
+      @event.business_price = 950
+      @event.business_eb_price = 900
+
+      @event.valid?.should be false
+    end
+
+    it "should not have special price for enterprises" do
+      @event.enterprise_6plus_price = 850
+      @event.enterprise_11plus_price = 800
 
       @event.valid?.should be false
     end
@@ -271,8 +285,13 @@ describe Event do
     end
 
     it "can have discounts" do
-      @event.list_price_2_pax_discount = 10
-      @event.list_price_3plus_pax_discount = 15
+      @event.list_price = 1200
+      @event.eb_price = 1100
+      @event.couples_eb_price = 1000
+      @event.business_price = 900
+      @event.business_eb_price = 800
+      @event.enterprise_6plus_price = 700
+      @event.enterprise_11plus_price = 600
 
       @event.valid?.should be true
     end

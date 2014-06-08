@@ -12,16 +12,40 @@
     .box-content.box-no-padding
       .responsive-table
         .scrollable-area
-          %table.table{ :style => "margin-bottom:0;" }
+          %table.table.table-striped{ :style => "margin-bottom:0;" }
             %thead
               %tr
                 %th Fecha
-                %th Nombre
-                %th Ciudad
-                %th E. Bird
-                %th Precio de Lista
-                %th Desc. 2p
-                %th Desc. 3p
+                %th Nombre/Ciudad
+                %th{ :style => "background: #FFFF00" }
+                  P. de Lista
+                %th{ :style => "background: #FFFF00" }
+                  EB. Particular
+                %th{ :style => "background: #FFFF00" }
+                  EB. Parejas
+                  %br
+                  %small.muted
+                    2 personas
+                %th{ :style => "background: #00FFFF" }
+                  EB. Business
+                  %br
+                  %small.muted
+                    5 personas
+                %th{ :style => "background: #00FFFF" }
+                  Business
+                  %br
+                  %small.muted
+                    5 personas
+                %th{ :style => "background: #00FF00" }
+                  Enterprise 6+
+                  %br
+                  %small.muted
+                    6 a 10 personas
+                %th{ :style => "background: #00FF00" }
+                  Enterprise 11+ 
+                  %br
+                  %small.muted
+                    11 a 20 personas
             %tbody
               - @events.each do |event|
                 %tr
@@ -29,34 +53,69 @@
                   - if event.event_type.nil?
                     %td= "Sin Tipo de Evento"
                   - else
-                  %td= event.event_type.short_name
-                  %td= event.city
-                  - if !event.eb_price.nil? && event.eb_price > 0
-                    - if event.list_price_plus_tax
-                      %td
-                        = "(#{event.currency_iso_code})"
-                        = currency_symbol_for( event.currency_iso_code )
-                        = sprintf("%05.2f", event.eb_price) + "+IVA"
-                        %br
-                        = "Hasta el " + event.eb_end_date.to_formatted_s(:short)
-                    - else
-                      %td
-                        = "(#{event.currency_iso_code})"
-                        = currency_symbol_for( event.currency_iso_code )
-                        = sprintf("%05.2f", event.eb_price)
-                        %br
-                        = "Hasta el " + event.eb_end_date.to_formatted_s(:short)
-                  - else
-                    %td= " "
-                  - if event.list_price_plus_tax
                     %td
-                      = "(#{event.currency_iso_code})"
-                      = currency_symbol_for( event.currency_iso_code )
-                      = sprintf("%05.2f", event.list_price) + "+IVA"
-                  - else
+                      = event.event_type.short_name
+                      %br
+                      = event.city
+
+                  - if !event.list_price.nil? && event.list_price > 0
                     %td
                       = "(#{event.currency_iso_code})"
                       = currency_symbol_for( event.currency_iso_code )
                       = sprintf("%05.2f", event.list_price)
-                  %td= event.list_price_2_pax_discount
-                  %td= event.list_price_3plus_pax_discount
+                  - else
+                    %td= "Gratuito"
+
+                  - if !event.eb_price.nil? && event.eb_price > 0
+                    %td
+                      = "(#{event.currency_iso_code})"
+                      = currency_symbol_for( event.currency_iso_code )
+                      = sprintf("%05.2f", event.eb_price)
+                      %br
+                      = "Hasta el " + event.eb_end_date.to_formatted_s(:short)
+                  - else
+                    %td= " "
+
+                  - if !event.couples_eb_price.nil? && event.couples_eb_price > 0
+                    %td
+                      = "(#{event.currency_iso_code})"
+                      = currency_symbol_for( event.currency_iso_code )
+                      = sprintf("%05.2f", event.couples_eb_price)
+                      %br
+                      = "Hasta el " + event.eb_end_date.to_formatted_s(:short)
+                  - else
+                    %td= " "
+
+                  - if !event.business_eb_price.nil? && event.business_eb_price > 0
+                    %td
+                      = "(#{event.currency_iso_code})"
+                      = currency_symbol_for( event.currency_iso_code )
+                      = sprintf("%05.2f", event.business_eb_price)
+                      %br
+                      = "Hasta el " + event.eb_end_date.to_formatted_s(:short)
+                  - else
+                    %td= " "
+
+                  - if !event.business_price.nil? && event.business_price > 0
+                    %td
+                      = "(#{event.currency_iso_code})"
+                      = currency_symbol_for( event.currency_iso_code )
+                      = sprintf("%05.2f", event.business_price)
+                  - else
+                    %td= " "
+
+                  - if !event.enterprise_6plus_price.nil? && event.enterprise_6plus_price > 0
+                    %td
+                      = "(#{event.currency_iso_code})"
+                      = currency_symbol_for( event.currency_iso_code )
+                      = sprintf("%05.2f", event.enterprise_6plus_price)
+                  - else
+                    %td= " "
+
+                  - if !event.enterprise_11plus_price.nil? && event.enterprise_11plus_price > 0
+                    %td
+                      = "(#{event.currency_iso_code})"
+                      = currency_symbol_for( event.currency_iso_code )
+                      = sprintf("%05.2f", event.enterprise_11plus_price)
+                  - else
+                    %td= " "

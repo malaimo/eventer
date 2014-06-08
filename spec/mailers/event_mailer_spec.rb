@@ -55,36 +55,36 @@ describe EventMailer do
     html_message.should include("(ARS) $ 180.00")
   end
   
-  it "should show 2 person discount if present" do
-    @participant.event.list_price_2_pax_discount = 10
+  it "should show 2 person price if present" do
+    @participant.event.couples_eb_price = 950
 
     email = EventMailer.welcome_new_event_participant(@participant).deliver
 
     text_message = email.body.parts.find {|p| p.content_type.match /plain/}.body.raw_source
-    text_message.should include("10% dto. para 2 personas.")
+    text_message.should include("950.00 pagando de a 2 personas antes del")
         
     html_message = email.body.parts.find {|p| p.content_type.match /html/}.body.raw_source
-    html_message.should include("10% dto. para 2 personas.")
+    html_message.should include("950.00 pagando de a 2 personas antes del")
   end
   
-  it "should show 3+ person discount if present" do
-    @participant.event.list_price_3plus_pax_discount = 15
+  it "should show 5 person price if present" do
+    @participant.event.business_eb_price = 850
 
     email = EventMailer.welcome_new_event_participant(@participant).deliver
 
     text_message = email.body.parts.find {|p| p.content_type.match /plain/}.body.raw_source
-    text_message.should include("15% dto. para 3 o más personas.")
+    text_message.should include("850.00 pagando de a 5 personas antes del")
     
     html_message = email.body.parts.find {|p| p.content_type.match /html/}.body.raw_source
-    html_message.should include("15% dto. para 3 o más personas.")
+    html_message.should include("850.00 pagando de a 5 personas antes del")
   end
   
-  it "should not send list price, early bird prices, discounts if custom text is present" do
+  it "should not send list price or early bird prices if custom text is present" do
     @participant.event.list_price = 200
     @participant.event.eb_end_date = Date.today
     @participant.event.eb_price = 180
-    @participant.event.list_price_2_pax_discount = 10
-    @participant.event.list_price_3plus_pax_discount = 15
+    @participant.event.couples_eb_price = 100
+    @participant.event.business_eb_price = 150
     
     @participant.event.custom_prices_email_text = "texto customizado"
     
@@ -93,16 +93,15 @@ describe EventMailer do
     text_message = email.body.parts.find {|p| p.content_type.match /plain/}.body.raw_source
     text_message.should_not include("(ARS) $ 200.00")
     text_message.should_not include("(ARS) $ 180.00")
-    text_message.should_not include("Si pagas antes del")
-    text_message.should_not include("10% dto. para 2 personas.")
-    text_message.should_not include("15% dto. para 3 o más personas.")
+    text_message.should_not include("pagando de a 2 personas")
+    text_message.should_not include("pagando de a 5 personas")
     
     html_message = email.body.parts.find {|p| p.content_type.match /html/}.body.raw_source
     html_message.should_not include("(ARS) $ 200.00")
     html_message.should_not include("(ARS) $ 180.00")
     html_message.should_not include("Si pagas antes del")
-    html_message.should_not include("10% dto. para 2 personas.")
-    html_message.should_not include("15% dto. para 3 o más personas.")
+    html_message.should_not include("pagando de a 2 personas")
+    html_message.should_not include("pagando de a 5 personas")
   end
   
   it "should send the custom text if custom text is present" do
