@@ -1,6 +1,12 @@
 class PopulateNewPricingForFutureEvents < ActiveRecord::Migration
   
   def up
+  	change_column :events, :couples_eb_price, :decimal, :precision => 10, :scale => 2
+  	change_column :events, :business_price, :decimal, :precision => 10, :scale => 2
+  	change_column :events, :business_eb_price, :decimal, :precision => 10, :scale => 2
+  	change_column :events, :enterprise_6plus_price, :decimal, :precision => 10, :scale => 2
+  	change_column :events, :enterprise_11plus_price, :decimal, :precision => 10, :scale => 2
+
   	Event.visible.each do |ev|
   		if !ev.list_price.nil? && ev.list_price > 0
   			
@@ -23,6 +29,12 @@ class PopulateNewPricingForFutureEvents < ActiveRecord::Migration
   end
  
   def down
+  	change_column :events, :couples_eb_price, :decimal, :precision => 7, :scale => 2
+  	change_column :events, :business_price, :decimal, :precision => 7, :scale => 2
+  	change_column :events, :business_eb_price, :decimal, :precision => 7, :scale => 2
+  	change_column :events, :enterprise_6plus_price, :decimal, :precision => 7, :scale => 2
+  	change_column :events, :enterprise_11plus_price, :decimal, :precision => 7, :scale => 2
+
   	Event.visible.each do |ev|
   		if !ev.list_price.nil? && ev.list_price > 0
   			ev.eb_price = nil

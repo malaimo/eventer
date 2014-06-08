@@ -127,11 +127,11 @@ ActiveRecord::Schema.define(:version => 20140608150837) do
     t.text     "specific_conditions"
     t.boolean  "should_welcome_email"
     t.boolean  "should_ask_for_referer_code",                                               :default => false
-    t.decimal  "couples_eb_price",                           :precision => 7,  :scale => 2
-    t.decimal  "business_price",                             :precision => 7,  :scale => 2
-    t.decimal  "business_eb_price",                          :precision => 7,  :scale => 2
-    t.decimal  "enterprise_6plus_price",                     :precision => 7,  :scale => 2
-    t.decimal  "enterprise_11plus_price",                    :precision => 7,  :scale => 2
+    t.decimal  "couples_eb_price",                           :precision => 10, :scale => 2
+    t.decimal  "business_price",                             :precision => 10, :scale => 2
+    t.decimal  "business_eb_price",                          :precision => 10, :scale => 2
+    t.decimal  "enterprise_6plus_price",                     :precision => 10, :scale => 2
+    t.decimal  "enterprise_11plus_price",                    :precision => 10, :scale => 2
   end
 
   add_index "events", ["country_id"], :name => "index_events_on_country_id"
