@@ -83,37 +83,88 @@
                   %label.checkbox.inline
                     = f.radio_button :visibility_type, "co"
                     %span.label.label-info= t('event.type.community')
-          .row-fuid#event_public_or_private_set
-            .span2
-              .control-group
-                %label.control-label{ :for => :list_price }= t("formtastic.labels.event.list_price")
-                = f.text_field :list_price, :class => "input-mini"
-            .span2
-              .control-group
-                %label.control-label{ :for => :list_price_plus_tax }= t("formtastic.labels.event.list_price_plus_tax")
-                = f.check_box :list_price_plus_tax
-            .span8
-              .row-fuid
-                .span3
-                  .control-group
-                    %label.control-label{ :for => :list_price_2_pax_discount }= t("formtastic.labels.event.list_price_2_pax_discount")
-                    = f.text_field :list_price_2_pax_discount, :class => "input-mini"
-                .span3
-                  .control-group
-                    %label.control-label{ :for => :list_price_3plus_pax_discount }= t("formtastic.labels.event.list_price_3plus_pax_discount")
-                    = f.text_field :list_price_3plus_pax_discount, :class => "input-mini"
-                .span3
-                  .control-group
-                    %label.control-label{ :for => :eb_price }= t("formtastic.labels.event.eb_price")
-                    = f.text_field :eb_price, :class => "input-mini"
-                .span3
-                  .control-group
-                    %label.control-label{ :for => :eb_end_date }= t("formtastic.labels.event.eb_end_date")
-                    = f.text_field :eb_end_date, :class => 'datepicker-class input-small'
+          .row-fuid
             .span12
-              .control-group
-                %label.control-label{ :for => :currency_iso_code}= t("formtastic.labels.event.currency_iso_code")
-                = f.collection_select :currency_iso_code, @currencies.collect{ |c| [ c[1][:iso_code]+" - "+c[1][:name], c[1][:iso_code]] }, :last, :first
+              %hr.hr-normal
+          .row-fuid#event_public_or_private_set
+            .row-fluid
+              .span3
+                .control-group
+                  %label.control-label{ :for => :list_price }= t("formtastic.labels.event.list_price")
+                  = f.text_field :list_price, :class => "input-mini"
+                  %br
+                  %small.muted
+                    Precio final por persona.
+                    %br
+                    %strong
+                      Impuestos incluidos.
+              .span3
+                .control-group
+                  %label.control-label{ :for => :business_price }= t("formtastic.labels.event.business_price")
+                  = f.text_field :business_price, :class => "input-mini"
+                  %br
+                  %small.muted
+                    5 personas. 
+                    %br
+                    Recomendado: 12% descuento.          
+              .span3
+                .control-group
+                  %label.control-label{ :for => :enterprise_6plus_price }= t("formtastic.labels.event.enterprise_6plus_price")
+                  = f.text_field :enterprise_6plus_price, :class => "input-mini"
+                  %br
+                  %small.muted
+                    6 a 10 personas.
+                    %br
+                    Recomendado: 17% descuento.  
+              .span3
+                .control-group
+                  %label.control-label{ :for => :enterprise_11plus_price }= t("formtastic.labels.event.enterprise_11plus_price")
+                  = f.text_field :enterprise_11plus_price, :class => "input-mini"
+                  %br
+                  %small.muted
+                    11 a 20 personas.
+                    %br
+                    Recomendado: 20% descuento.
+            .row-fluid
+              .span3
+                .control-group
+                  %label.control-label{ :for => :eb_price }= t("formtastic.labels.event.eb_price")
+                  = f.text_field :eb_price, :class => "input-mini"
+                  %br
+                  %small.muted
+                    Por persona antes de la fecha EB. 
+                    %br
+                    Recomendado: 5% descuento.
+              .span3
+                .control-group
+                  %label.control-label{ :for => :couples_eb_price }= t("formtastic.labels.event.couples_eb_price")
+                  = f.text_field :couples_eb_price, :class => "input-mini"
+                  %br
+                  %small.muted
+                    Por parejas antes de la fecha EB. 
+                    %br
+                    Recomendado: 10% descuento.
+              .span3
+                .control-group
+                  %label.control-label{ :for => :business_eb_price }= t("formtastic.labels.event.business_eb_price")
+                  = f.text_field :business_eb_price, :class => "input-mini"
+                  %br
+                  %small.muted
+                    5 personas antes de la fecha EB. 
+                    %br
+                    Recomendado: 15% descuento.
+              .span3
+                .control-group
+                  %label.control-label{ :for => :eb_end_date }= t("formtastic.labels.event.eb_end_date")
+                  = f.text_field :eb_end_date, :class => 'datepicker-class input-small'
+            .row-fluid
+              .span12
+                .control-group
+                  %label.control-label{ :for => :currency_iso_code}= t("formtastic.labels.event.currency_iso_code")
+                  = f.collection_select :currency_iso_code, @currencies.collect{ |c| [ c[1][:iso_code]+" - "+c[1][:name], c[1][:iso_code]] }, :last, :first
+            .row-fuid
+              .span12
+                %hr.hr-normal
           .row-fuid
             .span12
               .control-group
@@ -200,6 +251,8 @@
 
     $("#event_date").change( function() { eventDateChanged( $(this).val() ); });
 
+    $("#event_list_price").change( function() { calculateDiscounts( $(this).val() ); });
+
     $("#event_is_webinar").change( function() { eventWebinarToggle(); });
     $("#event_time_zone_name").change( function() { eventTimeZoneToggle(); });
     $("#event_time_zone_name_input").hide();
@@ -214,26 +267,66 @@
 
   })
 
+  function calculateDiscounts( value ) {
+    if (($("#event_eb_price").val() == "") && !$("#event_visibility_type_pr").is(":checked"))
+      $("#event_eb_price").val( Math.ceil( value*0.95 ) );
+
+    if (($("#event_couples_eb_price").val() == "") && !$("#event_visibility_type_pr").is(":checked"))
+      $("#event_couples_eb_price").val( Math.ceil( value*0.9 ) );
+
+    if (($("#event_business_price").val() == "") && !$("#event_visibility_type_pr").is(":checked"))
+      $("#event_business_price").val( Math.ceil( value*0.88 ) );
+
+    if (($("#event_business_eb_price").val() == "") && !$("#event_visibility_type_pr").is(":checked"))
+      $("#event_business_eb_price").val( Math.ceil( value*0.85 ) );
+
+    if (($("#event_enterprise_6plus_price").val() == "") && !$("#event_visibility_type_pr").is(":checked"))
+      $("#event_enterprise_6plus_price").val( Math.ceil( value*0.83 ) );
+
+    if (($("#event_enterprise_11plus_price").val() == "") && !$("#event_visibility_type_pr").is(":checked"))
+      $("#event_enterprise_11plus_price").val( Math.ceil( value*0.8 ) );
+  }
+
   function eventTypeActions( value ) {
     if (value === "pu") {
-      $("#event_list_price_2_pax_discount").removeAttr('disabled');
-      $("#event_list_price_3plus_pax_discount").removeAttr('disabled');
-      $("#event_eb_price").removeAttr('disabled');
+      $("#event_eb_price").removeAttr('disabled');    
+      $("#event_couples_eb_price").removeAttr('disabled');
+      $("#event_business_price").removeAttr('disabled');
+      $("#event_business_eb_price").removeAttr('disabled');
+      $("#event_enterprise_6plus_price").removeAttr('disabled');
+      $("#event_enterprise_11plus_price").removeAttr('disabled');                        
       $("#event_eb_end_date").removeAttr('disabled');
       $("#event_public_or_private_set").show();
     }
     else if (value === "co") {
-      $("#event_list_price_2_pax_discount").val("");
-      $("#event_list_price_3plus_pax_discount").val("");
+      $("#event_eb_price").val("");
+      $("#event_couples_eb_price").val("");
+      $("#event_business_price").val("");
+      $("#event_business_eb_price").val("");
+      $("#event_enterprise_6plus_price").val("");
+      $("#event_enterprise_11plus_price").val("");
       $("#event_list_price").val( 0 );
       $("#event_public_or_private_set").hide();
     }
     else if (value === "pr") {
-      $("#event_list_price_2_pax_discount").val("");
-      $("#event_list_price_3plus_pax_discount").val("");
-      $("#event_list_price_2_pax_discount").attr('disabled','disabled');
-      $("#event_list_price_3plus_pax_discount").attr('disabled','disabled');
+      $("#event_eb_price").val("");
       $("#event_eb_price").attr('disabled','disabled');
+
+      $("#event_couples_eb_price").val("");
+      $("#event_couples_eb_price").attr('disabled','disabled');
+
+      $("#event_business_price").val("");
+      $("#event_business_price").attr('disabled','disabled');
+
+      $("#event_business_eb_price").val("");
+      $("#event_business_eb_price").attr('disabled','disabled');
+
+      $("#event_enterprise_6plus_price").val("");
+      $("#event_enterprise_6plus_price").attr('disabled','disabled');
+
+      $("#event_enterprise_11plus_price").val("");
+      $("#event_enterprise_11plus_price").attr('disabled','disabled');
+
       $("#event_eb_end_date").attr('disabled','disabled');
       $("#event_public_or_private_set").show();
     }

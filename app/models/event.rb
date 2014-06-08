@@ -22,11 +22,11 @@ class Event < ActiveRecord::Base
   after_initialize :initialize_defaults
 
   attr_accessible :event_type_id, :trainer_id, :country_id, :date, :place, :capacity, :city, :visibility_type, :list_price,
-                  :list_price_plus_tax, :list_price_2_pax_discount, :list_price_3plus_pax_discount,
                   :eb_price, :eb_end_date, :draft, :cancelled, :registration_link, :is_sold_out, :participants, :duration, 
                   :start_time, :end_time, :sepyme_enabled, :is_webinar, :time_zone_name, :embedded_player, :twitter_embedded_search,
                   :notify_webinar_start, :webinar_started, :currency_iso_code, :address, :custom_prices_email_text, :monitor_email,
-                  :specific_conditions, :should_welcome_email, :should_ask_for_referer_code
+                  :specific_conditions, :should_welcome_email, :should_ask_for_referer_code,
+                  :couples_eb_price, :business_price, :business_eb_price, :enterprise_6plus_price, :enterprise_11plus_price
 
   validates :date, :place, :capacity, :city, :visibility_type, :list_price,
             :country, :trainer, :event_type, :duration, :start_time, :end_time, :address, :presence => true
@@ -42,13 +42,31 @@ class Event < ActiveRecord::Base
       record.errors.add(attr, :eb_price_should_be_smaller_than_list_price) unless value.nil? || value < record.list_price
   end
 
-  validates_each :list_price_2_pax_discount  do |record, attr, value|
+  validates_each :couples_eb_price  do |record, attr, value|
     if !value.nil? && (value > 0 && record.visibility_type == 'pr')
       record.errors.add(attr, :private_event_should_not_have_discounts)
     end
   end
 
-  validates_each :list_price_3plus_pax_discount  do |record, attr, value|
+  validates_each :business_price  do |record, attr, value|
+    if !value.nil? && (value > 0 && record.visibility_type == 'pr')
+      record.errors.add(attr, :private_event_should_not_have_discounts)
+    end
+  end
+
+  validates_each :business_eb_price  do |record, attr, value|
+    if !value.nil? && (value > 0 && record.visibility_type == 'pr')
+      record.errors.add(attr, :private_event_should_not_have_discounts)
+    end
+  end
+
+  validates_each :enterprise_6plus_price  do |record, attr, value|
+    if !value.nil? && (value > 0 && record.visibility_type == 'pr')
+      record.errors.add(attr, :private_event_should_not_have_discounts)
+    end
+  end
+
+  validates_each :enterprise_11plus_price  do |record, attr, value|
     if !value.nil? && (value > 0 && record.visibility_type == 'pr')
       record.errors.add(attr, :private_event_should_not_have_discounts)
     end

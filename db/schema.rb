@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140522133846) do
+ActiveRecord::Schema.define(:version => 20140608140633) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -99,17 +99,14 @@ ActiveRecord::Schema.define(:version => 20140522133846) do
     t.string   "city"
     t.integer  "country_id"
     t.integer  "trainer_id"
-    t.string   "visibility_type",               :limit => 2
-    t.decimal  "list_price",                                   :precision => 10, :scale => 2
-    t.boolean  "list_price_plus_tax"
-    t.integer  "list_price_2_pax_discount"
-    t.integer  "list_price_3plus_pax_discount"
-    t.decimal  "eb_price",                                     :precision => 10, :scale => 2
+    t.string   "visibility_type",             :limit => 2
+    t.decimal  "list_price",                                 :precision => 10, :scale => 2
+    t.decimal  "eb_price",                                   :precision => 10, :scale => 2
     t.date     "eb_end_date"
     t.boolean  "draft"
     t.boolean  "cancelled"
-    t.datetime "created_at",                                                                                     :null => false
-    t.datetime "updated_at",                                                                                     :null => false
+    t.datetime "created_at",                                                                                   :null => false
+    t.datetime "updated_at",                                                                                   :null => false
     t.integer  "event_type_id"
     t.string   "registration_link"
     t.boolean  "is_sold_out"
@@ -117,19 +114,24 @@ ActiveRecord::Schema.define(:version => 20140522133846) do
     t.time     "start_time"
     t.time     "end_time"
     t.boolean  "sepyme_enabled"
-    t.boolean  "is_webinar",                                                                  :default => false
+    t.boolean  "is_webinar",                                                                :default => false
     t.string   "time_zone_name"
     t.text     "embedded_player"
-    t.boolean  "notify_webinar_start",                                                        :default => false
+    t.boolean  "notify_webinar_start",                                                      :default => false
     t.text     "twitter_embedded_search"
-    t.boolean  "webinar_started",                                                             :default => false
+    t.boolean  "webinar_started",                                                           :default => false
     t.string   "currency_iso_code"
     t.string   "address"
-    t.text     "custom_prices_email_text",      :limit => 255
+    t.text     "custom_prices_email_text",    :limit => 255
     t.string   "monitor_email"
     t.text     "specific_conditions"
     t.boolean  "should_welcome_email"
-    t.boolean  "should_ask_for_referer_code",                                                 :default => false
+    t.boolean  "should_ask_for_referer_code",                                               :default => false
+    t.decimal  "couples_eb_price",                           :precision => 7,  :scale => 2
+    t.decimal  "business_price",                             :precision => 7,  :scale => 2
+    t.decimal  "business_eb_price",                          :precision => 7,  :scale => 2
+    t.decimal  "enterprise_6plus_price",                     :precision => 7,  :scale => 2
+    t.decimal  "enterprise_11plus_price",                    :precision => 7,  :scale => 2
   end
 
   add_index "events", ["country_id"], :name => "index_events_on_country_id"
