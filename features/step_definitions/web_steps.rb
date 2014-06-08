@@ -37,11 +37,8 @@ def create_valid_event_inputs(event_type_name, event_date='31-01-2030')
   all('#event_event_type_id option')[1].select_option
   choose 'event_visibility_type_pu'
   fill_in 'event_list_price', :with => 500.00
-  check 'event_list_price_plus_tax'
   check 'event_should_welcome_email'
   check 'event_should_ask_for_referer_code'
-  fill_in 'event_list_price_2_pax_discount', :with =>  10
-  fill_in 'event_list_price_3plus_pax_discount', :with =>  15
   fill_in 'event_eb_price', :with => 450.00
   fill_in 'event_specific_conditions', :with => 'Algunas condiciones especiales'
 end
@@ -100,8 +97,8 @@ When /^I create an private event with discounts$/ do
   visit "/events/new"
   create_valid_event 'Tipo de Evento de Prueba'
   choose 'event_visibility_type_pr'
-  fill_in 'event_list_price_2_pax_discount', :with =>  10
-  fill_in 'event_list_price_3plus_pax_discount', :with =>  15  
+  fill_in 'event_eb_price', :with =>  10
+  fill_in 'event_business_eb_price', :with =>  15  
   submit_event
 end
 
