@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140608150837) do
+ActiveRecord::Schema.define(:version => 20140624222814) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(:version => 20140608150837) do
     t.decimal  "business_eb_price",                          :precision => 10, :scale => 2
     t.decimal  "enterprise_6plus_price",                     :precision => 10, :scale => 2
     t.decimal  "enterprise_11plus_price",                    :precision => 10, :scale => 2
+    t.date     "finish_date"
   end
 
   add_index "events", ["country_id"], :name => "index_events_on_country_id"

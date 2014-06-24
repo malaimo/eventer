@@ -24,8 +24,8 @@
                 = f.text_field :date, :class => 'datepicker-class input-small'
             .span2
               .control-group
-                %label.control-label{ :for => :duration }= t("formtastic.labels.event.duration")
-                = f.text_field :duration, :class => "input-mini"
+                %label.control-label{ :for => :date }= t("formtastic.labels.event.finish_date")
+                = f.text_field :finish_date, :class => 'datepicker-class input-small'
             .span2
               .control-group
                 %label.control-label{ :for => :capacity }= t("formtastic.labels.event.capacity")

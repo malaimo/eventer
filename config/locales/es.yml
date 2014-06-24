@@ -122,7 +122,8 @@ es:
           password_confirmation: "Confirmación de Clave"
           roles: "Roles"
       event:
-        date: "Fecha"
+        date: "Fecha de inicio"
+        finish_date: "Fecha de fin"
         capacity: "Capacidad"
         duration: "Duración (días)"
         start_time: "Hora de inicio"
