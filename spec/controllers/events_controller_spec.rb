@@ -28,11 +28,11 @@ describe EventsController do
   def valid_attributes
     { :event_type_id => FactoryGirl.create(:event_type).id,
       :date => "23/01/2100",
+      :finish_date => "24/01/2100",
       :place => "Hotel Conrad",
       :address => "Tucumán 373",
       :city => "Punta del Este",
       :capacity => 20,
-      :duration => 2,
       :start_time => "9:00",
       :end_time => "18:00",
       :visibility_type => 'pu',
