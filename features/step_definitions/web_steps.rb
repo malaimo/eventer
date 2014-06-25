@@ -27,7 +27,7 @@ end
 def create_valid_event_inputs(event_type_name, event_date='31-01-2030')
   select event_type_name, :from => 'event_event_type_id'
   fill_in 'event_date', :with => event_date
-  fill_in 'event_duration', :with => 2
+  fill_in 'event_finish_date', :with => Date.parse(event_date)+1
   fill_in 'event_date', :with => event_date
   fill_in 'event_place', :with => 'Hotel Llao Llao'
   fill_in 'event_address', :with => 'Tucumán 373'

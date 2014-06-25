@@ -85,6 +85,56 @@ describe Participant do
     @participant.is_present?.should be true
   end
 
+  it "should have the event rating from the participant satisfaction survey" do
+    @participant.event_rating = 5
+    @participant.event_rating.should == 5
+  end
+
+  it "should have an event rating smaller or equal to 5" do
+    @participant.event_rating = 10
+    @participant.valid?.should be false
+  end
+
+  it "should have an event rating greater or equal to 1" do
+    @participant.event_rating = 0
+    @participant.valid?.should be false
+  end
+
+  it "should have the trainer rating from the participant satisfaction survey" do
+    @participant.trainer_rating = 5
+    @participant.trainer_rating.should == 5
+  end
+
+  it "should have an trainer rating smaller or equal to 5" do
+    @participant.trainer_rating = 10
+    @participant.valid?.should be false
+  end
+
+  it "should have an trainer rating greater or equal to 1" do
+    @participant.trainer_rating = 0
+    @participant.valid?.should be false
+  end
+
+  it "should have a testimony from a participant satisfaction survey" do
+    @participant.testimony = "me ha gustado mucho"
+    @participant.testimony.should == "me ha gustado mucho"
+  end
+
+  it "should have a promoter_score from a participant satisfaction survey" do
+    @participant.promoter_score = 8
+    @participant.promoter_score.should == 8
+  end
+
+  it "should have a promoter_score smaller or equal to 10" do
+    @participant.promoter_score = 11
+    @participant.valid?.should be false
+  end
+
+  it "should have a promoter_score greater or equal to 0" do
+    @participant.promoter_score = -1
+    @participant.valid?.should be false
+  end
+
   context "given a PDF certificate is generated" do
 
     before(:all) do
