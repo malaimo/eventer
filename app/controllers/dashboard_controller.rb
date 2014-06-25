@@ -18,7 +18,7 @@ class DashboardController < ApplicationController
   end
   
   def past_events
-    @events = Event.public_and_past_visible.all(:order => 'date desc').select{ |ev| !ev.event_type.nil? }
+    @events = Event.past_visible.all(:order => 'date desc').select{ |ev| !ev.event_type.nil? }
   end
   
   def pricing

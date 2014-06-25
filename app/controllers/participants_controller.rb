@@ -14,6 +14,15 @@ class ParticipantsController < ApplicationController
       format.json { render json: @participants }
     end
   end
+
+  def survey
+    @event = Event.find(params[:event_id])
+    @participants = @event.participants.attended
+    
+    respond_to do |format|
+      format.html # survey.html.erb
+    end
+  end
   
   def print
     @event = Event.find(params[:event_id])

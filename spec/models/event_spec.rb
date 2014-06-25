@@ -322,9 +322,19 @@ describe Event do
       @event.duration = 1
       @event.human_date.should == "15 Ene"
     end
+
+    it "should have a human date in spanish that returns '15 Ene' if finish date is '15 Ene'" do
+      @event.finish_date = "15/01/2015"
+      @event.human_date.should == "15 Ene"
+    end
     
     it "should have a human date in spanish that returns '15-16 Ene' if duration is 2" do
       @event.duration = 2
+      @event.human_date.should == "15-16 Ene" 
+    end
+
+    it "should have a human date in spanish that returns '15-16 Ene' if finish date is '16 Ene'" do
+      @event.finish_date = "16/01/2015"
       @event.human_date.should == "15-16 Ene" 
     end
     
@@ -332,6 +342,12 @@ describe Event do
       @event.duration = 31
       @event.human_date.should ==  "15 Ene-14 Feb"
     end
+
+    it "should have a human date in spanish that returns '15 Ene-14 Feb' if finish date is '14-Feb'" do
+      @event.finish_date = "14/02/2015"
+      @event.human_date.should ==  "15 Ene-14 Feb"
+    end
+
   end
   
   context "When event date is 20-Apr-2015" do

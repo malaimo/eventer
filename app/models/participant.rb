@@ -5,11 +5,25 @@ class Participant < ActiveRecord::Base
   belongs_to :event
   belongs_to :influence_zone
   
-  attr_accessible :email, :fname, :lname, :phone, :event_id, :status, :notes, :influence_zone_id, :influence_zone, :referer_code
+  attr_accessible :email, :fname, :lname, :phone, :event_id, 
+                  :status, :notes, :influence_zone_id, :influence_zone, 
+                  :referer_code, :promoter_score, :event_rating, :trainer_rating, :testimony
   
   validates :email, :fname, :lname, :phone, :event, :influence_zone, :presence => true
   
   validates :email, :email => true
+
+  validates_each :event_rating do |record, attr, value|
+      record.errors.add(attr, :event_rating_should_be_between_1_and_5) unless value.nil? || (value >= 1 && value <= 5) 
+  end
+
+  validates_each :trainer_rating do |record, attr, value|
+      record.errors.add(attr, :trainer_rating_should_be_between_1_and_5) unless value.nil? || (value >= 1 && value <= 5) 
+  end 
+
+  validates_each :promoter_score do |record, attr, value|
+      record.errors.add(attr, :promoter_score_should_be_between_0_and_10) unless value.nil? || (value >= 0 && value <= 10) 
+  end 
   
   scope :new_ones, where(:status => "N")
   scope :confirmed, where(:status => "C")
@@ -17,6 +31,10 @@ class Participant < ActiveRecord::Base
   scope :cancelled, where(:status => "X")
   scope :deffered, where(:status => "D")
   scope :attended, where(:status => "A")
+
+  scope :promoter, where('promoter_score >= 9')
+  scope :passive, where('promoter_score <= 8 AND promoter_score >= 7')
+  scope :detractor, where('promoter_score <= 6')
   
   after_initialize :initialize_defaults
   

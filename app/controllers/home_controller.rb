@@ -57,7 +57,7 @@ class HomeController < ApplicationController
 
     respond_to do |format|
       format.json { render json: @event_type }
-      format.xml { render xml: @event_type }
+      format.xml { render :xml => @event_type.to_xml( { :include => :categories, :methods => [:average_rating, :net_promoter_score] } ) }
     end
   end
   
@@ -68,7 +68,7 @@ class HomeController < ApplicationController
 
     respond_to do |format|
       format.json { render json: @event_types }
-      format.xml { render :xml => @event_types.to_xml( { :include => :categories } ) }
+      format.xml { render :xml => @event_types.to_xml( { :include => :categories, :methods => [:average_rating, :net_promoter_score] } ) }
     end
   end
   
