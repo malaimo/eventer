@@ -83,7 +83,9 @@ es:
           eb_end_date_should_be_earlier_than_event_date: "la fecha de Early Bird no puede ser mayor a la Fecha del Evento"
           private_event_should_not_have_discounts: "un evento Privado no puede tener descuentos por cantidad de personas"
           time_zone_name_is_required_for_a_webinar: "un webinar debe tener una zona horaria asociada"
-
+          event_rating_should_be_between_1_and_5: "el rating del evento debe estar entre 1 y 5"
+          trainer_rating_should_be_between_1_and_5: "el rating del entrenador debe estar entre 1 y 5"
+          promoter_score_should_be_between_0_and_10: "el promoter score debe estar entre 0 y 10"
   formtastic:
     yes: "Si"
     no: "No"

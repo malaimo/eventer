@@ -1,0 +1,71 @@
+:css
+  .purr {
+    position: fixed;
+    top: 30px;
+    right: 100px;
+    width: 250px;
+    padding: 20px;
+    background-color: #FCC;
+    border: solid 2px #C66;
+    &:first-letter { text-transform: uppercase; }
+  }
+
+.page-header
+  %h1.pull-left
+    %i.icon-group
+    %span Encuesta de Satisfacción
+
+= render '/commons/notice'
+
+.row-fluid
+  .span12.box.bordered-box.blue-border{ :style => "margin-bottom:0;" }
+    .box-header.blue-background
+      .title= @event.event_type.name + " - " + @event.date.to_formatted_s(:short) + " - " + @event.city 
+    .box-content.box-no-padding
+      .responsive-table
+        .scrollable-area
+
+  %br
+
+.row-fluid
+  .span12.box.bordered-box.blue-border{ :style => "margin-bottom:0;" }
+    .box-header.green-background
+      .title Lista de Participantes Presentes
+    .box-content.box-no-padding
+      .responsive-table
+        .scrollable-area
+          %table.table{ :style => "margin-bottom:0;" }
+            %thead
+              %tr
+                %th Participante
+                %th Rating Evento
+                %th Rating Entrenador
+                %th ¿Lo recomendaría a un colega?
+                %th Testimonio
+            %tbody
+              - @participants.each do |participant|
+                %tr
+                  %td{ :style => "white-space:normal;"}
+                    %span{ :style => "white-space:nowrap;"}
+                      %i.icon-user
+                      = participant.fname
+                      = " "
+                      = participant.lname
+                  %td{ :style => "white-space:normal;"}
+                    %span{ :style => "white-space:nowrap;"}
+                      = best_in_place participant, :event_rating, :type => :select, :path => "/events/#{participant.event.id}/participants/#{participant.id}", :classes => ['editable','editable-click'], :collection => [["1", "1 - Muy Malo"], ["2", "2"], ["3", "3 - Medio"], ["4", "4"], ["5", "5 - Muy Bueno"]]
+                  %td{ :style => "white-space:normal;"}
+                    %span{ :style => "white-space:nowrap;"}
+                      = best_in_place participant, :trainer_rating, :type => :select, :path => "/events/#{participant.event.id}/participants/#{participant.id}", :collection => [["1", "1 - Muy Malo"], ["2", "2"], ["3", "3 - Medio"], ["4", "4"], ["5", "5 - Muy Bueno"]], :classes => ['editable','editable-click']
+                  %td{ :style => "white-space:normal;"}
+                    %span{ :style => "white-space:nowrap;"}
+                      = best_in_place participant, :promoter_score, :type => :select, :path => "/events/#{participant.event.id}/participants/#{participant.id}", :collection => [["0", "0 - Definitivamente No"], ["1","1 - No"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8 - Probablemente Si"], ["9", "9 - Seguramente Si"], ["10", "10 - Definitivamente Si"]], :classes => ['editable','editable-click']
+                  %td{ :style => "white-space:pre-line;"}
+                    = best_in_place participant, :testimony, :type => :textarea, :path => "/events/#{participant.event.id}/participants/#{participant.id}", :classes => ['editable','editable-click']
+
+:javascript
+
+  $(document).ready(function() {
+    /* Activating Best In Place */
+    jQuery(".best_in_place").best_in_place();
+  });

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140624222814) do
+ActiveRecord::Schema.define(:version => 20140625014142) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -159,6 +159,10 @@ ActiveRecord::Schema.define(:version => 20140624222814) do
     t.integer  "influence_zone_id"
     t.string   "referer_code"
     t.string   "verification_code"
+    t.integer  "event_rating"
+    t.integer  "trainer_rating"
+    t.text     "testimony"
+    t.integer  "promoter_score"
   end
 
   add_index "participants", ["event_id"], :name => "index_participants_on_event_id"
