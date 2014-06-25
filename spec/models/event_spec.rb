@@ -410,6 +410,10 @@ describe Event do
       @event.average_rating.should == 4
     end
 
+    it "should have a global event rating" do
+      Participant.average("event_rating").should == 4
+    end
+
     it "should have an average event rating even with participants without rating" do
       participant4 = FactoryGirl.build(:participant)
       participant4.id = 104
