@@ -165,6 +165,35 @@ class Event < ActiveRecord::Base
     self.visibility_type == 'co'
   end
 
+  def average_rating
+    cualified_participants = participants.attended.select{ |p| !p.event_rating.nil? }
+
+    if cualified_participants.length > 0
+      cualified_participants.collect{ |p| p.event_rating}.sum.to_f/cualified_participants.length
+    else
+      nil
+    end
+
+  end
+
+  def net_promoter_score
+    promoter_count = participants.attended.promoter.length.to_f
+    passive_count = participants.attended.passive.length.to_f
+    detractor_count = participants.attended.detractor.length.to_f
+    attended_count = (promoter_count+passive_count+detractor_count)
+
+    if (promoter_count+detractor_count) > 0
+      promoter_percent = promoter_count / attended_count
+      detractor_percent = detractor_count / attended_count
+
+      (promoter_percent - detractor_percent).round(2)
+
+    else
+      nil
+    end
+
+  end
+
   private
   
   def get_event_duration

@@ -371,4 +371,94 @@ describe Event do
       @event.human_date.should ==  "20 Abr-4 May"
     end
   end
+
+  context "if the event have participants" do
+
+    before(:each) do
+      @participant1 = FactoryGirl.build(:participant)
+      @participant2 = FactoryGirl.build(:participant)
+      @participant3 = FactoryGirl.build(:participant)
+
+      @participant1.id = 101
+      @participant2.id = 102
+      @participant3.id = 103
+
+      @participant1.status = "A"
+      @participant2.status = "A"
+      @participant3.status = "A"
+
+      @participant1.event_rating = 5
+      @participant2.event_rating = 5
+      @participant3.event_rating = 2
+
+      @participant1.promoter_score = 10
+      @participant2.promoter_score = 9
+      @participant3.promoter_score = 5
+
+      @participant1.save!
+      @participant2.save!
+      @participant3.save!
+
+      @event.participants << @participant1
+      @event.participants << @participant2
+      @event.participants << @participant3
+
+      @event.save!
+    end
+
+    it "should have an average event rating" do
+      @event.average_rating.should == 4
+    end
+
+    it "should have an average event rating even with participants without rating" do
+      participant4 = FactoryGirl.build(:participant)
+      participant4.id = 104
+      participant4.status = "A"
+      participant4.save!
+      @event.participants << participant4
+      @event.save!
+
+      @event.average_rating.should == 4
+    end
+
+    it "should have an average event rating even with participants not being present" do
+      participant4 = FactoryGirl.build(:participant)
+      participant4.id = 104
+      @participant3.event_rating = 5
+      participant4.status = "C"
+      participant4.save!
+      @event.participants << participant4
+      @event.save!
+
+      @event.average_rating.should == 4
+    end
+
+    it "should have a net promoter score" do
+      @event.net_promoter_score.should == 0.33
+    end
+
+    it "should have a net promoter score even with participants without rating" do
+      participant4 = FactoryGirl.build(:participant)
+      participant4.id = 104
+      participant4.status = "A"
+      participant4.save!
+      @event.participants << participant4
+      @event.save!
+
+      @event.net_promoter_score.should == 0.33
+    end
+
+    it "should have a net promoter score even with participants not being present" do
+      participant4 = FactoryGirl.build(:participant)
+      participant4.id = 104
+      @participant3.promoter_score = 0
+      participant4.status = "C"
+      participant4.save!
+      @event.participants << participant4
+      @event.save!
+
+      @event.net_promoter_score.should == 0.33
+    end
+
+  end
 end
