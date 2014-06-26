@@ -160,7 +160,7 @@ describe EventType do
         @event2.participants << participant4
         @event2.save!
 
-        @event_type.average_rating.should == 4
+        @event_type.net_promoter_score.should == 0.33
       end
 
     end

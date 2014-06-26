@@ -41,7 +41,6 @@
                           %b= event.event_type.name
                           = "| " + event.city + " | " + event.place
                       %small.pull-right
-                        = "Presentes: #{event.participants.attended.count.to_s}/#{event_people_count.to_i} "
                         %a.btn.btn-warning.btn-mini{ :href => "/events/#{event.id}/participants" }
                           %i.icon-group
                         &nbsp;
@@ -51,6 +50,9 @@
                       - event_attended_percent = event.participants.attended.count.to_f / event_people_count
                     - else
                       - event_attended_percent = 0
+
+                    Porcentaje de Asistentes Presentes:
+                    = "#{(event_attended_percent*100).round.to_s}% (#{event.participants.attended.count.to_s}/#{event_people_count.to_i})"
                     - if event_attended_percent < 0.2
                       .progress.progress-small.progress-danger
                         .bar{ :style => "width: #{(event_attended_percent*100).round.to_s}%" }
