@@ -68,8 +68,10 @@
               %ul.unstyled.tasks
                 - @top_5_nps_event_types.each do |et|
                   %li
-                    = "#{(et.net_promoter_score*100).to_i} - #{et.name}"
-                    = "(#{et.participants.select{|p| !p.promoter_score.nil?}.count} opiniones)"
+                    %strong
+                      = "#{(et.net_promoter_score*100).to_i}"
+                    = "| #{et.name}"
+                    = "| #{et.participants.select{|p| !p.promoter_score.nil?}.count} opiniones"
       .span6
         .row-fluid
           .span12.box.box-nomargin
@@ -81,8 +83,10 @@
               %ul.unstyled.tasks
                 - @top_5_nps_trainers.each do |t|
                   %li
-                    = "#{(t.net_promoter_score*100).to_i} - #{t.name}"
-                    = "(#{t.participants.select{|p| !p.promoter_score.nil?}.count} opiniones)"
+                    %strong
+                      = "#{(t.net_promoter_score*100).to_i}"
+                    = "| #{t.name}"
+                    = "| #{t.participants.select{|p| !p.promoter_score.nil?}.count} opiniones"
 
     .box-header
       .title
@@ -101,9 +105,11 @@
               %ul.unstyled.tasks
                 - @top_10_event_types.each do |et|
                   %li
-                    = "#{et.average_rating.round(2)} - #{et.name}"
-                    = "(#{et.participants.select{|p| !p.event_rating.nil?}.count} opiniones)"
-      .span4
+                    %strong
+                      = "#{et.average_rating.round(2)}"
+                    = "| #{et.name}"
+                    = "| #{et.participants.select{|p| !p.event_rating.nil?}.count} opiniones"
+      .span5
         .row-fluid
           .span12.box.box-nomargin
             .box-header.green-background
@@ -114,10 +120,17 @@
               %ul.unstyled.tasks
                 - @top_10_events.each do |e|
                   %li
-                    = "#{e.average_rating.round(2)} - #{e.event_type.name}"
-                    = "(#{e.participants.select{|p| !p.event_rating.nil?}.count} opiniones)"
+                    %strong
+                      = "#{e.average_rating.round(2)}"
+                    = "| #{e.human_date} | #{e.event_type.name} | #{e.city}"
+                    %br
+                    = "#{e.participants.select{|p| !p.event_rating.nil?}.count} opiniones | "
+                    %a{ :href => "/events/#{e.id}/participants_survey" }
+                      ver encuesta
+                    %br
+                    &nbsp;
 
-      .span4
+      .span3
         .row-fluid
           .span12.box.box-nomargin
             .box-header.green-background
@@ -128,8 +141,10 @@
               %ul.unstyled.tasks
                 - @top_10_trainers.each do |t|
                   %li
-                    = "#{t.average_rating.round(2)} - #{t.name}"
-                    = "(#{t.participants.select{|p| !p.trainer_rating.nil?}.count} opiniones)"
+                    %strong
+                      = "#{t.average_rating.round(2)}"
+                    = "| #{t.name}"
+                    = "| #{t.participants.select{|p| !p.trainer_rating.nil?}.count} opiniones"
 
     .box-header
       .title
