@@ -43,11 +43,11 @@ class DashboardController < ApplicationController
     global_promoter_count = Participant.attended.promoter.length.to_f
     global_passive_count = Participant.attended.passive.length.to_f
     global_detractor_count = Participant.attended.detractor.length.to_f
-    global_attended_count = (global_promoter_count+global_passive_count+global_detractor_count)
+    @global_attended_count = (global_promoter_count+global_passive_count+global_detractor_count)
 
-    if global_attended_count > 0
-      global_promoter_percent = global_promoter_count / global_attended_count
-      global_detractor_percent = global_detractor_count / global_attended_count
+    if @global_attended_count > 0
+      global_promoter_percent = global_promoter_count / @global_attended_count
+      global_detractor_percent = global_detractor_count / @global_attended_count
 
       @global_net_promoter_score = (global_promoter_percent - global_detractor_percent).round(2)
 
@@ -56,7 +56,10 @@ class DashboardController < ApplicationController
     end
 
     @average_trainer_rating = Participant.average("trainer_rating").to_f.round(2)
+    @count_trainer_rating = Participant.count("trainer_rating")
+
     @average_event_rating = Participant.average("event_rating").to_f.round(2)
+    @count_event_rating = Participant.count("event_rating")
 
     @top_5_nps_event_types = EventType.all.select{ |et| !et.net_promoter_score.nil? }.sort_by(&:net_promoter_score).reverse![0..4]
     @top_5_nps_trainers = Trainer.all.select{ |t| !t.net_promoter_score.nil? }.sort_by(&:net_promoter_score).reverse![0..4]
