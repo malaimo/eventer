@@ -30,7 +30,7 @@
         .box-content.box-statistic
           %h3.title.text-success
             = @average_event_rating
-            = "(#{@average_event_rating*100/5}%)"
+            = "(#{(@average_event_rating*100/5).round(2)}%)"
           %small Rating Global Promedio de los Eventos (1-5)
           %br
           %small
@@ -42,7 +42,7 @@
         .box-content.box-statistic
           %h3.title.text-success
             = @average_trainer_rating
-            = "(#{@average_trainer_rating*100/5}%)"
+            = "(#{(@average_trainer_rating*100/5).round(2)}%)"
           %small Rating Global Promedio de los Trainers (1-5)
           %br
           %small
@@ -101,7 +101,7 @@
               %ul.unstyled.tasks
                 - @top_10_event_types.each do |et|
                   %li
-                    = "#{et.average_rating} - #{et.name}"
+                    = "#{et.average_rating.round(2)} - #{et.name}"
                     = "(#{et.participants.select{|p| !p.event_rating.nil?}.count} opiniones)"
       .span4
         .row-fluid
@@ -114,7 +114,7 @@
               %ul.unstyled.tasks
                 - @top_10_events.each do |e|
                   %li
-                    = "#{e.average_rating} - #{e.event_type.name}"
+                    = "#{e.average_rating.round(2)} - #{e.event_type.name}"
                     = "(#{e.participants.select{|p| !p.event_rating.nil?}.count} opiniones)"
 
       .span4
