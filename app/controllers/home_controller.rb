@@ -3,7 +3,18 @@ class HomeController < ApplicationController
     @events = Event.public_commercial_visible.all(:order => 'date')
     respond_to do |format|
       format.html
-      format.xml { render :xml => @events.to_xml({:include => [:country,:event_type,:trainer,:categories], methods: :human_date} ) }
+      format.xml { render :xml => @events.to_xml( :include => { 
+                                                    :country => {}, 
+                                                    :event_type => { 
+                                                      :methods => [:average_rating, :net_promoter_score, :participant_count, :promoter_count] 
+                                                    }, 
+                                                    :trainer => { 
+                                                      :methods => [:average_rating, :net_promoter_score]
+                                                    }, 
+                                                    :categories => {}
+                                                  }, 
+                                                  :methods => [:human_date] 
+                                                ) }
       format.json { render json: @events }  
     end
   end
@@ -12,7 +23,18 @@ class HomeController < ApplicationController
     @events = Event.public_community_visible.all(:order => 'date')
     respond_to do |format|
       format.html
-      format.xml { render :xml => @events.to_xml({:include => [:country,:event_type,:trainer,:categories], methods: :human_date} ) }
+      format.xml { render :xml => @events.to_xml(:include => { 
+                                                    :country => {}, 
+                                                    :event_type => { 
+                                                      :methods => [:average_rating, :net_promoter_score, :participant_count, :promoter_count] 
+                                                    }, 
+                                                    :trainer => { 
+                                                      :methods => [:average_rating, :net_promoter_score]
+                                                    }, 
+                                                    :categories => {}
+                                                  }, 
+                                                  :methods => [:human_date] 
+                                                ) }
       format.json { render json: @events }  
     end
   end
@@ -20,7 +42,18 @@ class HomeController < ApplicationController
   def show
     @event = Event.public_and_visible.find(params[:id])
     respond_to do |format|
-      format.xml { render :xml => @event.to_xml({:include => [:country,:event_type,:trainer,:categories], methods: :human_date} ) }
+      format.xml { render :xml => @event.to_xml(:include => { 
+                                                    :country => {}, 
+                                                    :event_type => { 
+                                                      :methods => [:average_rating, :net_promoter_score, :participant_count, :promoter_count] 
+                                                    }, 
+                                                    :trainer => { 
+                                                      :methods => [:average_rating, :net_promoter_score]
+                                                    }, 
+                                                    :categories => {}
+                                                  }, 
+                                                  :methods => [:human_date] 
+                                                ) }
       format.json { render json: @event }  
     end
   end
@@ -57,7 +90,7 @@ class HomeController < ApplicationController
 
     respond_to do |format|
       format.json { render json: @event_type }
-      format.xml { render :xml => @event_type.to_xml( { :include => :categories, :methods => [:average_rating, :net_promoter_score] } ) }
+      format.xml { render :xml => @event_type.to_xml( { :include => :categories, :methods => [:average_rating, :net_promoter_score, :participant_count, :promoter_count] } ) }
     end
   end
   
@@ -68,7 +101,7 @@ class HomeController < ApplicationController
 
     respond_to do |format|
       format.json { render json: @event_types }
-      format.xml { render :xml => @event_types.to_xml( { :include => :categories, :methods => [:average_rating, :net_promoter_score] } ) }
+      format.xml { render :xml => @event_types.to_xml( { :include => :categories, :methods => [:average_rating, :net_promoter_score, :participant_count, :promoter_count] } ) }
     end
   end
   
