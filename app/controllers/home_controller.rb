@@ -6,7 +6,7 @@ class HomeController < ApplicationController
       format.xml { render :xml => @events.to_xml( :include => { 
                                                     :country => {}, 
                                                     :event_type => { 
-                                                      :methods => [:average_rating, :net_promoter_score, :participant_count, :promoter_count] 
+                                                      :methods => [:average_rating, :net_promoter_score, :participant_count, :promoter_count, :nps_opinions_count, :rating_opinions_count] 
                                                     }, 
                                                     :trainer => { 
                                                       :methods => [:average_rating, :net_promoter_score]
@@ -26,7 +26,7 @@ class HomeController < ApplicationController
       format.xml { render :xml => @events.to_xml(:include => { 
                                                     :country => {}, 
                                                     :event_type => { 
-                                                      :methods => [:average_rating, :net_promoter_score, :participant_count, :promoter_count] 
+                                                      :methods => [:average_rating, :net_promoter_score, :participant_count, :promoter_count, :nps_opinions_count, :rating_opinions_count] 
                                                     }, 
                                                     :trainer => { 
                                                       :methods => [:average_rating, :net_promoter_score]
@@ -45,7 +45,7 @@ class HomeController < ApplicationController
       format.xml { render :xml => @event.to_xml(:include => { 
                                                     :country => {}, 
                                                     :event_type => { 
-                                                      :methods => [:average_rating, :net_promoter_score, :participant_count, :promoter_count] 
+                                                      :methods => [:average_rating, :net_promoter_score, :participant_count, :promoter_count, :nps_opinions_count, :rating_opinions_count] 
                                                     }, 
                                                     :trainer => { 
                                                       :methods => [:average_rating, :net_promoter_score]
@@ -78,7 +78,9 @@ class HomeController < ApplicationController
   def categories
     @categories = Category.visible_ones
     respond_to do |format|
-      format.xml { render :xml => @categories.to_xml(:include => :event_types ) }
+      format.xml { render :xml => @categories.to_xml(:include => {:event_types  => { 
+                                                      :methods => [:average_rating, :net_promoter_score, :participant_count, :promoter_count, :nps_opinions_count, :rating_opinions_count] 
+                                                    }, } ) }
       format.json { render json: @categories }
     end
   end
@@ -90,7 +92,7 @@ class HomeController < ApplicationController
 
     respond_to do |format|
       format.json { render json: @event_type }
-      format.xml { render :xml => @event_type.to_xml( { :include => :categories, :methods => [:average_rating, :net_promoter_score, :participant_count, :promoter_count] } ) }
+      format.xml { render :xml => @event_type.to_xml( { :include => :categories, :methods => [:average_rating, :net_promoter_score, :participant_count, :promoter_count, :nps_opinions_count, :rating_opinions_count] } ) }
     end
   end
   
@@ -101,7 +103,7 @@ class HomeController < ApplicationController
 
     respond_to do |format|
       format.json { render json: @event_types }
-      format.xml { render :xml => @event_types.to_xml( { :include => :categories, :methods => [:average_rating, :net_promoter_score, :participant_count, :promoter_count] } ) }
+      format.xml { render :xml => @event_types.to_xml( { :include => :categories, :methods => [:average_rating, :net_promoter_score, :participant_count, :promoter_count, :nps_opinions_count, :rating_opinions_count] } ) }
     end
   end
   
