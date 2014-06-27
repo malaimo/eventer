@@ -47,5 +47,13 @@ class EventType < ActiveRecord::Base
     end
 
   end
+
+  def participant_count
+    participants.attended.count
+  end
+
+  def promoter_count
+    participants.attended.promoter.count
+  end
   
 end
