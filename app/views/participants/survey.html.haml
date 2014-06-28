@@ -20,7 +20,7 @@
 .row-fluid
   .span12.box.bordered-box.blue-border{ :style => "margin-bottom:0;" }
     .box-header.blue-background
-      .title= @event.event_type.name + " - " + @event.date.to_formatted_s(:short) + " - " + @event.city 
+      .title= @event.event_type.name + " - " + @event.date.to_formatted_s(:short) + " - " + @event.city + " | Trainer: " + @event.trainer.name
     .box-content.box-no-padding
       .responsive-table
         .scrollable-area
@@ -30,7 +30,7 @@
 .row-fluid
   .span12.box.bordered-box.blue-border{ :style => "margin-bottom:0;" }
     .box-header.green-background
-      .title Lista de Participantes Presentes
+      .title Lista de Participantes Presentes (Estado = Presente)
     .box-content.box-no-padding
       .responsive-table
         .scrollable-area

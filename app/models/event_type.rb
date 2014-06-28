@@ -47,5 +47,24 @@ class EventType < ActiveRecord::Base
     end
 
   end
+
+  def participant_count
+    participants.attended.count
+  end
+
+  def nps_opinions_count
+    promoter_count = participants.attended.promoter.count
+    passive_count = participants.attended.passive.count
+    detractor_count = participants.attended.detractor.count
+    promoter_count+passive_count+detractor_count
+  end
+
+  def promoter_count
+    participants.attended.promoter.count
+  end
+
+  def rating_opinions_count
+    participants.attended.select{ |p| !p.event_rating.nil? }.count
+  end
   
 end

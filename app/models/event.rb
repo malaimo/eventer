@@ -26,7 +26,8 @@ class Event < ActiveRecord::Base
                   :start_time, :end_time, :sepyme_enabled, :is_webinar, :time_zone_name, :embedded_player, :twitter_embedded_search,
                   :notify_webinar_start, :webinar_started, :currency_iso_code, :address, :custom_prices_email_text, :monitor_email,
                   :specific_conditions, :should_welcome_email, :should_ask_for_referer_code,
-                  :couples_eb_price, :business_price, :business_eb_price, :enterprise_6plus_price, :enterprise_11plus_price
+                  :couples_eb_price, :business_price, :business_eb_price, :enterprise_6plus_price, :enterprise_11plus_price,
+                  :show_pricing
 
   validates :date, :place, :capacity, :city, :visibility_type, :list_price,
             :country, :trainer, :event_type, :duration, :start_time, :end_time, :address, :presence => true
@@ -163,6 +164,35 @@ class Event < ActiveRecord::Base
   
   def is_community_event?
     self.visibility_type == 'co'
+  end
+
+  def average_rating
+    cualified_participants = participants.attended.select{ |p| !p.event_rating.nil? }
+
+    if cualified_participants.length > 0
+      cualified_participants.collect{ |p| p.event_rating}.sum.to_f/cualified_participants.length
+    else
+      nil
+    end
+
+  end
+
+  def net_promoter_score
+    promoter_count = participants.attended.promoter.length.to_f
+    passive_count = participants.attended.passive.length.to_f
+    detractor_count = participants.attended.detractor.length.to_f
+    attended_count = (promoter_count+passive_count+detractor_count)
+
+    if (promoter_count+detractor_count) > 0
+      promoter_percent = promoter_count / attended_count
+      detractor_percent = detractor_count / attended_count
+
+      (promoter_percent - detractor_percent).round(2)
+
+    else
+      nil
+    end
+
   end
 
   private

@@ -161,6 +161,7 @@ es:
         monitor_email: "Notificación de nuevos registros a"
         specific_conditions: "Condiciones Especeificas del evento"
         should_welcome_email: "Enviar e-mail de bienvenida a nuevos registrados?"
+        show_pricing: "Exponer precios"
         should_ask_for_referer_code: "Solicitar código de referencia (referer) a nuevos registrados?"
         edit:
           title: "Edit title"
