@@ -168,6 +168,11 @@ describe Event do
     @event.is_webinar = true
     @event.is_webinar?.should be true
   end
+
+  it "should have a show_pricing flag" do
+    @event.show_pricing = true
+    @event.show_pricing?.should be true
+  end
   
   it "should have a time zone name" do
     @event.time_zone_name = TimeZone.all.first.name
