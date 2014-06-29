@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140628201752) do
+ActiveRecord::Schema.define(:version => 20140629174120) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(:version => 20140628201752) do
     t.text     "description"
     t.text     "recipients"
     t.text     "program"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.text     "goal"
     t.integer  "duration"
     t.text     "faq"
@@ -85,6 +85,10 @@ ActiveRecord::Schema.define(:version => 20140628201752) do
     t.text     "takeaways"
     t.string   "tag_name"
     t.boolean  "csd_eligible"
+    t.decimal  "average_rating",     :precision => 4, :scale => 2
+    t.integer  "net_promoter_score"
+    t.integer  "surveyed_count"
+    t.integer  "promoter_count"
   end
 
   create_table "event_types_trainers", :id => false, :force => true do |t|
@@ -134,6 +138,8 @@ ActiveRecord::Schema.define(:version => 20140628201752) do
     t.decimal  "enterprise_11plus_price",                    :precision => 10, :scale => 2
     t.date     "finish_date"
     t.boolean  "show_pricing",                                                              :default => false
+    t.decimal  "average_rating",                             :precision => 4,  :scale => 2
+    t.integer  "net_promoter_score"
   end
 
   add_index "events", ["country_id"], :name => "index_events_on_country_id"
@@ -168,6 +174,20 @@ ActiveRecord::Schema.define(:version => 20140628201752) do
 
   add_index "participants", ["event_id"], :name => "index_participants_on_event_id"
 
+  create_table "ratings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "global_nps"
+    t.integer  "global_nps_count"
+    t.decimal  "global_trainer_rating",       :precision => 4, :scale => 2
+    t.integer  "global_trainer_rating_count"
+    t.decimal  "global_event_rating",         :precision => 4, :scale => 2
+    t.integer  "global_event_rating_count"
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
+  end
+
+  add_index "ratings", ["user_id"], :name => "index_ratings_on_user_id"
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -181,8 +201,8 @@ ActiveRecord::Schema.define(:version => 20140628201752) do
 
   create_table "trainers", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.text     "bio"
     t.string   "gravatar_email"
     t.string   "twitter_username"
@@ -192,6 +212,10 @@ ActiveRecord::Schema.define(:version => 20140628201752) do
     t.string   "tag_name"
     t.string   "signature_image"
     t.string   "signature_credentials"
+    t.decimal  "average_rating",        :precision => 4, :scale => 2
+    t.integer  "net_promoter_score"
+    t.integer  "surveyed_count"
+    t.integer  "promoter_count"
   end
 
   create_table "users", :force => true do |t|

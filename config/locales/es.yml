@@ -312,6 +312,8 @@ es:
           is_attending: "El participante ya está presente en el webinar. Por favor, regístrate mediante el siguiente formulario."
           not_found: "El participante indicado no fue encontrado. Por favor, regístrate mediante el siguiente formulario."
           registration_required: "Es necesario que te registres. Por favor, utiliza el siguiente formulario."
+      rating:
+        calculating: "Calculando rating. Puede tardar unos minutos... Recarga la página para ver el resultado."
   
   confirm:
       sure: "Está Ud. seguro?"
