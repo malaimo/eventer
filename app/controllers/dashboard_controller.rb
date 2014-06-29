@@ -55,7 +55,7 @@ class DashboardController < ApplicationController
 
     Rating.delay.calculate( current_user )
 
-    flash.now[:notice] = t('flash.rating.calculating')
+    flash[:notice] = t('flash.rating.calculating')
 
     redirect_to dashboard_ratings_path
   end
