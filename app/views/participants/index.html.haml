@@ -17,7 +17,7 @@
   .pull-right
     %a.btn.btn-white{ :href => event_participants_path(@event) }
       %i.icon-rotate-right 
-    %a.btn.btn-white{ "data-toggle" => "modal", :href => "#modal-batch-load", :role => "button", :title => "Enviar Participantes a CapsuleCRM" }
+    %a.btn.btn-white{ "data-toggle" => "modal", :href => "#modal-batch-load", :role => "button", :title => "Carge de Lote de Usuarios" }
       %i.icon-user
       Nuevo(s)
     - if @event.participants.count > 0

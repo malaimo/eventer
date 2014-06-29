@@ -2,6 +2,37 @@
   %h1.pull-left
     %i.icon-trophy
     %span Ratings
+  .pull-right
+    %a.btn.btn-white{ :href => dashboard_ratings_path }
+      %i.icon-rotate-right 
+    %a.btn.btn-white{ "data-toggle" => "modal", :href => "#modal-rating-generate", :role => "button", :title => "Recalcular Rating" }
+      %i.icon-trophy
+      Recalcular
+%i
+  Último Rating generado el
+  = @rating.updated_at.to_formatted_s(:short)
+  por
+  = @rating.user.email
+
+.modal.hide.fade#modal-rating-generate{ :role => :dialog, :tabindex => -1 }
+  .modal-header
+    %button.close{ "data-dismiss" => :modal, :type => "button" }
+      &times;
+    %h3 
+      Recalcular Ratings
+  .modal-body
+    %h4
+      ¡Atención!
+    %p
+      Esta operación recalculará el rating de todos los veentos. Puede durar unos minutos. Al terminar verás reflejada la nueva fecha y hora de generación del rating.
+    %p
+      ¿Estás seguro/a de continuar?
+  .modal-footer
+    %button.btn{ "data-dismiss" => "modal" }
+      No, cancelar :(
+    %a.btn.btn-primary{ :href => "./calculate_rating" }
+      Si, continuar! :)
+
 
 = render '/commons/notice'
 
@@ -17,37 +48,35 @@
       .span4
         .box-content.box-statistic
           %h3.title.text-success
-            = (@global_net_promoter_score*100).to_i
+            = @rating.global_nps
             = "(-100 a +100)"
           %small Net Promoter Score (NPS)* global de Kleer
           %br
           %small
             Basado en 
-            = @global_attended_count.to_i
+            = @rating.global_nps_count
             opiniones de participantes
           .text-success.icon-heart.align-right
       .span4
         .box-content.box-statistic
           %h3.title.text-success
-            = @average_event_rating
-            = "(#{(@average_event_rating*100/5).round(2)}%)"
+            = @rating.global_event_rating
           %small Rating Global Promedio de los Eventos (1-5)
           %br
           %small
             Basado en 
-            = @count_event_rating
+            = @rating.global_event_rating_count
             opiniones de participantes
           .text-success.icon-calendar.align-right
       .span4
         .box-content.box-statistic
           %h3.title.text-success
-            = @average_trainer_rating
-            = "(#{(@average_trainer_rating*100/5).round(2)}%)"
+            = @rating.global_trainer_rating
           %small Rating Global Promedio de los Trainers (1-5)
           %br
           %small
             Basado en 
-            = @count_trainer_rating
+            = @rating.global_trainer_rating_count
             opiniones de participantes
           .text-success.icon-briefcase.align-right
 
@@ -69,9 +98,9 @@
                 - @top_5_nps_event_types.each do |et|
                   %li
                     %strong
-                      = "#{(et.net_promoter_score*100).to_i}"
+                      = "#{et.net_promoter_score}"
                     = "| #{et.name}"
-                    = "| #{et.participants.select{|p| !p.promoter_score.nil?}.count} opiniones"
+                    = "| #{et.participants.surveyed.count} opiniones"
       .span6
         .row-fluid
           .span12.box.box-nomargin
@@ -84,9 +113,9 @@
                 - @top_5_nps_trainers.each do |t|
                   %li
                     %strong
-                      = "#{(t.net_promoter_score*100).to_i}"
+                      = "#{t.net_promoter_score}"
                     = "| #{t.name}"
-                    = "| #{t.participants.select{|p| !p.promoter_score.nil?}.count} opiniones"
+                    = "| #{t.participants.surveyed.count} opiniones"
 
     .box-header
       .title
@@ -106,9 +135,9 @@
                 - @top_10_event_types.each do |et|
                   %li
                     %strong
-                      = "#{et.average_rating.round(2)}"
+                      = "#{et.average_rating}"
                     = "| #{et.name}"
-                    = "| #{et.participants.select{|p| !p.event_rating.nil?}.count} opiniones"
+                    = "| #{et.participants.surveyed.count} opiniones"
       .span5
         .row-fluid
           .span12.box.box-nomargin
@@ -121,10 +150,10 @@
                 - @top_10_events.each do |e|
                   %li
                     %strong
-                      = "#{e.average_rating.round(2)}"
+                      = "#{e.average_rating}"
                     = "| #{e.human_date} | #{e.event_type.name} | #{e.city}"
                     %br
-                    = "#{e.participants.select{|p| !p.event_rating.nil?}.count} opiniones | "
+                    = "#{e.participants.surveyed.count} opiniones | "
                     %a{ :href => "/events/#{e.id}/participants_survey" }
                       ver encuesta
                     %br
@@ -142,9 +171,9 @@
                 - @top_10_trainers.each do |t|
                   %li
                     %strong
-                      = "#{t.average_rating.round(2)}"
+                      = "#{t.average_rating}"
                     = "| #{t.name}"
-                    = "| #{t.participants.select{|p| !p.trainer_rating.nil?}.count} opiniones"
+                    = "| #{t.participants.surveyed.count} opiniones"
 
     .box-header
       .title
