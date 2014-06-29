@@ -99,7 +99,7 @@ class Rating < ActiveRecord::Base
   		cualified_participants = tr.participants.attended.surveyed
 
 	    if cualified_participants.count > 0
-	      tr.average_rating = cualified_participants.collect{ |p| p.event_rating}.sum.to_f/cualified_participants.length
+	      tr.average_rating = cualified_participants.collect{ |p| p.trainer_rating}.sum.to_f/cualified_participants.length
 	      tr.surveyed_count = cualified_participants.count
 	    end
 
