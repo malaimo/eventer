@@ -153,12 +153,12 @@ end
 When /^I choose to create a Webinar event$/ do
   visit "/events/new"
   create_valid_event_inputs 'Tipo de Evento de Prueba'
-  select 'OnLine', :from => 'event_mode'
+  select 'Online', :from => 'event_mode'
   choose 'event_visibility_type_co'
 end
 
 Then /^I should see the webinar setup$/ do
-  page.find_field('event_city').value.should == "OnLine"
+  page.find_field('event_city').value.should == "Online"
   page.find_field('event_country_id').find('option[selected]').text.should == "-- OnLine --"
 end
 
