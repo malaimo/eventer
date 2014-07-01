@@ -59,68 +59,194 @@ describe Rating do
 
 		@event.reload
 		@event2.reload
+		@event_type.reload
+		@trainer.reload
     end
 
-    it "should have an average event rating" do
-      @event.average_rating.should == 5.0
-      @event2.average_rating.should == 2.0
-    end
+    context "for each event" do
 
-    it "should have a global event rating" do
-      Rating.first.global_event_rating.should == 4.0
-    end
+	    it "should have an average event rating" do
+	      @event.average_rating.should == 5.0
+	      @event2.average_rating.should == 2.0
+	    end
 
-    it "should have an average event rating even with participants without rating" do
-      participant4 = FactoryGirl.build(:participant)
-      participant4.id = 104
-      participant4.status = "A"
-      participant4.save!
-      @event.participants << participant4
-      @event.save!
+	    it "should have a global event rating" do
+	      Rating.first.global_event_rating.should == 4.0
+	    end
 
-      @event.average_rating.should == 5.0
-    end
+	    it "should have an average event rating even with participants without rating" do
+	      participant4 = FactoryGirl.build(:participant)
+	      participant4.id = 104
+	      participant4.status = "A"
+	      participant4.save!
+	      @event.participants << participant4
+	      @event.save!
 
-    it "should have an average event rating even with participants not being present" do
-      participant4 = FactoryGirl.build(:participant)
-      participant4.id = 104
-      @participant3.event_rating = 5
-      participant4.status = "C"
-      participant4.save!
-      @event.participants << participant4
-      @event.save!
+	      @event.average_rating.should == 5.0
+	    end
 
-      @event.average_rating.should == 5.0
-    end
+	    it "should have an average event rating even with participants not being present" do
+	      participant4 = FactoryGirl.build(:participant)
+	      participant4.id = 104
+	      @participant3.event_rating = 5
+	      participant4.status = "C"
+	      participant4.save!
+	      @event.participants << participant4
+	      @event.save!
 
-    it "should have a net promoter score" do
-      @event.net_promoter_score.should == 100
-      @event2.net_promoter_score.should == -100
-    end
+	      @event.average_rating.should == 5.0
+	    end
 
-    it "should have a net promoter score even with participants without rating" do
-      participant4 = FactoryGirl.build(:participant)
-      participant4.id = 104
-      participant4.status = "A"
-      participant4.save!
-      @event.participants << participant4
-      @event.save!
+	    it "should have a net promoter score" do
+	      @event.net_promoter_score.should == 100
+	      @event2.net_promoter_score.should == -100
+	    end
 
-      @event.net_promoter_score.should == 100
-      @event2.net_promoter_score.should == -100
-    end
+	    it "should have a net promoter score even with participants without rating" do
+	      participant4 = FactoryGirl.build(:participant)
+	      participant4.id = 104
+	      participant4.status = "A"
+	      participant4.save!
+	      @event.participants << participant4
+	      @event.save!
 
-    it "should have a net promoter score even with participants not being present" do
-      participant4 = FactoryGirl.build(:participant)
-      participant4.id = 104
-      @participant3.promoter_score = 0
-      participant4.status = "C"
-      participant4.save!
-      @event.participants << participant4
-      @event.save!
+	      @event.net_promoter_score.should == 100
+	      @event2.net_promoter_score.should == -100
+	    end
 
-      @event.net_promoter_score.should == 100
-      @event2.net_promoter_score.should == -100
-    end
+	    it "should have a net promoter score even with participants not being present" do
+	      participant4 = FactoryGirl.build(:participant)
+	      participant4.id = 104
+	      @participant3.promoter_score = 0
+	      participant4.status = "C"
+	      participant4.save!
+	      @event.participants << participant4
+	      @event.save!
+
+	      @event.net_promoter_score.should == 100
+	      @event2.net_promoter_score.should == -100
+	    end
+
+	end
+
+	context "for the event_type" do
+
+	    it "should have an average event rating" do
+	      @event_type.average_rating.should == 4.0
+	    end
+
+	    it "should have an average event rating even with participants without rating" do
+	      participant4 = FactoryGirl.build(:participant)
+	      participant4.id = 104
+	      participant4.status = "A"
+	      participant4.save!
+	      @event.participants << participant4
+	      @event.save!
+
+	      @event_type.average_rating.should == 4.0
+	    end
+
+	    it "should have an average event rating even with participants not being present" do
+	      participant4 = FactoryGirl.build(:participant)
+	      participant4.id = 104
+	      @participant3.event_rating = 5
+	      participant4.status = "C"
+	      participant4.save!
+	      @event.participants << participant4
+	      @event.save!
+
+	      @event_type.average_rating.should == 4.0
+	    end
+
+	    it "should have a net promoter score" do
+	      @event_type.net_promoter_score.should == 33
+	    end
+
+	    it "should have a net promoter score even with participants without rating" do
+	      participant4 = FactoryGirl.build(:participant)
+	      participant4.id = 104
+	      participant4.status = "A"
+	      participant4.save!
+	      @event.participants << participant4
+	      @event.save!
+
+	      @event_type.net_promoter_score.should == 33
+	    end
+
+	    it "should have a net promoter score even with participants not being present" do
+	      participant4 = FactoryGirl.build(:participant)
+	      participant4.id = 104
+	      @participant3.promoter_score = 0
+	      participant4.status = "C"
+	      participant4.save!
+	      @event.participants << participant4
+	      @event.save!
+
+	      @event_type.net_promoter_score.should == 33
+	    end
+	    
+	end
+
+	context "for the trainer" do
+
+	    it "should have an average event rating" do
+	      @trainer.average_rating.should == 4.0
+	    end
+
+	    it "should have a global event rating" do
+	      Rating.first.global_trainer_rating.should == 4.0
+	    end
+
+	    it "should have an average event rating even with participants without rating" do
+	      participant4 = FactoryGirl.build(:participant)
+	      participant4.id = 104
+	      participant4.status = "A"
+	      participant4.save!
+	      @event.participants << participant4
+	      @event.save!
+
+	      @trainer.average_rating.should == 4.0
+	    end
+
+	    it "should have an average event rating even with participants not being present" do
+	      participant4 = FactoryGirl.build(:participant)
+	      participant4.id = 104
+	      @participant3.event_rating = 5
+	      participant4.status = "C"
+	      participant4.save!
+	      @event.participants << participant4
+	      @event.save!
+
+	      @trainer.average_rating.should == 4.0
+	    end
+
+	    it "should have a net promoter score" do
+	      @trainer.net_promoter_score.should == 33
+	    end
+
+	    it "should have a net promoter score even with participants without rating" do
+	      participant4 = FactoryGirl.build(:participant)
+	      participant4.id = 104
+	      participant4.status = "A"
+	      participant4.save!
+	      @event.participants << participant4
+	      @event.save!
+
+	      @trainer.net_promoter_score.should == 33
+	    end
+
+	    it "should have a net promoter score even with participants not being present" do
+	      participant4 = FactoryGirl.build(:participant)
+	      participant4.id = 104
+	      @participant3.promoter_score = 0
+	      participant4.status = "C"
+	      participant4.save!
+	      @event.participants << participant4
+	      @event.save!
+
+	      @trainer.net_promoter_score.should == 33
+	    end
+	    
+	end
 
 end

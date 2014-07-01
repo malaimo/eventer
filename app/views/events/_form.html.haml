@@ -30,11 +30,11 @@
               .control-group
                 %label.control-label{ :for => :capacity }= t("formtastic.labels.event.capacity")
                 = f.text_field :capacity, :class => "input-mini"
-            .span2
+            .span3
               .control-group
-                %label.control-label{ :for => :is_webinar }= t("formtastic.labels.event.is_webinar")
-                = f.check_box :is_webinar
-            .span4
+                %label.control-label{ :for => :mode }= t("formtastic.labels.event.mode")
+                = f.collection_select :mode, [['cl', 'Presencial'], ['ol', 'OnLine'], ['bl', 'Blended Learning']], :first, :second, {include_blank: 'Selecciona una...'}
+            .span3
               .control-group#event_time_zone_name_input
                 %label.control-label{ :for => :time_zone_name }= t("formtastic.labels.event.time_zone_name")
                 = f.collection_select :time_zone_name, @timezones, :name, :to_s, {include_blank: 'Selecciona una...'}
@@ -260,10 +260,10 @@
 
     $("#event_list_price").change( function() { calculateDiscounts( $(this).val() ); });
 
-    $("#event_is_webinar").change( function() { eventWebinarToggle(); });
+    $("#event_mode").change( function() { eventOnLineToggle(); });
     $("#event_time_zone_name").change( function() { eventTimeZoneToggle(); });
     $("#event_time_zone_name_input").hide();
-    eventWebinarCheck();
+    eventOnLineCheck();
 
     if ( $("#event_visibility_type_pr").is(":checked") ) {
       $("#event_visibility_type_pr").trigger('change');
@@ -359,9 +359,9 @@
 
   }
 
-  function eventWebinarToggle() {
-     if ( $("#event_is_webinar").is(":checked") ) {
-         eventWebinarConfigure();
+  function eventOnLineToggle() {
+     if ( $("#event_mode").val() == "ol" ) {
+         eventOnLineConfigure();
      } else {
          $("#event_city").val( $event_city_before_webinar );
          $("#event_city").removeAttr('readonly');
@@ -379,20 +379,20 @@
      }
   }
 
-  function eventWebinarCheck() {
-     if ( $("#event_is_webinar").is(":checked") ) {
-         eventWebinarConfigure();
+  function eventOnLineCheck() {
+     if ( $("#event_mode").val() == "ol" ) {
+         eventOnLineConfigure();
      }
   }
 
-  function eventWebinarConfigure() {
-     if ( $("#event_is_webinar").is(":checked") ) {
+  function eventOnLineConfigure() {
+     if ( $("#event_mode").val() == "ol" ) {
          $event_city_before_webinar = $("#event_city").val();
-         $("#event_city").val( "Webinar" );
+         $("#event_city").val( "OnLine" );
          $("#event_city").attr('readonly','readonly');
 
          $event_address_before_webinar = $("#event_address").val();
-         $("#event_address").val( "Webinar" );
+         $("#event_address").val( "OnLine" );
          $("#event_address").attr('readonly','readonly');
 
          $event_country_id_before_webinar = $("#event_country_id").val();

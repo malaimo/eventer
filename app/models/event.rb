@@ -23,14 +23,14 @@ class Event < ActiveRecord::Base
 
   attr_accessible :event_type_id, :trainer_id, :country_id, :date, :finish_date, :place, :capacity, :city, :visibility_type, :list_price,
                   :eb_price, :eb_end_date, :draft, :cancelled, :registration_link, :is_sold_out, :participants, 
-                  :start_time, :end_time, :sepyme_enabled, :is_webinar, :time_zone_name, :embedded_player, :twitter_embedded_search,
+                  :start_time, :end_time, :sepyme_enabled, :mode, :time_zone_name, :embedded_player, :twitter_embedded_search,
                   :notify_webinar_start, :webinar_started, :currency_iso_code, :address, :custom_prices_email_text, :monitor_email,
                   :specific_conditions, :should_welcome_email, :should_ask_for_referer_code,
                   :couples_eb_price, :business_price, :business_eb_price, :enterprise_6plus_price, :enterprise_11plus_price,
                   :show_pricing
 
   validates :date, :place, :capacity, :city, :visibility_type, :list_price,
-            :country, :trainer, :event_type, :duration, :start_time, :end_time, :address, :presence => true
+            :country, :trainer, :event_type, :duration, :start_time, :end_time, :address, :mode, :presence => true
 
   validates :capacity, :numericality => { :greater_than => 0, :message => :capacity_should_be_greater_than_0 }
   validates :duration, :numericality => { :greater_than => 0, :message => :duration_should_be_greater_than_0 }
@@ -164,6 +164,27 @@ class Event < ActiveRecord::Base
   
   def is_community_event?
     self.visibility_type == 'co'
+  end
+
+  def is_classroom?
+    self.mode == 'cl'
+  end
+
+  def is_online?
+    self.mode == 'ol'
+  end
+
+  def is_blended_learning?
+    self.mode == 'bl'
+  end
+
+  def is_webinar
+    is_online? && is_community_event?
+  end
+
+  # backward compatibility
+  def is_webinar?
+    is_webinar
   end
 
   private

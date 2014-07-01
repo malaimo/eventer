@@ -35,6 +35,12 @@ describe Event do
     @event.valid?.should be false
   end
 
+  it "should require its mode" do
+    @event.mode = ""
+
+    @event.valid?.should be false
+  end
+
   it "should require its list_price" do
     @event.list_price = ""
 
@@ -164,9 +170,43 @@ describe Event do
     @event.valid?.should be false
   end
   
-  it "should have a webinar flag" do
-    @event.is_webinar = true
+  it "should allow a Presencial mode" do
+    @event.mode = 'cl'
+    @event.is_classroom?.should be true
+  end
+
+  it "should allow an OnLine mode" do
+    @event.mode = 'ol'
+    @event.is_online?.should be true
+  end
+
+  it "should allow a Blended Learning mode" do
+    @event.mode = 'bl'
+    @event.is_blended_learning?.should be true
+  end    
+
+  it "should have a webinar indicator for online community events" do
+    @event.mode = 'ol'
+    @event.visibility_type = 'co'
+    @event.is_online?.should be true
+    @event.is_community_event?.should be true
     @event.is_webinar?.should be true
+  end
+
+  it "should not have a webinar indicator for online payed events" do
+    @event.mode = 'ol'
+    @event.visibility_type = 'pu'
+    @event.is_online?.should be true
+    @event.is_community_event?.should be false
+    @event.is_webinar?.should be false
+  end
+
+  it "should not have a webinar indicator for classroom community events" do
+    @event.mode = 'cl'
+    @event.visibility_type = 'co'
+    @event.is_classroom?.should be true
+    @event.is_community_event?.should be true
+    @event.is_webinar?.should be false
   end
 
   it "should have a show_pricing flag" do
@@ -198,13 +238,15 @@ describe Event do
   
   it "should express if a webinar was started" do
     @event.webinar_started.should be false
-    @event.is_webinar = true
+    @event.mode = 'ol'
+    @event.visibility_type = 'co'
     @event.start_webinar!
     @event.webinar_started?.should be true
   end
   
   it "should express if a webinar already finished (based on end_time in time_zone)" do
-    @event.is_webinar = true
+    @event.mode = 'ol'
+    @event.visibility_type = 'co'
     @event.start_time = Time.now-3600
     @event.end_time = Time.now+3600
     @event.start_webinar!
@@ -214,7 +256,8 @@ describe Event do
   end
   
   it "should express if a webinar already finished (based on end_time in time_zone)" do
-    @event.is_webinar = true
+    @event.mode = 'ol'
+    @event.visibility_type = 'co'
     @event.time_zone_name = "Buenos Aires"
     @event.start_time = Time.now-3600
     @event.end_time = Time.now+3600
@@ -226,10 +269,12 @@ describe Event do
   
   it "should require a time zone name if event is webinar" do
     @event.time_zone_name = ""
-    @event.is_webinar = false
+    @event.mode = 'ol'
+    @event.visibility_type = 'pu'
     @event.valid?.should be true
     
-    @event.is_webinar = true
+    @event.mode = 'ol'
+    @event.visibility_type = 'co'
     @event.valid?.should be false
     
     @event.time_zone_name = "Buenos Aires"

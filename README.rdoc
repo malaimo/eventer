@@ -1,4 +1,6 @@
 {<img src="https://travis-ci.org/kleer-la/eventer.png?" alt="Build Status" />}[https://travis-ci.org/kleer-la/eventer]
+{<img src="https://coveralls.io/repos/kleer-la/eventer/badge.png?branch=develop" alt="Coverage Status" />}[https://coveralls.io/r/kleer-la/eventer?branch=develop]
+
 
 KEventer es una aplicación de administración de cursos, calendarios e inscripciones que utilizamos en Kleer como back-end de nuestro sitio web público.
 

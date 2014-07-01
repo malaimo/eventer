@@ -29,6 +29,7 @@ def create_valid_event_inputs(event_type_name, event_date='31-01-2030')
   fill_in 'event_date', :with => event_date
   fill_in 'event_finish_date', :with => Date.parse(event_date)+1
   fill_in 'event_date', :with => event_date
+  select 'Presencial', :from => 'event_mode'
   fill_in 'event_place', :with => 'Hotel Llao Llao'
   fill_in 'event_address', :with => 'Tucumán 373'
   fill_in 'event_capacity', :with => 25
@@ -152,11 +153,12 @@ end
 When /^I choose to create a Webinar event$/ do
   visit "/events/new"
   create_valid_event_inputs 'Tipo de Evento de Prueba'
-  check 'event_is_webinar'
+  select 'OnLine', :from => 'event_mode'
+  choose 'event_visibility_type_co'
 end
 
 Then /^I should see the webinar setup$/ do
-  page.find_field('event_city').value.should == "Webinar"
+  page.find_field('event_city').value.should == "OnLine"
   page.find_field('event_country_id').find('option[selected]').text.should == "-- OnLine --"
 end
 
