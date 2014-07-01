@@ -9,7 +9,7 @@ class HomeController < ApplicationController
                                                     :trainer => {}, 
                                                     :categories => {}
                                                   }, 
-                                                  :methods => [:human_date] 
+                                                  :methods => [:human_date, :is_webinar] 
                                                 ) }
       format.json { render json: @events }  
     end
@@ -25,7 +25,7 @@ class HomeController < ApplicationController
                                                     :trainer => {}, 
                                                     :categories => {}
                                                   }, 
-                                                  :methods => [:human_date] 
+                                                  :methods => [:human_date, :is_webinar] 
                                                 ) }
       format.json { render json: @events }  
     end
@@ -40,7 +40,7 @@ class HomeController < ApplicationController
                                                     :trainer => {}, 
                                                     :categories => {}
                                                   }, 
-                                                  :methods => [:human_date] 
+                                                  :methods => [:human_date, :is_webinar] 
                                                 ) }
       format.json { render json: @event }  
     end

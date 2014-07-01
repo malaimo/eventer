@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140629174120) do
+ActiveRecord::Schema.define(:version => 20140701145452) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -118,7 +118,6 @@ ActiveRecord::Schema.define(:version => 20140629174120) do
     t.time     "start_time"
     t.time     "end_time"
     t.boolean  "sepyme_enabled"
-    t.boolean  "is_webinar",                                                                :default => false
     t.string   "time_zone_name"
     t.text     "embedded_player"
     t.boolean  "notify_webinar_start",                                                      :default => false
@@ -140,6 +139,7 @@ ActiveRecord::Schema.define(:version => 20140629174120) do
     t.boolean  "show_pricing",                                                              :default => false
     t.decimal  "average_rating",                             :precision => 4,  :scale => 2
     t.integer  "net_promoter_score"
+    t.string   "mode",                        :limit => 2
   end
 
   add_index "events", ["country_id"], :name => "index_events_on_country_id"

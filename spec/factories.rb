@@ -75,7 +75,7 @@ FactoryGirl.define do
     visibility_type 'pu'
     list_price 500.00
     currency_iso_code "ARS"
-    is_webinar false
+    mode 'cl'
     country FactoryGirl.build(:country)
     trainer FactoryGirl.build(:trainer)
   end

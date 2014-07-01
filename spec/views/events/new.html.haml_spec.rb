@@ -24,7 +24,7 @@ describe "events/new" do
       :program => "MyText",
       :draft => false,
       :cancelled => false,
-      :is_webinar => false
+      :mode => "cl"
     ).as_new_record)
   end
 
@@ -45,7 +45,7 @@ describe "events/new" do
       assert_select "input#event_eb_price", :name => "event[eb_price]"
       assert_select "input#event_draft", :name => "event[draft]"
       assert_select "input#event_cancelled", :name => "event[cancelled]"
-      assert_select "input#event_is_webinar", :name => "event[is_webinar]"
+      assert_select "select#event_mode", :name => "event[mode]"
     end
   end
 end

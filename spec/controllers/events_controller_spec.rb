@@ -39,6 +39,7 @@ describe EventsController do
       :list_price => 500.00,
       :country_id => FactoryGirl.create(:country).id,
       :trainer_id => FactoryGirl.create(:trainer).id,
+      :mode => "cl",
       :cancelled => false
       }
   end
