@@ -1,13 +1,14 @@
 class MigrateEventWebinarsToModes < ActiveRecord::Migration
   def up
   	Event.where( "is_webinar = 't'" ).each do |e|
-    if e.list_price > 0.0
-  	 	e.mode = 'ol'
-  	 	e.visibility_type = 'co'
-    else
-      e.mode = 'cl'
+      if e.list_price > 0.0
+    	 	e.mode = 'ol'
+    	 	e.visibility_type = 'co'
+      else
+        e.mode = 'cl'
+      end
+    	e.save! unless !e.valid?
     end
-  	e.save! unless !e.valid?
   end
 
   def down
