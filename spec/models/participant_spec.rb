@@ -5,69 +5,97 @@ describe Participant do
   before(:each) do
     @participant = FactoryGirl.build(:participant)
   end
-  
-  it "should be valid" do
-    @participant.valid?.should be true
+
+  describe "human_status" do
+    it "should be Nuevo when status is N" do
+      @participant.status = "N"
+      @participant.human_status.should == "Nuevo"
+    end
+    it "should be Presente when status is A" do
+      @participant.status = "A"
+      @participant.human_status.should == "Presente"
+    end
   end
-  
+
+  describe "status_sort_order" do
+    it "should be 1 when status is N" do
+      @participant.status_sort_order.should == 1
+    end
+    it "should be 4 when status is A" do
+      @participant.status = "A"
+      @participant.status_sort_order.should == 4
+    end
+    it "should be 7 when status is q (unknown)" do
+      @participant.status = "q"
+      @participant.status_sort_order.should == 7
+    end
+  end
+
+
   it "should have a default status of 'N'" do
     @participant.status.should == "N"
   end
-  
-  it "should require its name" do
-    @participant.fname = ""
+
+  describe "valid" do
+    it "should be valid" do
+      @participant.valid?.should be true
+    end
     
-    @participant.valid?.should be false
-  end
-  
-  it "should require its last name" do
-    @participant.lname = ""
+    it "should require its name" do
+      @participant.fname = ""
+      
+      @participant.valid?.should be false
+    end
     
-    @participant.valid?.should be false
-  end
-  
-  it "should require its email" do
-    @participant.email = ""
+    it "should require its last name" do
+      @participant.lname = ""
+      
+      @participant.valid?.should be false
+    end
     
-    @participant.valid?.should be false
-  end
-  
-  it "should validate the email" do
-    @participant.email = "cualquiercosa"
+    it "should require its email" do
+      @participant.email = ""
+      
+      @participant.valid?.should be false
+    end
     
-    @participant.valid?.should be false
+    it "should validate the email" do
+      @participant.email = "cualquiercosa"
+      
+      @participant.valid?.should be false
+    end
+
+    it "should require the influence zone" do
+      @participant.influence_zone = nil
+      
+      @participant.valid?.should be false
+    end
+
+    it "should validate the email" do
+      @participant.email = "hola@gmail.com"
+      
+      @participant.valid?.should be true
+    end  
+    
+    it "should require its phone" do
+      @participant.phone = ""
+      
+      @participant.valid?.should be false
+    end
+    
+    it "should be valid if there's no referer code" do
+      @participant.referer_code = ""
+      
+      @participant.valid?.should be true
+    end
+    
+    it "should be valid if there's a referer code" do
+      @participant.referer_code = "UNCODIGO"
+      
+      @participant.valid?.should be true
+    end
   end
 
-  it "should require the influence zone" do
-    @participant.influence_zone = nil
-    
-    @participant.valid?.should be false
-  end
-
-  it "should validate the email" do
-    @participant.email = "hola@gmail.com"
-    
-    @participant.valid?.should be true
-  end  
-  
-  it "should require its phone" do
-    @participant.phone = ""
-    
-    @participant.valid?.should be false
-  end
-  
-  it "should be valid if there's no referer code" do
-    @participant.referer_code = ""
-    
-    @participant.valid?.should be true
-  end
-  
-  it "should be valid if there's a referer code" do
-    @participant.referer_code = "UNCODIGO"
-    
-    @participant.valid?.should be true
-  end
-  
   it "should let someone confirm it" do
     @participant.confirm!
     @participant.status.should == "C"

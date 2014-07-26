@@ -58,36 +58,16 @@ class Participant < ActiveRecord::Base
   end
   
   def human_status
-    if self.status == "N"
-      return "Nuevo"
-    elsif self.status == "T"
-      return "Contactado"
-    elsif self.status == "C"
-      return "Confirmado"
-    elsif self.status == "D"
-      return "Pospuesto"
-    elsif self.status == "X"
-      return "Cancelado"
-    elsif self.status == "A"
-      return "Presente"
-    end
+    desc = %w(Nuevo Contactado Confirmado Presente Pospuesto Cancelado --?--)
+    return desc[status_sort_order-1]
   end
   
   def status_sort_order
-    if self.status == "N"
-      return 1
-    elsif self.status == "T"
-      return 2
-    elsif self.status == "C"
-      return 3
-    elsif self.status == "A"
-      return 4
-    elsif self.status == "D"
-      return 5
-    elsif self.status == "X"
-      return 6
+    order = "NTCADX".index(self.status)
+    if order.nil?
+      7
     else
-      return 7
+      order+1
     end
   end
   
