@@ -52,6 +52,9 @@ class ParticipantsController < ApplicationController
     @event = Event.find(params[:event_id])
     @influence_zones = InfluenceZone.all
     @nakedform = !params[:nakedform].nil?
+    if !params[:lang].nil?
+      I18n.locale=params[:lang]
+    end
 
     respond_to do |format|
       format.html { render :layout => "empty_layout" }

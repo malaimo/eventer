@@ -1,4 +1,4 @@
-es:
+en:
     
   # formatos de fecha y hora
   date:
@@ -32,7 +32,6 @@ es:
     failure:
       user:
         unauthenticated: "Usuario no identificado. Por favor identifíquese."
-        not_found_in_database: "Usuario no identificado. Por favor identifíquese."
     sessions:
       user:
         signed_in: "Identificación exitosa. Bienvenido!"
@@ -88,7 +87,7 @@ es:
           trainer_rating_should_be_between_1_and_5: "el rating del entrenador debe estar entre 1 y 5"
           promoter_score_should_be_between_0_and_10: "el promoter score debe estar entre 0 y 10"
   formtastic:
-    yes: "Si"
+    yes: "Yes"
     no: "No"
     titles:
         event_details: "Información de Evento"
@@ -97,19 +96,19 @@ es:
         user_details: "Información de Usuario"
         role_details: "Información de Rol"
     labels:
-      name: "Nombre"
-      date: "Fecha"
-      place: "Lugar"
-      city: "Ciudad"
-      country: "País"
-      trainer: "Entrenador"
-      participant: "Participante"
+      name: "Name"
+      date: "Date"
+      place: "Place"
+      city: "City"
+      country: "Country"
+      trainer: "Trainer"
+      participant: "Participant"
       participant: 
-        fname: "Nombre"
-        lname: "Apellido"
-        phone: "Teléfono de contacto"
+        fname: "First name"
+        lname: "Last name"
+        phone: "Phone"
         email: "E-Mail"
-        status: "Estado"      
+        status: "Status"      
         influence_zone: "Zona de Influencia"  
         referer_code: "Código de Referencia"
       trainer:
@@ -198,8 +197,8 @@ es:
         custom_prices_email_text: "Dejar en blanco para que el e-mail de bienvenida contenga información de precio de lista, early bird y descuentos para 2 y 3+ personas (si corresponde)"
         monitor_email: "Email de la persona a quien se notificarán nuevos registros. En blanco para no notificar nuevos registros."
         specific_conditions: "Condiciones específicas de este evento. Como por ejemplo: promociones, horarios especiales, ejecución desagregada, etc. En blanco, si no tiene."
-      participant: 
-        phone_old: "Una persona de Kleer se contactará a este teléfono para continuar con tu inscripción."    
+      participant:
+        phone_old: "Una persona de Kleer se contactará a este teléfono para continuar con tu inscripción."
       event_type:
         materials: "Materiales requeridos para el dictado de este curso"
     placeholders:
