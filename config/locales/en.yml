@@ -95,6 +95,10 @@ en:
         trainer_details: "Información de Entrenador"
         user_details: "Información de Usuario"
         role_details: "Información de Rol"
+    button:
+      participant:
+        register: "Register Now!"
+        more_info: "More info!"
     labels:
       name: "Name"
       date: "Date"
@@ -111,6 +115,7 @@ en:
         status: "Status"      
         influence_zone: "Zona de Influencia"  
         referer_code: "Código de Referencia"
+        zone: "Where are you?"
       trainer:
         linedin_url: "URL de LinedIn"
         is_kleerer: "Es Kleerer?"
