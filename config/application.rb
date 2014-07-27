@@ -32,6 +32,9 @@ module Eventer
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+#    config.i18n.enforce_available_locales = false
+    I18n.config.enforce_available_locales = false
+    I18n.default_locale = :es
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
@@ -62,6 +65,5 @@ module Eventer
     # On config/application.rb forcing your application to not access the DB or load models when precompiling your assets.
     config.assets.initialize_on_precompile = false
     
-    I18n.default_locale = :es
   end
 end
