@@ -53,9 +53,9 @@ class ParticipantsController < ApplicationController
     @influence_zones = InfluenceZone.all
     @nakedform = !params[:nakedform].nil?
     if params[:lang].nil? or params[:lang] == "es" 
-        I18n.locale="es"
+        I18n.locale=:es
       else
-        I18n.locale="en"
+        I18n.locale=:en
     end
 
     respond_to do |format|

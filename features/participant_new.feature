@@ -5,12 +5,14 @@ Feature: Registración en evento
         Given there is one event
         When I visit the "en" registration page
         Then I should see "More info!"
+        And I should see "Where are you?"
 
     @selenium
     Scenario: El formulario en español
         Given there is one event
         When I visit the "es" registration page
         Then I should see "¡Me interesa!"
+        And I should see "Tu lugar más próximo ..."
 
     @selenium
     Scenario: El formulario en idioma desconocido default a Inglés
@@ -24,3 +26,14 @@ Feature: Registración en evento
         When I visit the registration page without languaje
         Then I should see "¡Me interesa!"
 
+    @selenium
+    Scenario: Fechas en formulario en inglés
+        Given there is one event
+        When I visit the "en" registration page
+        Then I should see "Jan 23-Jan 24 from 09:00 to 18:00 hs."
+
+    @selenium
+    Scenario: Fechas en formulario en castellano
+        Given there is one event
+        When I visit the "es" registration page
+        Then I should see "23-24 Ene de 09:00 a 18:00 hs."
