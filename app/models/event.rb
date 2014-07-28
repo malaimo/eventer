@@ -138,6 +138,14 @@ class Event < ActiveRecord::Base
     human_date
   end
   
+  def human_time
+    if I18n.locale == :es
+      "de " + self.start_time.strftime( "%H:%M" ) + " a " + self.end_time.strftime( "%H:%M" ) + " hs"
+    else
+      "from " + self.start_time.strftime( "%H:%M" ) + " to " + self.end_time.strftime( "%H:%M" ) + " hs"
+    end
+  end
+
   def start_webinar!
     if self.is_webinar?
       self.webinar_started = true

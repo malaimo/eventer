@@ -14,7 +14,7 @@
       - else
         %p.text-center
           %i.icon-calendar
-          = @event.human_date + " de " + @event.start_time.strftime( "%H:%M" ) + " a " + @event.end_time.strftime( "%H:%M" ) + " hs."
+          = @event.human_date + " " + @event.human_time + "."
           %br
           %i.icon-map-marker
           = @event.place + ", " + @event.city

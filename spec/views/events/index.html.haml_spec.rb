@@ -45,6 +45,7 @@ describe "events/index" do
   end
 
   it "renders a list of events" do
+    I18n.locale = :es
     render
     assert_select "tr>th", :text => "Fecha".to_s, :count => 1
     assert_select "tr>th", :text => "Tipo de Evento".to_s, :count => 1
