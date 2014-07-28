@@ -28,12 +28,12 @@ Feature: Registración en evento
 
     @selenium
     Scenario: Fechas en formulario en inglés
-        Given there is one event
+        Given there is one event 
         When I visit the "en" registration page
-        Then I should see "Jan 23-Jan 24 from 09:00 to 18:00 hs."
+        Then I should see "Jan 31-Feb 01 from 09:00 to 18:00 hs."
 
     @selenium
     Scenario: Fechas en formulario en castellano
         Given there is one event
         When I visit the "es" registration page
-        Then I should see "23-24 Ene de 09:00 a 18:00 hs."
+        Then I should see "31 Ene-1 Feb de 09:00 a 18:00 hs."
