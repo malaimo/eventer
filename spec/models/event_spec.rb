@@ -421,4 +421,23 @@ describe Event do
       @event.human_date.should ==  "20 Abr-4 May"
     end
   end
+
+  it "should have a human time in English that returns 'from 9:00 to 18:00hs'" do
+    @event.human_time.should == "de 09:00 a 18:00 hs"
+  end
+
+ context "When Locale is en" do
+    before (:each) do
+      I18n.locale=:en
+    end
+    
+    it "should have a human date in English that returns '20 Abr' if duration is 1" do
+      @event.date = "20/04/2015"
+      @event.duration = 1
+      @event.human_date.should == "Apr 20"
+    end
+    it "should have a human time in English that returns 'from 9:00 to 18:00hs'" do
+      @event.human_time.should == "from 09:00 to 18:00 hs"
+    end
+  end
 end

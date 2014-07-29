@@ -1,6 +1,5 @@
 Feature: Administración de Eventos
 
-	@selenium
 	Scenario: Ver listado de Eventos Confirmados
 		Given Im a logged in user
 		When I visit the events page
@@ -18,12 +17,11 @@ Feature: Administración de Eventos
 		And I should see "Evento creado exitosamente"
 		And I should see "Tipo de Evento de Prueba"
 	
-	@selenium
 	Scenario: Validación de Capacidad
 		Given Im a logged in user
 		When I create an invalid event with "0" as "event_capacity"
 		Then I should see "el evento no puede tener una capacidad de 0 personas"
-		
+
 	@selenium
 	Scenario: Precio EB debe ser menor a Precio de Lista
 		Given Im a logged in user
@@ -43,7 +41,7 @@ Feature: Administración de Eventos
 		Then I should see "no puede estar en blanco"
 		
 	@selenium	
-	Scenario: Se deben ocutar los descuentos y precios EB y SEB si es un evento privado
+	Scenario: Se deben ocultar los descuentos y precios EB y SEB si es un evento privado
 		Given Im a logged in user
 		When I choose to create a Private event
 		Then public prices should be disabled
@@ -75,7 +73,7 @@ Feature: Administración de Eventos
 		Then I should be on the events listing page
 		And I should see "Evento modificado exitosamente"
 	
-	@selenium
+	@selenium	
 	Scenario: Cancelación de Evento
 		Given Im a logged in user
 		When I create a valid event of type "Tipo de Evento de Prueba"
