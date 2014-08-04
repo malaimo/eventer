@@ -113,8 +113,9 @@ en:
         phone: "Phone"
         email: "E-Mail"
         status: "Status"      
-        influence_zone: "Zona de Influencia"  
-        referer_code: "Código de Referencia"
+        influence_zone: "Influence Zone"  
+        referer_code: "Reference code"
+        notes: "Optional: additional data or question"
         zone: "Where are you?"
       trainer:
         linedin_url: "URL de LinedIn"

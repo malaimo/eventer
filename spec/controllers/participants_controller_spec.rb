@@ -97,6 +97,15 @@ describe ParticipantsController do
             post :create, :participant => valid_attributes, :event_id => valid_attributes[:event_id]
             response.should redirect_to( "/events/" + Participant.last.event.id.to_s + "/participant_confirmed" )
           end
+
+          it "persist comment has the first note" do
+            va= valid_attributes
+            va[:notes] = "Some question"
+            expect {
+              post :create, :participant => va, :event_id => valid_attributes[:event_id]
+            }.to change(Participant, :count).by(1)
+            assigns(:participant)[:notes].should =~ /^Some question$/
+          end
         end
 
         describe "with invalid params" do

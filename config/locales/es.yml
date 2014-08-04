@@ -116,6 +116,7 @@ es:
         status: "Estado"      
         influence_zone: "Zona de Influencia"  
         referer_code: "Código de Referencia"
+        notes: "Opcional: Datos adicionales que te interesa contarnos o preguntarnos"
         zone: "Tu lugar más próximo ..."
       trainer:
         linedin_url: "URL de LinedIn"
