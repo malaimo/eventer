@@ -37,3 +37,9 @@ Feature: Registración en evento
         Given there is one event
         When I visit the "es" registration page
         Then I should see "31 Ene-1 Feb de 09:00 a 18:00 hs."
+
+    @selenium
+    Scenario: Registrar comentarios
+        Given there is one event
+        When I visit the "es" registration page
+        Then I can enter a note
