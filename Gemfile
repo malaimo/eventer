@@ -21,7 +21,7 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'capybara'
   gem 'shoulda-matchers'
-  gem 'selenium-webdriver', '~> 2.35'
+  gem 'selenium-webdriver', '~> 2.43'
   gem 'pdf-inspector', :require => "pdf/inspector"
 end
 
