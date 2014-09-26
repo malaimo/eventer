@@ -1,23 +1,59 @@
 module ParticipantsHelper
+  class Certificate
+    def initialize(participant)
+      @participant=participant
+    end
+    def name
+      @participant.fname + ' ' + @participant.lname
+    end
+    def verification_code
+      @participant.verification_code
+    end
+    def is_csd_eligible?
+      @participant.event.event_type.csd_eligible
+    end
+    def event_name
+      @participant.event.event_type.name
+    end
+    def event_city
+      @participant.event.city
+    end
+    def event_country
+      @participant.event.country.name
+    end
+    def event_date
+      @participant.event.human_date
+    end
+    def event_year
+      @participant.event.date.year.to_s
+    end
+    def event_duration
+      d = @participant.event.duration/8
+      unit = "day"
+      if d*8 != @participant.event.duration
+        d = @participant.event.duration
+        unit = "hour"
+      end
+      plural = "s" unless d==1
+      "#{d} #{unit}#{plural}"
+    end
+    def trainer
+      @participant.event.trainer.name
+    end
+    def trainer_credentials
+      @participant.event.trainer.signature_credentials
+    end
+    def trainer_signature
+      @participant.event.trainer.signature_image
+    end
+  end
 
-	def self.generate_certificate( participant, page_size )
-
+  def self.render_certificate( pdf, certificate, page_size )
     rep_logo_path = "#{Rails.root}/app/assets/images/rep-logo-transparent.png"
     kleer_logo_path = "#{Rails.root}/app/assets/images/K-kleer_horizontal_negro_1color-01.png"
-    trainer_signature_path = "#{Rails.root}/app/assets/images/firmas/" + participant.event.trainer.signature_image
+    trainer_signature_path = "#{Rails.root}/app/assets/images/firmas/" + certificate.trainer_signature
 
-    is_csd_eligible = participant.event.event_type.csd_eligible
-
-    temp_dir = "#{Rails.root}/tmp"
-
-    Dir.mkdir( temp_dir ) unless Dir.exist?( temp_dir )
-
-    certificate_filename = "#{temp_dir}/#{participant.verification_code}p#{participant.id}-#{page_size}.pdf"
-
-    Prawn::Document.generate(certificate_filename, 
-      :page_layout => :landscape, :page_size => page_size) do |pdf|
-
-      if is_csd_eligible
+      if certificate.is_csd_eligible?
           pdf.image rep_logo_path, :width => 150, :position => :right
       else
           pdf.move_down 100
@@ -35,24 +71,24 @@ module ParticipantsHelper
      
       pdf.move_down 20
 
-      pdf.text  "<b><i>#{participant.fname} #{participant.lname}</i></b>", 
+      pdf.text  "<b><i>#{certificate.name}</i></b>", 
             :align => :center, :size => 48, :inline_format => true
 
       pdf.text "attended the course named", :align => :center, :size => 14
 
       pdf.move_down 10
 
-      pdf.text    "<b><i>#{participant.event.event_type.name}</i></b>", 
+      pdf.text    "<b><i>#{certificate.event_name}</i></b>", 
                   :align => :center, :size => 24, :inline_format => true
 
       pdf.move_down 10
 
-      pdf.text  "delivered in <b>#{participant.event.city}, #{participant.event.country.name}</b>, " +
-            "on <b>#{participant.event.human_date} #{participant.event.date.year}</b>, " +
-                  "with a duration of #{participant.event.duration} day(s).",
+      pdf.text  "delivered in <b>#{certificate.event_city}, #{certificate.event_country}</b>, " +
+            "on <b>#{certificate.event_date} #{certificate.event_year}</b>, " +
+                  "with a duration of #{certificate.event_duration}.",
             :align => :center, :size => 14, :inline_format => true 
 
-      if is_csd_eligible
+      if certificate.is_csd_eligible?
           pdf.text    "This course has been approved by the <b>Scrum Alliance</b> as a CSD-eligible one,",
                       :align => :center, :size => 14, :inline_format => true
 
@@ -60,7 +96,7 @@ module ParticipantsHelper
                       :align => :center, :size => 14, :inline_format => true
       end
 
-      pdf.text    "<i>Certificate verification code: #{participant.verification_code}.</i>",
+      pdf.text    "<i>Certificate verification code: #{certificate.verification_code}.</i>",
                   :align => :center, :size => 9, :inline_format => true         
 
       if page_size == "LETTER"
@@ -72,11 +108,11 @@ module ParticipantsHelper
       pdf.bounding_box(signature_position, :width => 200, :height => 120) do
           #pdf.transparent(0.5) { pdf.stroke_bounds }
           pdf.image trainer_signature_path, :position => :center, :scale => 0.7
-          pdf.text "<b>#{participant.event.trainer.name}</b>", :align => :center, :size => 14, :inline_format => true
-          pdf.text "#{participant.event.trainer.signature_credentials}", :align => :center, :size => 14
+          pdf.text "<b>#{certificate.trainer}</b>", :align => :center, :size => 14, :inline_format => true
+          pdf.text "#{certificate.trainer_credentials}", :align => :center, :size => 14
       end
 
-      if is_csd_eligible
+      if certificate.is_csd_eligible?
           pdf.text    "Kleer is a Scrum Alliance Registered Education Provider. " +
                       "SCRUM ALLIANCE REP(SM) is a service mark of Scrum Alliance, Inc. " +
                       "Any unauthorized use is strictly prohibited.", :valign => :bottom, :size => 9
@@ -101,11 +137,20 @@ module ParticipantsHelper
             pdf.rectangle [-20, 543], 810, 560
         end
       end
+  end
 
+  def self.generate_certificate( participant, page_size )
+    temp_dir = "#{Rails.root}/tmp"
+    Dir.mkdir( temp_dir ) unless Dir.exist?( temp_dir )
+
+    certificate_filename = "#{temp_dir}/#{participant.verification_code}p#{participant.id}-#{page_size}.pdf"
+
+    Prawn::Document.generate(certificate_filename, 
+      :page_layout => :landscape, :page_size => page_size) do |pdf|
+      self.render_certificate( pdf, Certificate.new(participant), page_size )
     end
 
     certificate_filename
-
   end
 
   def self.upload_certificate( certificate_filename )
