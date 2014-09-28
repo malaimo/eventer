@@ -49,6 +49,13 @@ module ParticipantsHelper
     end
   end
 
+  PageConfig = {
+    :LogoPos => {"LETTER" => [-55, 610], "A4" => [-55, 590]},
+    :SignPos => {"LETTER" => [500, 160], "A4" => [550, 150]},
+    :OuterBox => {"LETTER" => [[-25, 565], 770, 585], "A4" => [[-25, 548], 820, 570]},
+    :InnerBox => {"LETTER" => [[-20, 560], 760, 575], "A4" => [[-20, 543], 810, 560]}
+  }
+
   def self.render_certificate( pdf, certificate, page_size )
     rep_logo_path = "#{Rails.root}/app/assets/images/rep-logo-transparent.png"
     kleer_logo_path = "#{Rails.root}/app/assets/images/K-kleer_horizontal_negro_1color-01.png"
@@ -60,11 +67,7 @@ module ParticipantsHelper
           pdf.move_down 100
       end
 
-      if page_size == "LETTER"
-       pdf.image kleer_logo_path, :width => 300, :at => [-55, 610]
-      elsif page_size == "A4"
-       pdf.image kleer_logo_path, :width => 300, :at => [-55, 590]
-      end 
+      pdf.image kleer_logo_path, :width => 300, :at => PageConfig[:LogoPos][page_size]
 
       pdf.move_down 50
 
@@ -100,11 +103,7 @@ module ParticipantsHelper
       pdf.text    "<i>Certificate verification code: #{certificate.verification_code}.</i>",
                   :align => :center, :size => 9, :inline_format => true         
 
-      if page_size == "LETTER"
-          signature_position = [500, 160]
-      elsif page_size == "A4"
-          signature_position = [550, 150]
-      end 
+      signature_position = PageConfig[:SignPos][page_size]
 
       pdf.bounding_box(signature_position, :width => 200, :height => 120) do
           #pdf.transparent(0.5) { pdf.stroke_bounds }
@@ -120,24 +119,18 @@ module ParticipantsHelper
       end
 
       pdf.line_width = 3
-
-      pdf.stroke do
-        if page_size == "LETTER"
-          pdf.rectangle [-25, 565], 770, 585
-        elsif page_size == "A4"
-          pdf.rectangle [-25, 548], 820, 570
-        end
-      end
+      pdf.stroke {pdf.rectangle *PageConfig[:OuterBox][page_size] }
 
       pdf.line_width = 1
+      pdf.stroke {pdf.rectangle *PageConfig[:InnerBox][page_size] }
 
-      pdf.stroke do
-        if page_size == "LETTER"
-          pdf.rectangle [-20, 560], 760, 575
-        elsif page_size == "A4"
-            pdf.rectangle [-20, 543], 810, 560
-        end
-      end
+      # pdf.stroke do
+      #   if page_size == "LETTER"
+      #     pdf.rectangle [-20, 560], 760, 575
+      #   elsif page_size == "A4"
+      #       pdf.rectangle [-20, 543], 810, 560
+      #   end
+      # end
   end
 
   def self.generate_certificate( participant, page_size )
