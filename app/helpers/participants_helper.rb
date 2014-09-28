@@ -28,10 +28,11 @@ module ParticipantsHelper
       @participant.event.date.year.to_s
     end
     def event_duration
-      d = @participant.event.duration/8
+      duration = @participant.event.event_type.duration 
+      d = duration/8
       unit = "day"
-      if d*8 != @participant.event.duration
-        d = @participant.event.duration
+      if d*8 != duration
+        d = duration
         unit = "hour"
       end
       plural = "s" unless d==1

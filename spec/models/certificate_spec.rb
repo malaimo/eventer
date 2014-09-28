@@ -62,19 +62,19 @@ describe Certificate do
     end
 
     it "a 16 hs event is a 2 days event" do
-        @e.duration = 16
+        @et.duration = 16
         cert = Certificate.new(@participant)
         cert.event_duration.should == "2 days"
     end
 
     it "a 2 hs event is a 2 hours event" do
-        @e.duration = 2
+        @et.duration = 2
         cert = Certificate.new(@participant)
         cert.event_duration.should == "2 hours"
     end
 
     it "a 1 hs event is a 1 hour event" do
-        @e.duration = 1
+        @et.duration = 1
         cert = Certificate.new(@participant)
         cert.event_duration.should == "1 hour"
     end
