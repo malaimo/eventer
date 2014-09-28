@@ -97,7 +97,7 @@ describe Certificate do
 end
 
 describe "render certificates" do
-    it "" do
+    it "non csd certificate have 6 text lines" do
         pdf = double()
         allow(pdf).to receive(:move_down)
         allow(pdf).to receive(:image)
@@ -106,7 +106,29 @@ describe "render certificates" do
         allow(pdf).to receive(:stroke)
         certificate = Certificate.new(FactoryGirl.build(:participant))
 
-        expect(pdf).to receive(:text).at_least(6).times
+        expect(pdf).to receive(:text).exactly(6).times
+
+        filename= ParticipantsHelper::render_certificate( pdf, certificate, "A4" )
+    end
+
+    it "csd certificate have 9 text lines" do
+        pdf = double()
+        allow(pdf).to receive(:move_down)
+        allow(pdf).to receive(:image)
+        allow(pdf).to receive(:bounding_box)
+        allow(pdf).to receive(:line_width=)
+        allow(pdf).to receive(:stroke)
+
+        p = FactoryGirl.build(:participant)
+        et = FactoryGirl.build(:event_type)
+        e = FactoryGirl.build(:event)
+        e.event_type = et
+        p.event = e
+        et.csd_eligible = true
+
+        certificate = Certificate.new(p)
+
+        expect(pdf).to receive(:text).exactly(9).times
 
         filename= ParticipantsHelper::render_certificate( pdf, certificate, "A4" )
     end
