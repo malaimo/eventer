@@ -124,13 +124,6 @@ module ParticipantsHelper
       pdf.line_width = 1
       pdf.stroke {pdf.rectangle *PageConfig[:InnerBox][page_size] }
 
-      # pdf.stroke do
-      #   if page_size == "LETTER"
-      #     pdf.rectangle [-20, 560], 760, 575
-      #   elsif page_size == "A4"
-      #       pdf.rectangle [-20, 543], 810, 560
-      #   end
-      # end
   end
 
   def self.generate_certificate( participant, page_size )
