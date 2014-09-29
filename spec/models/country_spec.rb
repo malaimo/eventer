@@ -1,5 +1,8 @@
 require 'spec_helper'
 
 describe Country do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "shown as AR - Argentina" do
+    c = FactoryGirl.build(:country)
+    c.to_s.should == "AR - Argentina"
+  end
 end
