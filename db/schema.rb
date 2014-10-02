@@ -11,19 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140930223231) do
+ActiveRecord::Schema.define(:version => 20141002132645) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.string   "codename"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.string   "tagline"
     t.boolean  "visible"
-    t.integer  "order",          :default => 0
+    t.integer  "order",                         :default => 0
     t.string   "name_en"
-    t.string   "description_en"
+    t.text     "description_en", :limit => 255
     t.string   "tagline_en"
   end
 

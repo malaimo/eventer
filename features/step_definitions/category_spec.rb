@@ -15,5 +15,5 @@ When(/^I fill the category "(.*?)" fields "(.*?)"$/) do |lang, fields|
   fill_in 'category_tagline_en', :with => values[1]
   fill_in 'category_description_en', :with => values[2]
 
-  click_button_and_wait 'Crear'
+  click_button_and_wait 'Guardar'
 end
