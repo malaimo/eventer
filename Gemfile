@@ -9,7 +9,7 @@ gem 'rails', '3.2.11'
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
-  gem 'pdf-inspector'
+  gem 'pdf-inspector', :require => "pdf/inspector"
   gem 'rspec-mocks'
   gem 'simplecov', '~> 0.7.1'
   gem 'coveralls', require: false
@@ -22,7 +22,6 @@ group :test do
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'selenium-webdriver', '~> 2.43'
-  gem 'pdf-inspector', :require => "pdf/inspector"
 end
 
 group :production do
