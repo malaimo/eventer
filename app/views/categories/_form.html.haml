@@ -8,7 +8,7 @@
     .box-header.red-background
       .title
         .icon-edit
-          = @category.name.nil? ? "Nuevo Tipo de Evento" : @category  .name
+          = @category.name.nil? ? t("formtastic.labels.category.new_title") : @category.name
     .box-content
       = form_for @category do |f|
         %fieldset.inputs

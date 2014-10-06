@@ -119,6 +119,8 @@ es:
         notes: "Opcional: Datos adicionales que te interesa contarnos o preguntarnos"
         zone: "Tu lugar más próximo ..."
       trainer:
+        new_title: "Nuevo Entrenador"
+        bio_en: "Bio EN"
         linedin_url: "URL de LinedIn"
         is_kleerer: "Es Kleerer?"
         twitter_username: "Usuario de Twitter"
@@ -187,6 +189,7 @@ es:
         tag_name: "Tag Name (CapsuleCRM)"
         csd_eligible: "Es CSD-Eligible? (Aprobado por la Scrum Alliance para la certificación CSD)"
       category:
+        new_title: "Nueva Categoría"
         name: "Nombre"
         description: "Descripción"
         tagline: "Subtítulo"

@@ -14,3 +14,8 @@ Feature: Administración de Instructores
 		And I view the trainer "Carlos Peix2"
 		Then I should see "Gran instructor!"
 
+	Scenario: Instructor as English mini Bio
+		Given Im a logged in user
+		When I create a valid trainer named "Carlos Saul Peix" and with EN bio "Eats too much chicken with hormones!"
+		And I view the trainer "Carlos Saul Peix"
+		Then I should see "chicken with hormones"

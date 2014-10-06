@@ -1,15 +1,88 @@
-= semantic_form_for @trainer do |f|
-  - f.inputs :trainer_details do
-    .grid_12
-      = f.input :name, :input_html => { :size => 40 }
-      = f.input :bio
-      = f.input :gravatar_email
-      = f.input :twitter_username
-      = f.input :linkedin_url
-      = f.input :tag_name
-      = f.input :signature_image
-      = f.input :signature_credentials
-      = f.input :is_kleerer, :as => :boolean
-      = f.input :country, :as => :select, :collection => Country.find(:all)
-      = f.actions
-      = link_to t('formtastic.actions.cancel'), trainers_path
+- @trainer.errors.full_messages.each do |msg|
+  .alert.alert-error
+    %a.close{ "data-dismiss" => :alert, :href => "#" } &times;
+    =msg
+
+.row-fluid
+  .span12.box
+    .box-header.red-background
+      .title
+        .icon-edit
+          = @trainer.name.nil? ? t("formtastic.labels.trainer.new_title") : @trainer.name
+    .box-content
+      = form_for @trainer do |f|
+        %fieldset.inputs
+          .row-fluid
+            .span8
+              .control-group
+                %label.control-label{ :for => :name }= t("formtastic.labels.trainer.name") + " (*)"
+                = f.text_field :name, :class => 'input-xxlarge'
+          .row-fluid
+            .span6
+              .control-group
+                %label.control-label{ :for => :bio }= t("formtastic.labels.trainer.bio") + " (*)"
+                = f.text_area :bio, :rows => 8, :class => "input-block-level"
+                %small.muted 
+                  Este texto soporta 
+                  %a{ :href => "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet", :target => "_blank"}Markdown 
+                  y HTML.
+          .row-fluid
+            .span6
+              .control-group
+                %label.control-label{ :for => :bio_en }= t("formtastic.labels.trainer.bio_en") + " (*)"
+                = f.text_area :bio_en, :rows => 8, :class => "input-block-level"
+                %small.muted 
+                  Este texto soporta 
+                  %a{ :href => "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet", :target => "_blank"}Markdown 
+                  y HTML.
+          .row-fluid
+            .span8
+              .control-group
+                %label.control-label{ :for => :gravatar_email }= t("formtastic.labels.trainer.gravatar_email")
+                = f.text_field :gravatar_email
+          .row-fluid
+            .span8
+              .control-group
+                %label.control-label{ :for => :twitter_username }= t("formtastic.labels.trainer.twitter_username")
+                = f.text_field :twitter_username
+          .row-fluid
+            .span8
+              .control-group
+                %label.control-label{ :for => :linkedin_url }= t("formtastic.labels.trainer.linkedin_url")
+                = f.text_field :linkedin_url
+          .row-fluid
+            .span8
+              .control-group
+                %label.control-label{ :for => :tag_name }= t("formtastic.labels.trainer.tag_name")
+                = f.text_field :tag_name
+          .row-fluid
+            .span8
+              .control-group
+                %label.control-label{ :for => :signature_image }= t("formtastic.labels.trainer.signature_image")
+                = f.text_field :signature_image
+          .row-fluid
+            .span8
+              .control-group
+                %label.control-label{ :for => :signature_credentials }= t("formtastic.labels.trainer.signature_credentials")
+                = f.text_field :signature_credentials
+          .row-fluid
+            .span3
+              .control-group
+                %label.control-label{ :for => :is_kleerer }= t("formtastic.labels.category.is_kleerer")
+                = f.check_box :is_kleerer
+          .row-fluid
+            .span12
+              .control-group
+                %label.control-label{ :for => :country_id } País
+                = f.collection_select :country_id, Country.find(:all).sort{|p1,p2| p1.name <=> p2.name}, :id, :name, {include_blank: 'Selecciona uno...'}
+
+          .row-fuid
+            .span12
+              .form-actions
+                .text-right
+                  %button.btn.btn-primary.btn-large{:id => "guardar", :name => "commit", :type => "submit"}
+                    %i.icon-save
+                    Guardar
+                  %a.btn.btn-large{ :href => categories_path }
+                    %i.icon-undo
+                    Cancelar
