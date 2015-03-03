@@ -395,6 +395,10 @@ if (InfluenceZone.count == 0)
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMC (America Central y Caribe)', country_id: Country.find_by_iso_code( 'CU' ).id )
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMC (America Central y Caribe)', country_id: Country.find_by_iso_code( 'GT' ).id )
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMC (America Central y Caribe)', country_id: Country.find_by_iso_code( 'HN' ).id )
+    InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMC (America Central y Caribe)', country_id: Country.find_by_iso_code( 'PA' ).id )
+    InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMC (America Central y Caribe)', country_id: Country.find_by_iso_code( 'DO' ).id )
+    InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMC-SV (El Salvador)', country_id: Country.find_by_iso_code( 'SV' ).id )
+
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMS-EC (Ecuador)', country_id: Country.find_by_iso_code( 'EC' ).id )
 
     InfluenceZone.create( zone_name: 'Andalucía', tag_name: 'ZI-EUR-ES (España)', country_id: Country.find_by_iso_code( 'ES' ).id )
@@ -419,7 +423,6 @@ if (InfluenceZone.count == 0)
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-ASI (Asia)', country_id: Country.find_by_iso_code( 'ES' ).id )
 
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMN-MX (Mexico)', country_id: Country.find_by_iso_code( 'MX' ).id )
-    InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMC (America Central y Caribe)', country_id: Country.find_by_iso_code( 'PA' ).id )
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMS-PY (Paraguay)', country_id: Country.find_by_iso_code( 'PY' ).id )
 
     InfluenceZone.create( zone_name: 'Amazonas', tag_name: 'ZI-AMS-PE (Peru)', country_id: Country.find_by_iso_code( 'PE' ).id )
@@ -448,7 +451,6 @@ if (InfluenceZone.count == 0)
     InfluenceZone.create( zone_name: 'Tumbes', tag_name: 'ZI-AMS-PE (Peru)', country_id: Country.find_by_iso_code( 'PE' ).id )
     InfluenceZone.create( zone_name: 'Ucayali', tag_name: 'ZI-AMS-PE (Peru)', country_id: Country.find_by_iso_code( 'PE' ).id )
 
-    InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMC (America Central y Caribe)', country_id: Country.find_by_iso_code( 'DO' ).id )
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMS-UY (Uruguay)', country_id: Country.find_by_iso_code( 'UY' ).id )
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMN-US (EEUU)', country_id: Country.find_by_iso_code( 'US' ).id )
     InfluenceZone.create( zone_name: '', tag_name: 'ZI-AMS-VE (Venezuela)', country_id: Country.find_by_iso_code( 'VE' ).id )
